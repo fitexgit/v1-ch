@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.5
+# pages.py  -  OXNET v2.0.6
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -56,7 +56,6 @@ input:focus+.ic{color:var(--accent)}
 
 .pc-ss{background:rgba(20,184,166,.12);color:#0F766E}
 [data-theme="dark"] .pc-ss{color:#5EEAD4}
-.pc-grpc{background:rgba(14,165,233,.12);color:#0369A1}.pc-hu{background:rgba(99,102,241,.12);color:#4F46E5}[data-theme="dark"] .pc-grpc{color:#7DD3FC}[data-theme="dark"] .pc-hu{color:#C4B5FD}
 .dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}
 .dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}
 .dash-main-card>*{position:relative;z-index:2}.dash-main-card:before{content:'';pointer-events:none;position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}
@@ -92,7 +91,7 @@ input:focus+.ic{color:var(--accent)}
 
 .pro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr}}
 
-/* OXNET v2.0.5 dark-mode contrast hardening */
+/* OXNET v2.0.6 dark-mode contrast hardening */
 [data-theme="dark"] .btn-o,[data-theme="dark"] .btn-g,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .icon-btn{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-bh)!important}
 [data-theme="dark"] .btn-p{background:linear-gradient(135deg,#f8fafc,#cbd5e1)!important;color:#020617!important;box-shadow:none!important}
 [data-theme="dark"] .btn-d{background:rgba(239,68,68,.18)!important;color:#fecaca!important}
@@ -101,7 +100,7 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .fs option{background:#0b1220!important;color:#f8fafc!important}
 [data-theme="dark"] .proto-card,[data-theme="dark"] .proto-base-card,[data-theme="dark"] .proto-t-card,[data-theme="dark"] .cm-dd,[data-theme="dark"] .cm-input{background:var(--card)!important;color:var(--t1)!important}
 
-/* OXNET v2.0.5 dark-mode final contrast fix */
+/* OXNET v2.0.6 dark-mode final contrast fix */
 [data-theme="dark"]{--bg:#05070b!important;--bg2:#0b1018!important;--bg3:#111827!important;--card:#0f172a!important;--card-b:rgba(255,255,255,.10)!important;--card-bh:rgba(255,255,255,.22)!important;--t1:#f8fafc!important;--t2:#cbd5e1!important;--t3:#94a3b8!important;--accent:#e5e7eb!important;--accent2:#ffffff!important;--accent-d:rgba(255,255,255,.08)!important}
 [data-theme="dark"] .card,[data-theme="dark"] .modal,[data-theme="dark"] .modal-v2,[data-theme="dark"] .cm-modal,[data-theme="dark"] .dash-main-card,[data-theme="dark"] .dash-kpi,[data-theme="dark"] .dash-chart-card,[data-theme="dark"] .dash-protocol,[data-theme="dark"] .cfg-card,[data-theme="dark"] .multi-group-card,[data-theme="dark"] .sub-card,[data-theme="dark"] .pro-card,[data-theme="dark"] .db-card,[data-theme="dark"] .srv-panel,[data-theme="dark"] .pw-panel,[data-theme="dark"] .conn-card-v2,[data-theme="dark"] .health-row,[data-theme="dark"] .cust-row{background:#0f172a!important;color:#f8fafc!important;border-color:rgba(255,255,255,.12)!important}
 [data-theme="dark"] .fi,[data-theme="dark"] .fs,[data-theme="dark"] .cm-input,[data-theme="dark"] .modal-v2-input,[data-theme="dark"] .pw-input,[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#0b1018!important;color:#f8fafc!important;border-color:rgba(255,255,255,.14)!important}
@@ -112,12 +111,48 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .cm-opt:hover,[data-theme="dark"] .cm-opt.sel{background:rgba(255,255,255,.10)!important}
 
 
-/* OXNET v2.0.5 extra dark contrast */
+/* OXNET v2.0.6 extra dark contrast */
 [data-theme="dark"] *{scrollbar-color:#334155 #0b1018}
 [data-theme="dark"] .upd-install-btn,[data-theme="dark"] .copy-all-btn{background:#0b1018!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.16)!important}
 [data-theme="dark"] .bg-blue,[data-theme="dark"] .badge{background:rgba(255,255,255,.08)!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.12)!important}
 [data-theme="dark"] .cfg-uuid-mini,[data-theme="dark"] .cfg-sub-tag,[data-theme="dark"] .exp-chip,[data-theme="dark"] .proto-chip{border-color:rgba(255,255,255,.12)!important}
 
+
+/* OXNET v2.0.6 stable polish */
+#modal-create-link .cm-modal{max-height:94vh!important;display:flex!important;flex-direction:column!important}
+#modal-create-link .cm-body{max-height:min(68vh,720px)!important;overflow-y:auto!important;padding-left:18px!important}
+#modal-create-link .cm-body::-webkit-scrollbar{width:8px}
+#modal-create-link .cm-body::-webkit-scrollbar-thumb{background:rgba(15,23,42,.22);border-radius:999px}
+[data-theme="dark"] #modal-create-link .cm-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.24)}
+.login-version-pill,.brand-sub{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;background:rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.08)}
+body > .wrap .footer{display:none!important}
+.brand-mark,.logo-mark{background:linear-gradient(135deg,#020617,#334155)!important;color:#fff!important;box-shadow:0 14px 35px rgba(15,23,42,.22)!important}
+.dash-chart-card:has(#ch2){background:radial-gradient(circle at 80% 15%,rgba(99,102,241,.14),transparent 34%),linear-gradient(145deg,var(--card),var(--bg3))!important}
+.dash-chart-card:has(#ch2) .ch-sm{min-height:285px;padding:10px;border-radius:20px;background:rgba(15,23,42,.025);border:1px solid var(--card-b)}
+[data-theme="dark"] .dash-chart-card:has(#ch2) .ch-sm{background:rgba(255,255,255,.04)}
+.dash-protocols{grid-template-columns:repeat(5,1fr)!important}
+.dash-protocol{position:relative;overflow:hidden}
+.dash-protocol:after{content:'';position:absolute;inset:auto -30px -35px auto;width:90px;height:90px;border-radius:999px;background:var(--accent-d)}
+@media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}
+@media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
+
+/* OXNET v2.0.6 stable polish */
+#modal-create-link .cm-modal{max-height:94vh!important;display:flex!important;flex-direction:column!important}
+#modal-create-link .cm-body{max-height:min(68vh,720px)!important;overflow-y:auto!important;padding-left:18px!important}
+#modal-create-link .cm-body::-webkit-scrollbar{width:8px}
+#modal-create-link .cm-body::-webkit-scrollbar-thumb{background:rgba(15,23,42,.22);border-radius:999px}
+[data-theme="dark"] #modal-create-link .cm-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.24)}
+.login-version-pill,.brand-sub{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;background:rgba(15,23,42,.06);border:1px solid rgba(15,23,42,.08)}
+body > .wrap .footer{display:none!important}
+.brand-mark,.logo-mark{background:linear-gradient(135deg,#020617,#334155)!important;color:#fff!important;box-shadow:0 14px 35px rgba(15,23,42,.22)!important}
+.dash-chart-card:has(#ch2){background:radial-gradient(circle at 80% 15%,rgba(99,102,241,.14),transparent 34%),linear-gradient(145deg,var(--card),var(--bg3))!important}
+.dash-chart-card:has(#ch2) .ch-sm{min-height:285px;padding:10px;border-radius:20px;background:rgba(15,23,42,.025);border:1px solid var(--card-b)}
+[data-theme="dark"] .dash-chart-card:has(#ch2) .ch-sm{background:rgba(255,255,255,.04)}
+.dash-protocols{grid-template-columns:repeat(5,1fr)!important}
+.dash-protocol{position:relative;overflow:hidden}
+.dash-protocol:after{content:'';position:absolute;inset:auto -30px -35px auto;width:90px;height:90px;border-radius:999px;background:var(--accent-d)}
+@media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}
+@media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -127,7 +162,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.5</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub login-version-pill">Stable · v2.0.6</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -142,7 +177,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.5</div>
+    <div class="footer">OXNET · 2.0.6</div>
   </div>
 </div>
 <script>
@@ -953,7 +988,7 @@ a{color:inherit;text-decoration:none}
   justify-content:center;cursor:pointer;z-index:2;transition:.15s}
 .cm-close:hover{background:var(--red-bg);color:var(--red-t);border-color:rgba(239,68,68,.25)}
 
-.cm-body{padding:22px 28px 8px;overflow-y:auto;flex:1}
+.cm-body{padding:22px 28px 8px;overflow-y:auto;overflow-x:hidden;flex:1;max-height:min(68vh,720px);scrollbar-width:thin}
 .cm-section{margin-bottom:20px}
 .cm-section-label{font-size:10.5px;font-weight:800;color:var(--t3);text-transform:uppercase;
   letter-spacing:.08em;display:flex;align-items:center;gap:6px;margin-bottom:10px}
@@ -1150,7 +1185,6 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="cm-dd-panel" id="dd-transport"><div class="cm-dd-panel-inner"><div class="cm-dd-list">
             <div class="cm-opt sel" onclick="cmSelectTransport('ws',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-link"></i></div><div class="cm-opt-text"><div class="cm-opt-title">WebSocket</div><div class="cm-opt-desc">پایدارترین حالت عمومی</div></div></div>
-            <div class="cm-opt" onclick="cmSelectTransport('grpc',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-cloud-data-connection"></i></div><div class="cm-opt-text"><div class="cm-opt-title">gRPC TLS</div><div class="cm-opt-desc">VLESS/Trojan روی HTTP/2 gRPC</div></div></div>
             <div class="cm-opt" onclick="cmSelectTransport('httpupgrade',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-http-post"></i></div><div class="cm-opt-text"><div class="cm-opt-title">HTTPUpgrade TLS</div><div class="cm-opt-desc">ترابرد Upgrade سبک روی TLS</div></div></div>
             <div class="cm-opt" onclick="cmSelectTransport('xhttp-packet-up',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-package"></i></div><div class="cm-opt-text"><div class="cm-opt-title">XHTTP packet-up</div><div class="cm-opt-desc">سازگار با CDN و پروکسی‌ها</div></div></div>
             <div class="cm-opt" onclick="cmSelectTransport('xhttp-stream-up',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-rocket"></i></div><div class="cm-opt-text"><div class="cm-opt-title">XHTTP stream-up</div><div class="cm-opt-desc">تاخیر کمتر برای شبکه پایدار</div></div></div>
@@ -1325,7 +1359,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 
-<!-- OXNET v2.0.5 repaired action modals -->
+<!-- OXNET v2.0.6 repaired action modals -->
 <div class="modal-bg" id="modal-edit-link">
   <div class="modal-v2" style="max-width:520px">
     <button class="modal-v2-close" onclick="closeModal('modal-edit-link')"><i class="ti ti-x"></i></button>
@@ -1437,7 +1471,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.5</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.6</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1487,7 +1521,6 @@ a{color:inherit;text-decoration:none}
     <div class="dash-protocol"><i class="ti ti-shield-lock"></i><div><b>Trojan WS</b><span>TLS-ready</span></div></div>
     <div class="dash-protocol"><i class="ti ti-lock-bolt"></i><div><b>Shadowsocks TLS</b><span>مسیر اختصاصی</span></div></div>
     <div class="dash-protocol"><i class="ti ti-package"></i><div><b>XHTTP Fixed</b><span>packet / stream</span></div></div>
-    <div class="dash-protocol"><i class="ti ti-cloud-data-connection"></i><div><b>gRPC TLS</b><span>VLESS / Trojan</span></div></div>
     <div class="dash-protocol"><i class="ti ti-http-post"></i><div><b>HTTPUpgrade TLS</b><span>VLESS / Trojan</span></div></div>
   </div>
 
@@ -1838,7 +1871,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.5</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.6</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1928,13 +1961,11 @@ function expChip(exp,expired){
 function protoBadge(p){
   const m={
     'vless-ws':['VLESS · WS','pc-ws'],
-    'vless-grpc':['VLESS · gRPC','pc-grpc'],
     'vless-httpupgrade':['VLESS · HTTPUpgrade','pc-hu'],
     'xhttp-packet-up':['VLESS · XHTTP packet-up','pc-xhttp'],
     'xhttp-stream-up':['VLESS · XHTTP stream-up','pc-xhttp'],
     'xhttp-stream-one':['XHTTP Stream','pc-xh'],
     'trojan-ws':['Trojan · WS','pc-trojan'],
-    'trojan-grpc':['Trojan · gRPC','pc-grpc'],
     'trojan-httpupgrade':['Trojan · HTTPUpgrade','pc-hu'],
     'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
     'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
@@ -1948,9 +1979,16 @@ async function checkAuth(){try{const r=await fetch('/api/me');const d=await r.js
 async function logout(){try{await fetch('/api/logout',{method:'POST'})}catch(e){}location.href='/login'}
 document.getElementById('logout-btn').addEventListener('click',logout);
 async function authF(url,opts={}){
-  const r=await fetch(url,opts);
-  if(r.status===401){location.href='/login';throw new Error('unauthorized')}
-  return r;
+  opts = opts || {};
+  if(!opts.credentials) opts.credentials='same-origin';
+  try{
+    const r=await fetch(url,opts);
+    if(r.status===401){location.href='/login';throw new Error('unauthorized')}
+    return r;
+  }catch(e){
+    console.error('fetch failed', url, e);
+    throw new Error('ارتباط با سرور برقرار نشد؛ اگر عملیات در حال اجراست وضعیت را رفرش کن');
+  }
 }
 function setQuota(val,unit,el){
   document.getElementById('nl-val').value = val===0?'':val;
@@ -2011,7 +2049,7 @@ async function fetchStats(){
     if(d.hourly){
       const labels=Object.keys(d.hourly).sort(),vals=labels.map(k=>+(d.hourly[k]/1024**2).toFixed(2));
       [ch1,ch3].forEach(c=>{if(!c)return;c.data.labels=labels;c.data.datasets[0].data=vals;c.update()});
-      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','gRPC','HTTPUpgrade','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.grpc||0,pc.httpupgrade||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
+      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','HTTPUpgrade','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.httpupgrade||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
       if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);const tAvg=document.getElementById('t-avg'),tPeak=document.getElementById('t-peak');if(tAvg)tAvg.innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';if(tPeak)tPeak.innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
     }
     renderErrs(d.recent_errors||[]);
@@ -2045,10 +2083,11 @@ async function loadActivity(){
 let allSubsList=[],allLinksList=[];
 async function loadLinks(){
   try{
-    const [lr,sr]=await Promise.all([authF('/api/links'),authF('/api/subs')]);
-    if(!lr.ok||!sr.ok) throw new Error('bad response');
+    const [lres,sres]=await Promise.allSettled([authF('/api/links'),authF('/api/subs')]);
+    if(lres.status!=='fulfilled' || !lres.value.ok) throw new Error('links failed');
+    const lr=lres.value, sr=(sres.status==='fulfilled' && sres.value.ok) ? sres.value : null;
     const lj=await lr.json().catch(()=>({links:[]}));
-    const sj=await sr.json().catch(()=>({subs:[]}));
+    const sj=sr ? await sr.json().catch(()=>({subs:[]})) : {subs:[]};
     let rawLinks=Array.isArray(lj.links)?lj.links:[];
     const subs=Array.isArray(sj.subs)?sj.subs:[];
     rawLinks=(rawLinks||[]).filter(l=>l&&l.uuid&&!l.archived).map(l=>({label:'بدون نام',used_bytes:0,limit_bytes:0,active:true,expired:false,created_at:new Date().toISOString(),vless_link:'',sub_url:'',protocol:'vless-ws',...l}));
@@ -2115,7 +2154,6 @@ async function loadLinks(){
       </div>
       <div class="cfg-divider-v"></div>
       <div class="cfg-actions">
-        <div class="cfg-actions">
         <button class="tog${allowed?' on':''}" onclick="toggleActive('${l.uuid}',${!l.active})" title="فعال/غیرفعال"></button>
         ${adBtn}
         <button class="btn btn-sm btn-g btn-icon" onclick="navigator.clipboard.writeText('${esc(l.vless_link)}').then(()=>toast('لینک کپی شد','ok'))" title="کپی لینک"><i class="ti ti-copy"></i></button>
@@ -2128,12 +2166,11 @@ async function loadLinks(){
         <button class="btn btn-sm btn-g btn-icon" onclick="resetUsage('${l.uuid}')" title="ریست مصرف"><i class="ti ti-rotate"></i></button>
         <button class="btn btn-sm btn-d btn-icon" onclick="deleteLink('${l.uuid}')" title="حذف"><i class="ti ti-trash"></i></button>
       </div>
-      </div>
     </div>
   </div>`;
 }).join('');
     document.getElementById('lsummary').innerHTML=links.slice(0,6).map(l=>`<div class="sr"><span class="sr-k" style="gap:5px"><i class="ti ${l.expired?'ti-calendar-x':l.active?'ti-circle-check':'ti-circle-x'}" style="color:${l.expired?'var(--amber)':l.active?'var(--green)':'var(--red)'}"></i>${esc(l.label)}</span><span class="sr-v" style="font-size:10px">${fmtB(l.used_bytes)} / ${l.limit_bytes===0?'∞':fmtB(l.limit_bytes)}</span></div>`).join('');
-  }catch(e){console.error(e);toast('خطا در بارگذاری کانفیگ‌ها','err');const grid=document.getElementById('links-grid');if(grid&&!grid.innerHTML){grid.innerHTML='<div class="empty"><i class="ti ti-alert-circle"></i><p>خطا در بارگذاری؛ دوباره تلاش کن</p></div>'}}
+  }catch(e){console.error(e);const grid=document.getElementById('links-grid');if(grid&&!grid.innerHTML){grid.innerHTML='<div class="empty"><i class="ti ti-alert-circle"></i><p>اتصال لحظه‌ای برقرار نشد؛ چند ثانیه دیگر رفرش کن</p></div>'}}
 }
 
 let protoBase = 'vless', protoTransport = 'ws';
@@ -2163,7 +2200,6 @@ const BASE_INFO = {
 };
 const TRANSPORT_INFO = {
   'ws':               { icon:'ti-link',    title:'WebSocket',            desc:'پایدار و سازگار با همه شرایط شبکه' },
-  'grpc':             { icon:'ti-cloud-data-connection', title:'gRPC TLS', desc:'VLESS/Trojan روی HTTP/2 gRPC' },
   'httpupgrade':      { icon:'ti-http-post', title:'HTTPUpgrade TLS', desc:'ترابرد HTTP Upgrade سبک روی TLS' },
   'xhttp-packet-up':  { icon:'ti-package', title:'XHTTP · packet-up',    desc:'سازگاری بالا با CDN و پروکسی‌ها' },
   'xhttp-stream-up':  { icon:'ti-rocket',  title:'XHTTP · stream-up',    desc:'تاخیر پایین‌تر برای اتصال‌های پرسرعت' }
@@ -2249,7 +2285,6 @@ function cmApplyProto(){
   }
   let val;
   if (cmTransport === 'ws') val = (cmBase === 'trojan' ? 'trojan-ws' : 'vless-ws');
-  else if (cmTransport === 'grpc') val = (cmBase === 'trojan' ? 'trojan-grpc' : 'vless-grpc');
   else if (cmTransport === 'httpupgrade') val = (cmBase === 'trojan' ? 'trojan-httpupgrade' : 'vless-httpupgrade');
   else val = (cmBase === 'trojan' ? `trojan-${cmTransport}` : cmTransport);
   document.getElementById('nl-proto').value = val;
@@ -2314,7 +2349,7 @@ async function createLink(){
     const copyTarget = d.sub_url || d.vless_link;
     if(copyTarget && navigator.clipboard) navigator.clipboard.writeText(copyTarget).catch(()=>{});
     ['nl-label','nl-path','nl-val','nl-exp','nl-note','nl-mtproto-port','nl-mtproto-domain'].forEach(id=>document.getElementById(id).value='');
-    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : (protocol.includes('grpc') ? 'gRPC TLS ساخته شد و لینک کپی شد' : (protocol.includes('httpupgrade') ? 'HTTPUpgrade TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')))),'ok');
+    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : (protocol.includes('httpupgrade') ? 'HTTPUpgrade TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد'))),'ok');
     closeModal('modal-create-link');
     loadLinks();
     if(protocol==='multi'){loadSubs();loadSubsPage();}
@@ -2806,9 +2841,9 @@ function initCharts(){
 
   ch2=new Chart(document.getElementById('ch2'),{
     type:'doughnut',
-    data:{labels:['VLESS WS','Trojan WS','XHTTP','gRPC','HTTPUpgrade','Shadowsocks TLS','MTProto'],datasets:[{
-      data:[1,1,1,1,1,1,1],
-      backgroundColor:['#2563EB','#111827','#8B5CF6','#0EA5E9','#6366F1','#14B8A6','#F59E0B'],
+    data:{labels:['VLESS WS','Trojan WS','XHTTP','HTTPUpgrade','Shadowsocks TLS','MTProto'],datasets:[{
+      data:[1,1,1,1,1,1],
+      backgroundColor:['#2563EB','#111827','#8B5CF6','#6366F1','#14B8A6','#F59E0B'],
       borderColor:getComputedStyle(document.documentElement).getPropertyValue('--card')||'#0d1b2e',
       borderWidth:4,hoverOffset:10,borderRadius:6,spacing:3
     }]},
@@ -3125,8 +3160,9 @@ async function startBotTcpProxy(){
     btpPolling = setInterval(pollBotTcpProxy, 1500);
   }catch(e){
     toast(' '+e.message,'err');
-    btpSetStatus('ti-alert-circle','var(--red-t)', e.message, false);
-    btn.disabled = false; btn.innerHTML = '<i class="ti ti-player-play"></i> شروع فرآیند';
+    btpSetStatus('ti-alert-circle','var(--amber-t)', e.message, false);
+    setTimeout(()=>pollBotTcpProxy().catch(()=>{}), 900);
+    btn.disabled = false; btn.innerHTML = '<i class="ti ti-player-play"></i> شروع ساخت TCP Proxy';
   }
 }
 async function stopBotTcpProxy(){
@@ -3524,7 +3560,6 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 .proto-chip{{font-size:9px;padding:3px 8px;border-radius:7px;font-weight:800;letter-spacing:.02em}}
 .pc-ws{{background:var(--accent-d);color:var(--accent2)}}
 .pc-ss{{background:var(--green-bg);color:var(--green-t)}}
-.pc-grpc{{background:rgba(14,165,233,.12);color:#0284c7}}.pc-hu{{background:rgba(99,102,241,.12);color:#4f46e5}}
 .pc-trojan{{background:var(--purple-bg);color:#A78BFA}}
 .pc-xhttp{{background:var(--purple-bg);color:var(--purple-t)}}
 .pc-ultra{{background:var(--green-bg);color:var(--green-t)}}
@@ -3617,7 +3652,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 }}
 @keyframes spin{{to{{transform:rotate(360deg)}}}}
 
-/* OXNET v2.0.5 public subscription theme polish */
+/* OXNET v2.0.6 public subscription theme polish */
 .copy-all-bar{{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;box-shadow:var(--shadow)!important}}
 .copy-all-btn{{background:var(--card)!important;color:var(--t1)!important;border:1px solid var(--card-bh)!important}}
 .btn-p{{background:var(--accent)!important;color:var(--bg)!important}}
@@ -3642,7 +3677,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.5</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.6</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3652,7 +3687,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.5</div>
+  <div class="footer">OXNET v2.0.6</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';
@@ -3677,7 +3712,6 @@ function toFa(n){{return String(n).replace(/\\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
 function protoChip(p){{
   if(p==='xhttp-stream-one')return '<span class="proto-chip pc-xh"><i class="ti ti-bolt"></i> XHTTP Stream</span>';
   if(p&&p.startsWith('trojan'))return '<span class="proto-chip pc-trojan"><i class="ti ti-shield-lock"></i> '+esc(p)+'</span>';
-  if(p&&p.includes('grpc'))return '<span class="proto-chip pc-grpc">'+esc(p)+'</span>';
   if(p&&p.includes('httpupgrade'))return '<span class="proto-chip pc-hu">'+esc(p)+'</span>';
   if(p&&p.startsWith('xhttp'))return '<span class="proto-chip pc-xhttp">'+esc(p)+'</span>';
   if(p==='shadowsocks-tls')return '<span class="proto-chip pc-ss">Shadowsocks · TLS</span>';
