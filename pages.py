@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.0
+# pages.py  -  OXNET v2.0.1
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -58,7 +58,7 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .pc-ss{color:#5EEAD4}
 .dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}
 .dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}
-.dash-main-card:before{content:'';position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}
+.dash-main-card>*{position:relative;z-index:2}.dash-main-card:before{content:'';pointer-events:none;position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}
 .dash-eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--t3);text-transform:uppercase;margin-bottom:10px}
 .dash-title{font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--t1);line-height:1.2;margin-bottom:8px}
 .dash-title span{color:var(--accent2)}
@@ -99,7 +99,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.0</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.1</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -114,7 +114,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.0</div>
+    <div class="footer">OXNET · 2.0.1</div>
   </div>
 </div>
 <script>
@@ -1023,7 +1023,8 @@ a{color:inherit;text-decoration:none}
 <style id="oxnet-dashboard-redesign">
 #pg-overview,#pg-overview *{opacity:1!important;filter:none!important}#pg-overview{color:var(--t1)!important}.dash-main-card,.dash-kpi,.dash-protocol,.vless-box,.dash-chart-card,.card{box-shadow:0 12px 36px rgba(15,23,42,.09)!important}
 .pc-ss{background:rgba(20,184,166,.12);color:#0F766E}[data-theme="dark"] .pc-ss{color:#5EEAD4}
-.dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}.dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}.dash-main-card:before{content:'';position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}.dash-eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--t3);text-transform:uppercase;margin-bottom:10px}.dash-title{font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--t1);line-height:1.2;margin-bottom:8px}.dash-title span{color:var(--accent2)}.dash-desc{max-width:620px;color:var(--t2);font-size:13px;line-height:2}.dash-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.dash-side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dash-kpi{background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(15,23,42,.05)}.dash-kpi-icon{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:18px;margin-bottom:14px}.dash-kpi-label{font-size:10px;color:var(--t3);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.dash-kpi-val{font-size:28px;font-weight:900;color:var(--t1);line-height:1;margin-top:7px}.dash-kpi-sub{font-size:10px;color:var(--t3);margin-top:8px}.dash-chart-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:16px;margin-bottom:16px}.dash-chart-card{background:var(--card);border:1px solid var(--card-b);border-radius:24px;padding:20px 22px;box-shadow:0 12px 36px rgba(15,23,42,.06)}.dash-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.dash-card-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.dash-card-sub{font-size:10px;color:var(--t3);margin-top:3px}.dash-protocols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.dash-protocol{background:var(--card);border:1px solid var(--card-b);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}.dash-protocol i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:17px;flex-shrink:0}.dash-protocol b{font-size:12px;color:var(--t1)}.dash-protocol span{display:block;font-size:10px;color:var(--t3);margin-top:2px}.multi-group-card{border:1px solid var(--card-b);border-radius:18px;background:linear-gradient(145deg,var(--card),var(--bg3));padding:16px;margin-bottom:12px}.multi-group-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.multi-group-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.multi-protos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.multi-protos span{font-size:10px;padding:4px 8px;border-radius:7px;background:var(--accent-d);color:var(--t2);font-weight:700}.db-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:22px;margin-bottom:16px}.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:1000px){.dash-hero,.dash-chart-grid,.db-grid{grid-template-columns:1fr}.dash-protocols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.dash-side,.dash-protocols{grid-template-columns:1fr}.dash-title{font-size:26px}}
+.dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}.dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}.dash-main-card>*{position:relative;z-index:2}.dash-main-card:before{content:'';pointer-events:none;position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}.dash-eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--t3);text-transform:uppercase;margin-bottom:10px}.dash-title{font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--t1);line-height:1.2;margin-bottom:8px}.dash-title span{color:var(--accent2)}.dash-desc{max-width:620px;color:var(--t2);font-size:13px;line-height:2}.dash-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.dash-side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dash-kpi{background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(15,23,42,.05)}.dash-kpi-icon{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:18px;margin-bottom:14px}.dash-kpi-label{font-size:10px;color:var(--t3);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.dash-kpi-val{font-size:28px;font-weight:900;color:var(--t1);line-height:1;margin-top:7px}.dash-kpi-sub{font-size:10px;color:var(--t3);margin-top:8px}.dash-chart-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:16px;margin-bottom:16px}.dash-chart-card{background:var(--card);border:1px solid var(--card-b);border-radius:24px;padding:20px 22px;box-shadow:0 12px 36px rgba(15,23,42,.06)}.dash-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.dash-card-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.dash-card-sub{font-size:10px;color:var(--t3);margin-top:3px}.dash-protocols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.dash-protocol{background:var(--card);border:1px solid var(--card-b);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}.dash-protocol i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:17px;flex-shrink:0}.dash-protocol b{font-size:12px;color:var(--t1)}.dash-protocol span{display:block;font-size:10px;color:var(--t3);margin-top:2px}.multi-group-card{border:1px solid var(--card-b);border-radius:18px;background:linear-gradient(145deg,var(--card),var(--bg3));padding:16px;margin-bottom:12px}.multi-group-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.multi-group-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.multi-protos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.multi-protos span{font-size:10px;padding:4px 8px;border-radius:7px;background:var(--accent-d);color:var(--t2);font-weight:700}.db-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:22px;margin-bottom:16px}.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:1000px){.dash-hero,.dash-chart-grid,.db-grid{grid-template-columns:1fr}.dash-protocols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.dash-side,.dash-protocols{grid-template-columns:1fr}.dash-title{font-size:26px}}
+.pro-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3))!important;border:1px solid var(--card-b)!important;border-radius:22px!important;padding:20px!important;box-shadow:0 12px 34px rgba(15,23,42,.08)!important}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent2);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -1327,7 +1328,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.0</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.1</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1360,9 +1361,9 @@ a{color:inherit;text-decoration:none}
       <div class="dash-title">مدیریت سریع، تمیز و <span>چند پروتکل</span></div>
       <div class="dash-desc">نمای زنده از مصرف، اتصالات، کانفیگ‌ها و سلامت سرویس. از همین صفحه می‌تونی لینک پیش‌فرض رو برداری یا وارد ساخت کانفیگ جدید بشی.</div>
       <div class="dash-actions">
-        <button class="btn btn-p" onclick="openModal('modal-create-link')"><i class="ti ti-square-rounded-plus"></i> ساخت کانفیگ</button>
-        <button class="btn btn-g" onclick="navTo('traffic')"><i class="ti ti-chart-area"></i> مشاهده ترافیک</button>
-        <button class="btn btn-o" onclick="refreshAll()"><i class="ti ti-refresh"></i> رفرش</button>
+        <button class="btn btn-p" onclick="dashCreateConfig()"><i class="ti ti-square-rounded-plus"></i> ساخت کانفیگ</button>
+        <button class="btn btn-g" onclick="dashGoTraffic()"><i class="ti ti-chart-area"></i> مشاهده ترافیک</button>
+        <button class="btn btn-o" onclick="dashRefresh()"><i class="ti ti-refresh"></i> رفرش</button>
       </div>
     </div>
     <div class="dash-side">
@@ -1745,7 +1746,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.0</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.1</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1886,6 +1887,10 @@ function navTo(name){
 document.querySelectorAll('.nav-it').forEach(el=>el.addEventListener('click',()=>navTo(el.dataset.pg)));
 function openModal(id){document.getElementById(id).classList.add('open')}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
+function dashCreateConfig(){try{openModal('modal-create-link')}catch(e){console.error(e);toast('خطا در باز کردن ساخت کانفیگ','err')}}
+function dashGoTraffic(){try{navTo('traffic')}catch(e){console.error(e);toast('خطا در نمایش ترافیک','err')}}
+function dashRefresh(){try{refreshAll()}catch(e){console.error(e);toast('خطا در رفرش','err')}}
+
 let prevTraf=0,ch1,ch2,ch3;
 async function fetchStats(){
   try{
@@ -1944,8 +1949,9 @@ let allSubsList=[],allLinksList=[];
 async function loadLinks(){
   try{
     const [lr,sr]=await Promise.all([authF('/api/links'),authF('/api/subs')]);
-    const {links:rawLinks=[]}=await lr.json();
+    let {links:rawLinks=[]}=await lr.json();
     const {subs=[]}=await sr.json();
+    rawLinks=(rawLinks||[]).filter(l=>l&&l.uuid).map(l=>({label:'بدون نام',used_bytes:0,limit_bytes:0,active:true,expired:false,created_at:new Date().toISOString(),vless_link:'',sub_url:'',protocol:'vless-ws',...l}));
     const multiSubs=subs.filter(s=>String(s.desc||'').includes('Multi Protocol'));
     // فقط بچه‌های واقعی مولتی را داخل کارت گروهی مخفی/گروه‌بندی کن؛
     // کانفیگ یا پروکسی معمولی که بعداً داخل همان گروه اضافه شده باید جدا نمایش داده شود.
@@ -2027,7 +2033,7 @@ async function loadLinks(){
   </div>`;
 }).join('');
     document.getElementById('lsummary').innerHTML=links.slice(0,6).map(l=>`<div class="sr"><span class="sr-k" style="gap:5px"><i class="ti ${l.expired?'ti-calendar-x':l.active?'ti-circle-check':'ti-circle-x'}" style="color:${l.expired?'var(--amber)':l.active?'var(--green)':'var(--red)'}"></i>${esc(l.label)}</span><span class="sr-v" style="font-size:10px">${fmtB(l.used_bytes)} / ${l.limit_bytes===0?'∞':fmtB(l.limit_bytes)}</span></div>`).join('');
-  }catch(e){console.error(e)}
+  }catch(e){console.error(e);toast('خطا در بارگذاری کانفیگ‌ها','err')}
 }
 
 let protoBase = 'vless', protoTransport = 'ws';
@@ -2200,6 +2206,7 @@ async function createLink(){
     if(copyTarget && navigator.clipboard) navigator.clipboard.writeText(copyTarget).catch(()=>{});
     ['nl-label','nl-path','nl-val','nl-exp','nl-note','nl-mtproto-port','nl-mtproto-domain'].forEach(id=>document.getElementById(id).value='');
     toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')),'ok');
+    closeModal('modal-create-link');
     loadLinks();
   }catch(e){toast(' '+e.message,'err')}
 }
@@ -2575,12 +2582,15 @@ async function disconnectDatabase(){
 const THEME_COLORS=['#2563EB','#111827','#7C3AED','#059669','#DC2626','#D97706'];let selectedThemeColor=localStorage.getItem('oxnet-accent')||'#2563EB';
 function applyAccent(c){selectedThemeColor=c;localStorage.setItem('oxnet-accent',c);document.documentElement.style.setProperty('--accent2',c);document.documentElement.style.setProperty('--accent-d',c+'18');}
 function renderThemeSwatches(){const el=document.getElementById('theme-swatches');if(!el)return;el.innerHTML=THEME_COLORS.map(c=>`<span class="theme-swatch ${c===selectedThemeColor?'on':''}" style="background:${c}" onclick="applyAccent('${c}');renderThemeSwatches()"></span>`).join('')}
-async function loadProTools(){renderThemeSwatches();loadHealth();loadMonitoring();}
+async function loadProTools(){renderThemeSwatches();loadHealth();loadMonitoring();loadRestorePoints();}
 async function saveThemeStudio(){try{await authF('/api/settings',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:{accent:selectedThemeColor}})});toast('قالب ذخیره شد','ok')}catch(e){toast('خطا','err')}}
 async function createSmartSub(){const label=document.getElementById('smart-label').value||'Smart Iran';const profile=document.getElementById('smart-profile').value;try{const r=await authF('/api/smart-subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({label,profile})});const d=await r.json();if(!r.ok)throw new Error(d.detail||'خطا');navigator.clipboard?.writeText(d.sub_url);toast('ساب هوشمند ساخته و کپی شد','ok');loadLinks();loadSubs();}catch(e){toast(' '+e.message,'err')}}
 async function loadHealth(){try{const r=await authF('/api/config-health'),d=await r.json();const el=document.getElementById('health-list');if(!el)return;el.innerHTML=(d.items||[]).slice(0,8).map(x=>`<div class="health-row"><div><b>${esc(x.label)}</b><div class="pro-muted">${esc(x.protocol)} · ${esc(x.status)} · ${(x.reasons||[]).join('، ')||'بدون مشکل'}</div></div><span class="score-pill">${toFa(x.score)}</span></div>`).join('')||'<div class="pro-muted">کانفیگی نیست</div>'}catch(e){}}
 async function loadMonitoring(){try{const r=await authF('/api/monitoring'),d=await r.json();const el=document.getElementById('monitoring-box');if(!el)return;el.innerHTML=`<div class="sr"><span class="sr-k">دیتابیس</span><span class="sr-v">${esc(d.db_mode)}</span></div><div class="sr"><span class="sr-k">Top مصرف</span><span class="sr-v">${(d.top_links||[]).slice(0,3).map(x=>esc(x.label)).join('، ')||'—'}</span></div><div class="sr"><span class="sr-k">IP آنلاین</span><span class="sr-v">${(d.top_ips||[]).length}</span></div>`}catch(e){}}
 function exportBackup(){window.open('/api/backup/export','_blank')}
+async function saveRestorePoint(){const name=prompt('نام بکاپ/ریستور پوینت؟','Backup '+new Date().toLocaleString('fa-IR'));if(!name)return;try{await authF('/api/backup/save',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});toast('Restore Point ذخیره شد','ok');loadRestorePoints()}catch(e){toast('خطا','err')}}
+async function loadRestorePoints(){try{const r=await authF('/api/backup/restore-points'),d=await r.json();const el=document.getElementById('restore-points');if(!el)return;el.innerHTML=(d.items||[]).slice().reverse().map(b=>`<div class="health-row"><div><b>${esc(b.name)}</b><div class="pro-muted">${new Date(b.created_at).toLocaleString('fa-IR')}</div></div><button class="btn btn-p btn-sm" onclick="restorePoint('${b.id}')"><i class="ti ti-restore"></i> ریستور</button></div>`).join('')||'<div class="pro-muted">هنوز Restore Point ندارید</div>'}catch(e){}}
+async function restorePoint(id){if(!confirm('ریستور انجام شود؟ اطلاعات فعلی با بکاپ جایگزین می‌شود.'))return;try{const r=await authF('/api/backup/restore/'+id,{method:'POST'});const d=await r.json();if(!r.ok)throw new Error(d.detail||'خطا');toast('ریستور انجام شد','ok');refreshAll();loadProTools();loadCustomers()}catch(e){toast(' '+e.message,'err')}}
 async function importBackup(){const raw=document.getElementById('backup-import').value.trim();if(!raw){toast('JSON بکاپ را وارد کن','err');return}try{const data=JSON.parse(raw);const r=await authF('/api/backup/import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const d=await r.json();if(!r.ok)throw new Error(d.detail||'خطا');toast('بکاپ ایمپورت شد','ok');refreshAll()}catch(e){toast(' '+e.message,'err')}}
 async function runCleanup(){const expired_days=Number(document.getElementById('clean-expired').value||0),inactive_days=Number(document.getElementById('clean-inactive').value||0);try{const r=await authF('/api/cleanup/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expired_days,inactive_days,reset_logs:false})});const d=await r.json();toast(`پاک‌سازی: ${toFa(d.deleted)} حذف، ${toFa(d.archived)} آرشیو`,'ok');refreshAll()}catch(e){toast('خطا','err')}}
 async function loadCustomers(){try{const r=await authF('/api/customers'),d=await r.json();const el=document.getElementById('customers-list');if(!el)return;el.innerHTML=(d.customers||[]).map(c=>`<div class="cust-row"><div><b>${esc(c.name)}</b><div class="pro-muted">${esc(c.phone||'')} · ${esc(c.note||'')}</div></div><span class="badge bg-blue">${toFa((c.link_ids||[]).length)} کانفیگ</span><button class="btn btn-d btn-sm" onclick="deleteCustomer('${c.customer_id}')"><i class="ti ti-trash"></i></button></div>`).join('')||'<div class="empty"><i class="ti ti-users"></i><p>کاربری ثبت نشده</p></div>'}catch(e){}}
@@ -2599,7 +2609,7 @@ async function changePw(){
     const r=await authF('/api/change-password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({current_password:cur,new_password:nw})});
     const d=await r.json().catch(()=>({}));
     if(!r.ok)throw new Error(d.detail||'خطا');
-    toast('رمز تغییر کرد ','ok');
+    toast('رمز تغییر کرد و در دیتابیس/بکاپ ذخیره شد','ok');
     ['cp-cur','cp-new','cp-cf'].forEach(id=>document.getElementById(id).value='');
   }catch(e){toast(' '+e.message,'err')}
 }
@@ -3508,7 +3518,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.0</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.1</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3518,7 +3528,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.0</div>
+  <div class="footer">OXNET v2.0.1</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';

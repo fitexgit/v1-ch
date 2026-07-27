@@ -1,3 +1,3 @@
-version=2.0.0
-description=OXNET v2 Pro: Theme Studio, Smart Subscription, Health, Users, Backup, Security, Monitoring, Cleanup
-updated_at=1785150115
+version=2.0.1
+description=Fix dashboard buttons, v2 Pro design, TCP Proxy list, and backup restore
+updated_at=1785150843

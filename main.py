@@ -391,7 +391,7 @@ async def _attach_mtproto_public_proxy(uid: str, application_port: int, label: s
             LINKS[uid]["mtproto_public_port"] = pub["port"]
             LINKS[uid]["mtproto_proxy_id"] = pub["id"]
             LINKS[uid]["mtproto_public_pending"] = False
-    asyncio.create_task(save_state())
+    await save_state()
     log_activity("link", f"TCP Proxy عمومی «{label}» آماده شد ({pub['domain']}:{pub['port']})", "ok")
 
 async def _reattach_mtproto_public_proxy(uid: str, new_port: int, old_proxy_id: Optional[str], label: str):
@@ -422,7 +422,7 @@ async def _update_mtproto_ad_tag(uuid: str, ad_tag: str):
             link["ad_tag_link"] = generate_share_link(   # ← جدید، لینک تازه با سکرت جدید
                 uuid, get_host(), remark=f"OXNET-{link.get('label','')}", protocol="mtproto"
             )
-        asyncio.create_task(save_state())            # ← جدید: ذخیره روی دیسک
+        await save_state()            # ذخیره فوری در دیتابیس/دیسک
         logger.info(f"MTProto[{uuid[:8]}]: ad_tag به‌روز شد و instance ری‌استارت شد")
     except Exception as exc:
         logger.error(f"خطا در به‌روزرسانی ad_tag برای {uuid[:8]}: {exc}")
@@ -634,7 +634,7 @@ async def ensure_default_link():
                     "protocol": DEFAULT_PROTOCOL,
                     "path": uid,
                 }
-                asyncio.create_task(save_state())
+                await save_state()
         _default_link_created = True
 
 # ── Basic endpoints ───────────────────────────────────────────────────────────
@@ -698,7 +698,7 @@ async def create_sub(request: Request, _=Depends(require_auth)):
             "created_at": datetime.now().isoformat(),
             "link_ids": [],
         }
-    asyncio.create_task(save_state())
+    await save_state()
     log_activity("sub", f"گروه «{name}» ساخته شد", "ok")
     host = get_host()
     return {
@@ -751,7 +751,7 @@ async def update_sub(sub_id: str, request: Request, _=Depends(require_auth)):
             s["password_hash"] = hash_password(pw) if pw else None
         if "link_ids" in body:
             s["link_ids"] = list(body["link_ids"])
-    asyncio.create_task(save_state())
+    await save_state()
     return {"ok": True}
 
 @app.delete("/api/subs/{sub_id}")
@@ -765,7 +765,7 @@ async def delete_sub(sub_id: str, _=Depends(require_auth)):
         for link in LINKS.values():
             if link.get("sub_id") == sub_id:
                 link["sub_id"] = None
-    asyncio.create_task(save_state())
+    await save_state()
     log_activity("sub", f"گروه «{name}» حذف شد", "warn")
     return {"ok": True, "deleted": sub_id}
 
@@ -788,7 +788,7 @@ async def assign_link_to_sub(sub_id: str, request: Request, _=Depends(require_au
     async with LINKS_LOCK:
         if link_id in LINKS:
             LINKS[link_id]["sub_id"] = sub_id if action == "add" else None
-    asyncio.create_task(save_state())
+    await save_state()
     return {"ok": True}
 
 # ── Public sub-group subscription file ───────────────────────────────────────
@@ -1070,7 +1070,7 @@ async def create_link(request: Request, _=Depends(require_auth)):
                 links_out.append({"uuid": muid, "path": mpath, "protocol": p, "vless_link": generate_share_link(muid, host, remark=f"OXNET-{label}-{p}", protocol=p)})
         async with SUBS_LOCK:
             SUBS[sub_id] = sub
-        asyncio.create_task(save_state())
+        await save_state()
         log_activity("link", f"ساب مولتی پروتکل «{label}» ساخته شد", "ok")
         return {"ok": True, "mode": "multi", "sub_id": sub_id, "path": uuid_key, "sub_url": f"https://{host}/sub-group/{uuid_key}", "links": links_out}
 
@@ -1130,7 +1130,7 @@ async def create_link(request: Request, _=Depends(require_auth)):
                 if uid not in ids:
                     ids.append(uid)
 
-    asyncio.create_task(save_state())
+    await save_state()
     log_activity("link", f"کانفیگ «{label}» ساخته شد", "ok")
     host = get_host()
     return {
@@ -1242,10 +1242,10 @@ async def update_link(uid: str, request: Request, _=Depends(require_auth)):
                     if uid in LINKS:
                         LINKS[uid]["active"] = False
                 log_activity("link", f"روشن کردن پروکسی تلگرام «{label}» ناموفق بود", "err")
-                asyncio.create_task(save_state())
+                await save_state()
                 raise HTTPException(status_code=502, detail=f"روشن کردن پروکسی تلگرام ناموفق بود: {exc}")
 
-    asyncio.create_task(save_state())
+    await save_state()
     return {"ok": True}
 
 # ===== Endpoint جدید برای به‌روزرسانی ad_tag =====
@@ -1302,7 +1302,7 @@ async def delete_link(uid: str, _=Depends(require_auth)):
                 ids = SUBS[sub_id].get("link_ids", [])
                 if uid in ids:
                     ids.remove(uid)
-    asyncio.create_task(save_state())
+    await save_state()
     log_activity("link", f"کانفیگ «{label}» حذف شد", "err")
     return {"ok": True, "deleted": uid}
 
@@ -1516,6 +1516,37 @@ async def api_smart_subscription(request: Request, _=Depends(require_auth)):
 async def api_backup_export(_=Depends(require_auth)):
     return JSONResponse(_state_snapshot(), headers={"Content-Disposition":"attachment; filename=oxnet-backup.json"})
 
+@app.get("/api/backup/restore-points")
+async def api_backup_restore_points(_=Depends(require_auth)):
+    return {"items": SETTINGS.setdefault("backups", [])[-20:]}
+
+@app.post("/api/backup/save")
+async def api_backup_save(request: Request, _=Depends(require_auth)):
+    body = await request.json()
+    name = str(body.get("name") or f"Backup {datetime.now().strftime('%Y-%m-%d %H:%M')}")[:80]
+    bid = generate_uuid()
+    item = {"id": bid, "name": name, "created_at": datetime.now().isoformat(), "data": _state_snapshot()}
+    SETTINGS.setdefault("backups", []).append(item)
+    SETTINGS["backups"] = SETTINGS["backups"][-20:]
+    await save_state()
+    return {"ok": True, "id": bid, "name": name}
+
+@app.post("/api/backup/restore/{bid}")
+async def api_backup_restore(bid: str, _=Depends(require_auth)):
+    item = next((b for b in SETTINGS.setdefault("backups", []) if b.get("id") == bid), None)
+    if not item:
+        raise HTTPException(status_code=404, detail="backup not found")
+    data = item.get("data") or {}
+    LINKS.clear(); LINKS.update(data.get("links", {}))
+    SUBS.clear(); SUBS.update(data.get("subs", {}))
+    CUSTOMERS.clear(); CUSTOMERS.update(data.get("customers", {}))
+    SETTINGS.update(data.get("settings", {}))
+    if data.get("password_hash"):
+        AUTH["password_hash"] = data["password_hash"]
+    await save_state()
+    log_activity("system", f"ریستور بکاپ «{item.get('name','')}» انجام شد", "ok")
+    return {"ok": True, "restored": item.get("name")}
+
 @app.post("/api/backup/import")
 async def api_backup_import(request: Request, _=Depends(require_auth)):
     data = await request.json()
@@ -1620,7 +1651,7 @@ from pages import LOGIN_HTML, DASHBOARD_HTML
 
 def render_html(html: str) -> str:
     v = get_current_panel_version()
-    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}")
+    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}")
 
 
 # ── Central: Announcements & Support ─────────────────────────────────────────
