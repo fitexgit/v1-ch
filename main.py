@@ -22,6 +22,10 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import httpx
 import logging
+try:
+    import asyncpg
+except Exception:
+    asyncpg = None
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("OXNET")
@@ -42,6 +46,9 @@ app.add_middleware(
 DATA_DIR = Path(os.environ.get("DATA_DIR", "/data"))
 DATA_FILE = DATA_DIR / "oxnet_state.json"
 SECRET_FILE = DATA_DIR / ".oxnet_secret"
+DB_URL_FILE = DATA_DIR / ".oxnet_database_url"
+PANEL_VERSION_FILE = Path(__file__).with_name("version.txt")
+DB_POOL = None
 SAVE_LOCK = asyncio.Lock()
 
 
@@ -71,14 +78,104 @@ CONFIG = {
 }
 
 
+def get_current_panel_version() -> str:
+    try:
+        if PANEL_VERSION_FILE.exists():
+            for line in PANEL_VERSION_FILE.read_text(encoding="utf-8").splitlines():
+                if line.startswith("version="):
+                    return line.split("=", 1)[1].strip() or "1.0.0"
+    except Exception:
+        pass
+    return "1.0.0"
+
+
+def _state_snapshot() -> dict:
+    return {"links": dict(LINKS), "subs": dict(SUBS), "password_hash": AUTH["password_hash"], "saved_at": datetime.now().isoformat()}
+
+
+def get_database_url() -> str | None:
+    env = os.environ.get("OXNET_DATABASE_URL") or os.environ.get("DATABASE_URL")
+    if env:
+        return env.strip()
+    try:
+        if DB_URL_FILE.exists():
+            return DB_URL_FILE.read_text(encoding="utf-8").strip() or None
+    except Exception:
+        pass
+    return None
+
+
+def mask_db_url(url: str | None) -> str:
+    if not url:
+        return ""
+    return re.sub(r'//([^:/@]+):([^@]+)@', lambda m: f"//{m.group(1)}:********@", url)
+
+
+async def init_database(url: str | None = None, persist: bool = False) -> bool:
+    global DB_POOL
+    url = (url or get_database_url() or "").strip()
+    if not url:
+        return False
+    if asyncpg is None:
+        raise RuntimeError("asyncpg نصب نیست؛ requirements.txt را نصب کنید")
+    if DB_POOL:
+        await DB_POOL.close()
+        DB_POOL = None
+    DB_POOL = await asyncpg.create_pool(url, min_size=1, max_size=4, command_timeout=20)
+    async with DB_POOL.acquire() as conn:
+        await conn.execute("""
+        CREATE TABLE IF NOT EXISTS oxnet_state (
+            id TEXT PRIMARY KEY,
+            data JSONB NOT NULL,
+            updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+        """)
+    if persist:
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        DB_URL_FILE.write_text(url, encoding="utf-8")
+    return True
+
+
+async def load_state_from_database() -> dict | None:
+    if not DB_POOL:
+        return None
+    async with DB_POOL.acquire() as conn:
+        row = await conn.fetchrow("SELECT data FROM oxnet_state WHERE id='main'")
+    return (json.loads(row["data"]) if isinstance(row["data"], str) else dict(row["data"])) if row and row["data"] else None
+
+
+async def save_state_to_database(data: dict):
+    if not DB_POOL:
+        return False
+    async with DB_POOL.acquire() as conn:
+        await conn.execute("""
+        INSERT INTO oxnet_state(id, data, updated_at)
+        VALUES('main', $1::jsonb, NOW())
+        ON CONFLICT (id) DO UPDATE SET data=EXCLUDED.data, updated_at=NOW()
+        """, json.dumps(data, ensure_ascii=False))
+    return True
+
+
 async def load_state():
     global LINKS, AUTH, SUBS
     try:
         DATA_DIR.mkdir(parents=True, exist_ok=True)
-        if DATA_FILE.exists():
+        db_ready = False
+        try:
+            db_ready = await init_database()
+        except Exception as e:
+            logger.warning(f"PostgreSQL init failed; falling back to JSON: {e}")
+        data = None
+        if db_ready:
+            data = await load_state_from_database()
+        if data is None and DATA_FILE.exists():
             async with aiofiles.open(DATA_FILE, "r", encoding="utf-8") as f:
                 raw = await f.read()
             data = json.loads(raw)
+            if db_ready:
+                await save_state_to_database(data)
+                logger.info("Local JSON state migrated to PostgreSQL")
+        if data:
             LINKS.update(data.get("links", {}))
             SUBS.update(data.get("subs", {}))
             if "password_hash" in data:
@@ -91,12 +188,10 @@ async def save_state():
     async with SAVE_LOCK:
         try:
             DATA_DIR.mkdir(parents=True, exist_ok=True)
-            data = {
-                "links": dict(LINKS),
-                "subs": dict(SUBS),
-                "password_hash": AUTH["password_hash"],
-                "saved_at": datetime.now().isoformat(),
-            }
+            data = _state_snapshot()
+            if DB_POOL:
+                await save_state_to_database(data)
+                return
             tmp = DATA_FILE.with_suffix(".tmp")
             async with aiofiles.open(tmp, "w", encoding="utf-8") as f:
                 await f.write(json.dumps(data, ensure_ascii=False, indent=2))
@@ -294,7 +389,11 @@ async def _update_mtproto_ad_tag(uuid: str, ad_tag: str):
 
 @app.on_event("shutdown")
 async def shutdown():
+    global DB_POOL
     await save_state()
+    if DB_POOL:
+        await DB_POOL.close()
+        DB_POOL = None
     await mtproto.stop_all()
     if http_client:
         await http_client.aclose()
@@ -354,7 +453,7 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
     public_path = link_obj.get("path") or uuid
     if protocol == "shadowsocks-tls":
         import base64
-        user = base64.urlsafe_b64encode(f"none:{uuid}".encode()).decode().rstrip("=")
+        user = base64.urlsafe_b64encode(f"chacha20-ietf-poly1305:{uuid}".encode()).decode().rstrip("=")
         plugin = quote(f"v2ray-plugin;tls;host={host};path=/ss/{public_path}")
         return f"ss://{user}@{host}:443?plugin={plugin}#{quote(remark)}"
     if protocol == "mtproto":
@@ -377,6 +476,8 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
         return f"trojan://{uuid}@{host}:443?{query}#{quote(remark)}"
     if protocol.startswith("trojan-xhttp-"):
         mode = protocol.replace("trojan-xhttp-", "")
+        if mode == "stream-one":
+            mode = "stream-up"
         path = f"/xhttp-siz10/{mode}/{public_path}"
         params = {
             "security": "tls", "type": "xhttp", "mode": mode, "host": host,
@@ -398,6 +499,8 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
         }
     else:
         mode = protocol.replace("xhttp-", "")
+        if mode == "stream-one":
+            mode = "stream-up"
         path = f"/xhttp-siz10/{mode}/{public_path}"
         params = {
             "encryption": "none",
@@ -492,7 +595,7 @@ async def ensure_default_link():
 # ── Basic endpoints ───────────────────────────────────────────────────────────
 @app.get("/")
 async def root():
-    return {"service": "OXNET", "version": "1.0.0", "status": "active"}
+    return {"service": "OXNET", "version": get_current_panel_version(), "status": "active"}
 
 @app.get("/health")
 async def health():
@@ -866,7 +969,7 @@ async def create_link(request: Request, _=Depends(require_auth)):
         sub_id = generate_uuid()
         uuid_key = base_path
         multi_protocols = [
-            "vless-ws", "xhttp-packet-up", "xhttp-stream-up", "xhttp-stream-one",
+            "vless-ws", "xhttp-packet-up", "xhttp-stream-up",
             "trojan-ws", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
             "shadowsocks-tls",
         ]
@@ -1158,9 +1261,11 @@ from relay_vless import (
 )
 
 from trojan import trojan_ws_tunnel
+from shadowsocks_ws import shadowsocks_ws_tunnel
 
 app.add_api_websocket_route("/ws/{uuid}", websocket_tunnel)
 app.add_api_websocket_route("/trojan-ws", trojan_ws_tunnel)
+app.add_api_websocket_route("/ss/{uuid}", shadowsocks_ws_tunnel)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # XHTTP
@@ -1264,7 +1369,7 @@ def load_update_history(): return []
 
 @app.get("/api/version")
 async def api_version(_=Depends(require_auth)):
-    current_info = {"version": "1.0.0", "description": "نسخه اولیه OXNET"}
+    current_info = {"version": get_current_panel_version(), "description": "نسخه نصب‌شده OXNET"}
     return {"repo": "standalone", "branch": "local", "current": current_info, "latest": current_info, "update_available": False}
 
 @app.get("/api/update-history")
@@ -1279,8 +1384,48 @@ async def api_update_log(_=Depends(require_auth)):
 async def api_update(_=Depends(require_auth)):
     raise HTTPException(status_code=404, detail="بروزرسانی خودکار در نسخه مستقل OXNET حذف شده است")
 
+
+@app.get("/api/database/status")
+async def api_database_status(_=Depends(require_auth)):
+    url = get_database_url()
+    ok = DB_POOL is not None
+    return {"connected": ok, "configured": bool(url), "url": mask_db_url(url), "mode": "PostgreSQL" if ok else "JSON File"}
+
+@app.post("/api/database/connect")
+async def api_database_connect(request: Request, _=Depends(require_auth)):
+    body = await request.json()
+    url = str(body.get("url") or body.get("internal_url") or body.get("external_url") or "").strip()
+    if not url.startswith(("postgresql://", "postgres://")):
+        raise HTTPException(status_code=400, detail="لینک PostgreSQL معتبر نیست")
+    try:
+        await init_database(url, persist=True)
+        await save_state_to_database(_state_snapshot())
+        log_activity("system", "PostgreSQL به عنوان دیتابیس پنل فعال شد", "ok")
+        return {"ok": True, "connected": True, "url": mask_db_url(url)}
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"اتصال به PostgreSQL ناموفق بود: {exc}")
+
+@app.post("/api/database/disconnect")
+async def api_database_disconnect(_=Depends(require_auth)):
+    global DB_POOL
+    if DB_POOL:
+        await DB_POOL.close()
+        DB_POOL = None
+    try:
+        if DB_URL_FILE.exists():
+            DB_URL_FILE.unlink()
+    except Exception:
+        pass
+    await save_state()
+    return {"ok": True, "connected": False}
+
 # ── HTML Pages ───────────────────────────────────────────────────────────────
 from pages import LOGIN_HTML, DASHBOARD_HTML
+
+def render_html(html: str) -> str:
+    v = get_current_panel_version()
+    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}")
+
 
 # ── Central: Announcements & Support ─────────────────────────────────────────
 @app.get("/api/announcements")
@@ -1303,14 +1448,14 @@ async def api_support_send(request: Request, _=Depends(require_auth)):
 async def login_page(request: Request):
     if await is_valid_session(request.cookies.get(SESSION_COOKIE)):
         return RedirectResponse(url="/dashboard")
-    return HTMLResponse(content=LOGIN_HTML)
+    return HTMLResponse(content=render_html(LOGIN_HTML))
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):
     if not await is_valid_session(request.cookies.get(SESSION_COOKIE)):
         return RedirectResponse(url="/login")
     await ensure_default_link()
-    return HTMLResponse(content=DASHBOARD_HTML)
+    return HTMLResponse(content=render_html(DASHBOARD_HTML))
 
 @app.get("/test-ws", response_class=HTMLResponse)
 async def test_ws_redirect():

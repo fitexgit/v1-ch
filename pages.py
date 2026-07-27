@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v1.0.0
+# pages.py  -  OXNET v1.2.0
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -97,7 +97,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.0.0</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.2.0</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -112,7 +112,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 1.0.0</div>
+    <div class="footer">OXNET · 1.2.0</div>
   </div>
 </div>
 <script>
@@ -208,7 +208,7 @@ a{color:inherit;text-decoration:none}
 .overlay.show{display:block}
 .main{margin-right:var(--sidebar-w);flex:1;padding:28px 28px 60px;min-width:0;transition:margin .25s}
 .pg{display:none}
-.pg.on{display:block;animation:fi .2s ease}
+.pg.on{display:block;animation:none!important;opacity:1!important;transform:none!important}
 @keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
 .tb-title{font-size:18px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:8px;letter-spacing:-.02em}
@@ -1017,6 +1017,12 @@ a{color:inherit;text-decoration:none}
 @keyframes cmSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 
 </style>
+
+<style id="oxnet-dashboard-redesign">
+#pg-overview,#pg-overview *{opacity:1!important;filter:none!important}#pg-overview{color:var(--t1)!important}.dash-main-card,.dash-kpi,.dash-protocol,.vless-box,.dash-chart-card,.card{box-shadow:0 12px 36px rgba(15,23,42,.09)!important}
+.pc-ss{background:rgba(20,184,166,.12);color:#0F766E}[data-theme="dark"] .pc-ss{color:#5EEAD4}
+.dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}.dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}.dash-main-card:before{content:'';position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}.dash-eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--t3);text-transform:uppercase;margin-bottom:10px}.dash-title{font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--t1);line-height:1.2;margin-bottom:8px}.dash-title span{color:var(--accent2)}.dash-desc{max-width:620px;color:var(--t2);font-size:13px;line-height:2}.dash-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.dash-side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dash-kpi{background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(15,23,42,.05)}.dash-kpi-icon{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:18px;margin-bottom:14px}.dash-kpi-label{font-size:10px;color:var(--t3);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.dash-kpi-val{font-size:28px;font-weight:900;color:var(--t1);line-height:1;margin-top:7px}.dash-kpi-sub{font-size:10px;color:var(--t3);margin-top:8px}.dash-chart-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:16px;margin-bottom:16px}.dash-chart-card{background:var(--card);border:1px solid var(--card-b);border-radius:24px;padding:20px 22px;box-shadow:0 12px 36px rgba(15,23,42,.06)}.dash-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.dash-card-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.dash-card-sub{font-size:10px;color:var(--t3);margin-top:3px}.dash-protocols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.dash-protocol{background:var(--card);border:1px solid var(--card-b);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}.dash-protocol i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:17px;flex-shrink:0}.dash-protocol b{font-size:12px;color:var(--t1)}.dash-protocol span{display:block;font-size:10px;color:var(--t3);margin-top:2px}.multi-group-card{border:1px solid var(--card-b);border-radius:18px;background:linear-gradient(145deg,var(--card),var(--bg3));padding:16px;margin-bottom:12px}.multi-group-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.multi-group-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.multi-protos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.multi-protos span{font-size:10px;padding:4px 8px;border-radius:7px;background:var(--accent-d);color:var(--t2);font-weight:700}.db-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:22px;margin-bottom:16px}.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:1000px){.dash-hero,.dash-chart-grid,.db-grid{grid-template-columns:1fr}.dash-protocols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.dash-side,.dash-protocols{grid-template-columns:1fr}.dash-title{font-size:26px}}
+</style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
@@ -1254,7 +1260,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v1.0.0</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v1.2.0</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1626,6 +1632,20 @@ a{color:inherit;text-decoration:none}
 </section>
 <section class="pg" id="pg-settings">
   <div class="topbar"><div><div class="tb-title"><i class="ti ti-settings"></i> تنظیمات</div></div></div>
+  <div class="db-card">
+    <div class="card-title"><i class="ti ti-database"></i> دیتابیس خارجی PostgreSQL <span class="ml-auto badge bg-blue" id="db-status-badge">در حال بررسی</span></div>
+    <div class="cl" style="margin-top:0;margin-bottom:12px"><i class="ti ti-info-circle"></i><span>Internal URL را وقتی اپ و دیتابیس داخل یک شبکه هستند وارد کن. اگر از بیرون وصل می‌شی External URL را بزن. بعد از اتصال، OXNET جدول خودش را می‌سازد و اطلاعات پنل را در PostgreSQL ذخیره می‌کند.</span></div>
+    <div class="db-grid">
+      <div class="fg"><label>Internal URL</label><input class="fi" id="db-internal-url" dir="ltr" placeholder="postgresql://user:pass@host:5432/db" style="width:100%"></div>
+      <div class="fg"><label>External URL</label><input class="fi" id="db-external-url" dir="ltr" placeholder="postgresql://user:pass@host/db" style="width:100%"></div>
+      <div class="fg" style="grid-column:1/-1"><label>URL فعال / وضعیت</label><input class="fi" id="db-current-url" dir="ltr" readonly placeholder="هنوز متصل نیست" style="width:100%"></div>
+    </div>
+    <div class="vl-actions" style="margin-top:14px">
+      <button class="btn btn-p" onclick="connectDatabase('internal')"><i class="ti ti-plug-connected"></i> اتصال با Internal</button>
+      <button class="btn btn-g" onclick="connectDatabase('external')"><i class="ti ti-world"></i> اتصال با External</button>
+      <button class="btn btn-d" onclick="disconnectDatabase()"><i class="ti ti-plug-x"></i> قطع اتصال</button>
+    </div>
+  </div>
   <div class="g2">
     <div class="srv-panel">
       <div class="srv-hero">
@@ -1637,10 +1657,10 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v1.0.0</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v1.2.0</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
-        <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val">JSON File (/data)</div></div></div>
+        <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
       </div>
     </div>
     <div class="pw-panel">
@@ -1729,7 +1749,7 @@ function protoBadge(p){
     'vless-ws':['VLESS · WS','pc-ws'],
     'xhttp-packet-up':['VLESS · XHTTP packet-up','pc-xhttp'],
     'xhttp-stream-up':['VLESS · XHTTP stream-up','pc-xhttp'],
-    'xhttp-stream-one':['XHTTP ULTRA','pc-ultra'],
+    'xhttp-stream-one':['XHTTP Stream','pc-xh'],
     'trojan-ws':['Trojan · WS','pc-trojan'],
     'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
     'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
@@ -1772,7 +1792,7 @@ overlay.addEventListener('click',closeSb);
 function navTo(name){
   document.querySelectorAll('.nav-it').forEach(n=>n.classList.toggle('on',n.dataset.pg===name));
   document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id==='pg-'+name));
-  const loaders={links:loadLinks,connections:loadConns,errors:loadErrs,subscriptions:loadSubsPage,subgroups:loadSubs,logs:loadActivity};  if(loaders[name])loaders[name]();
+  const loaders={links:loadLinks,connections:loadConns,errors:loadErrs,subscriptions:loadSubsPage,subgroups:loadSubs,logs:loadActivity,settings:loadDbStatus};  if(loaders[name])loaders[name]();
   closeSb();window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.nav-it').forEach(el=>el.addEventListener('click',()=>navTo(el.dataset.pg)));
@@ -2433,6 +2453,32 @@ async function fetchDefaultVless(){
 function cpText(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>toast('کپی شد ','ok'))}
 function qrFor(id){showQR(document.getElementById(id).textContent)}
 function refreshAll(){fetchStats();fetchDefaultVless();loadLinks();if(document.getElementById('pg-subgroups').classList.contains('on'))loadSubs();if(document.getElementById('pg-subscriptions').classList.contains('on'))loadSubsPage();if(document.getElementById('pg-connections').classList.contains('on'))loadConns();if(document.getElementById('pg-logs').classList.contains('on'))loadActivity();toast('رفرش شد','ok')}
+
+async function loadDbStatus(){
+  try{
+    const r=await authF('/api/database/status'),d=await r.json();
+    const badge=document.getElementById('db-status-badge'),cur=document.getElementById('db-current-url'),storage=document.getElementById('storage-mode-label');
+    if(badge){badge.className='ml-auto badge '+(d.connected?'bg-green':'bg-amber');badge.textContent=d.connected?'PostgreSQL متصل':(d.configured?'تنظیم شده، قطع':'JSON محلی');}
+    if(cur)cur.value=d.url||'';
+    if(storage)storage.textContent=d.mode||'JSON File';
+  }catch(e){}
+}
+async function connectDatabase(kind){
+  const id=kind==='internal'?'db-internal-url':'db-external-url';
+  const url=(document.getElementById(id)?.value||'').trim();
+  if(!url){toast('لینک دیتابیس را وارد کنید','err');return}
+  try{
+    const r=await authF('/api/database/connect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(d.detail||'اتصال ناموفق بود');
+    toast('دیتابیس متصل شد و اطلاعات ذخیره شد','ok');
+    loadDbStatus();
+  }catch(e){toast(' '+e.message,'err')}
+}
+async function disconnectDatabase(){
+  try{await authF('/api/database/disconnect',{method:'POST'});toast('اتصال دیتابیس قطع شد','ok');loadDbStatus();}catch(e){toast('خطا در قطع اتصال','err')}
+}
+
 async function changePw(){
   const cur=document.getElementById('cp-cur').value,nw=document.getElementById('cp-new').value,cf=document.getElementById('cp-cf').value;
   if(!cur||!nw||!cf){toast('همه فیلدها را پر کنید','err');return}
@@ -2695,6 +2741,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadLinks();
   loadSubs();
   loadAnnouncements();
+  loadDbStatus();
   // بخش مرکزی حذف شده است
 
   setInterval(fetchStats, 2000);
@@ -3347,7 +3394,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.0.0</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.2.0</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3357,7 +3404,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v1.0.0</div>
+  <div class="footer">OXNET v1.2.0</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';
@@ -3380,7 +3427,7 @@ function esc(s){{return String(s||'').replace(/[&<>"']/g,c=>({{'&':'&amp;','<':'
 function fmtB(b){{if(!b||b===0)return '0 B';if(b<1024)return b+' B';if(b<1024**2)return (b/1024).toFixed(1)+' KB';if(b<1024**3)return (b/1024**2).toFixed(2)+' MB';return (b/1024**3).toFixed(2)+' GB'}}
 function toFa(n){{return String(n).replace(/\\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}}
 function protoChip(p){{
-  if(p==='xhttp-stream-one')return '<span class="proto-chip pc-ultra"><i class="ti ti-bolt"></i> XHTTP ULTRA</span>';
+  if(p==='xhttp-stream-one')return '<span class="proto-chip pc-xh"><i class="ti ti-bolt"></i> XHTTP Stream</span>';
   if(p&&p.startsWith('trojan'))return '<span class="proto-chip pc-trojan"><i class="ti ti-shield-lock"></i> '+esc(p)+'</span>';
   if(p&&p.startsWith('xhttp'))return '<span class="proto-chip pc-xhttp">'+esc(p)+'</span>';
   return '<span class="proto-chip pc-ws">VLESS · WS</span>';
