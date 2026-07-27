@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.6
+# pages.py  -  OXNET v2.0.7
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -91,7 +91,7 @@ input:focus+.ic{color:var(--accent)}
 
 .pro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr}}
 
-/* OXNET v2.0.6 dark-mode contrast hardening */
+/* OXNET v2.0.7 dark-mode contrast hardening */
 [data-theme="dark"] .btn-o,[data-theme="dark"] .btn-g,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .icon-btn{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-bh)!important}
 [data-theme="dark"] .btn-p{background:linear-gradient(135deg,#f8fafc,#cbd5e1)!important;color:#020617!important;box-shadow:none!important}
 [data-theme="dark"] .btn-d{background:rgba(239,68,68,.18)!important;color:#fecaca!important}
@@ -100,7 +100,7 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .fs option{background:#0b1220!important;color:#f8fafc!important}
 [data-theme="dark"] .proto-card,[data-theme="dark"] .proto-base-card,[data-theme="dark"] .proto-t-card,[data-theme="dark"] .cm-dd,[data-theme="dark"] .cm-input{background:var(--card)!important;color:var(--t1)!important}
 
-/* OXNET v2.0.6 dark-mode final contrast fix */
+/* OXNET v2.0.7 dark-mode final contrast fix */
 [data-theme="dark"]{--bg:#05070b!important;--bg2:#0b1018!important;--bg3:#111827!important;--card:#0f172a!important;--card-b:rgba(255,255,255,.10)!important;--card-bh:rgba(255,255,255,.22)!important;--t1:#f8fafc!important;--t2:#cbd5e1!important;--t3:#94a3b8!important;--accent:#e5e7eb!important;--accent2:#ffffff!important;--accent-d:rgba(255,255,255,.08)!important}
 [data-theme="dark"] .card,[data-theme="dark"] .modal,[data-theme="dark"] .modal-v2,[data-theme="dark"] .cm-modal,[data-theme="dark"] .dash-main-card,[data-theme="dark"] .dash-kpi,[data-theme="dark"] .dash-chart-card,[data-theme="dark"] .dash-protocol,[data-theme="dark"] .cfg-card,[data-theme="dark"] .multi-group-card,[data-theme="dark"] .sub-card,[data-theme="dark"] .pro-card,[data-theme="dark"] .db-card,[data-theme="dark"] .srv-panel,[data-theme="dark"] .pw-panel,[data-theme="dark"] .conn-card-v2,[data-theme="dark"] .health-row,[data-theme="dark"] .cust-row{background:#0f172a!important;color:#f8fafc!important;border-color:rgba(255,255,255,.12)!important}
 [data-theme="dark"] .fi,[data-theme="dark"] .fs,[data-theme="dark"] .cm-input,[data-theme="dark"] .modal-v2-input,[data-theme="dark"] .pw-input,[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#0b1018!important;color:#f8fafc!important;border-color:rgba(255,255,255,.14)!important}
@@ -111,14 +111,14 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .cm-opt:hover,[data-theme="dark"] .cm-opt.sel{background:rgba(255,255,255,.10)!important}
 
 
-/* OXNET v2.0.6 extra dark contrast */
+/* OXNET v2.0.7 extra dark contrast */
 [data-theme="dark"] *{scrollbar-color:#334155 #0b1018}
 [data-theme="dark"] .upd-install-btn,[data-theme="dark"] .copy-all-btn{background:#0b1018!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.16)!important}
 [data-theme="dark"] .bg-blue,[data-theme="dark"] .badge{background:rgba(255,255,255,.08)!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.12)!important}
 [data-theme="dark"] .cfg-uuid-mini,[data-theme="dark"] .cfg-sub-tag,[data-theme="dark"] .exp-chip,[data-theme="dark"] .proto-chip{border-color:rgba(255,255,255,.12)!important}
 
 
-/* OXNET v2.0.6 stable polish */
+/* OXNET v2.0.7 stable polish */
 #modal-create-link .cm-modal{max-height:94vh!important;display:flex!important;flex-direction:column!important}
 #modal-create-link .cm-body{max-height:min(68vh,720px)!important;overflow-y:auto!important;padding-left:18px!important}
 #modal-create-link .cm-body::-webkit-scrollbar{width:8px}
@@ -136,7 +136,7 @@ body > .wrap .footer{display:none!important}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}
 @media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 
-/* OXNET v2.0.6 stable polish */
+/* OXNET v2.0.7 stable polish */
 #modal-create-link .cm-modal{max-height:94vh!important;display:flex!important;flex-direction:column!important}
 #modal-create-link .cm-body{max-height:min(68vh,720px)!important;overflow-y:auto!important;padding-left:18px!important}
 #modal-create-link .cm-body::-webkit-scrollbar{width:8px}
@@ -153,6 +153,34 @@ body > .wrap .footer{display:none!important}
 .dash-protocol:after{content:'';position:absolute;inset:auto -30px -35px auto;width:90px;height:90px;border-radius:999px;background:var(--accent-d)}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}
 @media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
+
+/* OXNET v2.0.7 final stable visual polish */
+.brand-name,.logo-name{font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important}
+.brand-sub,.logo-sub{font-weight:700!important;letter-spacing:.02em!important}
+.brand-mark{background:linear-gradient(135deg,#0f172a,#334155)!important;color:#fff!important;font-weight:900!important}
+.brand-mark i{font-size:22px}.brand-mark.small i{font-size:16px}
+.card,.dash-main-card,.dash-chart-card,.dash-kpi,.dash-protocol,.pro-card{box-shadow:0 16px 44px rgba(15,23,42,.08)!important}
+[data-theme="dark"] .btn-p,[data-theme="dark"] .cm-btn-submit,[data-theme="dark"] .modal-v2-btn-submit{background:linear-gradient(135deg,#1d4ed8,#312e81)!important;color:#f8fafc!important;border:1px solid rgba(147,197,253,.28)!important;box-shadow:0 10px 26px rgba(29,78,216,.22)!important}
+[data-theme="dark"] .btn-p:hover,[data-theme="dark"] .cm-btn-submit:hover,[data-theme="dark"] .modal-v2-btn-submit:hover{background:linear-gradient(135deg,#2563eb,#4338ca)!important;color:#fff!important;filter:none!important}
+[data-theme="dark"] .btn-g,[data-theme="dark"] .btn-o,[data-theme="dark"] .btn-pur,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .cm-btn-cancel{background:#111827!important;color:#e5e7eb!important;border-color:rgba(255,255,255,.14)!important}
+[data-theme="dark"] .btn-g:hover,[data-theme="dark"] .btn-o:hover,[data-theme="dark"] .btn-pur:hover,[data-theme="dark"] .theme-btn:hover,[data-theme="dark"] .menu-btn:hover,[data-theme="dark"] .cm-btn-cancel:hover{background:#1e293b!important;color:#fff!important;border-color:rgba(147,197,253,.28)!important}
+[data-theme="dark"] .theme-swatch.on{border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(96,165,250,.18)!important}
+.dash-protocols{grid-template-columns:repeat(4,1fr)!important}
+@media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}@media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
+
+/* OXNET v2.0.7 final stable visual polish */
+.brand-name,.logo-name{font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important}
+.brand-sub,.logo-sub{font-weight:700!important;letter-spacing:.02em!important}
+.brand-mark{background:linear-gradient(135deg,#0f172a,#334155)!important;color:#fff!important;font-weight:900!important}
+.brand-mark i{font-size:22px}.brand-mark.small i{font-size:16px}
+.card,.dash-main-card,.dash-chart-card,.dash-kpi,.dash-protocol,.pro-card{box-shadow:0 16px 44px rgba(15,23,42,.08)!important}
+[data-theme="dark"] .btn-p,[data-theme="dark"] .cm-btn-submit,[data-theme="dark"] .modal-v2-btn-submit{background:linear-gradient(135deg,#1d4ed8,#312e81)!important;color:#f8fafc!important;border:1px solid rgba(147,197,253,.28)!important;box-shadow:0 10px 26px rgba(29,78,216,.22)!important}
+[data-theme="dark"] .btn-p:hover,[data-theme="dark"] .cm-btn-submit:hover,[data-theme="dark"] .modal-v2-btn-submit:hover{background:linear-gradient(135deg,#2563eb,#4338ca)!important;color:#fff!important;filter:none!important}
+[data-theme="dark"] .btn-g,[data-theme="dark"] .btn-o,[data-theme="dark"] .btn-pur,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .cm-btn-cancel{background:#111827!important;color:#e5e7eb!important;border-color:rgba(255,255,255,.14)!important}
+[data-theme="dark"] .btn-g:hover,[data-theme="dark"] .btn-o:hover,[data-theme="dark"] .btn-pur:hover,[data-theme="dark"] .theme-btn:hover,[data-theme="dark"] .menu-btn:hover,[data-theme="dark"] .cm-btn-cancel:hover{background:#1e293b!important;color:#fff!important;border-color:rgba(147,197,253,.28)!important}
+[data-theme="dark"] .theme-swatch.on{border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(96,165,250,.18)!important}
+.dash-protocols{grid-template-columns:repeat(4,1fr)!important}
+@media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}@media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -161,8 +189,8 @@ body > .wrap .footer{display:none!important}
 <div class="wrap">
   <div class="card">
     <div class="brand">
-      <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub login-version-pill">Stable · v2.0.6</div></div>
+      <div class="brand-mark"><i class="ti ti-network"></i></div>
+      <div><div class="brand-name">OXNET</div><div class="brand-sub login-version-pill">Stable Control · v2.0.7</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -177,7 +205,7 @@ body > .wrap .footer{display:none!important}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.6</div>
+    <div class="footer">OXNET · 2.0.7</div>
   </div>
 </div>
 <script>
@@ -1175,7 +1203,7 @@ a{color:inherit;text-decoration:none}
         </div>
 
         <div class="cm-dd" id="transport-section">
-          <div class="cm-dd-trigger" onclick="cmToggleDD('dd-transport')">
+          <div class="cm-dd-trigger" onclick="cmToggleDD('transport-section')">
             <div class="cm-dd-icon" id="dd-transport-icon"><i class="ti ti-link"></i></div>
             <div class="cm-dd-text">
               <div class="cm-dd-title">ترابرد — <span id="dd-transport-current">WebSocket</span></div>
@@ -1185,7 +1213,6 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="cm-dd-panel" id="dd-transport"><div class="cm-dd-panel-inner"><div class="cm-dd-list">
             <div class="cm-opt sel" onclick="cmSelectTransport('ws',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-link"></i></div><div class="cm-opt-text"><div class="cm-opt-title">WebSocket</div><div class="cm-opt-desc">پایدارترین حالت عمومی</div></div></div>
-            <div class="cm-opt" onclick="cmSelectTransport('httpupgrade',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-http-post"></i></div><div class="cm-opt-text"><div class="cm-opt-title">HTTPUpgrade TLS</div><div class="cm-opt-desc">ترابرد Upgrade سبک روی TLS</div></div></div>
             <div class="cm-opt" onclick="cmSelectTransport('xhttp-packet-up',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-package"></i></div><div class="cm-opt-text"><div class="cm-opt-title">XHTTP packet-up</div><div class="cm-opt-desc">سازگار با CDN و پروکسی‌ها</div></div></div>
             <div class="cm-opt" onclick="cmSelectTransport('xhttp-stream-up',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-rocket"></i></div><div class="cm-opt-text"><div class="cm-opt-title">XHTTP stream-up</div><div class="cm-opt-desc">تاخیر کمتر برای شبکه پایدار</div></div></div>
           </div></div></div>
@@ -1194,10 +1221,10 @@ a{color:inherit;text-decoration:none}
         <input type="hidden" id="nl-proto" value="vless-ws">
 
         <div class="cm-note" style="margin-top:12px" id="transport-note"><i class="ti ti-info-circle"></i> پروتکل و ترابرد پس از ساخت کانفیگ قابل تغییر نیستند.</div>
-        <div class="cm-note" style="margin-top:12px;display:none" id="mtproto-note"><i class="ti ti-brand-telegram"></i> برای Telegram Proxy یک پورت TCP اختصاصی به‌صورت خودکار اختصاص داده می‌شود؛ ترابرد WebSocket/XHTTP در این حالت کاربردی ندارد.</div>
+        <div class="cm-note" style="margin-top:12px;display:none" id="mtproto-note"><i class="ti ti-brand-telegram"></i> Telegram Proxy ابتدا روی پورت داخلی ساخته می‌شود؛ اگر توکن Railway ذخیره باشد، دامنه و پورت عمومی TCP Proxy خودکار به همان لینک وصل می‌شود.</div>
 
         <div class="cm-section" id="mtproto-port-field" style="display:none;margin-bottom:0">
-        <div id="auto-domain-box" style="margin-top:10px">
+        <div id="auto-domain-box" style="margin-top:10px;display:none">
           <div class="cm-note" style="display:flex;justify-content:space-between;align-items:center;gap:10px" id="auto-domain-note">
             <span id="auto-domain-status"><i class="ti ti-route"></i> برای دریافت خودکار دامنه‌ی TCP Proxy از دکمه‌ی کنار استفاده کن.</span>
             <button type="button" class="btn btn-g btn-sm" id="auto-domain-btn" onclick="autoGetMtprotoDomain()"><i class="ti ti-bolt"></i> دریافت دامنه</button>
@@ -1359,7 +1386,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 
-<!-- OXNET v2.0.6 repaired action modals -->
+<!-- OXNET v2.0.7 repaired action modals -->
 <div class="modal-bg" id="modal-edit-link">
   <div class="modal-v2" style="max-width:520px">
     <button class="modal-v2-close" onclick="closeModal('modal-edit-link')"><i class="ti ti-x"></i></button>
@@ -1458,7 +1485,7 @@ a{color:inherit;text-decoration:none}
 
 <div class="mob-top">
   <div class="ml">
-    <div class="brand-mark small">OX</div>
+    <div class="brand-mark small"><i class="ti ti-network"></i></div>
     <span class="mob-title">OXNET</span>
   </div>
   <div class="mob-right">
@@ -1470,8 +1497,8 @@ a{color:inherit;text-decoration:none}
 <aside class="sidebar" id="sb">
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
-    <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.6</div></div>
+    <div class="brand-mark small"><i class="ti ti-network"></i></div>
+    <div><div class="logo-name">OXNET</div><div class="logo-sub">Stable Control · v2.0.7</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1521,7 +1548,6 @@ a{color:inherit;text-decoration:none}
     <div class="dash-protocol"><i class="ti ti-shield-lock"></i><div><b>Trojan WS</b><span>TLS-ready</span></div></div>
     <div class="dash-protocol"><i class="ti ti-lock-bolt"></i><div><b>Shadowsocks TLS</b><span>مسیر اختصاصی</span></div></div>
     <div class="dash-protocol"><i class="ti ti-package"></i><div><b>XHTTP Fixed</b><span>packet / stream</span></div></div>
-    <div class="dash-protocol"><i class="ti ti-http-post"></i><div><b>HTTPUpgrade TLS</b><span>VLESS / Trojan</span></div></div>
   </div>
 
   <div class="vless-box">
@@ -1871,7 +1897,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.6</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.7</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1961,12 +1987,10 @@ function expChip(exp,expired){
 function protoBadge(p){
   const m={
     'vless-ws':['VLESS · WS','pc-ws'],
-    'vless-httpupgrade':['VLESS · HTTPUpgrade','pc-hu'],
     'xhttp-packet-up':['VLESS · XHTTP packet-up','pc-xhttp'],
     'xhttp-stream-up':['VLESS · XHTTP stream-up','pc-xhttp'],
     'xhttp-stream-one':['XHTTP Stream','pc-xh'],
     'trojan-ws':['Trojan · WS','pc-trojan'],
-    'trojan-httpupgrade':['Trojan · HTTPUpgrade','pc-hu'],
     'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
     'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
     'shadowsocks-tls':['Shadowsocks · TLS','pc-ss'],
@@ -2049,7 +2073,7 @@ async function fetchStats(){
     if(d.hourly){
       const labels=Object.keys(d.hourly).sort(),vals=labels.map(k=>+(d.hourly[k]/1024**2).toFixed(2));
       [ch1,ch3].forEach(c=>{if(!c)return;c.data.labels=labels;c.data.datasets[0].data=vals;c.update()});
-      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','HTTPUpgrade','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.httpupgrade||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
+      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
       if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);const tAvg=document.getElementById('t-avg'),tPeak=document.getElementById('t-peak');if(tAvg)tAvg.innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';if(tPeak)tPeak.innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
     }
     renderErrs(d.recent_errors||[]);
@@ -2149,7 +2173,7 @@ async function loadLinks(){
         ${protoBadge(l.protocol)}
         ${isMt && l.mtproto_public_host ? `<span class="cfg-sub-tag"><i class="ti ti-route"></i> ${esc(l.mtproto_public_host)}:${l.mtproto_public_port}</span>` : ''}
         ${isMt && !l.mtproto_public_host && l.mtproto_public_pending ? `<span class="cfg-sub-tag" style="color:var(--amber-t)"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال ساخت TCP Proxy عمومی...</span>` : ''}
-        ${isMt && !l.mtproto_public_host && !l.mtproto_public_pending && !l.mtproto_manual_port ? `<span class="cfg-sub-tag" style="color:var(--red-t)"><i class="ti ti-alert-triangle"></i> بدون TCP Proxy عمومی — لینک کار نمی‌کند</span>` : ''}
+        ${isMt && !l.mtproto_public_host && !l.mtproto_public_pending ? `<span class="cfg-sub-tag" style="color:var(--amber-t)"><i class="ti ti-alert-triangle"></i> دامنه عمومی وصل نیست</span><button class="btn btn-sm btn-p btn-icon" onclick="openTcpProxyFor('${l.uuid}',${Number(l.mtproto_port||0)})" title="ساخت TCP Proxy عمومی"><i class="ti ti-route"></i></button>` : ''}
         ${l.sub_id&&allSubsList.find(s=>s.sub_id===l.sub_id)?`<span class="cfg-sub-tag"><i class="ti ti-folder"></i> ${esc(allSubsList.find(s=>s.sub_id===l.sub_id).name)}</span>`:''}
       </div>
       <div class="cfg-divider-v"></div>
@@ -2200,7 +2224,6 @@ const BASE_INFO = {
 };
 const TRANSPORT_INFO = {
   'ws':               { icon:'ti-link',    title:'WebSocket',            desc:'پایدار و سازگار با همه شرایط شبکه' },
-  'httpupgrade':      { icon:'ti-http-post', title:'HTTPUpgrade TLS', desc:'ترابرد HTTP Upgrade سبک روی TLS' },
   'xhttp-packet-up':  { icon:'ti-package', title:'XHTTP · packet-up',    desc:'سازگاری بالا با CDN و پروکسی‌ها' },
   'xhttp-stream-up':  { icon:'ti-rocket',  title:'XHTTP · stream-up',    desc:'تاخیر پایین‌تر برای اتصال‌های پرسرعت' }
 };
@@ -2275,7 +2298,7 @@ function cmSelectTransport(val, el){
   document.getElementById('dd-transport-icon').innerHTML = `<i class="ti ${info.icon}"></i>`;
   document.getElementById('dd-transport-current').textContent = info.title;
   document.getElementById('dd-transport-current-desc').textContent = info.desc;
-  cmToggleDD('dd-transport');
+  cmToggleDD('transport-section');
   cmApplyProto();
 }
 function cmApplyProto(){
@@ -2285,7 +2308,6 @@ function cmApplyProto(){
   }
   let val;
   if (cmTransport === 'ws') val = (cmBase === 'trojan' ? 'trojan-ws' : 'vless-ws');
-  else if (cmTransport === 'httpupgrade') val = (cmBase === 'trojan' ? 'trojan-httpupgrade' : 'vless-httpupgrade');
   else val = (cmBase === 'trojan' ? `trojan-${cmTransport}` : cmTransport);
   document.getElementById('nl-proto').value = val;
 }
@@ -2349,7 +2371,7 @@ async function createLink(){
     const copyTarget = d.sub_url || d.vless_link;
     if(copyTarget && navigator.clipboard) navigator.clipboard.writeText(copyTarget).catch(()=>{});
     ['nl-label','nl-path','nl-val','nl-exp','nl-note','nl-mtproto-port','nl-mtproto-domain'].forEach(id=>document.getElementById(id).value='');
-    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : (protocol.includes('httpupgrade') ? 'HTTPUpgrade TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد'))),'ok');
+    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')),'ok');
     closeModal('modal-create-link');
     loadLinks();
     if(protocol==='multi'){loadSubs();loadSubsPage();}
@@ -2841,9 +2863,9 @@ function initCharts(){
 
   ch2=new Chart(document.getElementById('ch2'),{
     type:'doughnut',
-    data:{labels:['VLESS WS','Trojan WS','XHTTP','HTTPUpgrade','Shadowsocks TLS','MTProto'],datasets:[{
-      data:[1,1,1,1,1,1],
-      backgroundColor:['#2563EB','#111827','#8B5CF6','#6366F1','#14B8A6','#F59E0B'],
+    data:{labels:['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'],datasets:[{
+      data:[1,1,1,1,1],
+      backgroundColor:['#2563EB','#111827','#8B5CF6','#14B8A6','#F59E0B'],
       borderColor:getComputedStyle(document.documentElement).getPropertyValue('--card')||'#0d1b2e',
       borderWidth:4,hoverOffset:10,borderRadius:6,spacing:3
     }]},
@@ -3129,10 +3151,12 @@ async function startBotTcpProxy(){
   const tokenSection=document.getElementById('btp-token-section');
   const token = tokenSection && tokenSection.style.display !== 'none' ? tokenField.value.trim() : '';
   const portVal = document.getElementById('btp-port').value.trim();
-  const pendingPublic = (window.__rawLinksList||[])
-    .filter(l => (l.protocol==='mtproto' && !l.mtproto_public_host && l.mtproto_port))
+  let pendingPublic = null;
+  if (btpTargetUuid) pendingPublic = (window.__rawLinksList||[]).find(l=>l.uuid===btpTargetUuid) || null;
+  if (!pendingPublic) pendingPublic = (window.__rawLinksList||[])
+    .filter(l => (l.protocol==='mtproto' && l.mtproto_port))
     .sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||'')))[0];
-  btpTargetUuid = pendingPublic?.uuid || null;
+  btpTargetUuid = pendingPublic?.uuid || btpTargetUuid || null;
   const autoPort = pendingPublic ? (pendingPublic.mtproto_port || pendingPublic.ss_tcp_port) : '';
   const btn = document.getElementById('btp-start-btn');
   btn.disabled = true;
@@ -3460,6 +3484,15 @@ async function pollDomainScan(){
 }
 let btpForcedDomain = null;
 
+function openTcpProxyFor(uuid, port){
+  btpTargetUuid = uuid || null;
+  const inp=document.getElementById('btp-port');
+  if(inp && port) inp.value = port;
+  openModal('modal-bot-tcp-proxy');
+  btpCheckTokenState();
+  btpSetStatus('ti-route','var(--accent)', port ? ('آماده ساخت TCP Proxy عمومی برای پورت داخلی '+port) : 'آماده ساخت TCP Proxy عمومی', false);
+}
+
 function btpSelectIsp(domain, optId){
   btpForcedDomain = domain; // null یعنی حالت اسکن خودکار قبلی
   document.querySelectorAll('#modal-bot-tcp-proxy .cm-pill,#modal-bot-tcp-proxy .cm-opt').forEach(o=>o.classList.remove('active','sel'));
@@ -3652,7 +3685,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 }}
 @keyframes spin{{to{{transform:rotate(360deg)}}}}
 
-/* OXNET v2.0.6 public subscription theme polish */
+/* OXNET v2.0.7 public subscription theme polish */
 .copy-all-bar{{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;box-shadow:var(--shadow)!important}}
 .copy-all-btn{{background:var(--card)!important;color:var(--t1)!important;border:1px solid var(--card-bh)!important}}
 .btn-p{{background:var(--accent)!important;color:var(--bg)!important}}
@@ -3676,8 +3709,8 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 <div class="wrap">
   <div class="top">
     <div class="brand">
-      <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.6</div></div>
+      <div class="brand-mark"><i class="ti ti-network"></i></div>
+      <div><div class="brand-name">OXNET</div><div class="brand-sub">Stable Control · v2.0.7</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3687,7 +3720,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.6</div>
+  <div class="footer">OXNET v2.0.7</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';
@@ -3712,7 +3745,6 @@ function toFa(n){{return String(n).replace(/\\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
 function protoChip(p){{
   if(p==='xhttp-stream-one')return '<span class="proto-chip pc-xh"><i class="ti ti-bolt"></i> XHTTP Stream</span>';
   if(p&&p.startsWith('trojan'))return '<span class="proto-chip pc-trojan"><i class="ti ti-shield-lock"></i> '+esc(p)+'</span>';
-  if(p&&p.includes('httpupgrade'))return '<span class="proto-chip pc-hu">'+esc(p)+'</span>';
   if(p&&p.startsWith('xhttp'))return '<span class="proto-chip pc-xhttp">'+esc(p)+'</span>';
   if(p==='shadowsocks-tls')return '<span class="proto-chip pc-ss">Shadowsocks · TLS</span>';
   return '<span class="proto-chip pc-ws">VLESS · WS</span>';

@@ -234,9 +234,9 @@ SETTINGS: dict = {
 FAILED_LOGINS: dict = {}
 
 PROTOCOLS = (
-    "vless-ws", "vless-httpupgrade",
+    "vless-ws",
     "xhttp-packet-up", "xhttp-stream-up", "xhttp-stream-one",
-    "trojan-ws", "trojan-httpupgrade",
+    "trojan-ws",
     "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
     "shadowsocks-tls", "mtproto", "multi",
 )
@@ -392,6 +392,7 @@ async def _attach_mtproto_public_proxy(uid: str, application_port: int, label: s
             LINKS[uid]["mtproto_public_host"] = pub["domain"]
             LINKS[uid]["mtproto_public_port"] = pub["port"]
             LINKS[uid]["mtproto_proxy_id"] = pub["id"]
+            LINKS[uid]["mtproto_public_application_port"] = pub.get("application_port") or application_port
             LINKS[uid]["mtproto_public_pending"] = False
     await save_state()
     log_activity("link", f"TCP Proxy عمومی «{label}» آماده شد ({pub['domain']}:{pub['port']})", "ok")
@@ -504,7 +505,7 @@ async def unique_config_path(base: str | None, fallback: str) -> str:
     return candidate
 
 def proto_slug(proto: str) -> str:
-    return proto.replace('shadowsocks-tls', 'ss').replace('httpupgrade','hu').replace('trojan-', 'tr-').replace('vless-', 'vl-').replace('xhttp-', 'xh-').replace('-up', '').replace('-one', '1')
+    return proto.replace('shadowsocks-tls', 'ss').replace('trojan-', 'tr-').replace('vless-', 'vl-').replace('xhttp-', 'xh-').replace('-up', '').replace('-one', '1')
 
 def get_host() -> str:
     return os.environ.get("RAILWAY_PUBLIC_DOMAIN", CONFIG["host"])
@@ -552,22 +553,6 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
         params = {
             "security": "tls", "type": "xhttp", "mode": mode, "host": host,
             "path": path, "sni": host, "fp": "chrome", "alpn": "h2,http/1.1",
-        }
-        query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
-        return f"trojan://{uuid}@{host}:443?{query}#{quote(remark)}"
-    if protocol == "vless-httpupgrade":
-        path = f"/ws/{public_path}"
-        params = {
-            "encryption": "none", "security": "tls", "type": "httpupgrade",
-            "host": host, "path": path, "sni": host, "fp": "chrome", "alpn": "http/1.1",
-        }
-        query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
-        return f"vless://{uuid}@{host}:443?{query}#{quote(remark)}"
-    if protocol == "trojan-httpupgrade":
-        path = f"/trojan-ws"
-        params = {
-            "security": "tls", "type": "httpupgrade", "host": host,
-            "path": path, "sni": host, "fp": "chrome", "alpn": "http/1.1",
         }
         query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
         return f"trojan://{uuid}@{host}:443?{query}#{quote(remark)}"
@@ -933,7 +918,6 @@ async def get_stats(_=Depends(require_auth)):
             "vless_ws": sum(1 for l in snap.values() if l.get("protocol") == "vless-ws"),
             "trojan_ws": sum(1 for l in snap.values() if l.get("protocol") == "trojan-ws"),
             "xhttp": sum(1 for l in snap.values() if "xhttp" in str(l.get("protocol", ""))),
-            "httpupgrade": sum(1 for l in snap.values() if "httpupgrade" in str(l.get("protocol", ""))),
             "shadowsocks_tls": sum(1 for l in snap.values() if l.get("protocol") == "shadowsocks-tls"),
             "mtproto": sum(1 for l in snap.values() if l.get("protocol") == "mtproto"),
         },
@@ -951,8 +935,14 @@ async def api_bot_tcp_proxy_start(request: Request, _=Depends(require_auth)):
     except Exception:
         body = {}
     token = str(body.get("token", "")).strip()
+    target_uid = str(body.get("target_uuid") or "").strip()
+    body_port = body.get("port")
+    if (body_port in (None, "", 0, "0")) and target_uid:
+        async with LINKS_LOCK:
+            target_link = LINKS.get(target_uid) or {}
+        body_port = target_link.get("mtproto_port") or target_link.get("ss_tcp_port")
     try:
-        port = int(body.get("port") or CONFIG.get("port") or 8000)
+        port = int(body_port or CONFIG.get("port") or 8000)
     except Exception:
         port = int(CONFIG.get("port") or 8000)
     if not (1 <= port <= 65535):
@@ -1005,19 +995,22 @@ async def api_bot_tcp_proxy_attach_result(request: Request, _=Depends(require_au
             candidates = [(target_uid, LINKS[target_uid])]
         else:
             for uid, l in LINKS.items():
-                if l.get("protocol") == "mtproto" and not l.get("mtproto_public_host"):
+                if l.get("protocol") == "mtproto":
                     candidates.append((uid, l))
             if app_port:
                 exact = [(uid, l) for uid, l in candidates if int(l.get("mtproto_port") or l.get("ss_tcp_port") or 0) == int(app_port)]
                 if exact:
                     candidates = exact
-            candidates.sort(key=lambda x: x[1].get("created_at", ""), reverse=True)
+            # اگر چند مورد بود، اول لینک بدون دامنه عمومی، بعد جدیدترین لینک انتخاب شود.
+            candidates.sort(key=lambda x: (bool(x[1].get("mtproto_public_host")), x[1].get("created_at", "")))
         if not candidates:
             raise HTTPException(status_code=404, detail="لینک بدون دامنه عمومی پیدا نشد")
         uid, link = candidates[0]
         link["mtproto_public_host"] = domain
         link["mtproto_public_port"] = port
         link["mtproto_proxy_id"] = proxy_id
+        if app_port:
+            link["mtproto_public_application_port"] = app_port
         link["mtproto_public_pending"] = False
     await save_state()
     log_activity("link", f"دامنه TCP Proxy به لینک «{link.get('label','')}» متصل شد ({domain}:{port})", "ok")
@@ -1118,8 +1111,8 @@ async def create_link(request: Request, _=Depends(require_auth)):
         sub_id = generate_uuid()
         uuid_key = base_path
         multi_protocols = [
-            "vless-ws", "vless-httpupgrade", "xhttp-packet-up", "xhttp-stream-up",
-            "trojan-ws", "trojan-httpupgrade", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
+            "vless-ws", "xhttp-packet-up", "xhttp-stream-up",
+            "trojan-ws", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
             "shadowsocks-tls",
         ]
         sub = {
@@ -1207,7 +1200,7 @@ async def create_link(request: Request, _=Depends(require_auth)):
         link_data["mtproto_secret"] = inst["secret"]
         link_data["mtproto_domain"] = inst["domain"]
         link_data["mtproto_manual_port"] = manual_port is not None
-        if manual_port is None and bottokentcpproxy.has_saved_token():
+        if bottokentcpproxy.has_saved_token():
             link_data["mtproto_public_pending"] = True
             asyncio.create_task(_attach_mtproto_public_proxy(uid, inst["port"], label))
 
@@ -1743,7 +1736,7 @@ from pages import LOGIN_HTML, DASHBOARD_HTML
 
 def render_html(html: str) -> str:
     v = get_current_panel_version()
-    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("v2.0.3", f"v{v}").replace("v2.0.4", f"v{v}").replace("v2.0.5", f"v{v}").replace("v2.0.6", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}").replace("· 2.0.3", f"· {v}").replace("· 2.0.4", f"· {v}").replace("· 2.0.5", f"· {v}").replace("· 2.0.6", f"· {v}")
+    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("v2.0.3", f"v{v}").replace("v2.0.4", f"v{v}").replace("v2.0.5", f"v{v}").replace("v2.0.6", f"v{v}").replace("v2.0.7", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}").replace("· 2.0.3", f"· {v}").replace("· 2.0.4", f"· {v}").replace("· 2.0.5", f"· {v}").replace("· 2.0.6", f"· {v}").replace("· 2.0.7", f"· {v}")
 
 
 # ── Central: Announcements & Support ─────────────────────────────────────────
