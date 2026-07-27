@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.2
+# pages.py  -  OXNET v2.0.3
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -90,6 +90,15 @@ input:focus+.ic{color:var(--accent)}
 
 
 .pro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr}}
+
+/* OXNET v2.0.3 dark-mode contrast hardening */
+[data-theme="dark"] .btn-o,[data-theme="dark"] .btn-g,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .icon-btn{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-bh)!important}
+[data-theme="dark"] .btn-p{background:linear-gradient(135deg,#f8fafc,#cbd5e1)!important;color:#020617!important;box-shadow:none!important}
+[data-theme="dark"] .btn-d{background:rgba(239,68,68,.18)!important;color:#fecaca!important}
+[data-theme="dark"] .btn-amber{background:rgba(245,158,11,.18)!important;color:#fde68a!important}
+[data-theme="dark"] .fi,[data-theme="dark"] .fs,[data-theme="dark"] textarea,[data-theme="dark"] input,[data-theme="dark"] select{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-b)!important}
+[data-theme="dark"] .fs option{background:#0b1220!important;color:#f8fafc!important}
+[data-theme="dark"] .proto-card,[data-theme="dark"] .proto-base-card,[data-theme="dark"] .proto-t-card,[data-theme="dark"] .cm-dd,[data-theme="dark"] .cm-input{background:var(--card)!important;color:var(--t1)!important}
 </style>
 </head>
 <body>
@@ -99,7 +108,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.2</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.3</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -114,7 +123,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.2</div>
+    <div class="footer">OXNET · 2.0.3</div>
   </div>
 </div>
 <script>
@@ -283,7 +292,7 @@ a{color:inherit;text-decoration:none}
 .vl-title{color:var(--t2);font-size:11px;display:flex;align-items:center;gap:6px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .vl-title i{color:var(--accent);font-size:15px}
 .vl-code{background:rgba(0,0,0,.18);border:1px solid var(--card-b);border-radius:9px;padding:13px 15px;font-size:11px;font-family:ui-monospace,monospace;color:var(--accent2);word-break:break-all;line-height:1.8;letter-spacing:.01em}
-[data-theme="dark"] .vl-code{background:rgba(0,0,0,.04)}
+[data-theme="dark"] .vl-code{background:var(--bg2)!important;color:var(--t1)!important}
 .vl-actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
 .btn{font-family:inherit;font-size:12px;font-weight:500;border-radius:9px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;border:none;transition:all .15s;white-space:nowrap}
 .btn i{font-size:13px}
@@ -331,11 +340,11 @@ a{color:inherit;text-decoration:none}
 .fg{display:flex;flex-direction:column;gap:5px}
 .fg label{font-size:10px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .fi,.fs{padding:9px 12px;border-radius:9px;border:1px solid var(--card-b);background:rgba(0,0,0,.18);color:var(--t1);font-family:inherit;font-size:12px;outline:none;transition:.15s;min-width:100px}
-[data-theme="dark"] .fi,[data-theme="dark"] .fs{background:rgba(0,0,0,.04)}
+[data-theme="dark"] .fi,[data-theme="dark"] .fs{background:var(--bg2)!important;color:var(--t1)!important}
 .fi::placeholder{color:var(--t3)}
 .fi:focus,.fs:focus{border-color:rgba(59,130,246,.45);background:rgba(0,0,0,.25);box-shadow:0 0 0 3px rgba(59,130,246,.08)}
 .fs option{background:var(--bg2)}
-[data-theme="dark"] .fs option{background:#fff}
+[data-theme="dark"] .fs option{background:var(--bg2)!important;color:var(--t1)!important}
 .cl{background:var(--accent-d);border:1px solid rgba(59,130,246,.15);border-radius:10px;padding:11px 13px;font-size:11px;color:var(--t2);display:flex;gap:9px;align-items:flex-start;line-height:1.8;margin-top:12px}
 .cl i{font-size:15px;color:var(--accent);margin-top:1px;flex-shrink:0}
 .cl.amber{background:var(--amber-bg);border-color:rgba(245,158,11,.2);color:var(--amber-t)}
@@ -350,11 +359,11 @@ a{color:inherit;text-decoration:none}
 .cp-body{padding:2px 24px 22px;position:relative;z-index:1}
 .cp-row{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-bottom:16px}
 .cp-block{background:rgba(0,0,0,.14);border:1px solid var(--card-b);border-radius:14px;padding:14px 16px}
-[data-theme="dark"] .cp-block{background:rgba(37,99,235,.03)}
+[data-theme="dark"] .cp-block{background:var(--bg2)!important;color:var(--t1)!important}
 .cp-block-label{font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px;margin-bottom:11px}
 .cp-block-label i{color:var(--accent);font-size:14px}
 .cp-input-full{width:100%;padding:10px 13px;border-radius:10px;border:1px solid var(--card-b);background:rgba(0,0,0,.18);color:var(--t1);font-family:inherit;font-size:12.5px;outline:none;transition:.15s}
-[data-theme="dark"] .cp-input-full{background:#fff}
+[data-theme="dark"] .cp-input-full{background:var(--bg2)!important;color:var(--t1)!important}
 .cp-input-full:focus{border-color:rgba(59,130,246,.5);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
 .cp-input-full::placeholder{color:var(--t3)}
 .cp-mini-row{display:flex;gap:8px;margin-top:9px}
@@ -371,7 +380,7 @@ a{color:inherit;text-decoration:none}
 
 .proto-base-cards{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .proto-base-card{border:1.5px solid var(--card-b);border-radius:13px;padding:14px 12px;cursor:pointer;transition:.18s;text-align:center;position:relative;background:rgba(0,0,0,.1)}
-[data-theme="dark"] .proto-base-card{background:#fff}
+[data-theme="dark"] .proto-base-card{background:var(--bg2)!important;color:var(--t1)!important}
 .proto-base-card:hover{border-color:var(--card-bh);transform:translateY(-1px)}
 .proto-base-card.active{border-color:var(--accent);background:var(--accent-d);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
 .proto-base-icon{width:34px;height:34px;border-radius:9px;background:var(--accent-d);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:17px;margin:0 auto 8px}
@@ -381,7 +390,7 @@ a{color:inherit;text-decoration:none}
 
 .proto-transport-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
 .proto-t-card{border:1.5px solid var(--card-b);border-radius:13px;padding:13px 10px;cursor:pointer;transition:.18s;text-align:center;position:relative;background:rgba(0,0,0,.1)}
-[data-theme="dark"] .proto-t-card{background:#fff}
+[data-theme="dark"] .proto-t-card{background:var(--bg2)!important;color:var(--t1)!important}
 .proto-t-card:hover{border-color:var(--card-bh);transform:translateY(-1px)}
 .proto-t-card.active{border-color:var(--accent);background:var(--accent-d);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
 .proto-t-icon{width:30px;height:30px;border-radius:9px;background:var(--accent-d);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:15px;margin:0 auto 7px}
@@ -400,7 +409,7 @@ a{color:inherit;text-decoration:none}
 .proto-submodes{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .proto-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
 .proto-card{border:1.5px solid var(--card-b);border-radius:13px;padding:13px 12px;cursor:pointer;transition:.18s;text-align:center;position:relative;background:rgba(0,0,0,.1)}
-[data-theme="dark"] .proto-card{background:#fff}
+[data-theme="dark"] .proto-card{background:var(--bg2)!important;color:var(--t1)!important}
 .proto-card:hover{border-color:var(--card-bh);transform:translateY(-1px)}
 .proto-card.active{border-color:var(--accent);background:var(--accent-d);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
 .proto-card.active .proto-card-check{opacity:1;transform:scale(1)}
@@ -431,7 +440,7 @@ a{color:inherit;text-decoration:none}
 .srv-hero-sub{font-size:10.5px;color:var(--t3);margin-top:4px;display:flex;align-items:center;gap:6px}
 .srv-tiles{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:20px 22px 22px;position:relative;z-index:1}
 .srv-tile{display:flex;align-items:center;gap:11px;background:rgba(0,0,0,.14);border:1px solid var(--card-b);border-radius:13px;padding:12px 14px;transition:.18s}
-[data-theme="dark"] .srv-tile{background:rgba(37,99,235,.03)}
+[data-theme="dark"] .srv-tile{background:var(--bg2)!important;color:var(--t1)!important}
 .srv-tile:hover{border-color:var(--card-bh);transform:translateY(-1px)}
 .srv-tile-icon{width:34px;height:34px;border-radius:10px;background:var(--accent-d);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .srv-tile-text{min-width:0}
@@ -450,7 +459,7 @@ a{color:inherit;text-decoration:none}
 .pw-field{position:relative;margin-bottom:13px}
 .pw-field label{display:block;font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
 .pw-input{width:100%;padding:11px 42px 11px 14px;border-radius:11px;border:1px solid var(--card-b);background:rgba(0,0,0,.18);color:var(--t1);font-family:inherit;font-size:12.5px;outline:none;transition:.15s}
-[data-theme="dark"] .pw-input{background:#fff}
+[data-theme="dark"] .pw-input{background:var(--bg2)!important;color:var(--t1)!important}
 .pw-input:focus{border-color:rgba(139,92,246,.5);box-shadow:0 0 0 3px rgba(139,92,246,.1)}
 .pw-eye{position:absolute;left:12px;top:34px;background:none;border:none;color:var(--t3);cursor:pointer;font-size:16px;padding:4px;display:flex}
 .pw-eye:hover{color:var(--purple)}
@@ -585,10 +594,10 @@ a{color:inherit;text-decoration:none}
 .modal-v2-input-wrap{position:relative}
 .modal-v2-input-wrap>i{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:14px;pointer-events:none;transition:.15s;z-index:1}
 .modal-v2-input{width:100%;padding:9px 38px 9px 13px;border-radius:11px;border:1px solid var(--card-b);background:rgba(0,0,0,.2);color:var(--t1);font-family:inherit;font-size:12.5px;outline:none;transition:.18s}
-[data-theme="dark"] .modal-v2-input{background:rgba(124,58,237,.04)}
+[data-theme="dark"] .modal-v2-input{background:var(--bg2)!important;color:var(--t1)!important}
 .modal-v2-input::placeholder{color:var(--t3)}
 .modal-v2-input:focus{border-color:rgba(139,92,246,.55);box-shadow:0 0 0 3px rgba(139,92,246,.12);background:rgba(0,0,0,.28)}
-[data-theme="dark"] .modal-v2-input:focus{background:#fff}
+[data-theme="dark"] .modal-v2-input:focus{background:var(--bg2)!important;color:var(--t1)!important}
 .modal-v2-input:focus~i{color:var(--purple)}
 .modal-v2-hint{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.18);border-radius:11px;padding:9px 12px;font-size:10px;color:var(--t2);display:flex;gap:7px;align-items:flex-start;line-height:1.6;margin-top:2px}
 .modal-v2-hint i{font-size:14px;color:var(--accent);margin-top:1px;flex-shrink:0}
@@ -607,7 +616,7 @@ a{color:inherit;text-decoration:none}
 .lmodal-sub-v2{font-size:10.5px;color:var(--t3);margin-top:2px}
 .lmodal-search{margin-top:14px;position:relative}
 .lmodal-search input{width:100%;padding:10px 38px 10px 13px;border-radius:11px;border:1px solid var(--card-b);background:rgba(0,0,0,.2);color:var(--t1);font-family:inherit;font-size:12px;outline:none}
-[data-theme="dark"] .lmodal-search input{background:#fff}
+[data-theme="dark"] .lmodal-search input{background:var(--bg2)!important;color:var(--t1)!important}
 .lmodal-search input:focus{border-color:rgba(59,130,246,.5);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
 .lmodal-search i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:14px}
 .lmodal-quickbar{display:flex;gap:8px;margin-top:11px;position:relative;z-index:1}
@@ -791,7 +800,7 @@ a{color:inherit;text-decoration:none}
 .upd-hero-label{font-size:10.5px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
 .upd-hero-ver{font-size:26px;font-weight:800;color:var(--t1);letter-spacing:-.02em}
 .upd-hero-desc{font-size:12.5px;color:var(--t2);line-height:1.8;position:relative;z-index:1;margin-bottom:14px;background:rgba(0,0,0,.14);border:1px solid var(--card-b);border-radius:12px;padding:12px 14px}
-[data-theme="dark"] .upd-hero-desc{background:rgba(37,99,235,.03)}
+[data-theme="dark"] .upd-hero-desc{background:var(--bg2)!important;color:var(--t1)!important}
 .upd-hero-meta{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
 .upd-meta-chip{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;color:var(--t2);background:var(--accent-d);border:1px solid var(--card-b);padding:6px 12px;border-radius:20px}
 .upd-meta-chip i{color:var(--accent);font-size:13px}
@@ -935,14 +944,14 @@ a{color:inherit;text-decoration:none}
 .cm-field label{display:block;font-size:11px;font-weight:700;color:var(--t2);margin-bottom:7px}
 .cm-input{width:100%;padding:11px 14px;border-radius:11px;border:1px solid var(--card-b);
   background:rgba(0,0,0,.18);color:var(--t1);font-family:inherit;font-size:12.8px;outline:none;transition:.15s}
-[data-theme="dark"] .cm-input{background:rgba(37,99,235,.03)}
+[data-theme="dark"] .cm-input{background:var(--bg2)!important;color:var(--t1)!important}
 .cm-input:focus{border-color:rgba(59,130,246,.5);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
 .cm-input::placeholder{color:var(--t3)}
 .cm-row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
 /* ── آکاردئون کشویی انتخاب پروتکل / ترابرد ── */
 .cm-dd{border:1px solid var(--card-b);border-radius:14px;overflow:hidden;background:rgba(0,0,0,.1);transition:.18s}
-[data-theme="dark"] .cm-dd{background:#fff}
+[data-theme="dark"] .cm-dd{background:var(--bg2)!important;color:var(--t1)!important}
 .cm-dd.open{border-color:var(--card-bh);box-shadow:0 0 0 3px rgba(59,130,246,.08)}
 .cm-dd-trigger{display:flex;align-items:center;gap:12px;padding:13px 15px;cursor:pointer;user-select:none}
 .cm-dd-icon{width:38px;height:38px;border-radius:11px;background:var(--accent-d);color:var(--accent);
@@ -1101,52 +1110,6 @@ a{color:inherit;text-decoration:none}
               <div class="cm-opt-icon"><i class="ti ti-lock-bolt"></i></div>
               <div class="cm-opt-text"><div class="cm-opt-title">Shadowsocks TLS</div><div class="cm-opt-desc">شادوساکس روی TLS/WebSocket با مسیر اختصاصی</div></div>
               <span class="cm-opt-tag">TLS</span>
-            </div>
-            <div class="cm-opt" data-base="shadowsocks-tcp" onclick="cmSelectBase('shadowsocks-tcp',this)">
-              <div class="cm-opt-radio"></div>
-              <div class="cm-opt-icon"><i class="ti ti-server-bolt"></i></div>
-              <div class="cm-opt-text"><div class="cm-opt-title">Shadowsocks TCP</div><div class="cm-opt-desc">نسخه TCP تستی با دامنه/پورت عمومی Railway</div></div>
-              <span class="cm-opt-tag">TCP تستی</span>
-            </div>
-            <div class="cm-opt" data-base="telproxy" onclick="cmSelectBase('telproxy',this)">
-              <div class="cm-opt-radio"></div>
-              <div class="cm-opt-icon"><i class="ti ti-brand-telegram"></i></div>
-              <div class="cm-opt-text"><div class="cm-opt-title">Telegram Proxy</div><div class="cm-opt-desc">پروکسی MTProto مستقیم روی یک پورت TCP اختصاصی</div></div>
-              <span class="cm-opt-tag" style="background:var(--purple-bg);color:var(--purple-t)">MTProto</span>
-            </div>
-          </div></div></div>
-        </div>
-
-        <div style="height:10px"></div>
-
-        <div id="transport-section">
-          <div style="height:10px"></div>
-        
-          <div class="cm-dd" id="dd-transport">
-            <div class="cm-dd-trigger" onclick="cmToggleDD('dd-transport')">
-              <div class="cm-dd-icon" id="dd-transport-icon"><i class="ti ti-link"></i></div>
-              <div class="cm-dd-text">
-                <div class="cm-dd-title">نوع ترابرد — <span id="dd-transport-current">WebSocket</span></div>
-                <div class="cm-dd-desc" id="dd-transport-current-desc">پایدار و سازگار با همه شرایط شبکه</div>
-              </div>
-              <i class="ti ti-chevron-down cm-dd-chev"></i>
-            </div>
-            <div class="cm-dd-panel"><div class="cm-dd-panel-inner"><div class="cm-dd-list">
-              <div class="cm-opt sel" data-t="ws" onclick="cmSelectTransport('ws',this)">
-                <div class="cm-opt-radio"></div>
-                <div class="cm-opt-icon"><i class="ti ti-link"></i></div>
-                <div class="cm-opt-text"><div class="cm-opt-title">WebSocket</div><div class="cm-opt-desc">پایدار و سازگار با همه شرایط شبکه</div></div>
-              </div>
-              <div class="cm-opt" data-t="xhttp-packet-up" onclick="cmSelectTransport('xhttp-packet-up',this)">
-                <div class="cm-opt-radio"></div>
-                <div class="cm-opt-icon"><i class="ti ti-package"></i></div>
-                <div class="cm-opt-text"><div class="cm-opt-title">XHTTP · packet-up</div><div class="cm-opt-desc">سازگاری بالا با CDN و پروکسی‌ها</div></div>
-              </div>
-              <div class="cm-opt" data-t="xhttp-stream-up" onclick="cmSelectTransport('xhttp-stream-up',this)">
-                <div class="cm-opt-radio"></div>
-                <div class="cm-opt-icon"><i class="ti ti-rocket"></i></div>
-                <div class="cm-opt-text"><div class="cm-opt-title">XHTTP · stream-up</div><div class="cm-opt-desc">تاخیر پایین‌تر برای اتصال‌های پرسرعت</div></div>
-              </div>
             </div></div></div>
           </div>
         </div>
@@ -1334,7 +1297,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.2</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.3</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1752,7 +1715,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.2</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.3</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1849,7 +1812,6 @@ function protoBadge(p){
     'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
     'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
     'shadowsocks-tls':['Shadowsocks · TLS','pc-ss'],
-    'shadowsocks-tcp':['Shadowsocks · TCP','pc-ss'],
     'mtproto':['Telegram Proxy · MTProto','pc-trojan'],
   };
   const v=m[p]||['ناشناخته','pc-ws'];
@@ -1921,7 +1883,7 @@ async function fetchStats(){
     if(d.hourly){
       const labels=Object.keys(d.hourly).sort(),vals=labels.map(k=>+(d.hourly[k]/1024**2).toFixed(2));
       [ch1,ch3].forEach(c=>{if(!c)return;c.data.labels=labels;c.data.datasets[0].data=vals;c.update()});
-      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','SS TLS','SS TCP','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.shadowsocks_tcp||0,pc.mtproto||0];ch2.update();}
+      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
       if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);const tAvg=document.getElementById('t-avg'),tPeak=document.getElementById('t-peak');if(tAvg)tAvg.innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';if(tPeak)tPeak.innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
     }
     renderErrs(d.recent_errors||[]);
@@ -1956,9 +1918,12 @@ let allSubsList=[],allLinksList=[];
 async function loadLinks(){
   try{
     const [lr,sr]=await Promise.all([authF('/api/links'),authF('/api/subs')]);
-    let {links:rawLinks=[]}=await lr.json();
-    const {subs=[]}=await sr.json();
-    rawLinks=(rawLinks||[]).filter(l=>l&&l.uuid).map(l=>({label:'بدون نام',used_bytes:0,limit_bytes:0,active:true,expired:false,created_at:new Date().toISOString(),vless_link:'',sub_url:'',protocol:'vless-ws',...l}));
+    if(!lr.ok||!sr.ok) throw new Error('bad response');
+    const lj=await lr.json().catch(()=>({links:[]}));
+    const sj=await sr.json().catch(()=>({subs:[]}));
+    let rawLinks=Array.isArray(lj.links)?lj.links:[];
+    const subs=Array.isArray(sj.subs)?sj.subs:[];
+    rawLinks=(rawLinks||[]).filter(l=>l&&l.uuid&&!l.archived).map(l=>({label:'بدون نام',used_bytes:0,limit_bytes:0,active:true,expired:false,created_at:new Date().toISOString(),vless_link:'',sub_url:'',protocol:'vless-ws',...l}));
     const multiSubs=subs.filter(s=>String(s.desc||'').includes('Multi Protocol'));
     // فقط بچه‌های واقعی مولتی را داخل کارت گروهی مخفی/گروه‌بندی کن؛
     // کانفیگ یا پروکسی معمولی که بعداً داخل همان گروه اضافه شده باید جدا نمایش داده شود.
@@ -2016,8 +1981,6 @@ async function loadLinks(){
       <div class="cfg-badges-col">
         ${protoBadge(l.protocol)}
         ${isMt && l.mtproto_public_host ? `<span class="cfg-sub-tag"><i class="ti ti-route"></i> ${esc(l.mtproto_public_host)}:${l.mtproto_public_port}</span>` : ''}
-        ${l.protocol==='shadowsocks-tcp' && l.public_host ? `<span class="cfg-sub-tag"><i class="ti ti-route"></i> ${esc(l.public_host)}:${l.public_port}</span>` : ''}
-        ${l.protocol==='shadowsocks-tcp' && l.public_pending ? `<span class="cfg-sub-tag" style="color:var(--amber-t)"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال ساخت TCP Proxy عمومی...</span>` : ''}
         ${isMt && !l.mtproto_public_host && l.mtproto_public_pending ? `<span class="cfg-sub-tag" style="color:var(--amber-t)"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال ساخت TCP Proxy عمومی...</span>` : ''}
         ${isMt && !l.mtproto_public_host && !l.mtproto_public_pending && !l.mtproto_manual_port ? `<span class="cfg-sub-tag" style="color:var(--red-t)"><i class="ti ti-alert-triangle"></i> بدون TCP Proxy عمومی — لینک کار نمی‌کند</span>` : ''}
         ${l.sub_id&&allSubsList.find(s=>s.sub_id===l.sub_id)?`<span class="cfg-sub-tag"><i class="ti ti-folder"></i> ${esc(allSubsList.find(s=>s.sub_id===l.sub_id).name)}</span>`:''}
@@ -2042,7 +2005,7 @@ async function loadLinks(){
   </div>`;
 }).join('');
     document.getElementById('lsummary').innerHTML=links.slice(0,6).map(l=>`<div class="sr"><span class="sr-k" style="gap:5px"><i class="ti ${l.expired?'ti-calendar-x':l.active?'ti-circle-check':'ti-circle-x'}" style="color:${l.expired?'var(--amber)':l.active?'var(--green)':'var(--red)'}"></i>${esc(l.label)}</span><span class="sr-v" style="font-size:10px">${fmtB(l.used_bytes)} / ${l.limit_bytes===0?'∞':fmtB(l.limit_bytes)}</span></div>`).join('');
-  }catch(e){console.error(e);toast('خطا در بارگذاری کانفیگ‌ها','err')}
+  }catch(e){console.error(e);toast('خطا در بارگذاری کانفیگ‌ها','err');const grid=document.getElementById('links-grid');if(grid&&!grid.innerHTML){grid.innerHTML='<div class="empty"><i class="ti ti-alert-circle"></i><p>خطا در بارگذاری؛ دوباره تلاش کن</p></div>'}}
 }
 
 let protoBase = 'vless', protoTransport = 'ws';
@@ -2068,8 +2031,7 @@ const BASE_INFO = {
   trojan:   { icon:'ti-shield-lock',    title:'Trojan',         desc:'شبیه‌سازی ترافیک HTTPS معمولی' },
   telproxy: { icon:'ti-brand-telegram', title:'Telegram Proxy', desc:'پروکسی MTProto مستقیم روی یک پورت TCP اختصاصی' },
   multi:    { icon:'ti-layers-intersect', title:'Multi Protocol', desc:'یک ساب شامل همه پروتکل‌ها، بدون پروکسی تلگرام' },
-  shadowsocks: { icon:'ti-lock-bolt', title:'Shadowsocks TLS', desc:'شادوساکس روی TLS/WebSocket با مسیر اختصاصی' },
-  'shadowsocks-tcp': { icon:'ti-server-bolt', title:'Shadowsocks TCP', desc:'نسخه TCP تستی با دامنه و پورت عمومی Railway' }
+  shadowsocks: { icon:'ti-lock-bolt', title:'Shadowsocks TLS', desc:'شادوساکس روی TLS/WebSocket با مسیر اختصاصی' }
 };
 const TRANSPORT_INFO = {
   'ws':               { icon:'ti-link',    title:'WebSocket',            desc:'پایدار و سازگار با همه شرایط شبکه' },
@@ -2113,18 +2075,6 @@ function cmSelectBase(val, el){
     document.getElementById('cm-submit-text').textContent = 'ساخت Shadowsocks';
     document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-lock-bolt"></i>';
     document.getElementById('nl-proto').value = 'shadowsocks-tls';
-    return;
-  }
-  if (val === 'shadowsocks-tcp') {
-    transportSection.style.display = 'none';
-    normalNote.style.display = 'flex';
-    mtNote.style.display = 'none';
-    portField.style.display = 'none';
-    document.getElementById('cm-head-title').textContent = 'ساخت Shadowsocks TCP تستی';
-    document.getElementById('cm-head-sub').textContent = 'برای تست، یک Shadowsocks TCP با TCP Proxy عمومی Railway می‌سازد';
-    document.getElementById('cm-submit-text').textContent = 'ساخت Shadowsocks TCP';
-    document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-server-bolt"></i>';
-    document.getElementById('nl-proto').value = 'shadowsocks-tcp';
     return;
   }
   if (val === 'telproxy') {
@@ -2227,7 +2177,7 @@ async function createLink(){
     const copyTarget = d.sub_url || d.vless_link;
     if(copyTarget && navigator.clipboard) navigator.clipboard.writeText(copyTarget).catch(()=>{});
     ['nl-label','nl-path','nl-val','nl-exp','nl-note','nl-mtproto-port','nl-mtproto-domain'].forEach(id=>document.getElementById(id).value='');
-    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tcp' ? 'Shadowsocks TCP ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد'))),'ok');
+    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')),'ok');
     closeModal('modal-create-link');
     loadLinks();
   }catch(e){toast(' '+e.message,'err')}
@@ -2719,7 +2669,7 @@ function initCharts(){
 
   ch2=new Chart(document.getElementById('ch2'),{
     type:'doughnut',
-    data:{labels:['VLESS WS','Trojan WS','XHTTP','SS TLS','SS TCP','MTProto'],datasets:[{
+    data:{labels:['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'],datasets:[{
       data:[1,1,1,1,1],
       backgroundColor:['#2563EB','#111827','#8B5CF6','#14B8A6','#F59E0B'],
       borderColor:getComputedStyle(document.documentElement).getPropertyValue('--card')||'#0d1b2e',
@@ -3013,7 +2963,7 @@ async function startBotTcpProxy(){
   const token = tokenSection && tokenSection.style.display !== 'none' ? tokenField.value.trim() : '';
   const portVal = document.getElementById('btp-port').value.trim();
   const pendingPublic = (window.__rawLinksList||[])
-    .filter(l => (l.protocol==='mtproto' && !l.mtproto_public_host && l.mtproto_port) || (l.protocol==='shadowsocks-tcp' && !l.public_host && l.ss_tcp_port))
+    .filter(l => (l.protocol==='mtproto' && !l.mtproto_public_host && l.mtproto_port))
     .sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||'')))[0];
   btpTargetUuid = pendingPublic?.uuid || null;
   const autoPort = pendingPublic ? (pendingPublic.mtproto_port || pendingPublic.ss_tcp_port) : '';
@@ -3364,27 +3314,27 @@ def get_public_page_html(uuid_key: str) -> str:
 <style>
 *{{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}}
 :root{{
-  --bg:#060a14;--bg2:#0a1020;--bg3:#0d1428;
-  --card:#0c1326;--card-b:rgba(96,148,246,0.12);--card-bh:rgba(96,148,246,0.28);
-  --accent:#3B7CF6;--accent2:#6EA3FF;--accent-d:rgba(59,124,246,0.1);
-  --green:#1FB87E;--green-bg:rgba(31,184,126,0.1);--green-t:#3FD79C;
-  --red:#EF4444;--red-bg:rgba(239,68,68,0.1);--red-t:#FB8585;
-  --amber:#F2A33D;--amber-bg:rgba(242,163,61,0.1);--amber-t:#F9C988;
-  --purple:#9D7BF0;--purple-bg:rgba(157,123,240,0.1);--purple-t:#BCA4F7;
-  --t1:#EFF4FF;--t2:#8AA0C4;--t3:#48577A;
-  --radius:18px;--shadow:0 12px 40px rgba(0,0,0,0.45);
+  --bg:#f6f7f9;--bg2:#eef1f5;--bg3:#e5e9ef;
+  --card:#ffffff;--card-b:rgba(15,23,42,0.10);--card-bh:rgba(15,23,42,0.22);
+  --accent:#111827;--accent2:#0f172a;--accent-d:rgba(15,23,42,0.07);
+  --green:#16a34a;--green-bg:rgba(22,163,74,0.10);--green-t:#15803d;
+  --red:#dc2626;--red-bg:rgba(220,38,38,0.08);--red-t:#b91c1c;
+  --amber:#d97706;--amber-bg:rgba(217,119,6,0.09);--amber-t:#92400e;
+  --purple:#4f46e5;--purple-bg:rgba(79,70,229,0.09);--purple-t:#4338ca;
+  --t1:#0f172a;--t2:#475569;--t3:#94a3b8;
+  --radius:18px;--shadow:0 14px 38px rgba(15,23,42,0.10);
   --serif:'Vazirmatn',sans-serif;
 }}
 [data-theme="dark"]{{
-  --bg:#F0F3FA;--bg2:#E5ECF8;--bg3:#D9E3F4;
-  --card:#FFFFFF;--card-b:rgba(59,124,246,0.14);--card-bh:rgba(59,124,246,0.32);
-  --accent:#2E63D6;--accent2:#1E4CB8;--accent-d:rgba(46,99,214,0.08);
-  --green:#0E9A6A;--green-bg:rgba(14,154,106,0.08);--green-t:#0A7553;
-  --red:#DC2626;--red-bg:rgba(220,38,38,0.08);--red-t:#A51E1E;
-  --amber:#C97A12;--amber-bg:rgba(201,122,18,0.08);--amber-t:#8F5A0C;
-  --purple:#7350D6;--purple-bg:rgba(115,80,214,0.08);--purple-t:#5A3CAD;
-  --t1:#101A30;--t2:#48577A;--t3:#8694B0;
-  --shadow:0 12px 36px rgba(20,40,90,0.12);
+  --bg:#070a0f;--bg2:#0d1117;--bg3:#111827;
+  --card:#0f172a;--card-b:rgba(255,255,255,0.10);--card-bh:rgba(255,255,255,0.22);
+  --accent:#f8fafc;--accent2:#e2e8f0;--accent-d:rgba(248,250,252,0.08);
+  --green:#22c55e;--green-bg:rgba(34,197,94,0.12);--green-t:#86efac;
+  --red:#ef4444;--red-bg:rgba(239,68,68,0.12);--red-t:#fca5a5;
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.12);--amber-t:#fcd34d;
+  --purple:#a78bfa;--purple-bg:rgba(167,139,250,0.12);--purple-t:#c4b5fd;
+  --t1:#f8fafc;--t2:#cbd5e1;--t3:#64748b;
+  --shadow:0 18px 50px rgba(0,0,0,0.45);
 }}
 html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:var(--t1);font-size:14px;transition:background .35s,color .35s}}
 .bg-fx{{position:fixed;inset:0;background:radial-gradient(ellipse 70% 45% at 50% -8%,rgba(59,124,246,0.13),transparent 62%),var(--bg);z-index:0;pointer-events:none;transition:background .35s}}
@@ -3417,11 +3367,11 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 .stat-val{{font-size:22px;font-weight:800;color:var(--t1);line-height:1;letter-spacing:-.01em}}
 .stat-sub{{font-size:9.5px;color:var(--t3);margin-top:6px}}
 
-.copy-all-bar{{display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,var(--accent) 0%,#2952C8 100%);border-radius:18px;padding:16px 19px;margin-bottom:18px;box-shadow:0 10px 30px rgba(59,124,246,.28);flex-wrap:wrap}}
+.copy-all-bar{{display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,var(--accent) 0%,var(--accent2) 100%);border-radius:18px;padding:16px 19px;margin-bottom:18px;box-shadow:0 10px 30px rgba(15,23,42,.18);flex-wrap:wrap}}
 .copy-all-text{{flex:1;min-width:160px}}
 .copy-all-title{{font-size:13.5px;font-weight:800;color:#fff;display:flex;align-items:center;gap:6px}}
 .copy-all-sub{{font-size:10px;color:rgba(255,255,255,.78);margin-top:3px}}
-.copy-all-btn{{background:#fff;color:#1D4ED8;border:none;border-radius:12px;padding:10px 19px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.18s;white-space:nowrap}}
+.copy-all-btn{{background:#fff;color:var(--accent2);border:none;border-radius:12px;padding:10px 19px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.18s;white-space:nowrap}}
 .copy-all-btn:hover{{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.22)}}
 .copy-all-btn:active{{transform:translateY(0) scale(.98)}}
 
@@ -3441,6 +3391,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 .cfg-badges{{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}}
 .proto-chip{{font-size:9px;padding:3px 8px;border-radius:7px;font-weight:800;letter-spacing:.02em}}
 .pc-ws{{background:var(--accent-d);color:var(--accent2)}}
+.pc-ss{{background:var(--green-bg);color:var(--green-t)}}
 .pc-trojan{{background:var(--purple-bg);color:#A78BFA}}
 .pc-xhttp{{background:var(--purple-bg);color:var(--purple-t)}}
 .pc-ultra{{background:var(--green-bg);color:var(--green-t)}}
@@ -3533,7 +3484,14 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 }}
 @keyframes spin{{to{{transform:rotate(360deg)}}}}
 
-
+/* OXNET v2.0.3 public subscription theme polish */
+.copy-all-bar{{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;box-shadow:var(--shadow)!important}}
+.copy-all-btn{{background:var(--card)!important;color:var(--t1)!important;border:1px solid var(--card-bh)!important}}
+.btn-p{{background:var(--accent)!important;color:var(--bg)!important}}
+.btn-g,.btn-pur{{background:var(--accent-d)!important;color:var(--t1)!important;border:1px solid var(--card-b)!important}}
+[data-theme="dark"] .copy-all-btn{{background:#020617!important;color:#f8fafc!important;border-color:rgba(255,255,255,.16)!important}}
+[data-theme="dark"] .btn-p{{background:#f8fafc!important;color:#020617!important}}
+[data-theme="dark"] .btn-g,[data-theme="dark"] .btn-pur{{background:rgba(255,255,255,.08)!important;color:#f8fafc!important;border-color:rgba(255,255,255,.14)!important}}
 
 </style>
 </head>
@@ -3551,7 +3509,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.2</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.3</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3561,7 +3519,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.2</div>
+  <div class="footer">OXNET v2.0.3</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';
@@ -3587,6 +3545,7 @@ function protoChip(p){{
   if(p==='xhttp-stream-one')return '<span class="proto-chip pc-xh"><i class="ti ti-bolt"></i> XHTTP Stream</span>';
   if(p&&p.startsWith('trojan'))return '<span class="proto-chip pc-trojan"><i class="ti ti-shield-lock"></i> '+esc(p)+'</span>';
   if(p&&p.startsWith('xhttp'))return '<span class="proto-chip pc-xhttp">'+esc(p)+'</span>';
+  if(p==='shadowsocks-tls')return '<span class="proto-chip pc-ss">Shadowsocks · TLS</span>';
   return '<span class="proto-chip pc-ws">VLESS · WS</span>';
 }}
 
