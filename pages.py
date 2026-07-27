@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.4
+# pages.py  -  OXNET v2.0.5
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -56,6 +56,7 @@ input:focus+.ic{color:var(--accent)}
 
 .pc-ss{background:rgba(20,184,166,.12);color:#0F766E}
 [data-theme="dark"] .pc-ss{color:#5EEAD4}
+.pc-grpc{background:rgba(14,165,233,.12);color:#0369A1}.pc-hu{background:rgba(99,102,241,.12);color:#4F46E5}[data-theme="dark"] .pc-grpc{color:#7DD3FC}[data-theme="dark"] .pc-hu{color:#C4B5FD}
 .dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}
 .dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}
 .dash-main-card>*{position:relative;z-index:2}.dash-main-card:before{content:'';pointer-events:none;position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}
@@ -75,7 +76,7 @@ input:focus+.ic{color:var(--accent)}
 .dash-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
 .dash-card-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}
 .dash-card-sub{font-size:10px;color:var(--t3);margin-top:3px}
-.dash-protocols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.dash-protocols{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}
 .dash-protocol{background:var(--card);border:1px solid var(--card-b);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}
 .dash-protocol i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:17px;flex-shrink:0}
 .dash-protocol b{font-size:12px;color:var(--t1)}
@@ -91,7 +92,7 @@ input:focus+.ic{color:var(--accent)}
 
 .pro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr}}
 
-/* OXNET v2.0.4 dark-mode contrast hardening */
+/* OXNET v2.0.5 dark-mode contrast hardening */
 [data-theme="dark"] .btn-o,[data-theme="dark"] .btn-g,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .icon-btn{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-bh)!important}
 [data-theme="dark"] .btn-p{background:linear-gradient(135deg,#f8fafc,#cbd5e1)!important;color:#020617!important;box-shadow:none!important}
 [data-theme="dark"] .btn-d{background:rgba(239,68,68,.18)!important;color:#fecaca!important}
@@ -99,6 +100,24 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .fi,[data-theme="dark"] .fs,[data-theme="dark"] textarea,[data-theme="dark"] input,[data-theme="dark"] select{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-b)!important}
 [data-theme="dark"] .fs option{background:#0b1220!important;color:#f8fafc!important}
 [data-theme="dark"] .proto-card,[data-theme="dark"] .proto-base-card,[data-theme="dark"] .proto-t-card,[data-theme="dark"] .cm-dd,[data-theme="dark"] .cm-input{background:var(--card)!important;color:var(--t1)!important}
+
+/* OXNET v2.0.5 dark-mode final contrast fix */
+[data-theme="dark"]{--bg:#05070b!important;--bg2:#0b1018!important;--bg3:#111827!important;--card:#0f172a!important;--card-b:rgba(255,255,255,.10)!important;--card-bh:rgba(255,255,255,.22)!important;--t1:#f8fafc!important;--t2:#cbd5e1!important;--t3:#94a3b8!important;--accent:#e5e7eb!important;--accent2:#ffffff!important;--accent-d:rgba(255,255,255,.08)!important}
+[data-theme="dark"] .card,[data-theme="dark"] .modal,[data-theme="dark"] .modal-v2,[data-theme="dark"] .cm-modal,[data-theme="dark"] .dash-main-card,[data-theme="dark"] .dash-kpi,[data-theme="dark"] .dash-chart-card,[data-theme="dark"] .dash-protocol,[data-theme="dark"] .cfg-card,[data-theme="dark"] .multi-group-card,[data-theme="dark"] .sub-card,[data-theme="dark"] .pro-card,[data-theme="dark"] .db-card,[data-theme="dark"] .srv-panel,[data-theme="dark"] .pw-panel,[data-theme="dark"] .conn-card-v2,[data-theme="dark"] .health-row,[data-theme="dark"] .cust-row{background:#0f172a!important;color:#f8fafc!important;border-color:rgba(255,255,255,.12)!important}
+[data-theme="dark"] .fi,[data-theme="dark"] .fs,[data-theme="dark"] .cm-input,[data-theme="dark"] .modal-v2-input,[data-theme="dark"] .pw-input,[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#0b1018!important;color:#f8fafc!important;border-color:rgba(255,255,255,.14)!important}
+[data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{color:#64748b!important}
+[data-theme="dark"] .btn-p,[data-theme="dark"] .cm-btn-submit,[data-theme="dark"] .modal-v2-btn-submit{background:linear-gradient(135deg,#f8fafc,#cbd5e1)!important;color:#020617!important;box-shadow:none!important}
+[data-theme="dark"] .btn-g,[data-theme="dark"] .btn-o,[data-theme="dark"] .btn-pur,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob{background:rgba(255,255,255,.08)!important;color:#f8fafc!important;border-color:rgba(255,255,255,.14)!important}
+[data-theme="dark"] .vl-code,[data-theme="dark"] .cfg-vless,[data-theme="dark"] .sub-box,[data-theme="dark"] .cm-dd,[data-theme="dark"] .cm-dd-panel,[data-theme="dark"] .cm-opt{background:#0b1018!important;color:#f8fafc!important;border-color:rgba(255,255,255,.12)!important}
+[data-theme="dark"] .cm-opt:hover,[data-theme="dark"] .cm-opt.sel{background:rgba(255,255,255,.10)!important}
+
+
+/* OXNET v2.0.5 extra dark contrast */
+[data-theme="dark"] *{scrollbar-color:#334155 #0b1018}
+[data-theme="dark"] .upd-install-btn,[data-theme="dark"] .copy-all-btn{background:#0b1018!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.16)!important}
+[data-theme="dark"] .bg-blue,[data-theme="dark"] .badge{background:rgba(255,255,255,.08)!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.12)!important}
+[data-theme="dark"] .cfg-uuid-mini,[data-theme="dark"] .cfg-sub-tag,[data-theme="dark"] .exp-chip,[data-theme="dark"] .proto-chip{border-color:rgba(255,255,255,.12)!important}
+
 </style>
 </head>
 <body>
@@ -108,7 +127,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.4</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.5</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -123,7 +142,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.4</div>
+    <div class="footer">OXNET · 2.0.5</div>
   </div>
 </div>
 <script>
@@ -236,7 +255,7 @@ a{color:inherit;text-decoration:none}
 .dg{background:var(--green)}.dr{background:var(--red)}.da{background:var(--amber)}.db{background:var(--accent)}
 .pulse{animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px}
+.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:13px;margin-bottom:18px}
 .metric{background:var(--card);border:1px solid var(--card-b);border-radius:var(--radius);padding:17px 17px 14px;transition:all .2s;position:relative;overflow:hidden;cursor:default}
 .metric::after{content:'';position:absolute;top:0;right:0;width:3px;height:100%;background:var(--accent);opacity:0;transition:.2s}
 .metric:hover{border-color:var(--card-bh);transform:translateY(-2px);box-shadow:var(--shadow)}
@@ -474,7 +493,7 @@ a{color:inherit;text-decoration:none}
 .pw-submit:active{transform:translateY(0) scale(.98)}
 
 /* ══════ اتصالات فعال - نسخه پیشرفته ══════ */
-.conn-hero{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.conn-hero{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px}
 .conn-hero-tile{background:var(--card);border:1px solid var(--card-b);border-radius:16px;padding:16px 18px;position:relative;overflow:hidden;transition:.2s}
 .conn-hero-tile:hover{border-color:var(--card-bh);transform:translateY(-2px);box-shadow:var(--shadow)}
 .conn-hero-tile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent)}
@@ -1032,7 +1051,7 @@ a{color:inherit;text-decoration:none}
 <style id="oxnet-dashboard-redesign">
 #pg-overview,#pg-overview *{opacity:1!important;filter:none!important}#pg-overview{color:var(--t1)!important}.dash-main-card,.dash-kpi,.dash-protocol,.vless-box,.dash-chart-card,.card{box-shadow:0 12px 36px rgba(15,23,42,.09)!important}
 .pc-ss{background:rgba(20,184,166,.12);color:#0F766E}[data-theme="dark"] .pc-ss{color:#5EEAD4}
-.dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}.dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}.dash-main-card>*{position:relative;z-index:2}.dash-main-card:before{content:'';pointer-events:none;position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}.dash-eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--t3);text-transform:uppercase;margin-bottom:10px}.dash-title{font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--t1);line-height:1.2;margin-bottom:8px}.dash-title span{color:var(--accent2)}.dash-desc{max-width:620px;color:var(--t2);font-size:13px;line-height:2}.dash-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.dash-side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dash-kpi{background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(15,23,42,.05)}.dash-kpi-icon{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:18px;margin-bottom:14px}.dash-kpi-label{font-size:10px;color:var(--t3);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.dash-kpi-val{font-size:28px;font-weight:900;color:var(--t1);line-height:1;margin-top:7px}.dash-kpi-sub{font-size:10px;color:var(--t3);margin-top:8px}.dash-chart-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:16px;margin-bottom:16px}.dash-chart-card{background:var(--card);border:1px solid var(--card-b);border-radius:24px;padding:20px 22px;box-shadow:0 12px 36px rgba(15,23,42,.06)}.dash-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.dash-card-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.dash-card-sub{font-size:10px;color:var(--t3);margin-top:3px}.dash-protocols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.dash-protocol{background:var(--card);border:1px solid var(--card-b);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}.dash-protocol i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:17px;flex-shrink:0}.dash-protocol b{font-size:12px;color:var(--t1)}.dash-protocol span{display:block;font-size:10px;color:var(--t3);margin-top:2px}.multi-group-card{border:1px solid var(--card-b);border-radius:18px;background:linear-gradient(145deg,var(--card),var(--bg3));padding:16px;margin-bottom:12px}.multi-group-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.multi-group-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.multi-protos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.multi-protos span{font-size:10px;padding:4px 8px;border-radius:7px;background:var(--accent-d);color:var(--t2);font-weight:700}.db-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:22px;margin-bottom:16px}.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:1000px){.dash-hero,.dash-chart-grid,.db-grid{grid-template-columns:1fr}.dash-protocols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.dash-side,.dash-protocols{grid-template-columns:1fr}.dash-title{font-size:26px}}
+.dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}.dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}.dash-main-card>*{position:relative;z-index:2}.dash-main-card:before{content:'';pointer-events:none;position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}.dash-eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--t3);text-transform:uppercase;margin-bottom:10px}.dash-title{font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--t1);line-height:1.2;margin-bottom:8px}.dash-title span{color:var(--accent2)}.dash-desc{max-width:620px;color:var(--t2);font-size:13px;line-height:2}.dash-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.dash-side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dash-kpi{background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(15,23,42,.05)}.dash-kpi-icon{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:18px;margin-bottom:14px}.dash-kpi-label{font-size:10px;color:var(--t3);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.dash-kpi-val{font-size:28px;font-weight:900;color:var(--t1);line-height:1;margin-top:7px}.dash-kpi-sub{font-size:10px;color:var(--t3);margin-top:8px}.dash-chart-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:16px;margin-bottom:16px}.dash-chart-card{background:var(--card);border:1px solid var(--card-b);border-radius:24px;padding:20px 22px;box-shadow:0 12px 36px rgba(15,23,42,.06)}.dash-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.dash-card-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.dash-card-sub{font-size:10px;color:var(--t3);margin-top:3px}.dash-protocols{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}.dash-protocol{background:var(--card);border:1px solid var(--card-b);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}.dash-protocol i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:17px;flex-shrink:0}.dash-protocol b{font-size:12px;color:var(--t1)}.dash-protocol span{display:block;font-size:10px;color:var(--t3);margin-top:2px}.multi-group-card{border:1px solid var(--card-b);border-radius:18px;background:linear-gradient(145deg,var(--card),var(--bg3));padding:16px;margin-bottom:12px}.multi-group-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.multi-group-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.multi-protos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.multi-protos span{font-size:10px;padding:4px 8px;border-radius:7px;background:var(--accent-d);color:var(--t2);font-weight:700}.db-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:22px;margin-bottom:16px}.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:1000px){.dash-hero,.dash-chart-grid,.db-grid{grid-template-columns:1fr}.dash-protocols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.dash-side,.dash-protocols{grid-template-columns:1fr}.dash-title{font-size:26px}}
 .pro-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3))!important;border:1px solid var(--card-b)!important;border-radius:22px!important;padding:20px!important;box-shadow:0 12px 34px rgba(15,23,42,.08)!important}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent2);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr!important}}
 </style>
 </head>
@@ -1131,6 +1150,8 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="cm-dd-panel" id="dd-transport"><div class="cm-dd-panel-inner"><div class="cm-dd-list">
             <div class="cm-opt sel" onclick="cmSelectTransport('ws',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-link"></i></div><div class="cm-opt-text"><div class="cm-opt-title">WebSocket</div><div class="cm-opt-desc">پایدارترین حالت عمومی</div></div></div>
+            <div class="cm-opt" onclick="cmSelectTransport('grpc',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-cloud-data-connection"></i></div><div class="cm-opt-text"><div class="cm-opt-title">gRPC TLS</div><div class="cm-opt-desc">VLESS/Trojan روی HTTP/2 gRPC</div></div></div>
+            <div class="cm-opt" onclick="cmSelectTransport('httpupgrade',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-http-post"></i></div><div class="cm-opt-text"><div class="cm-opt-title">HTTPUpgrade TLS</div><div class="cm-opt-desc">ترابرد Upgrade سبک روی TLS</div></div></div>
             <div class="cm-opt" onclick="cmSelectTransport('xhttp-packet-up',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-package"></i></div><div class="cm-opt-text"><div class="cm-opt-title">XHTTP packet-up</div><div class="cm-opt-desc">سازگار با CDN و پروکسی‌ها</div></div></div>
             <div class="cm-opt" onclick="cmSelectTransport('xhttp-stream-up',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-rocket"></i></div><div class="cm-opt-text"><div class="cm-opt-title">XHTTP stream-up</div><div class="cm-opt-desc">تاخیر کمتر برای شبکه پایدار</div></div></div>
           </div></div></div>
@@ -1304,7 +1325,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 
-<!-- OXNET v2.0.4 repaired action modals -->
+<!-- OXNET v2.0.5 repaired action modals -->
 <div class="modal-bg" id="modal-edit-link">
   <div class="modal-v2" style="max-width:520px">
     <button class="modal-v2-close" onclick="closeModal('modal-edit-link')"><i class="ti ti-x"></i></button>
@@ -1416,7 +1437,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.4</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.5</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1432,7 +1453,6 @@ a{color:inherit;text-decoration:none}
     <div class="nav-it" data-pg="security"><i class="ti ti-shield-lock"></i> امنیت</div>
     <div class="nav-it" data-pg="logs"><i class="ti ti-history"></i> لاگ فعالیت‌ها</div>
     <div class="nav-it" data-pg="errors"><i class="ti ti-alert-triangle"></i> خطاها</div>
-    <div class="nav-it" data-pg="testws"><i class="ti ti-wifi"></i> تست WebSocket</div>
     <div class="nav-it" data-pg="settings"><i class="ti ti-settings"></i> تنظیمات</div>
   </div>
   <div class="sb-foot">
@@ -1466,7 +1486,9 @@ a{color:inherit;text-decoration:none}
     <div class="dash-protocol"><i class="ti ti-bolt"></i><div><b>VLESS WS</b><span>پایدار و سریع</span></div></div>
     <div class="dash-protocol"><i class="ti ti-shield-lock"></i><div><b>Trojan WS</b><span>TLS-ready</span></div></div>
     <div class="dash-protocol"><i class="ti ti-lock-bolt"></i><div><b>Shadowsocks TLS</b><span>مسیر اختصاصی</span></div></div>
-    <div class="dash-protocol"><i class="ti ti-package"></i><div><b>XHTTP Fixed</b><span>packet / stream / one</span></div></div>
+    <div class="dash-protocol"><i class="ti ti-package"></i><div><b>XHTTP Fixed</b><span>packet / stream</span></div></div>
+    <div class="dash-protocol"><i class="ti ti-cloud-data-connection"></i><div><b>gRPC TLS</b><span>VLESS / Trojan</span></div></div>
+    <div class="dash-protocol"><i class="ti ti-http-post"></i><div><b>HTTPUpgrade TLS</b><span>VLESS / Trojan</span></div></div>
   </div>
 
   <div class="vless-box">
@@ -1699,24 +1721,6 @@ a{color:inherit;text-decoration:none}
   <div class="topbar"><div><div class="tb-title"><i class="ti ti-alert-triangle"></i> خطاها</div></div><div class="tb-right"><span class="badge bg-red" id="errs-badge">۰</span><button class="btn btn-p btn-sm" onclick="refreshAll()"><i class="ti ti-refresh"></i></button></div></div>
   <div class="card"><div class="card-title"><i class="ti ti-bug"></i> لاگ خطاها</div><div id="errs-full">—</div></div>
 </section>
-<section class="pg" id="pg-testws">
-  <div class="topbar"><div><div class="tb-title"><i class="ti ti-wifi"></i> تست WebSocket</div></div></div>
-  <div class="card" style="max-width:660px">
-    <div class="cl amber" style="margin-top:0;margin-bottom:12px"><i class="ti ti-alert-triangle"></i><span>فقط UUID‌های ثبت‌شده و فعال اتصال برقرار می‌کنند (این فقط تست VLESS/WS است؛ تست XHTTP از خود کلاینت انجام می‌شود).</span></div>
-    <div class="form-row" style="margin-bottom:12px">
-      <div class="fg" style="flex:1"><label>UUID (باید در کانفیگ‌ها وجود داشته باشد)</label><input class="fi" id="ws-uuid" placeholder="UUID یک کانفیگ فعال" style="width:100%"></div>
-      <button class="btn btn-p" onclick="wsConn()"><i class="ti ti-plug-connected"></i> اتصال</button>
-      <button class="btn btn-d" onclick="wsDisc()"><i class="ti ti-plug-x"></i> قطع</button>
-    </div>
-    <div class="form-row" style="margin-bottom:12px">
-      <input class="fi" id="ws-msg" placeholder="پیام تست..." style="flex:1">
-      <button class="btn btn-o" onclick="wsSend()"><i class="ti ti-send"></i> ارسال</button>
-    </div>
-    <div style="background:rgba(0,0,0,.3);border:1px solid var(--card-b);border-radius:10px;padding:14px;height:250px;overflow-y:auto;font-family:ui-monospace,monospace;font-size:10.5px;line-height:1.9" id="ws-log">
-      <p style="color:var(--t3)">منتظر اتصال...</p>
-    </div>
-  </div>
-</section>
 <section class="pg" id="pg-updates">
   <div class="topbar">
     <div><div class="tb-title"><i class="ti ti-cloud-download"></i> نسخه و بروزرسانی</div><div class="tb-sub">مدیریت نسخه‌ی پنل و تاریخچه‌ی کامل بروزرسانی‌ها</div></div>
@@ -1834,7 +1838,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.4</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.5</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1924,10 +1928,14 @@ function expChip(exp,expired){
 function protoBadge(p){
   const m={
     'vless-ws':['VLESS · WS','pc-ws'],
+    'vless-grpc':['VLESS · gRPC','pc-grpc'],
+    'vless-httpupgrade':['VLESS · HTTPUpgrade','pc-hu'],
     'xhttp-packet-up':['VLESS · XHTTP packet-up','pc-xhttp'],
     'xhttp-stream-up':['VLESS · XHTTP stream-up','pc-xhttp'],
     'xhttp-stream-one':['XHTTP Stream','pc-xh'],
     'trojan-ws':['Trojan · WS','pc-trojan'],
+    'trojan-grpc':['Trojan · gRPC','pc-grpc'],
+    'trojan-httpupgrade':['Trojan · HTTPUpgrade','pc-hu'],
     'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
     'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
     'shadowsocks-tls':['Shadowsocks · TLS','pc-ss'],
@@ -2003,7 +2011,7 @@ async function fetchStats(){
     if(d.hourly){
       const labels=Object.keys(d.hourly).sort(),vals=labels.map(k=>+(d.hourly[k]/1024**2).toFixed(2));
       [ch1,ch3].forEach(c=>{if(!c)return;c.data.labels=labels;c.data.datasets[0].data=vals;c.update()});
-      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
+      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','gRPC','HTTPUpgrade','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.grpc||0,pc.httpupgrade||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
       if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);const tAvg=document.getElementById('t-avg'),tPeak=document.getElementById('t-peak');if(tAvg)tAvg.innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';if(tPeak)tPeak.innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
     }
     renderErrs(d.recent_errors||[]);
@@ -2155,6 +2163,8 @@ const BASE_INFO = {
 };
 const TRANSPORT_INFO = {
   'ws':               { icon:'ti-link',    title:'WebSocket',            desc:'پایدار و سازگار با همه شرایط شبکه' },
+  'grpc':             { icon:'ti-cloud-data-connection', title:'gRPC TLS', desc:'VLESS/Trojan روی HTTP/2 gRPC' },
+  'httpupgrade':      { icon:'ti-http-post', title:'HTTPUpgrade TLS', desc:'ترابرد HTTP Upgrade سبک روی TLS' },
   'xhttp-packet-up':  { icon:'ti-package', title:'XHTTP · packet-up',    desc:'سازگاری بالا با CDN و پروکسی‌ها' },
   'xhttp-stream-up':  { icon:'ti-rocket',  title:'XHTTP · stream-up',    desc:'تاخیر پایین‌تر برای اتصال‌های پرسرعت' }
 };
@@ -2237,9 +2247,11 @@ function cmApplyProto(){
     document.getElementById('nl-proto').value = 'mtproto';
     return;
   }
-  const val = cmTransport === 'ws'
-    ? (cmBase === 'trojan' ? 'trojan-ws' : 'vless-ws')
-    : (cmBase === 'trojan' ? `trojan-${cmTransport}` : cmTransport);
+  let val;
+  if (cmTransport === 'ws') val = (cmBase === 'trojan' ? 'trojan-ws' : 'vless-ws');
+  else if (cmTransport === 'grpc') val = (cmBase === 'trojan' ? 'trojan-grpc' : 'vless-grpc');
+  else if (cmTransport === 'httpupgrade') val = (cmBase === 'trojan' ? 'trojan-httpupgrade' : 'vless-httpupgrade');
+  else val = (cmBase === 'trojan' ? `trojan-${cmTransport}` : cmTransport);
   document.getElementById('nl-proto').value = val;
 }
 
@@ -2302,7 +2314,7 @@ async function createLink(){
     const copyTarget = d.sub_url || d.vless_link;
     if(copyTarget && navigator.clipboard) navigator.clipboard.writeText(copyTarget).catch(()=>{});
     ['nl-label','nl-path','nl-val','nl-exp','nl-note','nl-mtproto-port','nl-mtproto-domain'].forEach(id=>document.getElementById(id).value='');
-    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')),'ok');
+    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : (protocol.includes('grpc') ? 'gRPC TLS ساخته شد و لینک کپی شد' : (protocol.includes('httpupgrade') ? 'HTTPUpgrade TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')))),'ok');
     closeModal('modal-create-link');
     loadLinks();
     if(protocol==='multi'){loadSubs();loadSubsPage();}
@@ -2794,9 +2806,9 @@ function initCharts(){
 
   ch2=new Chart(document.getElementById('ch2'),{
     type:'doughnut',
-    data:{labels:['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'],datasets:[{
-      data:[1,1,1,1,1],
-      backgroundColor:['#2563EB','#111827','#8B5CF6','#14B8A6','#F59E0B'],
+    data:{labels:['VLESS WS','Trojan WS','XHTTP','gRPC','HTTPUpgrade','Shadowsocks TLS','MTProto'],datasets:[{
+      data:[1,1,1,1,1,1,1],
+      backgroundColor:['#2563EB','#111827','#8B5CF6','#0EA5E9','#6366F1','#14B8A6','#F59E0B'],
       borderColor:getComputedStyle(document.documentElement).getPropertyValue('--card')||'#0d1b2e',
       borderWidth:4,hoverOffset:10,borderRadius:6,spacing:3
     }]},
@@ -2809,11 +2821,6 @@ function initCharts(){
     }
   });
 }
-let ws;
-function wsLog(c,m){const l=document.getElementById('ws-log'),p=document.createElement('p');const colors={ok:'#34D399',err:'#F87171',info:'#7BAED4',sent:'#FCD34D'};p.style.color=colors[c]||'#fff';p.textContent='['+new Date().toLocaleTimeString('fa-IR')+'] '+m;l.appendChild(p);l.scrollTop=l.scrollHeight}
-function wsConn(){const u=document.getElementById('ws-uuid').value.trim();if(!u){toast('UUID را وارد کنید','err');return}const url=(location.protocol==='https:'?'wss':'ws')+'://'+location.host+'/ws/'+u;wsLog('info','اتصال: '+url);ws=new WebSocket(url);ws.onopen=()=>wsLog('ok',' متصل - UUID معتبر');ws.onerror=()=>wsLog('err',' خطا - UUID نامعتبر یا غیرفعال');ws.onmessage=m=>wsLog('info','دریافت '+(m.data.size||m.data.length)+' byte');ws.onclose=e=>wsLog('err','قطع ('+e.code+')'+(e.code===1008?' - دسترسی رد شد':''))}
-function wsSend(){const m=document.getElementById('ws-msg').value;if(!m||!ws||ws.readyState!==1)return;ws.send(m);wsLog('sent','ارسال: '+m);document.getElementById('ws-msg').value=''}
-function wsDisc(){if(ws)ws.close()}
 const ICON_MAP={ad:'ti-speakerphone',news:'ti-news',warning:'ti-alert-triangle',urgent:'ti-alert-octagon'};
 const LABEL_MAP={ad:'تبلیغ',news:'خبر',warning:'هشدار',urgent:'فوری'};
 async function loadAnnouncements(){
@@ -3517,6 +3524,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 .proto-chip{{font-size:9px;padding:3px 8px;border-radius:7px;font-weight:800;letter-spacing:.02em}}
 .pc-ws{{background:var(--accent-d);color:var(--accent2)}}
 .pc-ss{{background:var(--green-bg);color:var(--green-t)}}
+.pc-grpc{{background:rgba(14,165,233,.12);color:#0284c7}}.pc-hu{{background:rgba(99,102,241,.12);color:#4f46e5}}
 .pc-trojan{{background:var(--purple-bg);color:#A78BFA}}
 .pc-xhttp{{background:var(--purple-bg);color:var(--purple-t)}}
 .pc-ultra{{background:var(--green-bg);color:var(--green-t)}}
@@ -3609,7 +3617,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 }}
 @keyframes spin{{to{{transform:rotate(360deg)}}}}
 
-/* OXNET v2.0.4 public subscription theme polish */
+/* OXNET v2.0.5 public subscription theme polish */
 .copy-all-bar{{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;box-shadow:var(--shadow)!important}}
 .copy-all-btn{{background:var(--card)!important;color:var(--t1)!important;border:1px solid var(--card-bh)!important}}
 .btn-p{{background:var(--accent)!important;color:var(--bg)!important}}
@@ -3634,7 +3642,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.4</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.5</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3644,7 +3652,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.4</div>
+  <div class="footer">OXNET v2.0.5</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';
@@ -3669,6 +3677,8 @@ function toFa(n){{return String(n).replace(/\\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
 function protoChip(p){{
   if(p==='xhttp-stream-one')return '<span class="proto-chip pc-xh"><i class="ti ti-bolt"></i> XHTTP Stream</span>';
   if(p&&p.startsWith('trojan'))return '<span class="proto-chip pc-trojan"><i class="ti ti-shield-lock"></i> '+esc(p)+'</span>';
+  if(p&&p.includes('grpc'))return '<span class="proto-chip pc-grpc">'+esc(p)+'</span>';
+  if(p&&p.includes('httpupgrade'))return '<span class="proto-chip pc-hu">'+esc(p)+'</span>';
   if(p&&p.startsWith('xhttp'))return '<span class="proto-chip pc-xhttp">'+esc(p)+'</span>';
   if(p==='shadowsocks-tls')return '<span class="proto-chip pc-ss">Shadowsocks · TLS</span>';
   return '<span class="proto-chip pc-ws">VLESS · WS</span>';

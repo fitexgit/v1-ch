@@ -234,8 +234,10 @@ SETTINGS: dict = {
 FAILED_LOGINS: dict = {}
 
 PROTOCOLS = (
-    "vless-ws", "xhttp-packet-up", "xhttp-stream-up", "xhttp-stream-one",
-    "trojan-ws", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
+    "vless-ws", "vless-grpc", "vless-httpupgrade",
+    "xhttp-packet-up", "xhttp-stream-up", "xhttp-stream-one",
+    "trojan-ws", "trojan-grpc", "trojan-httpupgrade",
+    "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
     "shadowsocks-tls", "mtproto", "multi",
 )
 DEFAULT_PROTOCOL = "vless-ws"
@@ -502,7 +504,7 @@ async def unique_config_path(base: str | None, fallback: str) -> str:
     return candidate
 
 def proto_slug(proto: str) -> str:
-    return proto.replace('shadowsocks-tls', 'ss').replace('trojan-', 'tr-').replace('xhttp-', 'xh-').replace('-up', '').replace('-one', '1')
+    return proto.replace('shadowsocks-tls', 'ss').replace('httpupgrade','hu').replace('grpc','grpc').replace('trojan-', 'tr-').replace('vless-', 'vl-').replace('xhttp-', 'xh-').replace('-up', '').replace('-one', '1')
 
 def get_host() -> str:
     return os.environ.get("RAILWAY_PUBLIC_DOMAIN", CONFIG["host"])
@@ -519,10 +521,11 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
     public_path = link_obj.get("path") or uuid
     if protocol == "shadowsocks-tls":
         import base64
-        # SIP002 full-userinfo form imports better on Android clients such as v2rayNG/SagerNet.
-        userinfo = base64.urlsafe_b64encode(f"chacha20-ietf-poly1305:{uuid}@{host}:443".encode()).decode().rstrip("=")
-        plugin = quote(f"v2ray-plugin;tls;host={host};path=/ss/{public_path}")
-        return f"ss://{userinfo}?plugin={plugin}#{quote(remark)}"
+        # SIP002 plugin form with explicit websocket mode and always a fragment/name.
+        # This fixes links that previously ended as "...?" without plugin/name.
+        user = base64.urlsafe_b64encode(f"chacha20-ietf-poly1305:{uuid}".encode()).decode().rstrip("=")
+        plugin = quote(f"v2ray-plugin;tls;mode=websocket;host={host};path=/ss/{public_path}", safe="")
+        return f"ss://{user}@{host}:443?plugin={plugin}#{quote(remark or 'OXNET-Shadowsocks')}"
     if protocol == "mtproto":
         link = LINKS.get(uuid)
         port = link.get("mtproto_port") if link else None
@@ -549,6 +552,39 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
         params = {
             "security": "tls", "type": "xhttp", "mode": mode, "host": host,
             "path": path, "sni": host, "fp": "chrome", "alpn": "h2,http/1.1",
+        }
+        query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
+        return f"trojan://{uuid}@{host}:443?{query}#{quote(remark)}"
+    if protocol == "vless-grpc":
+        service = f"vgrpc-{public_path}"
+        params = {
+            "encryption": "none", "security": "tls", "type": "grpc",
+            "serviceName": service, "mode": "gun", "authority": host,
+            "sni": host, "fp": "chrome", "alpn": "h2",
+        }
+        query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
+        return f"vless://{uuid}@{host}:443?{query}#{quote(remark)}"
+    if protocol == "vless-httpupgrade":
+        path = f"/ws/{public_path}"
+        params = {
+            "encryption": "none", "security": "tls", "type": "httpupgrade",
+            "host": host, "path": path, "sni": host, "fp": "chrome", "alpn": "http/1.1",
+        }
+        query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
+        return f"vless://{uuid}@{host}:443?{query}#{quote(remark)}"
+    if protocol == "trojan-grpc":
+        service = f"tgrpc-{public_path}"
+        params = {
+            "security": "tls", "type": "grpc", "serviceName": service,
+            "mode": "gun", "authority": host, "sni": host, "fp": "chrome", "alpn": "h2",
+        }
+        query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
+        return f"trojan://{uuid}@{host}:443?{query}#{quote(remark)}"
+    if protocol == "trojan-httpupgrade":
+        path = f"/trojan-ws"
+        params = {
+            "security": "tls", "type": "httpupgrade", "host": host,
+            "path": path, "sni": host, "fp": "chrome", "alpn": "http/1.1",
         }
         query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
         return f"trojan://{uuid}@{host}:443?{query}#{quote(remark)}"
@@ -914,6 +950,8 @@ async def get_stats(_=Depends(require_auth)):
             "vless_ws": sum(1 for l in snap.values() if l.get("protocol") == "vless-ws"),
             "trojan_ws": sum(1 for l in snap.values() if l.get("protocol") == "trojan-ws"),
             "xhttp": sum(1 for l in snap.values() if "xhttp" in str(l.get("protocol", ""))),
+            "grpc": sum(1 for l in snap.values() if "grpc" in str(l.get("protocol", ""))),
+            "httpupgrade": sum(1 for l in snap.values() if "httpupgrade" in str(l.get("protocol", ""))),
             "shadowsocks_tls": sum(1 for l in snap.values() if l.get("protocol") == "shadowsocks-tls"),
             "mtproto": sum(1 for l in snap.values() if l.get("protocol") == "mtproto"),
         },
@@ -1085,8 +1123,8 @@ async def create_link(request: Request, _=Depends(require_auth)):
         sub_id = generate_uuid()
         uuid_key = base_path
         multi_protocols = [
-            "vless-ws", "xhttp-packet-up", "xhttp-stream-up",
-            "trojan-ws", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
+            "vless-ws", "vless-grpc", "vless-httpupgrade", "xhttp-packet-up", "xhttp-stream-up",
+            "trojan-ws", "trojan-grpc", "trojan-httpupgrade", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
             "shadowsocks-tls",
         ]
         sub = {
@@ -1389,6 +1427,8 @@ app.add_api_websocket_route("/ss/{uuid}", shadowsocks_ws_tunnel)
 # ══════════════════════════════════════════════════════════════════════════════
 from xhttp_siz10 import router as xhttp_router
 app.include_router(xhttp_router)
+from grpc_routes import router as grpc_router
+app.include_router(grpc_router)
 
 # ── HTTP Proxy ────────────────────────────────────────────────────────────────
 _HOP = {"connection","keep-alive","proxy-authenticate","proxy-authorization",
@@ -1710,7 +1750,7 @@ from pages import LOGIN_HTML, DASHBOARD_HTML
 
 def render_html(html: str) -> str:
     v = get_current_panel_version()
-    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("v2.0.3", f"v{v}").replace("v2.0.4", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}").replace("· 2.0.3", f"· {v}").replace("· 2.0.4", f"· {v}")
+    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("v2.0.3", f"v{v}").replace("v2.0.4", f"v{v}").replace("v2.0.5", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}").replace("· 2.0.3", f"· {v}").replace("· 2.0.4", f"· {v}").replace("· 2.0.5", f"· {v}")
 
 
 # ── Central: Announcements & Support ─────────────────────────────────────────
