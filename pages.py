@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.1
+# pages.py  -  OXNET v2.0.2
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -99,7 +99,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.1</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.2</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -114,7 +114,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.1</div>
+    <div class="footer">OXNET · 2.0.2</div>
   </div>
 </div>
 <script>
@@ -1035,7 +1035,7 @@ a{color:inherit;text-decoration:none}
     <button class="cm-close" onclick="closeModal('modal-create-link')"><i class="ti ti-x"></i></button>
     <div class="cm-head">
       <div class="cm-head-row">
-        <div class="cm-head-icon" id="cm-head-icon"><i class="ti ti-square-rounded-plus"></i></div>
+        <div class="cm-head-icon" id="cm-head-icon"><i class="ti ti-plus"></i></div>
         <div>
           <div class="cm-head-title" id="cm-head-title">ساخت کانفیگ جدید</div>
           <div class="cm-head-sub" id="cm-head-sub">تنظیمات کامل پروتکل، ترابرد و محدودیت‌ها در یک صفحه</div>
@@ -1101,6 +1101,12 @@ a{color:inherit;text-decoration:none}
               <div class="cm-opt-icon"><i class="ti ti-lock-bolt"></i></div>
               <div class="cm-opt-text"><div class="cm-opt-title">Shadowsocks TLS</div><div class="cm-opt-desc">شادوساکس روی TLS/WebSocket با مسیر اختصاصی</div></div>
               <span class="cm-opt-tag">TLS</span>
+            </div>
+            <div class="cm-opt" data-base="shadowsocks-tcp" onclick="cmSelectBase('shadowsocks-tcp',this)">
+              <div class="cm-opt-radio"></div>
+              <div class="cm-opt-icon"><i class="ti ti-server-bolt"></i></div>
+              <div class="cm-opt-text"><div class="cm-opt-title">Shadowsocks TCP</div><div class="cm-opt-desc">نسخه TCP تستی با دامنه/پورت عمومی Railway</div></div>
+              <span class="cm-opt-tag">TCP تستی</span>
             </div>
             <div class="cm-opt" data-base="telproxy" onclick="cmSelectBase('telproxy',this)">
               <div class="cm-opt-radio"></div>
@@ -1286,7 +1292,7 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="cm-footer">
       <button class="cm-btn-cancel" onclick="closeModal('modal-bot-tcp-proxy')">بستن</button>
-      <button class="btn btn-d" id="btp-stop-btn" onclick="stopBotTcpProxy()" style="display:none"><i class="ti ti-player-stop"></i> توقف</button>
+      <button class="btn btn-d" id="btp-stop-btn" onclick="stopBotTcpProxy()" style="display:none"><i class="ti ti-ban"></i> توقف</button>
       <button class="cm-btn-submit" id="btp-start-btn" onclick="startBotTcpProxy()"><i class="ti ti-player-play"></i> شروع ساخت TCP Proxy</button>
     </div>
   </div>
@@ -1328,7 +1334,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.1</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.2</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1361,7 +1367,7 @@ a{color:inherit;text-decoration:none}
       <div class="dash-title">مدیریت سریع، تمیز و <span>چند پروتکل</span></div>
       <div class="dash-desc">نمای زنده از مصرف، اتصالات، کانفیگ‌ها و سلامت سرویس. از همین صفحه می‌تونی لینک پیش‌فرض رو برداری یا وارد ساخت کانفیگ جدید بشی.</div>
       <div class="dash-actions">
-        <button class="btn btn-p" onclick="dashCreateConfig()"><i class="ti ti-square-rounded-plus"></i> ساخت کانفیگ</button>
+        <button class="btn btn-p" onclick="dashCreateConfig()"><i class="ti ti-plus"></i> ساخت کانفیگ</button>
         <button class="btn btn-g" onclick="dashGoTraffic()"><i class="ti ti-chart-area"></i> مشاهده ترافیک</button>
         <button class="btn btn-o" onclick="dashRefresh()"><i class="ti ti-refresh"></i> رفرش</button>
       </div>
@@ -1408,7 +1414,7 @@ a{color:inherit;text-decoration:none}
   <div class="topbar">
     <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:16px">
       <button class="btn btn-p" onclick="openModal('modal-create-link')">
-        <i class="ti ti-square-rounded-plus"></i> ساخت کانفیگ جدید
+        <i class="ti ti-plus"></i> ساخت کانفیگ جدید
       </button>
       <button class="btn btn-g" style="margin-right:14px" onclick="openModal('modal-bot-tcp-proxy');btpCheckTokenState()">
         <i class="ti ti-server-2"></i> ساخت TCP Proxy
@@ -1693,7 +1699,7 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <div class="upd-history-head">
-    <div class="upd-history-title"><i class="ti ti-history"></i> تاریخچه‌ی بروزرسانی‌ها</div>
+    <div class="upd-history-title"><i class="ti ti-history"></i> تاریخچه بروزرسانی غیرفعال است</div>
     <span class="badge bg-blue" id="upd-history-count">۰ مورد</span>
   </div>
   <div class="upd-timeline" id="upd-history-list">
@@ -1746,7 +1752,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.1</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.2</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1843,6 +1849,7 @@ function protoBadge(p){
     'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
     'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
     'shadowsocks-tls':['Shadowsocks · TLS','pc-ss'],
+    'shadowsocks-tcp':['Shadowsocks · TCP','pc-ss'],
     'mtproto':['Telegram Proxy · MTProto','pc-trojan'],
   };
   const v=m[p]||['ناشناخته','pc-ws'];
@@ -1914,7 +1921,7 @@ async function fetchStats(){
     if(d.hourly){
       const labels=Object.keys(d.hourly).sort(),vals=labels.map(k=>+(d.hourly[k]/1024**2).toFixed(2));
       [ch1,ch3].forEach(c=>{if(!c)return;c.data.labels=labels;c.data.datasets[0].data=vals;c.update()});
-      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
+      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','SS TLS','SS TCP','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.shadowsocks_tcp||0,pc.mtproto||0];ch2.update();}
       if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);const tAvg=document.getElementById('t-avg'),tPeak=document.getElementById('t-peak');if(tAvg)tAvg.innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';if(tPeak)tPeak.innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
     }
     renderErrs(d.recent_errors||[]);
@@ -2009,6 +2016,8 @@ async function loadLinks(){
       <div class="cfg-badges-col">
         ${protoBadge(l.protocol)}
         ${isMt && l.mtproto_public_host ? `<span class="cfg-sub-tag"><i class="ti ti-route"></i> ${esc(l.mtproto_public_host)}:${l.mtproto_public_port}</span>` : ''}
+        ${l.protocol==='shadowsocks-tcp' && l.public_host ? `<span class="cfg-sub-tag"><i class="ti ti-route"></i> ${esc(l.public_host)}:${l.public_port}</span>` : ''}
+        ${l.protocol==='shadowsocks-tcp' && l.public_pending ? `<span class="cfg-sub-tag" style="color:var(--amber-t)"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال ساخت TCP Proxy عمومی...</span>` : ''}
         ${isMt && !l.mtproto_public_host && l.mtproto_public_pending ? `<span class="cfg-sub-tag" style="color:var(--amber-t)"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال ساخت TCP Proxy عمومی...</span>` : ''}
         ${isMt && !l.mtproto_public_host && !l.mtproto_public_pending && !l.mtproto_manual_port ? `<span class="cfg-sub-tag" style="color:var(--red-t)"><i class="ti ti-alert-triangle"></i> بدون TCP Proxy عمومی — لینک کار نمی‌کند</span>` : ''}
         ${l.sub_id&&allSubsList.find(s=>s.sub_id===l.sub_id)?`<span class="cfg-sub-tag"><i class="ti ti-folder"></i> ${esc(allSubsList.find(s=>s.sub_id===l.sub_id).name)}</span>`:''}
@@ -2059,7 +2068,8 @@ const BASE_INFO = {
   trojan:   { icon:'ti-shield-lock',    title:'Trojan',         desc:'شبیه‌سازی ترافیک HTTPS معمولی' },
   telproxy: { icon:'ti-brand-telegram', title:'Telegram Proxy', desc:'پروکسی MTProto مستقیم روی یک پورت TCP اختصاصی' },
   multi:    { icon:'ti-layers-intersect', title:'Multi Protocol', desc:'یک ساب شامل همه پروتکل‌ها، بدون پروکسی تلگرام' },
-  shadowsocks: { icon:'ti-lock-bolt', title:'Shadowsocks TLS', desc:'شادوساکس روی TLS/WebSocket با مسیر اختصاصی' }
+  shadowsocks: { icon:'ti-lock-bolt', title:'Shadowsocks TLS', desc:'شادوساکس روی TLS/WebSocket با مسیر اختصاصی' },
+  'shadowsocks-tcp': { icon:'ti-server-bolt', title:'Shadowsocks TCP', desc:'نسخه TCP تستی با دامنه و پورت عمومی Railway' }
 };
 const TRANSPORT_INFO = {
   'ws':               { icon:'ti-link',    title:'WebSocket',            desc:'پایدار و سازگار با همه شرایط شبکه' },
@@ -2105,6 +2115,18 @@ function cmSelectBase(val, el){
     document.getElementById('nl-proto').value = 'shadowsocks-tls';
     return;
   }
+  if (val === 'shadowsocks-tcp') {
+    transportSection.style.display = 'none';
+    normalNote.style.display = 'flex';
+    mtNote.style.display = 'none';
+    portField.style.display = 'none';
+    document.getElementById('cm-head-title').textContent = 'ساخت Shadowsocks TCP تستی';
+    document.getElementById('cm-head-sub').textContent = 'برای تست، یک Shadowsocks TCP با TCP Proxy عمومی Railway می‌سازد';
+    document.getElementById('cm-submit-text').textContent = 'ساخت Shadowsocks TCP';
+    document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-server-bolt"></i>';
+    document.getElementById('nl-proto').value = 'shadowsocks-tcp';
+    return;
+  }
   if (val === 'telproxy') {
     transportSection.style.display = 'none';
     normalNote.style.display = 'none';
@@ -2122,7 +2144,7 @@ function cmSelectBase(val, el){
     document.getElementById('cm-head-title').textContent = 'ساخت کانفیگ جدید';
     document.getElementById('cm-head-sub').textContent = 'تنظیمات کامل پروتکل، ترابرد و محدودیت‌ها در یک صفحه';
     document.getElementById('cm-submit-text').textContent = 'ساخت کانفیگ';
-    document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-square-rounded-plus"></i>';
+    document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-plus"></i>';
   }
   cmApplyProto();
 }
@@ -2205,7 +2227,7 @@ async function createLink(){
     const copyTarget = d.sub_url || d.vless_link;
     if(copyTarget && navigator.clipboard) navigator.clipboard.writeText(copyTarget).catch(()=>{});
     ['nl-label','nl-path','nl-val','nl-exp','nl-note','nl-mtproto-port','nl-mtproto-domain'].forEach(id=>document.getElementById(id).value='');
-    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')),'ok');
+    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tcp' ? 'Shadowsocks TCP ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد'))),'ok');
     closeModal('modal-create-link');
     loadLinks();
   }catch(e){toast(' '+e.message,'err')}
@@ -2589,7 +2611,7 @@ async function loadHealth(){try{const r=await authF('/api/config-health'),d=awai
 async function loadMonitoring(){try{const r=await authF('/api/monitoring'),d=await r.json();const el=document.getElementById('monitoring-box');if(!el)return;el.innerHTML=`<div class="sr"><span class="sr-k">دیتابیس</span><span class="sr-v">${esc(d.db_mode)}</span></div><div class="sr"><span class="sr-k">Top مصرف</span><span class="sr-v">${(d.top_links||[]).slice(0,3).map(x=>esc(x.label)).join('، ')||'—'}</span></div><div class="sr"><span class="sr-k">IP آنلاین</span><span class="sr-v">${(d.top_ips||[]).length}</span></div>`}catch(e){}}
 function exportBackup(){window.open('/api/backup/export','_blank')}
 async function saveRestorePoint(){const name=prompt('نام بکاپ/ریستور پوینت؟','Backup '+new Date().toLocaleString('fa-IR'));if(!name)return;try{await authF('/api/backup/save',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});toast('Restore Point ذخیره شد','ok');loadRestorePoints()}catch(e){toast('خطا','err')}}
-async function loadRestorePoints(){try{const r=await authF('/api/backup/restore-points'),d=await r.json();const el=document.getElementById('restore-points');if(!el)return;el.innerHTML=(d.items||[]).slice().reverse().map(b=>`<div class="health-row"><div><b>${esc(b.name)}</b><div class="pro-muted">${new Date(b.created_at).toLocaleString('fa-IR')}</div></div><button class="btn btn-p btn-sm" onclick="restorePoint('${b.id}')"><i class="ti ti-restore"></i> ریستور</button></div>`).join('')||'<div class="pro-muted">هنوز Restore Point ندارید</div>'}catch(e){}}
+async function loadRestorePoints(){try{const r=await authF('/api/backup/restore-points'),d=await r.json();const el=document.getElementById('restore-points');if(!el)return;el.innerHTML=(d.items||[]).slice().reverse().map(b=>`<div class="health-row"><div><b>${esc(b.name)}</b><div class="pro-muted">${new Date(b.created_at).toLocaleString('fa-IR')}</div></div><button class="btn btn-p btn-sm" onclick="restorePoint('${b.id}')"><i class="ti ti-history-toggle"></i> ریستور</button></div>`).join('')||'<div class="pro-muted">هنوز Restore Point ندارید</div>'}catch(e){}}
 async function restorePoint(id){if(!confirm('ریستور انجام شود؟ اطلاعات فعلی با بکاپ جایگزین می‌شود.'))return;try{const r=await authF('/api/backup/restore/'+id,{method:'POST'});const d=await r.json();if(!r.ok)throw new Error(d.detail||'خطا');toast('ریستور انجام شد','ok');refreshAll();loadProTools();loadCustomers()}catch(e){toast(' '+e.message,'err')}}
 async function importBackup(){const raw=document.getElementById('backup-import').value.trim();if(!raw){toast('JSON بکاپ را وارد کن','err');return}try{const data=JSON.parse(raw);const r=await authF('/api/backup/import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const d=await r.json();if(!r.ok)throw new Error(d.detail||'خطا');toast('بکاپ ایمپورت شد','ok');refreshAll()}catch(e){toast(' '+e.message,'err')}}
 async function runCleanup(){const expired_days=Number(document.getElementById('clean-expired').value||0),inactive_days=Number(document.getElementById('clean-inactive').value||0);try{const r=await authF('/api/cleanup/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expired_days,inactive_days,reset_logs:false})});const d=await r.json();toast(`پاک‌سازی: ${toFa(d.deleted)} حذف، ${toFa(d.archived)} آرشیو`,'ok');refreshAll()}catch(e){toast('خطا','err')}}
@@ -2697,7 +2719,7 @@ function initCharts(){
 
   ch2=new Chart(document.getElementById('ch2'),{
     type:'doughnut',
-    data:{labels:['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'],datasets:[{
+    data:{labels:['VLESS WS','Trojan WS','XHTTP','SS TLS','SS TCP','MTProto'],datasets:[{
       data:[1,1,1,1,1],
       backgroundColor:['#2563EB','#111827','#8B5CF6','#14B8A6','#F59E0B'],
       borderColor:getComputedStyle(document.documentElement).getPropertyValue('--card')||'#0d1b2e',
@@ -2947,6 +2969,7 @@ async function startUpdate(){
   }
 }
 let btpPolling = null;
+let btpTargetUuid = null;
 
 function btpSetStatus(icon, color, text, spin){
   const ic = document.getElementById('btp-status-icon');
@@ -2989,13 +3012,18 @@ async function startBotTcpProxy(){
   const tokenSection=document.getElementById('btp-token-section');
   const token = tokenSection && tokenSection.style.display !== 'none' ? tokenField.value.trim() : '';
   const portVal = document.getElementById('btp-port').value.trim();
+  const pendingPublic = (window.__rawLinksList||[])
+    .filter(l => (l.protocol==='mtproto' && !l.mtproto_public_host && l.mtproto_port) || (l.protocol==='shadowsocks-tcp' && !l.public_host && l.ss_tcp_port))
+    .sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||'')))[0];
+  btpTargetUuid = pendingPublic?.uuid || null;
+  const autoPort = pendingPublic ? (pendingPublic.mtproto_port || pendingPublic.ss_tcp_port) : '';
   const btn = document.getElementById('btp-start-btn');
   btn.disabled = true;
   btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال اجرا...';
   btpSetStatus('ti-loader-2','var(--accent)','در حال اتصال به Railway...', true);
   document.getElementById('btp-log-box').style.display = 'block';
 
-  const body = { token, port: portVal || undefined };
+  const body = { token, port: portVal || autoPort || undefined, target_uuid: btpTargetUuid || undefined };
   if (btpForcedDomain) {
     body.mode = 'whitelist';
     body.target_domains = [btpForcedDomain];
@@ -3049,8 +3077,13 @@ async function pollBotTcpProxy(){
       if(d.result){
         btpSetStatus('ti-circle-check','var(--green-t)', `موفق — ${d.result.domain}:${d.result.port}`, false);
         toast('پروکسی ساخته شد: '+d.result.domain+':'+d.result.port,'ok');
+        try{
+          const ar=await authF('/api/bot-tcp-proxy/attach-result',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({result:d.result, uuid: btpTargetUuid || undefined})});
+          const ad=await ar.json().catch(()=>({}));
+          if(ar.ok){toast('دامنه و پورت روی لینک نشست: '+(ad.label||''),'ok'); btpTargetUuid=null; loadLinks();}
+        }catch(e){console.warn(e)}
       } else if(d.stopped_by_user){
-        btpSetStatus('ti-player-stop','var(--amber-t)', 'فرآیند متوقف شد', false);
+        btpSetStatus('ti-ban','var(--amber-t)', 'فرآیند متوقف شد', false);
       } else if(d.error){
         btpSetStatus('ti-alert-circle','var(--red-t)', d.error, false);
         toast(' '+d.error,'err');
@@ -3518,7 +3551,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.1</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.2</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3528,7 +3561,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.1</div>
+  <div class="footer">OXNET v2.0.2</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';

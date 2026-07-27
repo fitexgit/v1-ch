@@ -236,7 +236,7 @@ FAILED_LOGINS: dict = {}
 PROTOCOLS = (
     "vless-ws", "xhttp-packet-up", "xhttp-stream-up", "xhttp-stream-one",
     "trojan-ws", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
-    "shadowsocks-tls", "mtproto", "multi",
+    "shadowsocks-tls", "shadowsocks-tcp", "mtproto", "multi",
 )
 DEFAULT_PROTOCOL = "vless-ws"
 
@@ -399,6 +399,27 @@ async def _reattach_mtproto_public_proxy(uid: str, new_port: int, old_proxy_id: 
         await bottokentcpproxy.delete_public_proxy(old_proxy_id)
     await _attach_mtproto_public_proxy(uid, new_port, label)
 
+async def _attach_link_public_proxy(uid: str, application_port: int, label: str, prefix: str = "public"):
+    try:
+        pub = await bottokentcpproxy.create_public_proxy_for_port(application_port)
+    except Exception as exc:
+        logger.warning(f"TCP Proxy عمومی برای {uid[:8]} ناموفق بود: {exc}")
+        async with LINKS_LOCK:
+            if uid in LINKS:
+                LINKS[uid][f"{prefix}_pending"] = False
+        log_activity("link", f"ساخت TCP Proxy عمومی برای «{label}» ناموفق بود: {exc}", "err")
+        await save_state()
+        return
+    async with LINKS_LOCK:
+        if uid in LINKS:
+            LINKS[uid][f"{prefix}_host"] = pub["domain"]
+            LINKS[uid][f"{prefix}_port"] = pub["port"]
+            LINKS[uid][f"{prefix}_proxy_id"] = pub["id"]
+            LINKS[uid][f"{prefix}_application_port"] = pub.get("application_port") or application_port
+            LINKS[uid][f"{prefix}_pending"] = False
+    await save_state()
+    log_activity("link", f"TCP Proxy عمومی «{label}» آماده شد ({pub['domain']}:{pub['port']})", "ok")
+
 # ===== تابع جدید برای به‌روزرسانی ad_tag روی پروکسی =====
 async def _update_mtproto_ad_tag(uuid: str, ad_tag: str):
     try:
@@ -440,6 +461,7 @@ async def shutdown():
         await DB_POOL.close()
         DB_POOL = None
     await mtproto.stop_all()
+    await shadowsocks_tcp.stop_all()
     if http_client:
         await http_client.aclose()
 
@@ -481,7 +503,7 @@ async def unique_config_path(base: str | None, fallback: str) -> str:
     return candidate
 
 def proto_slug(proto: str) -> str:
-    return proto.replace('shadowsocks-tls', 'ss').replace('trojan-', 'tr-').replace('xhttp-', 'xh-').replace('-up', '').replace('-one', '1')
+    return proto.replace('shadowsocks-tcp', 'sstcp').replace('shadowsocks-tls', 'ss').replace('trojan-', 'tr-').replace('xhttp-', 'xh-').replace('-up', '').replace('-one', '1')
 
 def get_host() -> str:
     return os.environ.get("RAILWAY_PUBLIC_DOMAIN", CONFIG["host"])
@@ -496,6 +518,12 @@ def now_ir() -> datetime:
 def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: str = DEFAULT_PROTOCOL) -> str:
     link_obj = LINKS.get(uuid, {})
     public_path = link_obj.get("path") or uuid
+    if protocol == "shadowsocks-tcp":
+        import base64
+        public_host = link_obj.get("public_host") or host
+        public_port = link_obj.get("public_port") or link_obj.get("ss_tcp_port") or 0
+        user = base64.urlsafe_b64encode(f"chacha20-ietf-poly1305:{uuid}".encode()).decode().rstrip("=")
+        return f"ss://{user}@{public_host}:{public_port}#{quote(remark)}"
     if protocol == "shadowsocks-tls":
         import base64
         user = base64.urlsafe_b64encode(f"chacha20-ietf-poly1305:{uuid}".encode()).decode().rstrip("=")
@@ -893,6 +921,7 @@ async def get_stats(_=Depends(require_auth)):
             "trojan_ws": sum(1 for l in snap.values() if l.get("protocol") == "trojan-ws"),
             "xhttp": sum(1 for l in snap.values() if "xhttp" in str(l.get("protocol", ""))),
             "shadowsocks_tls": sum(1 for l in snap.values() if l.get("protocol") == "shadowsocks-tls"),
+            "shadowsocks_tcp": sum(1 for l in snap.values() if l.get("protocol") == "shadowsocks-tcp"),
             "mtproto": sum(1 for l in snap.values() if l.get("protocol") == "mtproto"),
         },
         "top_links": sorted([
@@ -932,6 +961,51 @@ async def api_bot_tcp_proxy_status(_=Depends(require_auth)):
     return bottokentcpproxy.get_status()
 
 # ── Activity Logs ─────────────────────────────────────────────────────────────
+
+@app.post("/api/bot-tcp-proxy/attach-result")
+async def api_bot_tcp_proxy_attach_result(request: Request, _=Depends(require_auth)):
+    body = await request.json()
+    result = body.get("result") or bottokentcpproxy.get_status().get("result") or {}
+    domain = str(result.get("domain") or "").strip()
+    port = int(result.get("port") or 0)
+    proxy_id = result.get("id")
+    app_port = result.get("application_port")
+    if not domain or not port:
+        raise HTTPException(status_code=400, detail="نتیجه TCP Proxy معتبر نیست")
+    target_uid = str(body.get("uuid") or "").strip() or None
+    async with LINKS_LOCK:
+        candidates = []
+        if target_uid and target_uid in LINKS:
+            candidates = [(target_uid, LINKS[target_uid])]
+        else:
+            for uid, l in LINKS.items():
+                if l.get("protocol") == "mtproto" and not l.get("mtproto_public_host"):
+                    candidates.append((uid, l))
+                if l.get("protocol") == "shadowsocks-tcp" and not l.get("public_host"):
+                    candidates.append((uid, l))
+            if app_port:
+                exact = [(uid, l) for uid, l in candidates if int(l.get("mtproto_port") or l.get("ss_tcp_port") or 0) == int(app_port)]
+                if exact:
+                    candidates = exact
+            candidates.sort(key=lambda x: x[1].get("created_at", ""), reverse=True)
+        if not candidates:
+            raise HTTPException(status_code=404, detail="لینک بدون دامنه عمومی پیدا نشد")
+        uid, link = candidates[0]
+        if link.get("protocol") == "shadowsocks-tcp":
+            link["public_host"] = domain
+            link["public_port"] = port
+            link["public_proxy_id"] = proxy_id
+            link["public_application_port"] = app_port
+            link["public_pending"] = False
+        else:
+            link["mtproto_public_host"] = domain
+            link["mtproto_public_port"] = port
+            link["mtproto_proxy_id"] = proxy_id
+            link["mtproto_public_pending"] = False
+    await save_state()
+    log_activity("link", f"دامنه TCP Proxy به لینک «{link.get('label','')}» متصل شد ({domain}:{port})", "ok")
+    return {"ok": True, "uuid": uid, "label": link.get("label"), "domain": domain, "port": port, "protocol": link.get("protocol")}
+
 @app.get("/api/activity")
 async def get_activity(_=Depends(require_auth)):
     return {"logs": list(activity_logs)[-150:]}
@@ -1120,6 +1194,16 @@ async def create_link(request: Request, _=Depends(require_auth)):
             link_data["mtproto_public_pending"] = True
             asyncio.create_task(_attach_mtproto_public_proxy(uid, inst["port"], label))
 
+    if protocol == "shadowsocks-tcp":
+        raw_port = body.get("ss_tcp_port")
+        manual_port = int(raw_port) if raw_port not in (None, "", 0, "0") else None
+        inst = await shadowsocks_tcp.start_instance(uid, preferred_port=manual_port, force_port=manual_port is not None)
+        link_data["ss_tcp_port"] = inst["port"]
+        link_data["ss_tcp_manual_port"] = manual_port is not None
+        if manual_port is None and bottokentcpproxy.has_saved_token():
+            link_data["public_pending"] = True
+            asyncio.create_task(_attach_link_public_proxy(uid, inst["port"], label, "public"))
+
     async with LINKS_LOCK:
         LINKS[uid] = link_data
 
@@ -1291,11 +1375,16 @@ async def delete_link(uid: str, _=Depends(require_auth)):
         sub_id = LINKS[uid].get("sub_id")
         proto = LINKS[uid].get("protocol")
         proxy_id = LINKS[uid].get("mtproto_proxy_id")
+        public_proxy_id = LINKS[uid].get("public_proxy_id")
         del LINKS[uid]
     if proto == "mtproto":
         await mtproto.stop_instance(uid)
         if proxy_id:
             asyncio.create_task(bottokentcpproxy.delete_public_proxy(proxy_id))
+    if proto == "shadowsocks-tcp":
+        await shadowsocks_tcp.stop_instance(uid)
+        if public_proxy_id:
+            asyncio.create_task(bottokentcpproxy.delete_public_proxy(public_proxy_id))
     if sub_id:
         async with SUBS_LOCK:
             if sub_id in SUBS:
@@ -1320,6 +1409,8 @@ from relay_vless import (
 
 from trojan import trojan_ws_tunnel
 from shadowsocks_ws import shadowsocks_ws_tunnel
+import shadowsocks_tcp
+shadowsocks_tcp.set_usage_callback(_mtproto_usage_callback)
 
 app.add_api_websocket_route("/ws/{uuid}", websocket_tunnel)
 app.add_api_websocket_route("/trojan-ws", trojan_ws_tunnel)
@@ -1651,7 +1742,7 @@ from pages import LOGIN_HTML, DASHBOARD_HTML
 
 def render_html(html: str) -> str:
     v = get_current_panel_version()
-    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}")
+    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}")
 
 
 # ── Central: Announcements & Support ─────────────────────────────────────────

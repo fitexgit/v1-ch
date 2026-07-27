@@ -1,3 +1,3 @@
-version=2.0.1
-description=Fix dashboard buttons, v2 Pro design, TCP Proxy list, and backup restore
-updated_at=1785150843
+version=2.0.2
+description=Fix stop icon, auto attach TCP Proxy, add Shadowsocks TCP test mode
+updated_at=1785151673
