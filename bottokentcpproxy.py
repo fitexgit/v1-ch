@@ -17,7 +17,7 @@ from typing import Optional
 
 import httpx
 
-logger = logging.getLogger("OXNET-Gateway")
+logger = logging.getLogger("OXNET")
 
 GRAPHQL_URL = "https://backboard.railway.app/graphql/v2"
 

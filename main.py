@@ -24,11 +24,11 @@ import httpx
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger("OXNET-Gateway")
+logger = logging.getLogger("OXNET")
 
 IRAN_TZ = ZoneInfo("Asia/Tehran")
 
-app = FastAPI(title="OXNET Gateway", docs_url=None, redoc_url=None)
+app = FastAPI(title="OXNET", docs_url=None, redoc_url=None)
 
 app.add_middleware(
     CORSMiddleware,
@@ -124,7 +124,7 @@ SUBS_LOCK = asyncio.Lock()
 PROTOCOLS = (
     "vless-ws", "xhttp-packet-up", "xhttp-stream-up", "xhttp-stream-one",
     "trojan-ws", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
-    "mtproto", "multi",
+    "shadowsocks-tls", "mtproto", "multi",
 )
 DEFAULT_PROTOCOL = "vless-ws"
 
@@ -190,7 +190,7 @@ async def startup():
     await load_state()
     await _restart_mtproto_instances()
     log_activity("system", "سرور راه‌اندازی شد", "ok")
-    logger.info(f"OXNET Gateway v1.0.0 started on port {CONFIG['port']}")
+    logger.info(f"OXNET v1.0.0 started on port {CONFIG['port']}")
 
 async def _restart_mtproto_instances():
     async with LINKS_LOCK:
@@ -337,7 +337,7 @@ async def unique_config_path(base: str | None, fallback: str) -> str:
     return candidate
 
 def proto_slug(proto: str) -> str:
-    return proto.replace('trojan-', 'tr-').replace('xhttp-', 'xh-').replace('-up', '').replace('-one', '1')
+    return proto.replace('shadowsocks-tls', 'ss').replace('trojan-', 'tr-').replace('xhttp-', 'xh-').replace('-up', '').replace('-one', '1')
 
 def get_host() -> str:
     return os.environ.get("RAILWAY_PUBLIC_DOMAIN", CONFIG["host"])
@@ -352,6 +352,11 @@ def now_ir() -> datetime:
 def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: str = DEFAULT_PROTOCOL) -> str:
     link_obj = LINKS.get(uuid, {})
     public_path = link_obj.get("path") or uuid
+    if protocol == "shadowsocks-tls":
+        import base64
+        user = base64.urlsafe_b64encode(f"none:{uuid}".encode()).decode().rstrip("=")
+        plugin = quote(f"v2ray-plugin;tls;host={host};path=/ss/{public_path}")
+        return f"ss://{user}@{host}:443?plugin={plugin}#{quote(remark)}"
     if protocol == "mtproto":
         link = LINKS.get(uuid)
         port = link.get("mtproto_port") if link else None
@@ -487,7 +492,7 @@ async def ensure_default_link():
 # ── Basic endpoints ───────────────────────────────────────────────────────────
 @app.get("/")
 async def root():
-    return {"service": "OXNET Gateway", "version": "1.0.0", "status": "active"}
+    return {"service": "OXNET", "version": "1.0.0", "status": "active"}
 
 @app.get("/health")
 async def health():
@@ -727,6 +732,13 @@ async def get_stats(_=Depends(require_auth)):
         "active_links": sum(1 for l in snap.values() if is_link_allowed(l)),
         "expired_links": sum(1 for l in snap.values() if is_link_expired(l)),
         "subs_count": len(SUBS),
+        "protocol_counts": {
+            "vless_ws": sum(1 for l in snap.values() if l.get("protocol") == "vless-ws"),
+            "trojan_ws": sum(1 for l in snap.values() if l.get("protocol") == "trojan-ws"),
+            "xhttp": sum(1 for l in snap.values() if "xhttp" in str(l.get("protocol", ""))),
+            "shadowsocks_tls": sum(1 for l in snap.values() if l.get("protocol") == "shadowsocks-tls"),
+            "mtproto": sum(1 for l in snap.values() if l.get("protocol") == "mtproto"),
+        },
     }
 
 @app.post("/api/bot-tcp-proxy/start")
@@ -856,6 +868,7 @@ async def create_link(request: Request, _=Depends(require_auth)):
         multi_protocols = [
             "vless-ws", "xhttp-packet-up", "xhttp-stream-up", "xhttp-stream-one",
             "trojan-ws", "trojan-xhttp-packet-up", "trojan-xhttp-stream-up",
+            "shadowsocks-tls",
         ]
         sub = {
             "name": label,
@@ -887,6 +900,9 @@ async def create_link(request: Request, _=Depends(require_auth)):
                     "sub_id": sub_id,
                     "protocol": p,
                     "path": mpath,
+                    "is_multi_child": True,
+                    "multi_group_id": sub_id,
+                    "multi_group_path": base_path,
                     "ad_tag": None,
                 }
                 sub["link_ids"].append(muid)

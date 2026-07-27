@@ -1,12 +1,12 @@
 
-# pages.py  -  OXNET Gateway v1.0.0
+# pages.py  -  OXNET v1.0.0
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ورود · OXNET Gateway</title>
+<title>ورود · OXNET</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
@@ -53,6 +53,41 @@ input:focus+.ic{color:var(--accent)}
 .footer a{color:var(--accent);font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px}
 @keyframes spin{to{transform:rotate(360deg)}}
 #pg-updates,#pg-support,#modal-update{display:none!important}
+
+.pc-ss{background:rgba(20,184,166,.12);color:#0F766E}
+[data-theme="dark"] .pc-ss{color:#5EEAD4}
+.dash-hero{display:grid;grid-template-columns:1.35fr .9fr;gap:16px;margin-bottom:18px}
+.dash-main-card{position:relative;overflow:hidden;border-radius:26px;padding:28px;border:1px solid var(--card-b);background:linear-gradient(145deg,var(--card) 0%,var(--bg3) 100%);box-shadow:0 18px 60px rgba(15,23,42,.08)}
+.dash-main-card:before{content:'';position:absolute;inset:auto -110px -140px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)}
+.dash-eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--t3);text-transform:uppercase;margin-bottom:10px}
+.dash-title{font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--t1);line-height:1.2;margin-bottom:8px}
+.dash-title span{color:var(--accent2)}
+.dash-desc{max-width:620px;color:var(--t2);font-size:13px;line-height:2}
+.dash-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.dash-side{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dash-kpi{background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(15,23,42,.05)}
+.dash-kpi-icon{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:18px;margin-bottom:14px}
+.dash-kpi-label{font-size:10px;color:var(--t3);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.dash-kpi-val{font-size:28px;font-weight:900;color:var(--t1);line-height:1;margin-top:7px}
+.dash-kpi-sub{font-size:10px;color:var(--t3);margin-top:8px}
+.dash-chart-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:16px;margin-bottom:16px}
+.dash-chart-card{background:var(--card);border:1px solid var(--card-b);border-radius:24px;padding:20px 22px;box-shadow:0 12px 36px rgba(15,23,42,.06)}
+.dash-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
+.dash-card-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}
+.dash-card-sub{font-size:10px;color:var(--t3);margin-top:3px}
+.dash-protocols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.dash-protocol{background:var(--card);border:1px solid var(--card-b);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}
+.dash-protocol i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--accent-d);color:var(--accent2);font-size:17px;flex-shrink:0}
+.dash-protocol b{font-size:12px;color:var(--t1)}
+.dash-protocol span{display:block;font-size:10px;color:var(--t3);margin-top:2px}
+.multi-group-card{border:1px solid var(--card-b);border-radius:18px;background:linear-gradient(145deg,var(--card),var(--bg3));padding:16px;margin-bottom:12px}
+.multi-group-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.multi-group-title{font-size:14px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}
+.multi-protos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.multi-protos span{font-size:10px;padding:4px 8px;border-radius:7px;background:var(--accent-d);color:var(--t2);font-weight:700}
+@media(max-width:1000px){.dash-hero,.dash-chart-grid{grid-template-columns:1fr}.dash-protocols{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.dash-side,.dash-protocols{grid-template-columns:1fr}.dash-title{font-size:26px}}
+
 </style>
 </head>
 <body>
@@ -62,7 +97,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET Gateway · v1.0.0</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.0.0</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -77,7 +112,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET Gateway · 1.0.0</div>
+    <div class="footer">OXNET · 1.0.0</div>
   </div>
 </div>
 <script>
@@ -103,7 +138,7 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OXNET Gateway · oxnet</title>
+<title>OXNET · oxnet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
@@ -120,7 +155,7 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
   --purple:#6D28D9;--purple-bg:rgba(109,40,217,0.08);
   --t1:#111827;--t2:#334155;--t3:#64748B;
   --sidebar-w:248px;--radius:16px;
-  --shadow:0 4px 24px rgba(0,0,0,0.35);
+  --shadow:0 12px 34px rgba(15,23,42,0.08);
 }
 [data-theme="dark"]{
   --bg:#0B0D10;--bg2:#111418;--bg3:#171B21;
@@ -1052,6 +1087,12 @@ a{color:inherit;text-decoration:none}
               <div class="cm-opt-text"><div class="cm-opt-title">Multi Protocol</div><div class="cm-opt-desc">ساخت یک ساب شامل همه پروتکل‌ها، بدون پروکسی تلگرام</div></div>
               <span class="cm-opt-tag">همه در یک ساب</span>
             </div>
+            <div class="cm-opt" data-base="shadowsocks" onclick="cmSelectBase('shadowsocks',this)">
+              <div class="cm-opt-radio"></div>
+              <div class="cm-opt-icon"><i class="ti ti-lock-bolt"></i></div>
+              <div class="cm-opt-text"><div class="cm-opt-title">Shadowsocks TLS</div><div class="cm-opt-desc">شادوساکس روی TLS/WebSocket با مسیر اختصاصی</div></div>
+              <span class="cm-opt-tag">TLS</span>
+            </div>
             <div class="cm-opt" data-base="telproxy" onclick="cmSelectBase('telproxy',this)">
               <div class="cm-opt-radio"></div>
               <div class="cm-opt-icon"><i class="ti ti-brand-telegram"></i></div>
@@ -1198,352 +1239,10 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 </div>
-<!-- ══════ اطلاعیه رسمی مالکیت معنوی ══════ -->
-<div class="modal-bg" id="modal-copyright-notice" style="z-index:9999">
-  <div class="modal-v2" style="max-width:460px">
-    <div class="modal-v2-head" style="background:linear-gradient(155deg,rgba(239,68,68,.16) 0%,transparent 65%)">
-      <button class="modal-v2-close" onclick="closeModal('modal-copyright-notice')"><i class="ti ti-x"></i></button>
-      <div class="modal-v2-icon" style="background:linear-gradient(135deg,var(--red),#B91C1C);box-shadow:0 8px 18px rgba(239,68,68,.4)"><i class="ti ti-copyright"></i></div>
-      <div class="modal-v2-title">اطلاعیه رسمی مالکیت معنوی</div>
-      <div class="modal-v2-sub">توجه به موضوع نقض کپی‌رایت پروژه</div>
-    </div>
-    <div class="modal-v2-body">
-      <div class="cl amber" style="margin-top:0">
-        <i class="ti ti-alert-triangle"></i>
-        <span>به تازگی فردی اقدام به کپی‌برداری غیرمجاز از سورس‌کد این پروژه نموده و آن را تحت عنوان «X4G» بازنشر کرده است این اقدام، نقض آشکار حقوق مالکیت معنوی (کپی‌رایت) پروژه‌ی OXNET Gateway محسوب می‌شود</span>
-      </div>
-      <div class="cl" style="margin-top:10px">
-        <i class="ti ti-info-circle"></i>
-        <span>از کاربران و همکاران محترم درخواست می‌شود از استفاده، انتشار یا معرفی نسخه‌ی کپی‌شده با نام «X4G» خودداری نموده و صرفاً از منبع رسمی و اصلی این پروژه — OXNET Gateway · oxnet — بهره‌مند شوند. هرگونه استفاده از نسخه‌ی مذکور، حقوق قانونی صاحب اثر را نقض می‌کند و پیگرد آن محفوظ است.</span>
-      </div>
-      <div class="modal-v2-footer">
-        <button class="btn btn-p" style="flex:1;justify-content:center" onclick="closeModal('modal-copyright-notice')"><i class="ti ti-check"></i> متوجه شدم</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-bg" id="modal-links">
-  <div class="modal-v2" style="max-width:500px">
-    <div class="lmodal-head">
-      <button class="modal-v2-close" onclick="closeModal('modal-links')"><i class="ti ti-x"></i></button>
-      <div class="lmodal-icon-row">
-        <div class="lmodal-icon"><i class="ti ti-link-plus"></i></div>
-        <div>
-          <div class="lmodal-title-v2">مدیریت کانفیگ‌های <span id="modal-sub-name" style="color:var(--accent2)">—</span></div>
-          <div class="lmodal-sub-v2">کانفیگ‌هایی که می‌خواهید در این گروه باشند را انتخاب کنید</div>
-        </div>
-      </div>
-      <div class="lmodal-search">
-        <i class="ti ti-search"></i>
-        <input type="text" id="lmodal-search-inp" placeholder="جستجوی کانفیگ..." oninput="filterLmodal(this.value)">
-      </div>
-      <div class="lmodal-quickbar">
-        <button class="lmodal-qbtn" onclick="lmodalSelectAll(true)"><i class="ti ti-checks"></i> انتخاب همه</button>
-        <button class="lmodal-qbtn" onclick="lmodalSelectAll(false)"><i class="ti ti-x"></i> لغو همه</button>
-        <span class="lmodal-count" id="lmodal-count">۰ انتخاب شده</span>
-      </div>
-    </div>
-    <div class="lmodal-list" id="modal-links-body">در حال بارگذاری...</div>
-    <div class="lmodal-footer">
-      <div class="lmodal-footer-info"><i class="ti ti-info-circle"></i> تغییرات بلافاصله اعمال می‌شود</div>
-      <div class="lmodal-footer-btns">
-        <button class="btn btn-o" onclick="closeModal('modal-links')">بستن</button>
-        <button class="btn btn-p" id="modal-save-btn" onclick="saveSubLinks()"><i class="ti ti-check"></i> ذخیره</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal-bg" id="modal-ad-tag">
-  <div class="modal-v2 cm-modal" style="max-width:460px">
-    <button class="cm-close" onclick="closeModal('modal-ad-tag')"><i class="ti ti-x"></i></button>
-
-    <div class="cm-head">
-      <div class="cm-head-row">
-        <div class="cm-head-icon" style="background:linear-gradient(135deg,var(--purple),#6D48D6)"><i class="ti ti-speakerphone"></i></div>
-        <div>
-          <div class="cm-head-title">تبلیغ کانال روی پروکسی</div>
-          <div class="cm-head-sub" id="at-label-sub">تنظیم ad-tag برای <span id="at-cfg-name" style="color:var(--accent2)">—</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cm-body">
-      <div class="cm-section">
-        <div class="cm-section-label"><i class="ti ti-tag"></i> کد تبلیغ (ad_tag)</div>
-        <div class="cm-field" style="margin-bottom:8px">
-          <input class="cm-input" id="at-tag" placeholder="مثلاً: 3AB4C5D6E7F8...">
-        </div>
-        <div class="cm-note">
-          <i class="ti ti-info-circle"></i>
-          <span>این کد را از ربات <b>@MTProxybot</b> در تلگرام دریافت کنید (با ارسال دستور <b>/newproxy</b> و ثبت لینک پروکسی). با تنظیم این کد، هر بار کاربر از این پروکسی استفاده کند، تبلیغ کانال شما در تلگرامش نمایش داده می‌شود.</span>
-        </div>
-        <div class="cm-note" style="background:var(--amber-bg);color:var(--amber-t);margin-top:8px">
-          <i class="ti ti-alert-triangle"></i>
-          <span>با ثبت یا تغییر کد، پروکسی برای چند ثانیه ری‌استارت می‌شود و اتصال کاربران فعلی به‌طور موقت قطع خواهد شد.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="cm-footer">
-      <button class="cm-btn-cancel" onclick="closeModal('modal-ad-tag')">انصراف</button>
-      <button class="cm-btn-submit" id="at-submit-btn" onclick="submitAdTag()">
-        <i class="ti ti-check"></i> ذخیره و اعمال
-      </button>
-    </div>
-  </div>
-</div>
-<div class="modal-bg" id="modal-mt-info">
-  <div class="modal-v2 cm-modal" style="max-width:480px">
-    <button class="cm-close" onclick="closeModal('modal-mt-info')"><i class="ti ti-x"></i></button>
-
-    <div class="cm-head">
-      <div class="cm-head-row">
-        <div class="cm-head-icon" style="background:linear-gradient(135deg,var(--accent),var(--accent2))"><i class="ti ti-info-circle"></i></div>
-        <div>
-          <div class="cm-head-title">اطلاعات پروکسی تلگرام</div>
-          <div class="cm-head-sub">مشخصات <span id="mti-cfg-name" style="color:var(--accent2)">—</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cm-body">
-      <div class="cm-section">
-        <div class="cm-section-label"><i class="ti ti-key"></i> سکرت (مناسب برای ثبت در ربات‌ها)</div>
-        <div class="cm-field" style="margin-bottom:8px">
-          <div class="cm-input" id="mti-secret" style="font-family:ui-monospace,monospace;font-size:11.5px;word-break:break-all;user-select:all;cursor:text">—</div>
-        </div>
-        <button class="btn btn-g" style="width:100%;justify-content:center" onclick="cpMtiField('mti-secret','سکرت کپی شد ')"><i class="ti ti-copy"></i> کپی سکرت</button>
-        <div class="cm-note" style="margin-top:10px">
-          <i class="ti ti-info-circle"></i>
-          <span>این نسخه‌ی خالص سکرت است (بدون پیشوند fake-TLS و دامنه) — همان مقداری که ربات‌هایی مثل <b>@MTProxybot</b> برای ثبت پروکسی و دریافت لینک تبلیغ (ad_tag) نیاز دارند.</span>
-        </div>
-      </div>
-
-      <div class="cm-section" style="margin-bottom:6px">
-        <div class="cm-section-label"><i class="ti ti-link"></i> لینک کامل پروکسی</div>
-        <div class="cm-field" style="margin-bottom:8px">
-          <div class="cm-input" id="mti-link" style="font-family:ui-monospace,monospace;font-size:11px;word-break:break-all;user-select:all;cursor:text">—</div>
-        </div>
-        <button class="btn btn-p" style="width:100%;justify-content:center" onclick="cpMtiField('mti-link','لینک کپی شد ')"><i class="ti ti-copy"></i> کپی لینک کامل</button>
-      </div>
-    </div>
-
-    <div class="cm-footer">
-      <button class="cm-btn-cancel" style="flex:1;justify-content:center" onclick="closeModal('modal-mt-info')">بستن</button>
-    </div>
-  </div>
-</div>
-<div class="modal-bg" id="modal-bot-tcp-proxy">
-  <div class="modal-v2 cm-modal" style="max-width:480px">
-    <button class="cm-close" onclick="closeModal('modal-bot-tcp-proxy')"><i class="ti ti-x"></i></button>
-
-    <div class="cm-head">
-      <div class="cm-head-row">
-        <div class="cm-head-icon"><i class="ti ti-server-2"></i></div>
-        <div>
-          <div class="cm-head-title">ساخت TCP Proxy اختصاصی</div>
-          <div class="cm-head-sub">اتصال خودکار به زیرساخت Railway تا تخصیص دامنه‌ی هدف</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cm-body">
-      <div class="cm-section" id="btp-token-section">
-        <div class="cm-section-label"><i class="ti ti-key"></i> احراز هویت</div>
-        <div class="cm-field">
-          <label>Railway API Token</label>
-          <input class="cm-input" id="btp-token" type="password" placeholder="توکن اکانت یا پروژه‌ی Railway">
-        </div>
-        <div class="cm-field" style="margin-bottom:0">
-          <label>پورت داخلی اپلیکیشن (اختیاری)</label>
-          <input class="cm-input" id="btp-port" type="number" placeholder="پیش‌فرض: پورت خودِ پنل">
-        </div>
-      </div>
-      <div class="cm-section" id="btp-isp-section">
-        <div class="cm-section-label"><i class="ti ti-filter"></i> انتخاب دامنه بر اساس اپراتور</div>
-        <div class="cm-note" style="margin-bottom:9px">
-          <i class="ti ti-info-circle"></i>
-          <span>این دامنه‌ها از قبل تایید شده‌اند؛ با انتخاب هرکدام، همان دامنه مستقیماً برای ساخت TCP Proxy استفاده می‌شود (بدون نیاز به اسکن آزاد).</span>
-        </div>
-        <div class="cm-dd-list" style="border-top:none;padding:0">
-          <div class="cm-opt" id="btp-isp-0" onclick="btpSelectIsp('gondola.proxy.rlwy.net','btp-isp-0')">
-            <div class="cm-opt-radio"></div>
-            <div class="cm-opt-icon"><i class="ti ti-antenna"></i></div>
-            <div class="cm-opt-text"><div class="cm-opt-title">مبین‌نت – ایرانسل</div><div class="cm-opt-desc">gondola.proxy.rlwy.net</div></div>
-          </div>
-          <div class="cm-opt" id="btp-isp-1" onclick="btpSelectIsp('nozomi.proxy.rlwy.net','btp-isp-1')">
-            <div class="cm-opt-radio"></div>
-            <div class="cm-opt-icon"><i class="ti ti-antenna"></i></div>
-            <div class="cm-opt-text"><div class="cm-opt-title">ایرانسل – همراه اول</div><div class="cm-opt-desc">nozomi.proxy.rlwy.net</div></div>
-          </div>
-          <div class="cm-opt" id="btp-isp-2" onclick="btpSelectIsp('acela.proxy.rlwy.net','btp-isp-2')">
-            <div class="cm-opt-radio"></div>
-            <div class="cm-opt-icon"><i class="ti ti-antenna"></i></div>
-            <div class="cm-opt-text"><div class="cm-opt-title">ایرانسل – مبین‌نت</div><div class="cm-opt-desc">acela.proxy.rlwy.net</div></div>
-          </div>
-          <div class="cm-opt" id="btp-isp-auto" onclick="btpSelectIsp(null,'btp-isp-auto')">
-            <div class="cm-opt-radio"></div>
-            <div class="cm-opt-icon"><i class="ti ti-wand"></i></div>
-            <div class="cm-opt-text"><div class="cm-opt-title">اسکن خودکار (بلک‌لیست)</div><div class="cm-opt-desc">جستجوی دامنه‌ی آزاد توسط سیستم</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="cm-section" id="btp-token-saved-section" style="display:none">
-        <div class="cm-note" style="margin-top:0">
-          <i class="ti ti-shield-check"></i>
-          <span>توکن Railway از قبل روی سرور ذخیره شده و نیازی به وارد کردن دوباره نیست.
-          <a href="javascript:void(0)" onclick="btpChangeToken()" style="color:var(--accent2);font-weight:700">تغییر توکن</a></span>
-        </div>
-      </div>
-
-      <div class="cm-section" style="margin-bottom:6px">
-        <div class="cm-section-label"><i class="ti ti-activity"></i> وضعیت اجرا</div>
-        <div class="cm-note" id="btp-status-note">
-          <i class="ti ti-info-circle" id="btp-status-icon"></i>
-          <span id="btp-status-text">هنوز شروع نشده</span>
-        </div>
-        <div class="upd-log-box" id="btp-log-box" style="margin-top:10px;max-height:170px;display:none">
-          <p class="upd-log-empty">لاگی موجود نیست</p>
-        </div>
-      </div>
-
-      <div class="cm-note" style="background:var(--accent-d);color:var(--t2)">
-        <i class="ti ti-info-circle"></i>
-        <span>پس از آماده شدن TCP Proxy، لینک پروکسی تلگرام داخل اطلاعات همان کانفیگ قابل کپی است.</span>
-      </div>
-    </div>
-
-    <div class="cm-footer">
-      <button class="cm-btn-cancel" onclick="closeModal('modal-bot-tcp-proxy')">بستن</button>
-      <button class="cm-btn-cancel" id="btp-stop-btn" style="display:none;color:var(--red-t);border-color:rgba(239,68,68,.25)" onclick="stopBotTcpProxy()">
-        <i class="ti ti-player-stop"></i> توقف
-      </button>
-      <button class="cm-btn-submit" id="btp-start-btn" onclick="startBotTcpProxy()">
-        <i class="ti ti-player-play"></i> شروع فرآیند
-      </button>
-    </div>
-  </div>
-</div>
-<div class="modal-bg" id="modal-domain-scan">
-  <div class="modal-v2 cm-modal" style="max-width:480px">
-    <button class="cm-close" onclick="closeModal('modal-domain-scan')"><i class="ti ti-x"></i></button>
-    <div class="cm-head">
-      <div class="cm-head-row">
-        <div class="cm-head-icon"><i class="ti ti-search"></i></div>
-        <div>
-          <div class="cm-head-title">جستجوی دامنه‌ی دلخواه</div>
-          <div class="cm-head-sub">دامنه‌های موردنظرت رو وارد کن، هر بار Enter بزن</div>
-        </div>
-      </div>
-    </div>
-    <div class="cm-body">
-      <div class="cm-section" id="ds-token-section">
-        <div class="cm-field">
-          <label>Railway API Token</label>
-          <input class="cm-input" id="ds-token" type="password" placeholder="در صورتی که قبلاً ذخیره نشده">
-        </div>
-      </div>
-      <div class="cm-section">
-        <div class="cm-section-label"><i class="ti ti-filter"></i> انتخاب سریع بر اساس اپراتور</div>
-        <div class="cm-note" style="margin-bottom:9px">
-          <i class="ti ti-info-circle"></i>
-          <span>این‌ها دامنه‌های تایید‌شده و ثابت‌اند؛ با انتخاب هرکدام، همان دامنه مستقیماً به‌عنوان دامنه‌ی هدف استفاده می‌شود.</span>
-        </div>
-        <div class="cm-dd-list" style="border-top:none;padding:0">
-          <div class="cm-opt" id="isp-opt-0" onclick="dsSelectIsp('gondola.proxy.rlwy.net','isp-opt-0')">
-            <div class="cm-opt-radio"></div>
-            <div class="cm-opt-icon"><i class="ti ti-antenna"></i></div>
-            <div class="cm-opt-text"><div class="cm-opt-title">مبین‌نت – ایرانسل</div><div class="cm-opt-desc">gondola.proxy.rlwy.net</div></div>
-          </div>
-          <div class="cm-opt" id="isp-opt-1" onclick="dsSelectIsp('nozomi.proxy.rlwy.net','isp-opt-1')">
-            <div class="cm-opt-radio"></div>
-            <div class="cm-opt-icon"><i class="ti ti-antenna"></i></div>
-            <div class="cm-opt-text"><div class="cm-opt-title">ایرانسل – همراه اول</div><div class="cm-opt-desc">nozomi.proxy.rlwy.net</div></div>
-          </div>
-          <div class="cm-opt" id="isp-opt-2" onclick="dsSelectIsp('acela.proxy.rlwy.net','isp-opt-2')">
-            <div class="cm-opt-radio"></div>
-            <div class="cm-opt-icon"><i class="ti ti-antenna"></i></div>
-            <div class="cm-opt-text"><div class="cm-opt-title">ایرانسل – مبین‌نت</div><div class="cm-opt-desc">acela.proxy.rlwy.net</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="cm-section">
-        <div class="cm-field">
-          <label>افزودن دامنه</label>
-          <input class="cm-input" id="ds-domain-inp" placeholder="مثلاً nozomi.proxy.rlwy.net و Enter بزن"
-                 onkeydown="if(event.key==='Enter'){event.preventDefault();dsAddDomain()}">
-        </div>
-        <div class="cm-pills" id="ds-domain-chips"></div>
-      </div>
-      <div class="cm-section" style="margin-bottom:6px">
-        <div class="cm-note" id="ds-status-note">
-          <i class="ti ti-info-circle"></i> <span id="ds-status-text">هنوز شروع نشده</span>
-        </div>
-        <div class="upd-log-box" id="ds-log-box" style="margin-top:10px;max-height:170px;display:none">
-          <p class="upd-log-empty">لاگی موجود نیست</p>
-        </div>
-      </div>
-    </div>
-    <div class="cm-footer">
-      <button class="cm-btn-cancel" onclick="closeModal('modal-domain-scan')">بستن</button>
-      <button class="cm-btn-cancel" id="ds-stop-btn" style="display:none;color:var(--red-t)" onclick="stopDomainScan()"><i class="ti ti-player-stop"></i> توقف</button>
-      <button class="cm-btn-submit" id="ds-start-btn" onclick="startDomainScan()"><i class="ti ti-player-play"></i> شروع اسکن</button>
-    </div>
-  </div>
-</div>
-<div class="modal-bg" id="modal-create-sub">
-  <div class="modal-v2">
-    <div class="modal-v2-head">
-      <button class="modal-v2-close" onclick="closeModal('modal-create-sub')"><i class="ti ti-x"></i></button>
-      <div class="modal-v2-icon"><i class="ti ti-folder-plus"></i></div>
-      <div class="modal-v2-title">ساخت گروه جدید</div>
-      <div class="modal-v2-sub">یک صفحه پابلیک مجزا برای مدیریت کانفیگ‌ها بسازید</div>
-    </div>
-    <div class="modal-v2-body">
-      <div class="modal-v2-field">
-        <label><i class="ti ti-tag"></i> نام گروه</label>
-        <input class="modal-v2-input" id="ns-name" placeholder="مثلاً: کانال تلگرام">
-      </div>
-      <div class="modal-v2-field">
-        <label><i class="ti ti-align-left"></i> توضیحات (اختیاری)</label>
-        <input class="modal-v2-input" id="ns-desc" placeholder="توضیح کوتاه درباره این گروه">
-      </div>
-      <div class="modal-v2-field" style="margin-bottom:0">
-        <label><i class="ti ti-lock"></i> رمز صفحه پابلیک (اختیاری)</label>
-        <input class="modal-v2-input" id="ns-pw" type="password" placeholder="خالی بگذارید = بدون رمز">
-      </div>
-      <div class="cl" style="margin-top:14px"><i class="ti ti-info-circle"></i><span>صفحه پابلیک این گروه با یک لینک منحصر‌به‌فرد در اینترنت در دسترس خواهد بود.</span></div>
-      <div class="modal-v2-footer">
-        <button class="btn btn-o" onclick="closeModal('modal-create-sub')" style="flex:.6">انصراف</button>
-        <button class="btn btn-pur" onclick="createSub()"><i class="ti ti-folder-plus"></i> ساخت گروه</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal-bg" id="modal-edit-link">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-edit-link')"><i class="ti ti-x"></i></button>
-    <div class="modal-title"><i class="ti ti-edit"></i> ویرایش کانفیگ</div>
-    <input type="hidden" id="el-uuid">
-    <div class="fg" style="margin-bottom:13px"><label>عنوان</label><input class="fi" id="el-label" style="width:100%"></div>
-    <div class="form-row" style="margin-bottom:13px">
-      <div class="fg" style="flex:1"><label>سهمیه (0 = نامحدود)</label><input class="fi" id="el-val" type="number" min="0" step="0.1" style="width:100%"></div>
-      <div class="fg"><label>واحد</label><select class="fs" id="el-unit"><option value="GB">GB</option><option value="MB">MB</option></select></div>
-    </div>
-    <div class="fg" style="margin-bottom:13px"><label>انقضا (روز از الان، 0 = بدون تغییر/نامحدود)</label><input class="fi" id="el-exp" type="number" min="0" step="1" style="width:100%"></div>
-    <div class="fg" style="margin-bottom:16px"><label>یادداشت</label><input class="fi" id="el-note" style="width:100%"></div>
-    <div class="cl"><i class="ti ti-info-circle"></i><span>برای حفظ انقضای فعلی، فیلد انقضا را صفر بگذارید.</span></div>
-    <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end">
-      <button class="btn btn-o" onclick="closeModal('modal-edit-link')">انصراف</button>
-      <button class="btn btn-p" onclick="saveEditLink()"><i class="ti ti-check"></i> ذخیره تغییرات</button>
-    </div>
-  </div>
-</div>
 <div class="mob-top">
   <div class="ml">
     <div class="brand-mark small">OX</div>
-    <span class="mob-title">OXNET Gateway</span>
+    <span class="mob-title">OXNET</span>
   </div>
   <div class="mob-right">
     <button class="theme-mob" id="theme-mob-btn" onclick="toggleTheme()"><i class="ti ti-sun" id="theme-mob-icon"></i></button>
@@ -1555,7 +1254,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET Gateway · v1.0.0</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v1.0.0</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1580,58 +1279,53 @@ a{color:inherit;text-decoration:none}
 <main class="main">
 <div class="ann-banner-wrap" id="ann-banner-wrap"></div>
 <section class="pg on" id="pg-overview">
-  <div class="topbar">
-    <div><div class="tb-title"><i class="ti ti-layout-dashboard"></i> داشبورد</div><div class="tb-sub" id="last-upd">در حال بارگذاری...</div></div>
-    <div class="tb-right">
-      <span class="badge bg-green"><span class="dot dg pulse"></span> فعال</span>
-      <span class="badge bg-blue" id="uptime-badge">—</span>
-      <button class="btn btn-p btn-sm" onclick="refreshAll()"><i class="ti ti-refresh"></i> رفرش</button>
+  <div class="dash-hero">
+    <div class="dash-main-card">
+      <div class="dash-eyebrow">OXNET Control Panel</div>
+      <div class="dash-title">مدیریت سریع، تمیز و <span>چند پروتکل</span></div>
+      <div class="dash-desc">نمای زنده از مصرف، اتصالات، کانفیگ‌ها و سلامت سرویس. از همین صفحه می‌تونی لینک پیش‌فرض رو برداری یا وارد ساخت کانفیگ جدید بشی.</div>
+      <div class="dash-actions">
+        <button class="btn btn-p" onclick="openModal('modal-create-link')"><i class="ti ti-square-rounded-plus"></i> ساخت کانفیگ</button>
+        <button class="btn btn-g" onclick="navTo('traffic')"><i class="ti ti-chart-area"></i> مشاهده ترافیک</button>
+        <button class="btn btn-o" onclick="refreshAll()"><i class="ti ti-refresh"></i> رفرش</button>
+      </div>
+    </div>
+    <div class="dash-side">
+      <div class="dash-kpi"><div class="dash-kpi-icon"><i class="ti ti-plug-connected"></i></div><div class="dash-kpi-label">اتصالات</div><div class="dash-kpi-val" id="m-conns">—</div><div class="dash-kpi-sub">زنده</div></div>
+      <div class="dash-kpi"><div class="dash-kpi-icon"><i class="ti ti-transfer"></i></div><div class="dash-kpi-label">ترافیک</div><div class="dash-kpi-val" id="m-traffic">—</div><div class="dash-kpi-sub">از شروع</div></div>
+      <div class="dash-kpi"><div class="dash-kpi-icon"><i class="ti ti-link"></i></div><div class="dash-kpi-label">فعال</div><div class="dash-kpi-val" id="m-alinks">—</div><div class="dash-kpi-sub" id="m-lsub">کانفیگ</div></div>
+      <div class="dash-kpi"><div class="dash-kpi-icon"><i class="ti ti-folders"></i></div><div class="dash-kpi-label">ساب‌ها</div><div class="dash-kpi-val" id="m-subs">—</div><div class="dash-kpi-sub">گروه</div></div>
     </div>
   </div>
-  <div class="metrics">
-    <div class="metric"><div class="m-icon"><i class="ti ti-plug-connected"></i></div><div class="m-label">اتصالات فعال</div><div class="m-val" id="m-conns">—</div><div class="m-sub"><span class="dot dg pulse"></span> WebSocket / XHTTP زنده</div></div>
-    <div class="metric"><div class="m-icon"><i class="ti ti-transfer"></i></div><div class="m-label">کل ترافیک</div><div class="m-val" id="m-traffic">—<span class="m-unit">MB</span></div><div class="m-sub">از راه‌اندازی</div></div>
-    <div class="metric suc"><div class="m-icon suc"><i class="ti ti-link"></i></div><div class="m-label">کانفیگ فعال</div><div class="m-val" id="m-alinks">—</div><div class="m-sub" id="m-lsub">از کل</div></div>
-    <div class="metric pur"><div class="m-icon pur"><i class="ti ti-folders"></i></div><div class="m-label">گروه‌های ساب</div><div class="m-val" id="m-subs">—</div><div class="m-sub">فعال</div></div>
+
+  <div class="dash-protocols">
+    <div class="dash-protocol"><i class="ti ti-bolt"></i><div><b>VLESS WS</b><span>پایدار و سریع</span></div></div>
+    <div class="dash-protocol"><i class="ti ti-shield-lock"></i><div><b>Trojan WS</b><span>TLS-ready</span></div></div>
+    <div class="dash-protocol"><i class="ti ti-lock-bolt"></i><div><b>Shadowsocks TLS</b><span>مسیر اختصاصی</span></div></div>
+    <div class="dash-protocol"><i class="ti ti-package"></i><div><b>XHTTP Fixed</b><span>packet / stream / one</span></div></div>
   </div>
+
   <div class="vless-box">
     <div class="vl-header">
-      <div class="vl-title"><i class="ti ti-link"></i> لینک پیش‌فرض (بدون محدودیت)</div>
-      <span class="badge bg-blue"><span class="dot db"></span> TLS 443 · WS</span>
+      <div class="vl-title"><i class="ti ti-link"></i> لینک فعال پیشنهادی</div>
+      <span class="badge bg-blue"><span class="dot db"></span> TLS 443</span>
     </div>
     <div class="vl-code" id="vless-main">در حال دریافت...</div>
     <div class="vl-actions">
       <button class="btn btn-p" onclick="cpText('vless-main')"><i class="ti ti-copy"></i> کپی</button>
       <button class="btn btn-g" onclick="qrFor('vless-main')"><i class="ti ti-qrcode"></i> QR</button>
-      <button class="btn btn-o" onclick="navTo('links')"><i class="ti ti-link-plus"></i> کانفیگ محدود</button>
-      <button class="btn btn-pur" onclick="navTo('subgroups')"><i class="ti ti-folders"></i> گروه‌های ساب</button>
+      <button class="btn btn-o" onclick="navTo('links')"><i class="ti ti-list"></i> کانفیگ‌ها</button>
     </div>
   </div>
-  <div class="g3">
-    <div class="card"><div class="card-title"><i class="ti ti-chart-area"></i> ترافیک ساعتی (MB)</div><div class="ch"><canvas id="ch1"></canvas></div></div>
-    <div class="card"><div class="card-title"><i class="ti ti-chart-donut"></i> توزیع</div><div class="ch-sm"><canvas id="ch2"></canvas></div></div>
+
+  <div class="dash-chart-grid">
+    <div class="dash-chart-card"><div class="dash-card-head"><div><div class="dash-card-title"><i class="ti ti-chart-area"></i> روند ترافیک ساعتی</div><div class="dash-card-sub">مصرف بر اساس MB در ساعت</div></div><span class="badge bg-blue" id="uptime-badge">—</span></div><div class="ch"><canvas id="ch1"></canvas></div></div>
+    <div class="dash-chart-card"><div class="dash-card-head"><div><div class="dash-card-title"><i class="ti ti-chart-donut"></i> ترکیب پروتکل‌ها</div><div class="dash-card-sub">نمای تقریبی کانفیگ‌های فعال</div></div></div><div class="ch-sm"><canvas id="ch2"></canvas></div></div>
   </div>
+
   <div class="g2">
-    <div class="card">
-      <div class="card-title"><i class="ti ti-activity"></i> وضعیت سرویس</div>
-      <div class="sr"><span class="sr-k"><i class="ti ti-shield-check"></i> UUID Auth</span><span class="sr-v" style="color:var(--green-t)">● فعال · سخت‌گیرانه</span></div>
-      <div class="sr"><span class="sr-k"><i class="ti ti-circle-check"></i> VLESS / WS Tunnel</span><span class="sr-v" style="color:var(--green-t)">● فعال</span></div>
-      <div class="sr"><span class="sr-k"><i class="ti ti-bolt"></i> Siz10a XHTTP Ultra</span><span class="sr-v" style="color:var(--green-t)">● فعال · 3 mode</span></div>
-      <div class="sr"><span class="sr-k"><i class="ti ti-folders"></i> Sub Groups</span><span class="sr-v" style="color:var(--green-t)">● فعال v1</span></div>
-      <div class="sr"><span class="sr-k"><i class="ti ti-rss"></i> Subscription API</span><span class="sr-v" style="color:var(--green-t)">● فعال</span></div>
-      <div class="sr"><span class="sr-k"><i class="ti ti-clock"></i> آپتایم</span><span class="sr-v" id="uptime-inline">—</span></div>
-      <div class="sr" style="flex-direction:column;align-items:flex-start;gap:4px">
-        <div style="width:100%;display:flex;justify-content:space-between"><span class="sr-k"><i class="ti ti-gauge"></i> بار نسبی</span><span class="sr-v" id="bw-pct">—%</span></div>
-        <div class="spbar" style="width:100%"><div class="spfill" id="bw-bar" style="width:0%"></div></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title"><i class="ti ti-list"></i> خلاصه کانفیگ‌ها <span class="ml-auto badge bg-blue" id="lsummary-badge">۰</span></div>
-      <div id="lsummary">—</div>
-    </div>
-  </div>
-  <div class="dash-footer">
-    <span class="df-text">OXNET Gateway v1.0.0 · Railway · 2025</span>
+    <div class="card"><div class="card-title"><i class="ti ti-activity"></i> سلامت سرویس</div><div class="sr"><span class="sr-k"><i class="ti ti-shield-check"></i> Path Auth</span><span class="sr-v" style="color:var(--green-t)">فعال</span></div><div class="sr"><span class="sr-k"><i class="ti ti-clock"></i> آپتایم</span><span class="sr-v" id="uptime-inline">—</span></div><div class="sr" style="flex-direction:column;align-items:flex-start;gap:4px"><div style="width:100%;display:flex;justify-content:space-between"><span class="sr-k"><i class="ti ti-gauge"></i> بار نسبی</span><span class="sr-v" id="bw-pct">—%</span></div><div class="spbar" style="width:100%"><div class="spfill" id="bw-bar" style="width:0%"></div></div></div></div>
+    <div class="card"><div class="card-title"><i class="ti ti-list"></i> خلاصه کانفیگ‌ها <span class="ml-auto badge bg-blue" id="lsummary-badge">۰</span></div><div id="lsummary">—</div></div>
   </div>
 </section>
 <section class="pg" id="pg-links">
@@ -2039,6 +1733,7 @@ function protoBadge(p){
     'trojan-ws':['Trojan · WS','pc-trojan'],
     'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
     'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
+    'shadowsocks-tls':['Shadowsocks · TLS','pc-ss'],
     'mtproto':['Telegram Proxy · MTProto','pc-trojan'],
   };
   const v=m[p]||['ناشناخته','pc-ws'];
@@ -2089,16 +1784,16 @@ async function fetchStats(){
     const r=await authF('/stats'),d=await r.json();
     document.getElementById('m-conns').textContent=d.active_connections;
     document.getElementById('conns-nb').textContent=d.active_connections;
-    document.getElementById('m-traffic').innerHTML=d.total_traffic_mb.toFixed(1)+'<span class="m-unit">MB</span>';
+    document.getElementById('m-traffic').textContent=d.total_traffic_mb.toFixed(1)+' MB';
     document.getElementById('m-alinks').textContent=d.active_links??'—';
     document.getElementById('m-lsub').textContent='از '+d.links_count+' کانفیگ';
     document.getElementById('m-subs').textContent=d.subs_count??'—';
-    document.getElementById('errs-badge').textContent=d.total_errors+' خطا';
+    const errsBadge=document.getElementById('errs-badge'); if(errsBadge) errsBadge.textContent=d.total_errors+' خطا';
     document.getElementById('uptime-inline').textContent=d.uptime;
     document.getElementById('uptime-badge').textContent='Railway · '+d.uptime;
-    document.getElementById('last-upd').textContent='آخرین بروزرسانی: '+new Date().toLocaleTimeString('fa-IR');
-    document.getElementById('conns-live').innerHTML='<span class="dot dg pulse"></span> '+d.active_connections+' اتصال';
-    document.getElementById('t-traffic').innerHTML=d.total_traffic_mb.toFixed(1)+'<span class="m-unit">MB</span>';
+    const lastUpd=document.getElementById('last-upd'); if(lastUpd) lastUpd.textContent='آخرین بروزرسانی: '+new Date().toLocaleTimeString('fa-IR');
+    const connsLive=document.getElementById('conns-live'); if(connsLive) connsLive.innerHTML='<span class="dot dg pulse"></span> '+d.active_connections+' اتصال';
+    const tTraffic=document.getElementById('t-traffic'); if(tTraffic) tTraffic.innerHTML=d.total_traffic_mb.toFixed(1)+'<span class="m-unit">MB</span>';
     const delta=d.total_traffic_mb-prevTraf,pct=Math.min(100,Math.round((delta/50)*100));
     document.getElementById('bw-pct').textContent=pct+'%';
     document.getElementById('bw-bar').style.width=pct+'%';
@@ -2106,7 +1801,8 @@ async function fetchStats(){
     if(d.hourly){
       const labels=Object.keys(d.hourly).sort(),vals=labels.map(k=>+(d.hourly[k]/1024**2).toFixed(2));
       [ch1,ch3].forEach(c=>{if(!c)return;c.data.labels=labels;c.data.datasets[0].data=vals;c.update()});
-      if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);document.getElementById('t-avg').innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';document.getElementById('t-peak').innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
+      if(ch2){const pc=d.protocol_counts||{};ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
+      if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);const tAvg=document.getElementById('t-avg'),tPeak=document.getElementById('t-peak');if(tAvg)tAvg.innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';if(tPeak)tPeak.innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
     }
     renderErrs(d.recent_errors||[]);
   }catch(e){console.error(e)}
@@ -2140,8 +1836,15 @@ let allSubsList=[],allLinksList=[];
 async function loadLinks(){
   try{
     const [lr,sr]=await Promise.all([authF('/api/links'),authF('/api/subs')]);
-    const {links=[]}=await lr.json();
+    const {links:rawLinks=[]}=await lr.json();
     const {subs=[]}=await sr.json();
+    const multiSubs=subs.filter(s=>String(s.desc||'').includes('Multi Protocol'));
+    const childIds=new Set(rawLinks.filter(l=>l.is_multi_child || multiSubs.some(s=>(s.link_ids||[]).includes(l.uuid))).map(l=>l.uuid));
+    const groupCards=multiSubs.map(s=>{
+      const kids=rawLinks.filter(l=>l.multi_group_id===s.sub_id || (s.link_ids||[]).includes(l.uuid));
+      return {uuid:s.sub_id,label:s.name,protocol:'multi',is_multi_group:true,child_count:kids.length,children:kids,active:kids.some(k=>k.active&&!k.expired),expired:false,used_bytes:kids.reduce((a,k)=>a+(k.used_bytes||0),0),limit_bytes:kids.reduce((a,k)=>a+(k.limit_bytes||0),0),created_at:s.created_at,sub_url:s.sub_url,vless_link:s.sub_url,sub_id:s.sub_id};
+    });
+    const links=[...groupCards,...rawLinks.filter(l=>!childIds.has(l.uuid))];
     allSubsList=subs;allLinksList=links;
     document.getElementById('info-inbounds').textContent = toFa(links.length);
     document.getElementById('info-clients').textContent = toFa(links.filter(l=>l.active).length);
@@ -2156,6 +1859,7 @@ async function loadLinks(){
     empty.style.display='none';
     const subMap=Object.fromEntries(subs.map(s=>[s.sub_id,s.name]));
     grid.innerHTML=links.map(l=>{
+  if(l.is_multi_group){return `<div class="multi-group-card"><div class="multi-group-head"><div><div class="multi-group-title"><i class="ti ti-layers-intersect"></i>${esc(l.label)}</div><div class="multi-protos">${(l.children||[]).map(k=>`<span>${esc((PROTO_MAP[k.protocol]||[k.protocol])[0])}</span>`).join('')}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><span class="badge bg-blue">${toFa(l.child_count||0)} پروتکل</span><button class="btn btn-sm btn-p" onclick="navigator.clipboard.writeText('${esc(l.sub_url)}').then(()=>toast('ساب مولتی کپی شد','ok'))"><i class="ti ti-copy"></i> ساب</button><button class="btn btn-sm btn-g" onclick="showQR('${esc(l.sub_url)}')"><i class="ti ti-qrcode"></i></button></div></div><div class="utxt"><span>مصرف کل: ${fmtB(l.used_bytes||0)}</span><span>${esc(l.sub_url||'')}</span></div></div>`}
   const lim=l.limit_bytes===0?'∞':fmtB(l.limit_bytes);
   const pct=l.limit_bytes===0?0:Math.min(100,l.used_bytes/l.limit_bytes*100);
   const bc=pct>90?'var(--red)':pct>70?'var(--amber)':'var(--accent)';
@@ -2238,7 +1942,8 @@ const BASE_INFO = {
   vless:    { icon:'ti-bolt',           title:'VLESS',          desc:'سبک، سریع و پرکاربردترین گزینه' },
   trojan:   { icon:'ti-shield-lock',    title:'Trojan',         desc:'شبیه‌سازی ترافیک HTTPS معمولی' },
   telproxy: { icon:'ti-brand-telegram', title:'Telegram Proxy', desc:'پروکسی MTProto مستقیم روی یک پورت TCP اختصاصی' },
-  multi:    { icon:'ti-layers-intersect', title:'Multi Protocol', desc:'یک ساب شامل همه پروتکل‌ها، بدون پروکسی تلگرام' }
+  multi:    { icon:'ti-layers-intersect', title:'Multi Protocol', desc:'یک ساب شامل همه پروتکل‌ها، بدون پروکسی تلگرام' },
+  shadowsocks: { icon:'ti-lock-bolt', title:'Shadowsocks TLS', desc:'شادوساکس روی TLS/WebSocket با مسیر اختصاصی' }
 };
 const TRANSPORT_INFO = {
   'ws':               { icon:'ti-link',    title:'WebSocket',            desc:'پایدار و سازگار با همه شرایط شبکه' },
@@ -2270,6 +1975,18 @@ function cmSelectBase(val, el){
     document.getElementById('cm-submit-text').textContent = 'ساخت ساب مولتی';
     document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-layers-intersect"></i>';
     document.getElementById('nl-proto').value = 'multi';
+    return;
+  }
+  if (val === 'shadowsocks') {
+    transportSection.style.display = 'none';
+    normalNote.style.display = 'flex';
+    mtNote.style.display = 'none';
+    portField.style.display = 'none';
+    document.getElementById('cm-head-title').textContent = 'ساخت Shadowsocks TLS';
+    document.getElementById('cm-head-sub').textContent = 'شادوساکس با TLS و مسیر اختصاصی';
+    document.getElementById('cm-submit-text').textContent = 'ساخت Shadowsocks';
+    document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-lock-bolt"></i>';
+    document.getElementById('nl-proto').value = 'shadowsocks-tls';
     return;
   }
   if (val === 'telproxy') {
@@ -2372,7 +2089,7 @@ async function createLink(){
     const copyTarget = d.sub_url || d.vless_link;
     if(copyTarget && navigator.clipboard) navigator.clipboard.writeText(copyTarget).catch(()=>{});
     ['nl-label','nl-path','nl-val','nl-exp','nl-note','nl-mtproto-port','nl-mtproto-domain'].forEach(id=>document.getElementById(id).value='');
-    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد'),'ok');
+    toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')),'ok');
     loadLinks();
   }catch(e){toast(' '+e.message,'err')}
 }
@@ -2813,9 +2530,9 @@ function initCharts(){
 
   ch2=new Chart(document.getElementById('ch2'),{
     type:'doughnut',
-    data:{labels:['VLESS/WS','XHTTP Ultra','HTTP Proxy'],datasets:[{
-      data:[55,35,10],
-      backgroundColor:['#3B82F6','#10B981','#8B5CF6'],
+    data:{labels:['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'],datasets:[{
+      data:[1,1,1,1,1],
+      backgroundColor:['#2563EB','#111827','#8B5CF6','#14B8A6','#F59E0B'],
       borderColor:getComputedStyle(document.documentElement).getPropertyValue('--card')||'#0d1b2e',
       borderWidth:4,hoverOffset:10,borderRadius:6,spacing:3
     }]},
@@ -2971,18 +2688,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // ابتدا نسخه را بررسی کن
   // بروزرسانی خودکار در نسخه مستقل حذف شده است
-  
-  // تصمیم‌گیری برای نمایش مودال
-  const updateDismissed = sessionStorage.getItem('oxnet-update-dismissed') === 'true';
-  if (updateAvailable && !updateDismissed) {
-    // پر کردن اطلاعات مودال بروزرسانی
-    document.getElementById('update-modal-version').textContent = updateVersion;
-    document.getElementById('update-modal-desc').textContent = updateDescription;
-    openModal('modal-update');
-  } else {
-    // اگر بروزرسانی موجود نیست یا کاربر انصراف داده، مودال کپی‌رایت نمایش داده شود
-    openModal('modal-copyright-notice');
-  }
 
   // بقیه‌ی کدهای اولیه
   fetchStats();
@@ -3642,7 +3347,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET Gateway · v1.0.0</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.0.0</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3652,7 +3357,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">کانال رسمی: <a href="https://t.me/oxnet_ir" target="_blank">@oxnet_ir</a> · OXNET Gateway v1.0.0</div>
+  <div class="footer">OXNET v1.0.0</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';

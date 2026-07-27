@@ -17,7 +17,7 @@ from typing import Awaitable, Callable, Optional
 
 import httpx
 
-logger = logging.getLogger("OXNET-Gateway")
+logger = logging.getLogger("OXNET")
 
 MTG_VERSION = "2.1.7"
 MTG_DIR = Path(os.environ.get("DATA_DIR", "/data")) / "mtg"

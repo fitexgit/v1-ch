@@ -306,7 +306,7 @@ def ensure_reaper():
 
 
 async def _pump_tcp_to_queue(session_id: str, uuid: str, reader: asyncio.StreamReader, down_q: asyncio.Queue, vless_prefix: bool = True, conn_id: str = ""):
-    gate = _QuotaGate(uid)
+    gate = _QuotaGate(uuid)
     close_reason = "remote-eof"
     first = True
     # conn_id رو یک‌بار cache می‌کنیم تا در هر iteration از XHTTP_LOCK بی‌نیاز بشیم
@@ -391,11 +391,11 @@ async def xhttp_downlink(mode: str, uuid: str, session_id: str, request: Request
     uid = await resolve_link_id(uuid)
     if not uid:
         raise HTTPException(status_code=404, detail="not found")
-    if mode not in ("packet-up", "stream-up"):
+    if mode not in ("packet-up", "stream-up", "stream-one"):
         raise HTTPException(status_code=404, detail="unknown mode")
     await _check_link(uid)
     fp = request.query_params.get("fp", DEFAULT_FINGERPRINT)
-    sess = await _get_or_create_session(uid, mode, session_id, _req_client_ip(request))
+    sess = await _get_or_create_session(uid, "stream-up" if mode == "stream-one" else mode, session_id, _req_client_ip(request))
     if sess.get("closed"):
         raise HTTPException(status_code=404, detail="session closed")
 
@@ -480,6 +480,7 @@ async def packet_up_upload(uuid: str, session_id: str, seq: int, request: Reques
 # پشت‌سرهم بفرسته (rotation). وقتی کلاینت یک POST رو می‌بنده، این یک قطع طبیعیِ
 # «این درخواست» است، نه قطع کل تونل — پس فقط از این تابع خارج می‌شیم، بدون اینکه
 # TCP/session رو تخریب کنیم؛ POST بعدی با همون session_id ادامه می‌ده.
+@router.post("/xhttp-siz10/stream-one/{uuid}/{session_id}")
 @router.post("/xhttp-siz10/stream-up/{uuid}/{session_id}")
 async def stream_up_upload(uuid: str, session_id: str, request: Request):
     ensure_reaper()
