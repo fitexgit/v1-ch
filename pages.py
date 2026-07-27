@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.3
+# pages.py  -  OXNET v2.0.4
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -91,7 +91,7 @@ input:focus+.ic{color:var(--accent)}
 
 .pro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr}}
 
-/* OXNET v2.0.3 dark-mode contrast hardening */
+/* OXNET v2.0.4 dark-mode contrast hardening */
 [data-theme="dark"] .btn-o,[data-theme="dark"] .btn-g,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .icon-btn{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-bh)!important}
 [data-theme="dark"] .btn-p{background:linear-gradient(135deg,#f8fafc,#cbd5e1)!important;color:#020617!important;box-shadow:none!important}
 [data-theme="dark"] .btn-d{background:rgba(239,68,68,.18)!important;color:#fecaca!important}
@@ -108,7 +108,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.3</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.4</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -123,7 +123,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.3</div>
+    <div class="footer">OXNET · 2.0.4</div>
   </div>
 </div>
 <script>
@@ -1110,8 +1110,30 @@ a{color:inherit;text-decoration:none}
               <div class="cm-opt-icon"><i class="ti ti-lock-bolt"></i></div>
               <div class="cm-opt-text"><div class="cm-opt-title">Shadowsocks TLS</div><div class="cm-opt-desc">شادوساکس روی TLS/WebSocket با مسیر اختصاصی</div></div>
               <span class="cm-opt-tag">TLS</span>
+            </div>
+            <div class="cm-opt" data-base="telproxy" onclick="cmSelectBase('telproxy',this)">
+              <div class="cm-opt-radio"></div>
+              <div class="cm-opt-icon"><i class="ti ti-brand-telegram"></i></div>
+              <div class="cm-opt-text"><div class="cm-opt-title">Telegram Proxy</div><div class="cm-opt-desc">ساخت MTProto با TCP Proxy عمومی</div></div>
+              <span class="cm-opt-tag">MTProto</span>
             </div></div></div>
           </div>
+        </div>
+
+        <div class="cm-dd" id="transport-section">
+          <div class="cm-dd-trigger" onclick="cmToggleDD('dd-transport')">
+            <div class="cm-dd-icon" id="dd-transport-icon"><i class="ti ti-link"></i></div>
+            <div class="cm-dd-text">
+              <div class="cm-dd-title">ترابرد — <span id="dd-transport-current">WebSocket</span></div>
+              <div class="cm-dd-desc" id="dd-transport-current-desc">پایدار و سازگار با همه شرایط شبکه</div>
+            </div>
+            <i class="ti ti-chevron-down cm-dd-chev"></i>
+          </div>
+          <div class="cm-dd-panel" id="dd-transport"><div class="cm-dd-panel-inner"><div class="cm-dd-list">
+            <div class="cm-opt sel" onclick="cmSelectTransport('ws',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-link"></i></div><div class="cm-opt-text"><div class="cm-opt-title">WebSocket</div><div class="cm-opt-desc">پایدارترین حالت عمومی</div></div></div>
+            <div class="cm-opt" onclick="cmSelectTransport('xhttp-packet-up',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-package"></i></div><div class="cm-opt-text"><div class="cm-opt-title">XHTTP packet-up</div><div class="cm-opt-desc">سازگار با CDN و پروکسی‌ها</div></div></div>
+            <div class="cm-opt" onclick="cmSelectTransport('xhttp-stream-up',this)"><div class="cm-opt-radio"></div><div class="cm-opt-icon"><i class="ti ti-rocket"></i></div><div class="cm-opt-text"><div class="cm-opt-title">XHTTP stream-up</div><div class="cm-opt-desc">تاخیر کمتر برای شبکه پایدار</div></div></div>
+          </div></div></div>
         </div>
 
         <input type="hidden" id="nl-proto" value="vless-ws">
@@ -1153,9 +1175,7 @@ a{color:inherit;text-decoration:none}
             پورت خالی = یک پورت آزاد از بازه‌ی ۸۵۰۰–۸۶۰۰ خودکار انتخاب می‌شود. Fake SNI دامنه‌ای است که ترافیک پروکسی پشت آن پنهان می‌شود؛ می‌تونی خودت هر دامنه‌ای بذاری، پیش‌فرض پیشنهادی <b>www.cloudflare.com</b> است.
           </div>
         </div>
-        
-        <input type="hidden" id="nl-proto" value="vless-ws">
-        <div class="cm-note" style="margin-top:12px"><i class="ti ti-info-circle"></i> پروتکل و ترابرد پس از ساخت کانفیگ قابل تغییر نیستند.</div>
+
       </div>
 
       <!-- محدودیت‌ها -->
@@ -1282,6 +1302,105 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 </div>
+
+
+<!-- OXNET v2.0.4 repaired action modals -->
+<div class="modal-bg" id="modal-edit-link">
+  <div class="modal-v2" style="max-width:520px">
+    <button class="modal-v2-close" onclick="closeModal('modal-edit-link')"><i class="ti ti-x"></i></button>
+    <div class="modal-v2-head"><div class="modal-v2-icon"><i class="ti ti-edit"></i></div><div class="modal-v2-title">ویرایش کانفیگ</div><div class="modal-v2-sub">نام، یادداشت، سهمیه و انقضا را تغییر بده.</div></div>
+    <div class="modal-v2-body">
+      <input type="hidden" id="el-uuid">
+      <div class="modal-v2-field"><label><i class="ti ti-id"></i> نام</label><input class="modal-v2-input" id="el-label" placeholder="نام کانفیگ"></div>
+      <div class="modal-v2-field"><label><i class="ti ti-note"></i> یادداشت</label><input class="modal-v2-input" id="el-note" placeholder="یادداشت"></div>
+      <div class="form-row"><input class="fi" id="el-val" type="number" min="0" placeholder="سهمیه"><select class="fs" id="el-unit"><option value="GB">GB</option><option value="MB">MB</option></select><input class="fi" id="el-exp" type="number" min="0" placeholder="انقضا / روز"></div>
+      <div class="modal-v2-footer"><button class="modal-v2-btn-cancel" onclick="closeModal('modal-edit-link')">انصراف</button><button class="modal-v2-btn-submit" onclick="saveEditLink()"><i class="ti ti-check"></i> ذخیره</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-create-sub">
+  <div class="modal-v2" style="max-width:520px">
+    <button class="modal-v2-close" onclick="closeModal('modal-create-sub')"><i class="ti ti-x"></i></button>
+    <div class="modal-v2-head"><div class="modal-v2-icon"><i class="ti ti-folder-plus"></i></div><div class="modal-v2-title">گروه جدید</div><div class="modal-v2-sub">برای دسته‌بندی کانفیگ‌ها و ساخت صفحه عمومی.</div></div>
+    <div class="modal-v2-body">
+      <div class="modal-v2-field"><label><i class="ti ti-folder"></i> نام گروه</label><input class="modal-v2-input" id="ns-name" placeholder="مثلاً مشتری‌های ویژه"></div>
+      <div class="modal-v2-field"><label><i class="ti ti-notes"></i> توضیح</label><input class="modal-v2-input" id="ns-desc" placeholder="توضیح اختیاری"></div>
+      <div class="modal-v2-field"><label><i class="ti ti-lock"></i> رمز صفحه عمومی</label><input class="modal-v2-input" id="ns-pw" type="password" placeholder="خالی = بدون رمز"></div>
+      <div class="modal-v2-footer"><button class="modal-v2-btn-cancel" onclick="closeModal('modal-create-sub')">انصراف</button><button class="modal-v2-btn-submit" onclick="createSub()"><i class="ti ti-folder-plus"></i> ساخت گروه</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-links">
+  <div class="modal-v2" style="max-width:720px">
+    <button class="modal-v2-close" onclick="closeModal('modal-links')"><i class="ti ti-x"></i></button>
+    <div class="lmodal-head">
+      <div class="lmodal-icon-row"><div class="lmodal-icon"><i class="ti ti-link-plus"></i></div><div><div class="lmodal-title-v2">کانفیگ‌های گروه: <span id="modal-sub-name">—</span></div><div class="lmodal-sub-v2">کانفیگ‌هایی که باید داخل این گروه باشند را انتخاب کن.</div></div></div>
+      <div class="lmodal-search"><input id="lmodal-search-inp" placeholder="جستجو..." oninput="filterLmodal(this.value)"><i class="ti ti-search"></i></div>
+      <div class="lmodal-quickbar"><button class="lmodal-qbtn" onclick="lmodalSelectAll(true)">انتخاب همه</button><button class="lmodal-qbtn" onclick="lmodalSelectAll(false)">حذف انتخاب</button><span class="lmodal-count" id="lmodal-count">۰ انتخاب شده</span></div>
+    </div>
+    <div class="lmodal-list" id="modal-links-body"></div>
+    <div class="lmodal-footer"><div class="lmodal-footer-info"><i class="ti ti-info-circle"></i> تغییرات بعد از ذخیره اعمال می‌شود.</div><div class="lmodal-footer-btns"><button class="btn btn-o" onclick="closeModal('modal-links')">انصراف</button><button class="btn btn-p" onclick="saveSubLinks()"><i class="ti ti-device-floppy"></i> ذخیره</button></div></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-ad-tag">
+  <div class="modal-v2" style="max-width:520px">
+    <button class="modal-v2-close" onclick="closeModal('modal-ad-tag')"><i class="ti ti-x"></i></button>
+    <div class="modal-v2-head"><div class="modal-v2-icon"><i class="ti ti-speakerphone"></i></div><div class="modal-v2-title">تبلیغ کانال</div><div class="modal-v2-sub" id="at-cfg-name">—</div></div>
+    <div class="modal-v2-body"><div class="modal-v2-field"><label>ad_tag</label><input class="modal-v2-input" id="at-tag" dir="ltr" placeholder="ad tag"></div><div class="modal-v2-footer"><button class="modal-v2-btn-cancel" onclick="closeModal('modal-ad-tag')">انصراف</button><button class="modal-v2-btn-submit" id="at-submit-btn" onclick="submitAdTag()"><i class="ti ti-check"></i> ذخیره و اعمال</button></div></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-mt-info">
+  <div class="modal-v2" style="max-width:620px">
+    <button class="modal-v2-close" onclick="closeModal('modal-mt-info')"><i class="ti ti-x"></i></button>
+    <div class="modal-v2-head"><div class="modal-v2-icon"><i class="ti ti-brand-telegram"></i></div><div class="modal-v2-title">اطلاعات پروکسی</div><div class="modal-v2-sub" id="mti-cfg-name">—</div></div>
+    <div class="modal-v2-body">
+      <div class="cl amber" id="mti-warn"><i class="ti ti-alert-triangle"></i><span>دامنه عمومی هنوز آماده نشده است.</span></div>
+      <div class="modal-v2-field"><label>Secret</label><div class="vl-code" id="mti-secret">—</div><button class="btn btn-g btn-sm" onclick="cpMtiField('mti-secret','سکرت کپی شد')"><i class="ti ti-copy"></i> کپی</button></div>
+      <div class="modal-v2-field"><label>Link</label><div class="vl-code" id="mti-link">—</div><button class="btn btn-p btn-sm" onclick="cpMtiField('mti-link','لینک کپی شد')"><i class="ti ti-copy"></i> کپی لینک</button></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-bg" id="modal-domain-scan">
+  <div class="modal-v2 cm-modal" style="max-width:720px">
+    <button class="modal-v2-close" onclick="closeModal('modal-domain-scan')"><i class="ti ti-x"></i></button>
+    <div class="modal-v2-head">
+      <div class="modal-v2-icon"><i class="ti ti-radar"></i></div>
+      <div class="modal-v2-title">اسکن دامنه TCP Proxy</div>
+      <div class="modal-v2-sub">دامنه‌های دلخواه Railway را وارد کن تا فقط همان‌ها جستجو شوند.</div>
+    </div>
+    <div class="modal-v2-body">
+      <div class="cm-section" id="ds-token-section">
+        <div class="cm-section-label"><i class="ti ti-key"></i> توکن Railway</div>
+        <input class="cm-input" id="ds-token" type="password" dir="ltr" placeholder="Railway API Token">
+      </div>
+      <div class="cm-section">
+        <div class="cm-section-label"><i class="ti ti-world-search"></i> دامنه‌های هدف</div>
+        <div class="cm-row2">
+          <input class="cm-input" id="ds-domain-inp" dir="ltr" placeholder="example.proxy.rlwy.net" onkeydown="if(event.key==='Enter'){event.preventDefault();dsAddDomain()}">
+          <button class="btn btn-g" type="button" onclick="dsAddDomain()"><i class="ti ti-plus"></i> افزودن دامنه</button>
+        </div>
+        <div class="cm-pills" id="ds-domain-chips" style="margin-top:10px"></div>
+      </div>
+      <div class="cm-section">
+        <div class="cm-section-label"><i class="ti ti-activity"></i> وضعیت</div>
+        <div class="cl" style="margin-top:0"><i class="ti ti-radar"></i><span id="ds-status-text">آماده اسکن</span></div>
+        <div id="ds-log-box" style="display:none;background:rgba(0,0,0,.12);border:1px solid var(--card-b);border-radius:12px;padding:12px;max-height:220px;overflow:auto;font-family:ui-monospace,monospace;font-size:11px;line-height:1.8;margin-top:12px"></div>
+      </div>
+      <div class="modal-v2-footer">
+        <button class="modal-v2-btn-cancel" onclick="closeModal('modal-domain-scan')">بستن</button>
+        <button class="btn btn-d" id="ds-stop-btn" onclick="stopDomainScan()" style="display:none"><i class="ti ti-ban"></i> توقف</button>
+        <button class="modal-v2-btn-submit" id="ds-start-btn" onclick="startDomainScan()"><i class="ti ti-player-play"></i> شروع اسکن</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="mob-top">
   <div class="ml">
     <div class="brand-mark small">OX</div>
@@ -1297,7 +1416,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.3</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.4</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1376,7 +1495,7 @@ a{color:inherit;text-decoration:none}
 <section class="pg" id="pg-links">
   <div class="topbar">
     <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:16px">
-      <button class="btn btn-p" onclick="openModal('modal-create-link')">
+      <button class="btn btn-p" onclick="resetCreateModal();openModal('modal-create-link')">
         <i class="ti ti-plus"></i> ساخت کانفیگ جدید
       </button>
       <button class="btn btn-g" style="margin-right:14px" onclick="openModal('modal-bot-tcp-proxy');btpCheckTokenState()">
@@ -1715,7 +1834,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.3</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.4</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1854,9 +1973,10 @@ function navTo(name){
   closeSb();window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.nav-it').forEach(el=>el.addEventListener('click',()=>navTo(el.dataset.pg)));
-function openModal(id){document.getElementById(id).classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
-function dashCreateConfig(){try{openModal('modal-create-link')}catch(e){console.error(e);toast('خطا در باز کردن ساخت کانفیگ','err')}}
+function openModal(id){const el=document.getElementById(id);if(!el){console.error('modal missing',id);toast('پنجره پیدا نشد: '+id,'err');return}el.classList.add('open')}
+function closeModal(id){const el=document.getElementById(id);if(el)el.classList.remove('open')}
+function resetCreateModal(){try{cmSelectBase('vless',document.querySelector('#dd-base .cm-opt[data-base="vless"]'));cmSelectTransport('ws',document.querySelector('#dd-transport .cm-opt'));}catch(e){console.warn(e)}const p=document.getElementById('nl-proto');if(p)p.value='vless-ws'}
+function dashCreateConfig(){try{resetCreateModal();openModal('modal-create-link')}catch(e){console.error(e);toast('خطا در باز کردن ساخت کانفیگ','err')}}
 function dashGoTraffic(){try{navTo('traffic')}catch(e){console.error(e);toast('خطا در نمایش ترافیک','err')}}
 function dashRefresh(){try{refreshAll()}catch(e){console.error(e);toast('خطا در رفرش','err')}}
 
@@ -2041,8 +2161,9 @@ const TRANSPORT_INFO = {
 
 function cmSelectBase(val, el){
   cmBase = val;
+  const show=(node,display)=>{if(node)node.style.display=display};
   document.querySelectorAll('#dd-base .cm-opt').forEach(o => o.classList.remove('sel'));
-  el.classList.add('sel');
+  if(el)el.classList.add('sel');
   const info = BASE_INFO[val];
   document.getElementById('dd-base-icon').innerHTML = `<i class="ti ${info.icon}"></i>`;
   document.getElementById('dd-base-current').textContent = info.title;
@@ -2054,22 +2175,23 @@ function cmSelectBase(val, el){
   const mtNote = document.getElementById('mtproto-note');
   const portField = document.getElementById('mtproto-port-field');
   if (val === 'multi') {
-    transportSection.style.display = 'none';
-    normalNote.style.display = 'flex';
-    mtNote.style.display = 'none';
-    portField.style.display = 'none';
+    show(transportSection,'none');
+    show(normalNote,'flex');
+    show(mtNote,'none');
+    show(portField,'none');
     document.getElementById('cm-head-title').textContent = 'ساخت ساب مولتی پروتکل';
     document.getElementById('cm-head-sub').textContent = 'همه پروتکل‌ها در یک ساب؛ پروکسی تلگرام جدا می‌ماند';
     document.getElementById('cm-submit-text').textContent = 'ساخت ساب مولتی';
     document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-layers-intersect"></i>';
     document.getElementById('nl-proto').value = 'multi';
+    cmBase='multi';
     return;
   }
   if (val === 'shadowsocks') {
-    transportSection.style.display = 'none';
-    normalNote.style.display = 'flex';
-    mtNote.style.display = 'none';
-    portField.style.display = 'none';
+    show(transportSection,'none');
+    show(normalNote,'flex');
+    show(mtNote,'none');
+    show(portField,'none');
     document.getElementById('cm-head-title').textContent = 'ساخت Shadowsocks TLS';
     document.getElementById('cm-head-sub').textContent = 'شادوساکس با TLS و مسیر اختصاصی';
     document.getElementById('cm-submit-text').textContent = 'ساخت Shadowsocks';
@@ -2078,19 +2200,19 @@ function cmSelectBase(val, el){
     return;
   }
   if (val === 'telproxy') {
-    transportSection.style.display = 'none';
-    normalNote.style.display = 'none';
-    mtNote.style.display = 'flex';
-    portField.style.display = 'block';
+    show(transportSection,'none');
+    show(normalNote,'none');
+    show(mtNote,'flex');
+    show(portField,'block');
     document.getElementById('cm-head-title').textContent = 'ساخت پروکسی جدید';
     document.getElementById('cm-head-sub').textContent = 'ساخت پروکسی تلگرام (MTProto) با پورت TCP اختصاصی';
     document.getElementById('cm-submit-text').textContent = 'ساخت پروکسی';
     document.getElementById('cm-head-icon').innerHTML = '<i class="ti ti-brand-telegram"></i>';
   } else {
-    transportSection.style.display = '';
-    normalNote.style.display = 'flex';
-    mtNote.style.display = 'none';
-    portField.style.display = 'none';
+    show(transportSection,'');
+    show(normalNote,'flex');
+    show(mtNote,'none');
+    show(portField,'none');
     document.getElementById('cm-head-title').textContent = 'ساخت کانفیگ جدید';
     document.getElementById('cm-head-sub').textContent = 'تنظیمات کامل پروتکل، ترابرد و محدودیت‌ها در یک صفحه';
     document.getElementById('cm-submit-text').textContent = 'ساخت کانفیگ';
@@ -2102,7 +2224,7 @@ function cmSelectBase(val, el){
 function cmSelectTransport(val, el){
   cmTransport = val;
   document.querySelectorAll('#dd-transport .cm-opt').forEach(o => o.classList.remove('sel'));
-  el.classList.add('sel');
+  if(el)el.classList.add('sel');
   const info = TRANSPORT_INFO[val];
   document.getElementById('dd-transport-icon').innerHTML = `<i class="ti ${info.icon}"></i>`;
   document.getElementById('dd-transport-current').textContent = info.title;
@@ -2163,7 +2285,10 @@ async function createLink(){
   const note=document.getElementById('nl-note').value.trim();
   const custom_path=document.getElementById('nl-path').value.trim();
   const sub_id=document.getElementById('nl-sub').value||null;
-  const protocol=document.getElementById('nl-proto').value||'vless-ws';
+  let protocol=document.getElementById('nl-proto').value||'vless-ws';
+  if(cmBase==='multi') protocol='multi';
+  if(cmBase==='telproxy') protocol='mtproto';
+  if(cmBase==='shadowsocks') protocol='shadowsocks-tls';
   const isMt = protocol === 'mtproto';
   const mtproto_port = isMt ? (document.getElementById('nl-mtproto-port').value || null) : null;
   const mtproto_domain = isMt ? (document.getElementById('nl-mtproto-domain').value.trim() || null) : null;
@@ -2180,19 +2305,19 @@ async function createLink(){
     toast(protocol==='multi' ? 'ساب مولتی ساخته شد و لینک کپی شد' : (isMt ? 'پروکسی ساخته شد و لینک کپی شد' : (protocol==='shadowsocks-tls' ? 'Shadowsocks TLS ساخته شد و لینک کپی شد' : 'کانفیگ ساخته شد')),'ok');
     closeModal('modal-create-link');
     loadLinks();
+    if(protocol==='multi'){loadSubs();loadSubsPage();}
   }catch(e){toast(' '+e.message,'err')}
 }
 
 
 function openEditLink(uuid){
-  const l=(window.__rawLinksList||allLinksList).find(x=>x.uuid===uuid);
-  if(!l)return;
-  document.getElementById('el-uuid').value=uuid;
-  document.getElementById('el-label').value=l.label;
-  document.getElementById('el-note').value=l.note||'';
-  if(l.limit_bytes===0){document.getElementById('el-val').value='';document.getElementById('el-unit').value='GB';}
-  else{document.getElementById('el-val').value=(l.limit_bytes/1024/1024).toFixed(0);document.getElementById('el-unit').value='MB';}
-  document.getElementById('el-exp').value='';
+  const l=(window.__rawLinksList||allLinksList||[]).find(x=>x.uuid===uuid);
+  if(!l){toast('کانفیگ پیدا نشد؛ رفرش کن','err');return}
+  const set=(id,val)=>{const el=document.getElementById(id); if(el) el.value=val ?? ''};
+  set('el-uuid',uuid); set('el-label',l.label||''); set('el-note',l.note||'');
+  if(l.limit_bytes===0){set('el-val','');set('el-unit','GB')}
+  else{set('el-val',(l.limit_bytes/1024/1024).toFixed(0));set('el-unit','MB')}
+  set('el-exp','');
   openModal('modal-edit-link');
 }
 async function saveEditLink(){
@@ -2275,8 +2400,8 @@ async function submitAdTag(){
   btn.innerHTML = '<i class="ti ti-check"></i> ذخیره و اعمال';
 }
 async function deleteLink(uuid){
-  if(!confirm('حذف این کانفیگ؟'))return;
-  try{const r=await authF('/api/links/'+uuid,{method:'DELETE'});if(!r.ok)throw new Error();toast('حذف شد ','ok');loadLinks();}catch(e){toast('خطا','err')}
+  if(!confirm('این کانفیگ غیرفعال شود؟'))return;
+  try{const r=await authF('/api/links/'+uuid,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({active:false})});if(!r.ok)throw new Error();toast('کانفیگ غیرفعال شد','ok');loadLinks();}catch(e){toast('خطا','err')}
 }
 function showQR(link){window.open('https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+encodeURIComponent(link),'_blank')}
 let allSubsRaw=[];
@@ -2340,11 +2465,11 @@ async function createSub(){
   const pw=document.getElementById('ns-pw').value;
   try{
     const r=await authF('/api/subs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,desc,password:pw})});
-    if(!r.ok)throw new Error('failed');
-    ['ns-name','ns-desc','ns-pw'].forEach(id=>document.getElementById(id).value='');
+    if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d.detail||'failed')}
+    ['ns-name','ns-desc','ns-pw'].forEach(id=>{const el=document.getElementById(id); if(el)el.value=''});
     closeModal('modal-create-sub');
     toast('گروه ساخته شد ','ok');loadSubs();
-  }catch(e){toast('خطا در ساخت گروه','err')}
+  }catch(e){toast('خطا در ساخت گروه: '+(e.message||''),'err')}
 }
 async function deleteSub(sub_id){
   if(!confirm('حذف این گروه؟ کانفیگ‌ها حذف نمی‌شوند.'))return;
@@ -3484,7 +3609,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 }}
 @keyframes spin{{to{{transform:rotate(360deg)}}}}
 
-/* OXNET v2.0.3 public subscription theme polish */
+/* OXNET v2.0.4 public subscription theme polish */
 .copy-all-bar{{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;box-shadow:var(--shadow)!important}}
 .copy-all-btn{{background:var(--card)!important;color:var(--t1)!important;border:1px solid var(--card-bh)!important}}
 .btn-p{{background:var(--accent)!important;color:var(--bg)!important}}
@@ -3509,7 +3634,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.3</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.4</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3519,7 +3644,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.3</div>
+  <div class="footer">OXNET v2.0.4</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';

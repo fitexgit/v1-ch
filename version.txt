@@ -1,3 +1,3 @@
-version=2.0.3
-description=Fix refresh/delete, dark mode, Railway scan list, Android Shadowsocks TLS, remove SS TCP
-updated_at=1785153250
+version=2.0.4
+description=Fix multi protocol selector and repair all modal action buttons
+updated_at=1785155200
