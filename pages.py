@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v1.2.1
+# pages.py  -  OXNET v2.0.0
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -88,6 +88,8 @@ input:focus+.ic{color:var(--accent)}
 @media(max-width:1000px){.dash-hero,.dash-chart-grid{grid-template-columns:1fr}.dash-protocols{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.dash-side,.dash-protocols{grid-template-columns:1fr}.dash-title{font-size:26px}}
 
+
+.pro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -97,7 +99,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.2.1</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.0</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -112,7 +114,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 1.2.1</div>
+    <div class="footer">OXNET · 2.0.0</div>
   </div>
 </div>
 <script>
@@ -1325,7 +1327,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v1.2.1</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v2.0.0</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1335,6 +1337,8 @@ a{color:inherit;text-decoration:none}
     <div class="nav-it" data-pg="subscriptions"><i class="ti ti-rss"></i> سابسکریپشن</div>
     <div class="nav-it" data-pg="traffic"><i class="ti ti-chart-area"></i> ترافیک</div>
     <div class="nav-it" data-pg="connections"><i class="ti ti-plug-connected"></i> اتصالات <span class="nav-badge" id="conns-nb">0</span></div>
+    <div class="nav-it" data-pg="customers"><i class="ti ti-users"></i> کاربران</div>
+    <div class="nav-it" data-pg="pro"><i class="ti ti-sparkles"></i> ابزار v2 Pro</div>
     <div class="nav-sec">سیستم</div>
     <div class="nav-it" data-pg="security"><i class="ti ti-shield-lock"></i> امنیت</div>
     <div class="nav-it" data-pg="logs"><i class="ti ti-history"></i> لاگ فعالیت‌ها</div>
@@ -1558,6 +1562,23 @@ a{color:inherit;text-decoration:none}
     <div class="conn-empty-v2-sub">به محض اتصال کلاینت‌ها، اینجا نمایش داده می‌شوند</div>
   </div>
 </section>
+
+<section class="pg" id="pg-customers">
+  <div class="topbar"><div><div class="tb-title"><i class="ti ti-users"></i> کاربران و مشتری‌ها</div><div class="tb-sub">مدیریت کاربر، یادداشت، وضعیت و اتصال به کانفیگ‌ها</div></div><div class="tb-right"><button class="btn btn-p btn-sm" onclick="createCustomer()"><i class="ti ti-user-plus"></i> کاربر جدید</button></div></div>
+  <div class="card"><div class="form-row" style="margin-bottom:12px"><input class="fi" id="cust-name" placeholder="نام کاربر" style="flex:1"><input class="fi" id="cust-phone" placeholder="موبایل/شناسه" style="flex:1"><input class="fi" id="cust-note" placeholder="یادداشت" style="flex:1"></div><div id="customers-list">—</div></div>
+</section>
+<section class="pg" id="pg-pro">
+  <div class="topbar"><div><div class="tb-title"><i class="ti ti-sparkles"></i> ابزار v2 Pro</div><div class="tb-sub">Theme Studio، Smart Subscription، Health Check، Backup، Monitoring و پاک‌سازی خودکار</div></div><div class="tb-right"><button class="btn btn-p btn-sm" onclick="loadProTools()"><i class="ti ti-refresh"></i> رفرش</button></div></div>
+  <div class="pro-grid">
+    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-palette"></i> Theme Studio</div><div class="pro-muted">رنگ اصلی و حالت قالب پنل را تنظیم کن.</div><div class="theme-swatches" id="theme-swatches"></div><div class="pro-actions"><button class="btn btn-p btn-sm" onclick="saveThemeStudio()"><i class="ti ti-device-floppy"></i> ذخیره قالب</button></div></div>
+    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-route-alt-left"></i> Smart Subscription ایران</div><div class="pro-muted">ساب هوشمند با ترتیب پیشنهادی برای شبکه‌های ایران.</div><div class="form-row"><input class="fi" id="smart-label" placeholder="نام ساب" style="flex:1"><select class="fs" id="smart-profile"><option value="general">عمومی</option><option value="mobile">موبایل</option><option value="mci">همراه اول</option><option value="irancell">ایرانسل</option><option value="wifi">وای‌فای/ثابت</option></select></div><div class="pro-actions"><button class="btn btn-p btn-sm" onclick="createSmartSub()"><i class="ti ti-wand"></i> ساخت ساب هوشمند</button></div></div>
+    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-heart-rate-monitor"></i> سلامت کانفیگ‌ها</div><div class="pro-muted">تشخیص سالم، نیازمند بررسی یا خراب بر اساس فعال بودن، انقضا، سهمیه و اتصال زنده.</div><div class="pro-actions"><button class="btn btn-g btn-sm" onclick="loadHealth()"><i class="ti ti-stethoscope"></i> بررسی سلامت</button></div><div id="health-list" style="margin-top:12px">—</div></div>
+    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-chart-bar"></i> مانیتورینگ پیشرفته</div><div class="pro-muted">Top مصرف، پروتکل‌ها، IPهای آنلاین و وضعیت دیتابیس.</div><div class="pro-actions"><button class="btn btn-g btn-sm" onclick="loadMonitoring()"><i class="ti ti-chart-donut"></i> نمایش مانیتورینگ</button></div><div id="monitoring-box" style="margin-top:12px">—</div></div>
+    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-database-export"></i> Backup / Import / Export</div><div class="pro-muted">خروجی کامل از لینک‌ها، گروه‌ها، کاربران، تنظیمات و رمز هش‌شده.</div><textarea class="fi" id="backup-import" placeholder="برای ایمپورت، JSON بکاپ را اینجا paste کن" style="width:100%;min-height:80px;margin-top:10px"></textarea><div class="pro-actions"><button class="btn btn-p btn-sm" onclick="exportBackup()"><i class="ti ti-download"></i> خروجی بکاپ</button><button class="btn btn-g btn-sm" onclick="importBackup()"><i class="ti ti-upload"></i> ایمپورت</button></div></div>
+    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-trash-x"></i> پاک‌سازی خودکار</div><div class="pro-muted">حذف کانفیگ‌های منقضی‌شده، آرشیو غیرفعال‌ها و پاک‌سازی لاگ‌ها.</div><div class="form-row"><input class="fi" id="clean-expired" type="number" placeholder="حذف منقضی بعد از X روز"><input class="fi" id="clean-inactive" type="number" placeholder="آرشیو غیرفعال بعد از X روز"></div><div class="pro-actions"><button class="btn btn-d btn-sm" onclick="runCleanup()"><i class="ti ti-broom"></i> اجرای پاک‌سازی</button></div></div>
+  </div>
+</section>
+
 <section class="pg" id="pg-security">
   <div class="topbar"><div><div class="tb-title"><i class="ti ti-shield-lock"></i> امنیت</div></div></div>
   <div class="g2">
@@ -1576,6 +1597,8 @@ a{color:inherit;text-decoration:none}
       <div class="sr"><span class="sr-k"><i class="ti ti-gauge"></i> سهمیه ترافیک</span><span class="sr-v" style="color:var(--green-t)">● فعال</span></div>
       <div class="sr"><span class="sr-k"><i class="ti ti-calendar-x"></i> تاریخ انقضا</span><span class="sr-v" style="color:var(--green-t)">● فعال</span></div>
       <div class="sr"><span class="sr-k"><i class="ti ti-lock"></i> رمز صفحه پابلیک ساب</span><span class="sr-v" style="color:var(--green-t)">● اختیاری · SHA-256</span></div>
+      <div class="form-row" style="margin-top:12px"><input class="fi" id="sec-max" type="number" placeholder="حداکثر تلاش ورود"><input class="fi" id="sec-min" type="number" placeholder="دقیقه قفل"><input class="fi" id="sec-ips" placeholder="IPهای مجاز با کاما"></div>
+      <button class="btn btn-p btn-sm" onclick="saveSecuritySettings()"><i class="ti ti-shield-check"></i> ذخیره امنیت</button>
     </div>
   </div>
 </section>
@@ -1722,7 +1745,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v1.2.1</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.0</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1857,7 +1880,7 @@ overlay.addEventListener('click',closeSb);
 function navTo(name){
   document.querySelectorAll('.nav-it').forEach(n=>n.classList.toggle('on',n.dataset.pg===name));
   document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id==='pg-'+name));
-  const loaders={links:loadLinks,connections:loadConns,errors:loadErrs,subscriptions:loadSubsPage,subgroups:loadSubs,logs:loadActivity,settings:loadDbStatus};  if(loaders[name])loaders[name]();
+  const loaders={links:loadLinks,connections:loadConns,errors:loadErrs,subscriptions:loadSubsPage,subgroups:loadSubs,logs:loadActivity,settings:loadDbStatus,customers:loadCustomers,pro:loadProTools,security:loadSecuritySettings};  if(loaders[name])loaders[name]();
   closeSb();window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.nav-it').forEach(el=>el.addEventListener('click',()=>navTo(el.dataset.pg)));
@@ -2540,11 +2563,32 @@ async function connectDatabase(kind){
     if(!r.ok)throw new Error(d.detail||'اتصال ناموفق بود');
     toast('دیتابیس متصل شد و اطلاعات ذخیره شد','ok');
     loadDbStatus();
+  renderThemeSwatches();
   }catch(e){toast(' '+e.message,'err')}
 }
 async function disconnectDatabase(){
-  try{await authF('/api/database/disconnect',{method:'POST'});toast('اتصال دیتابیس قطع شد','ok');loadDbStatus();}catch(e){toast('خطا در قطع اتصال','err')}
+  try{await authF('/api/database/disconnect',{method:'POST'});toast('اتصال دیتابیس قطع شد','ok');loadDbStatus();
+  renderThemeSwatches();}catch(e){toast('خطا در قطع اتصال','err')}
 }
+
+
+const THEME_COLORS=['#2563EB','#111827','#7C3AED','#059669','#DC2626','#D97706'];let selectedThemeColor=localStorage.getItem('oxnet-accent')||'#2563EB';
+function applyAccent(c){selectedThemeColor=c;localStorage.setItem('oxnet-accent',c);document.documentElement.style.setProperty('--accent2',c);document.documentElement.style.setProperty('--accent-d',c+'18');}
+function renderThemeSwatches(){const el=document.getElementById('theme-swatches');if(!el)return;el.innerHTML=THEME_COLORS.map(c=>`<span class="theme-swatch ${c===selectedThemeColor?'on':''}" style="background:${c}" onclick="applyAccent('${c}');renderThemeSwatches()"></span>`).join('')}
+async function loadProTools(){renderThemeSwatches();loadHealth();loadMonitoring();}
+async function saveThemeStudio(){try{await authF('/api/settings',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:{accent:selectedThemeColor}})});toast('قالب ذخیره شد','ok')}catch(e){toast('خطا','err')}}
+async function createSmartSub(){const label=document.getElementById('smart-label').value||'Smart Iran';const profile=document.getElementById('smart-profile').value;try{const r=await authF('/api/smart-subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({label,profile})});const d=await r.json();if(!r.ok)throw new Error(d.detail||'خطا');navigator.clipboard?.writeText(d.sub_url);toast('ساب هوشمند ساخته و کپی شد','ok');loadLinks();loadSubs();}catch(e){toast(' '+e.message,'err')}}
+async function loadHealth(){try{const r=await authF('/api/config-health'),d=await r.json();const el=document.getElementById('health-list');if(!el)return;el.innerHTML=(d.items||[]).slice(0,8).map(x=>`<div class="health-row"><div><b>${esc(x.label)}</b><div class="pro-muted">${esc(x.protocol)} · ${esc(x.status)} · ${(x.reasons||[]).join('، ')||'بدون مشکل'}</div></div><span class="score-pill">${toFa(x.score)}</span></div>`).join('')||'<div class="pro-muted">کانفیگی نیست</div>'}catch(e){}}
+async function loadMonitoring(){try{const r=await authF('/api/monitoring'),d=await r.json();const el=document.getElementById('monitoring-box');if(!el)return;el.innerHTML=`<div class="sr"><span class="sr-k">دیتابیس</span><span class="sr-v">${esc(d.db_mode)}</span></div><div class="sr"><span class="sr-k">Top مصرف</span><span class="sr-v">${(d.top_links||[]).slice(0,3).map(x=>esc(x.label)).join('، ')||'—'}</span></div><div class="sr"><span class="sr-k">IP آنلاین</span><span class="sr-v">${(d.top_ips||[]).length}</span></div>`}catch(e){}}
+function exportBackup(){window.open('/api/backup/export','_blank')}
+async function importBackup(){const raw=document.getElementById('backup-import').value.trim();if(!raw){toast('JSON بکاپ را وارد کن','err');return}try{const data=JSON.parse(raw);const r=await authF('/api/backup/import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const d=await r.json();if(!r.ok)throw new Error(d.detail||'خطا');toast('بکاپ ایمپورت شد','ok');refreshAll()}catch(e){toast(' '+e.message,'err')}}
+async function runCleanup(){const expired_days=Number(document.getElementById('clean-expired').value||0),inactive_days=Number(document.getElementById('clean-inactive').value||0);try{const r=await authF('/api/cleanup/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expired_days,inactive_days,reset_logs:false})});const d=await r.json();toast(`پاک‌سازی: ${toFa(d.deleted)} حذف، ${toFa(d.archived)} آرشیو`,'ok');refreshAll()}catch(e){toast('خطا','err')}}
+async function loadCustomers(){try{const r=await authF('/api/customers'),d=await r.json();const el=document.getElementById('customers-list');if(!el)return;el.innerHTML=(d.customers||[]).map(c=>`<div class="cust-row"><div><b>${esc(c.name)}</b><div class="pro-muted">${esc(c.phone||'')} · ${esc(c.note||'')}</div></div><span class="badge bg-blue">${toFa((c.link_ids||[]).length)} کانفیگ</span><button class="btn btn-d btn-sm" onclick="deleteCustomer('${c.customer_id}')"><i class="ti ti-trash"></i></button></div>`).join('')||'<div class="empty"><i class="ti ti-users"></i><p>کاربری ثبت نشده</p></div>'}catch(e){}}
+async function createCustomer(){const name=document.getElementById('cust-name').value,phone=document.getElementById('cust-phone').value,note=document.getElementById('cust-note').value;if(!name){toast('نام را وارد کن','err');return}try{await authF('/api/customers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,note})});['cust-name','cust-phone','cust-note'].forEach(id=>document.getElementById(id).value='');toast('کاربر ساخته شد','ok');loadCustomers()}catch(e){toast('خطا','err')}}
+async function deleteCustomer(id){if(!confirm('حذف کاربر؟'))return;await authF('/api/customers/'+id,{method:'DELETE'});toast('حذف شد','ok');loadCustomers()}
+async function loadSecuritySettings(){try{const r=await authF('/api/settings'),d=await r.json();const sec=d.settings.security||{};document.getElementById('sec-max').value=sec.max_attempts||5;document.getElementById('sec-min').value=sec.lock_minutes||10;document.getElementById('sec-ips').value=(sec.allowed_ips||[]).join(',')}catch(e){}}
+async function saveSecuritySettings(){const max_attempts=Number(document.getElementById('sec-max').value||5),lock_minutes=Number(document.getElementById('sec-min').value||10),allowed_ips=document.getElementById('sec-ips').value.split(',').map(x=>x.trim()).filter(Boolean);try{await authF('/api/settings',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({security:{max_attempts,lock_minutes,allowed_ips}})});toast('تنظیمات امنیت ذخیره شد','ok')}catch(e){toast('خطا','err')}}
+applyAccent(selectedThemeColor);
 
 async function changePw(){
   const cur=document.getElementById('cp-cur').value,nw=document.getElementById('cp-new').value,cf=document.getElementById('cp-cf').value;
@@ -2809,6 +2853,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadSubs();
   loadAnnouncements();
   loadDbStatus();
+  renderThemeSwatches();
   // بخش مرکزی حذف شده است
 
   setInterval(fetchStats, 2000);
@@ -3463,7 +3508,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.2.1</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v2.0.0</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3473,7 +3518,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v1.2.1</div>
+  <div class="footer">OXNET v2.0.0</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';

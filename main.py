@@ -90,7 +90,7 @@ def get_current_panel_version() -> str:
 
 
 def _state_snapshot() -> dict:
-    return {"links": dict(LINKS), "subs": dict(SUBS), "password_hash": AUTH["password_hash"], "saved_at": datetime.now().isoformat()}
+    return {"links": dict(LINKS), "subs": dict(SUBS), "customers": dict(CUSTOMERS), "settings": dict(SETTINGS), "password_hash": AUTH["password_hash"], "saved_at": datetime.now().isoformat()}
 
 
 def get_database_url() -> str | None:
@@ -178,6 +178,8 @@ async def load_state():
         if data:
             LINKS.update(data.get("links", {}))
             SUBS.update(data.get("subs", {}))
+            CUSTOMERS.update(data.get("customers", {}))
+            SETTINGS.update(data.get("settings", {}))
             if "password_hash" in data:
                 AUTH["password_hash"] = data["password_hash"]
             logger.info(f"State loaded: {len(LINKS)} links, {len(SUBS)} subs")
@@ -215,6 +217,21 @@ LINKS: dict = {}
 LINKS_LOCK = asyncio.Lock()
 SUBS: dict = {}
 SUBS_LOCK = asyncio.Lock()
+CUSTOMERS: dict = {}
+CUSTOMERS_LOCK = asyncio.Lock()
+SETTINGS: dict = {
+    "theme": {"accent": "#2563EB", "radius": 16, "density": "comfortable", "mode": "light"},
+    "security": {"lockout_enabled": True, "max_attempts": 5, "lock_minutes": 10, "allowed_ips": []},
+    "cleanup": {"auto_delete_expired_days": 0, "inactive_archive_days": 0, "log_keep": 150, "low_resource": False},
+    "smart_profiles": {
+        "general": ["trojan-ws", "vless-ws", "xhttp-stream-up"],
+        "mobile": ["trojan-ws", "vless-ws", "shadowsocks-tls"],
+        "mci": ["trojan-ws", "vless-ws"],
+        "irancell": ["vless-ws", "trojan-ws", "xhttp-stream-up"],
+        "wifi": ["xhttp-stream-up", "trojan-ws", "vless-ws"],
+    }
+}
+FAILED_LOGINS: dict = {}
 
 PROTOCOLS = (
     "vless-ws", "xhttp-packet-up", "xhttp-stream-up", "xhttp-stream-one",
@@ -240,6 +257,34 @@ def hash_password(pw: str) -> str:
     return hashlib.sha256(f"{pw}{CONFIG['secret']}".encode()).hexdigest()
 
 AUTH = {"password_hash": hash_password(os.environ.get("ADMIN_PASSWORD", "123456"))}
+
+def security_client_allowed(ip: str) -> bool:
+    allowed = SETTINGS.get("security", {}).get("allowed_ips") or []
+    return not allowed or ip in allowed
+
+def is_login_locked(ip: str) -> tuple[bool, int]:
+    sec = SETTINGS.get("security", {})
+    if not sec.get("lockout_enabled", True):
+        return False, 0
+    rec = FAILED_LOGINS.get(ip) or {"count": 0, "until": 0}
+    until = float(rec.get("until") or 0)
+    if until > time.time():
+        return True, int(until - time.time())
+    return False, 0
+
+def record_login_failure(ip: str):
+    sec = SETTINGS.get("security", {})
+    max_attempts = int(sec.get("max_attempts", 5) or 5)
+    lock_minutes = int(sec.get("lock_minutes", 10) or 10)
+    rec = FAILED_LOGINS.setdefault(ip, {"count": 0, "until": 0})
+    rec["count"] = int(rec.get("count", 0)) + 1
+    if rec["count"] >= max_attempts:
+        rec["until"] = time.time() + lock_minutes * 60
+        rec["count"] = 0
+
+def record_login_success(ip: str):
+    FAILED_LOGINS.pop(ip, None)
+
 SESSIONS: dict = {}
 SESSIONS_LOCK = asyncio.Lock()
 
@@ -781,9 +826,17 @@ async def sub_group_subscription(uuid_key: str, request: Request):
 async def api_login(request: Request):
     body = await request.json()
     ip = client_ip(request)
+    if not security_client_allowed(ip):
+        log_activity("auth", f"ورود از IP غیرمجاز مسدود شد: {ip}", "err")
+        raise HTTPException(status_code=403, detail="IP شما مجاز نیست")
+    locked, remaining = is_login_locked(ip)
+    if locked:
+        raise HTTPException(status_code=429, detail=f"ورود موقتاً قفل است؛ {remaining} ثانیه دیگر تلاش کنید")
     if hash_password(str(body.get("password", ""))) != AUTH["password_hash"]:
+        record_login_failure(ip)
         log_activity("auth", f"تلاش ورود ناموفق از {ip}", "err")
         raise HTTPException(status_code=401, detail="رمز عبور اشتباه است")
+    record_login_success(ip)
     token = await create_session()
     log_activity("auth", f"ورود موفق به پنل از {ip}", "ok")
     resp = JSONResponse({"ok": True})
@@ -842,6 +895,11 @@ async def get_stats(_=Depends(require_auth)):
             "shadowsocks_tls": sum(1 for l in snap.values() if l.get("protocol") == "shadowsocks-tls"),
             "mtproto": sum(1 for l in snap.values() if l.get("protocol") == "mtproto"),
         },
+        "top_links": sorted([
+            {"label": l.get("label", ""), "protocol": l.get("protocol", DEFAULT_PROTOCOL), "used_bytes": l.get("used_bytes", 0)}
+            for l in snap.values()
+        ], key=lambda x: x["used_bytes"], reverse=True)[:8],
+        "db_mode": "PostgreSQL" if DB_POOL else "JSON File",
     }
 
 @app.post("/api/bot-tcp-proxy/start")
@@ -1360,6 +1418,144 @@ async def public_sub_data(uuid_key: str, request: Request):
         "links": links_out,
     }
 
+
+# ══════════════════════════════════════════════════════════════════════════════
+# OXNET v2 Pro features: Theme, Smart Sub, Health, Users, Backup, Monitoring, Cleanup
+# ══════════════════════════════════════════════════════════════════════════════
+@app.get("/api/settings")
+async def api_settings(_=Depends(require_auth)):
+    return {"settings": SETTINGS}
+
+@app.patch("/api/settings")
+async def api_update_settings(request: Request, _=Depends(require_auth)):
+    body = await request.json()
+    for section in ("theme", "security", "cleanup"):
+        if section in body and isinstance(body[section], dict):
+            SETTINGS.setdefault(section, {}).update(body[section])
+    await save_state()
+    log_activity("system", "تنظیمات پیشرفته ذخیره شد", "ok")
+    return {"ok": True, "settings": SETTINGS}
+
+@app.get("/api/customers")
+async def api_customers(_=Depends(require_auth)):
+    async with CUSTOMERS_LOCK:
+        return {"customers": [{"customer_id": cid, **c} for cid, c in CUSTOMERS.items()]}
+
+@app.post("/api/customers")
+async def api_create_customer(request: Request, _=Depends(require_auth)):
+    body = await request.json()
+    cid = generate_uuid()
+    CUSTOMERS[cid] = {
+        "name": str(body.get("name") or "کاربر جدید")[:80],
+        "phone": str(body.get("phone") or "")[:40],
+        "note": str(body.get("note") or "")[:300],
+        "status": str(body.get("status") or "active")[:30],
+        "link_ids": list(body.get("link_ids") or []),
+        "created_at": datetime.now().isoformat(),
+    }
+    await save_state()
+    return {"ok": True, "customer_id": cid, **CUSTOMERS[cid]}
+
+@app.patch("/api/customers/{cid}")
+async def api_update_customer(cid: str, request: Request, _=Depends(require_auth)):
+    if cid not in CUSTOMERS:
+        raise HTTPException(status_code=404, detail="customer not found")
+    body = await request.json()
+    for k in ("name", "phone", "note", "status"):
+        if k in body: CUSTOMERS[cid][k] = str(body[k])[:300]
+    if "link_ids" in body: CUSTOMERS[cid]["link_ids"] = list(body.get("link_ids") or [])
+    await save_state()
+    return {"ok": True, "customer_id": cid, **CUSTOMERS[cid]}
+
+@app.delete("/api/customers/{cid}")
+async def api_delete_customer(cid: str, _=Depends(require_auth)):
+    CUSTOMERS.pop(cid, None)
+    await save_state()
+    return {"ok": True}
+
+@app.get("/api/config-health")
+async def api_config_health(_=Depends(require_auth)):
+    async with LINKS_LOCK:
+        snap = dict(LINKS)
+    rows=[]
+    now = datetime.now()
+    for uid,l in snap.items():
+        used=l.get("used_bytes",0); limit=l.get("limit_bytes",0); expired=is_link_expired(l)
+        conn_count=sum(1 for c in connections.values() if c.get("uuid")==uid)
+        score=100
+        reasons=[]
+        if not l.get("active", True): score-=45; reasons.append("غیرفعال")
+        if expired: score-=45; reasons.append("منقضی")
+        if limit and used>=limit: score-=40; reasons.append("سهمیه تمام")
+        if conn_count>0: reasons.append("اتصال زنده")
+        if "xhttp" in str(l.get("protocol","")) and conn_count==0: score-=5
+        status="سالم" if score>=80 else ("نیازمند بررسی" if score>=45 else "خراب/مسدود")
+        rows.append({"uuid":uid,"label":l.get("label"),"protocol":l.get("protocol"),"score":max(0,score),"status":status,"reasons":reasons,"used_bytes":used,"limit_bytes":limit,"active_connections":conn_count})
+    rows.sort(key=lambda x:x["score"])
+    return {"items": rows}
+
+@app.post("/api/smart-subscription")
+async def api_smart_subscription(request: Request, _=Depends(require_auth)):
+    body = await request.json()
+    label = str(body.get("label") or "Smart Iran")[:60]
+    profile = str(body.get("profile") or "general")
+    protocols = SETTINGS.get("smart_profiles", {}).get(profile) or SETTINGS["smart_profiles"]["general"]
+    fake = {"label": label, "protocol": "multi", "custom_path": body.get("custom_path"), "limit_value": body.get("limit_value", 0), "limit_unit": body.get("limit_unit", "GB"), "expires_days": body.get("expires_days", 0), "note": "Smart Subscription"}
+    host=get_host(); base_path=await unique_config_path(normalize_config_path(fake.get("custom_path")), generate_uuid()[:8]); sub_id=generate_uuid(); uuid_key=base_path
+    sub={"name":label,"desc":f"Smart Subscription · {profile}","uuid_key":uuid_key,"password_hash":None,"created_at":datetime.now().isoformat(),"link_ids":[],"smart_profile":profile}
+    limit_bytes=0 if float(fake.get("limit_value") or 0)<=0 else parse_size_to_bytes(float(fake.get("limit_value") or 0), fake.get("limit_unit") or "GB")
+    expires_at=(datetime.now()+timedelta(days=int(fake.get("expires_days") or 0))).isoformat() if int(fake.get("expires_days") or 0)>0 else None
+    async with LINKS_LOCK:
+        for proto in protocols:
+            muid=generate_uuid(); mpath=f"{base_path}-{proto_slug(proto)}"; LINKS[muid]={"label":f"{label} - {proto}","limit_bytes":limit_bytes,"used_bytes":0,"created_at":datetime.now().isoformat(),"active":True,"expires_at":expires_at,"note":"Smart Subscription","is_default":False,"sub_id":sub_id,"protocol":proto,"path":mpath,"is_multi_child":True,"multi_group_id":sub_id,"ad_tag":None}; sub["link_ids"].append(muid)
+    SUBS[sub_id]=sub
+    await save_state()
+    return {"ok":True,"sub_id":sub_id,"sub_url":f"https://{host}/sub-group/{uuid_key}","profile":profile,"protocols":protocols}
+
+@app.get("/api/backup/export")
+async def api_backup_export(_=Depends(require_auth)):
+    return JSONResponse(_state_snapshot(), headers={"Content-Disposition":"attachment; filename=oxnet-backup.json"})
+
+@app.post("/api/backup/import")
+async def api_backup_import(request: Request, _=Depends(require_auth)):
+    data = await request.json()
+    if not isinstance(data, dict):
+        raise HTTPException(status_code=400, detail="backup invalid")
+    LINKS.clear(); LINKS.update(data.get("links", {}))
+    SUBS.clear(); SUBS.update(data.get("subs", {}))
+    CUSTOMERS.clear(); CUSTOMERS.update(data.get("customers", {}))
+    SETTINGS.update(data.get("settings", {}))
+    if data.get("password_hash"): AUTH["password_hash"] = data["password_hash"]
+    await save_state(); log_activity("system", "بکاپ ایمپورت شد", "ok")
+    return {"ok": True, "links": len(LINKS), "subs": len(SUBS), "customers": len(CUSTOMERS)}
+
+@app.get("/api/monitoring")
+async def api_monitoring(_=Depends(require_auth)):
+    async with LINKS_LOCK: snap=dict(LINKS)
+    proto={}
+    for l in snap.values(): proto[l.get("protocol",DEFAULT_PROTOCOL)] = proto.get(l.get("protocol",DEFAULT_PROTOCOL),0)+1
+    ipmap={}
+    for c in connections.values(): ipmap[c.get("ip","?")] = ipmap.get(c.get("ip","?"),0)+1
+    return {"protocols":proto,"top_ips":sorted(ipmap.items(), key=lambda x:x[1], reverse=True)[:10],"top_links":sorted([{"label":l.get("label"),"used_bytes":l.get("used_bytes",0),"protocol":l.get("protocol")} for l in snap.values()], key=lambda x:x["used_bytes"], reverse=True)[:10],"errors":list(error_logs)[-20:],"db_mode":"PostgreSQL" if DB_POOL else "JSON File"}
+
+@app.post("/api/cleanup/run")
+async def api_cleanup_run(request: Request, _=Depends(require_auth)):
+    body=await request.json(); expired_days=int(body.get("expired_days",0) or 0); reset_logs=bool(body.get("reset_logs",False)); inactive_days=int(body.get("inactive_days",0) or 0)
+    deleted=[]; archived=[]; now=datetime.now()
+    async with LINKS_LOCK:
+        for uid,l in list(LINKS.items()):
+            if expired_days and l.get("expires_at"):
+                try:
+                    if (now-datetime.fromisoformat(l["expires_at"])).days>=expired_days:
+                        deleted.append(uid); del LINKS[uid]; continue
+                except Exception: pass
+            if inactive_days and not l.get("active",True):
+                l["archived"] = True; archived.append(uid)
+    if reset_logs:
+        error_logs.clear(); activity_logs.clear()
+    await save_state()
+    return {"ok":True,"deleted":len(deleted),"archived":len(archived),"logs_reset":reset_logs}
+
 # ══════════════════════════════════════════════════════════════════════════════
 # Version / Auto-Update
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1424,7 +1620,7 @@ from pages import LOGIN_HTML, DASHBOARD_HTML
 
 def render_html(html: str) -> str:
     v = get_current_panel_version()
-    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}")
+    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}")
 
 
 # ── Central: Announcements & Support ─────────────────────────────────────────
