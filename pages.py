@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v1.2.0
+# pages.py  -  OXNET v1.2.1
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -97,7 +97,7 @@ input:focus+.ic{color:var(--accent)}
   <div class="card">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.2.0</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.2.1</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -112,7 +112,7 @@ input:focus+.ic{color:var(--accent)}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 1.2.0</div>
+    <div class="footer">OXNET · 1.2.1</div>
   </div>
 </div>
 <script>
@@ -1224,6 +1224,71 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+
+<div class="modal-bg" id="modal-bot-tcp-proxy">
+  <div class="modal-v2 cm-modal" style="max-width:760px">
+    <button class="cm-close" onclick="closeModal('modal-bot-tcp-proxy')"><i class="ti ti-x"></i></button>
+    <div class="cm-head">
+      <div class="cm-head-row">
+        <div class="cm-head-icon"><i class="ti ti-server-2"></i></div>
+        <div>
+          <div class="cm-head-title">ساخت TCP Proxy عمومی</div>
+          <div class="cm-head-sub">برای پروکسی تلگرام/MTProto یک دامنه و پورت عمومی از Railway دریافت می‌کند</div>
+        </div>
+      </div>
+    </div>
+    <div class="cm-body">
+      <div class="cl" style="margin-top:0;margin-bottom:14px">
+        <i class="ti ti-info-circle"></i>
+        <span>اگر قبلاً توکن Railway ذخیره شده باشد، نیازی به وارد کردن دوباره نیست. در غیر این صورت توکن را وارد کن و فرآیند را شروع کن.</span>
+      </div>
+      <div class="cm-section" id="btp-token-section">
+        <div class="cm-section-label"><i class="ti ti-key"></i> توکن Railway</div>
+        <input class="cm-input" id="btp-token" type="password" placeholder="Railway API Token" dir="ltr">
+      </div>
+      <div class="cm-section" id="btp-token-saved-section" style="display:none">
+        <div class="cl" style="margin-top:0;background:var(--green-bg);color:var(--green-t)">
+          <i class="ti ti-circle-check"></i>
+          <span>توکن Railway قبلاً ذخیره شده است. برای تغییر توکن روی دکمه زیر بزن.</span>
+        </div>
+        <button type="button" class="btn btn-o btn-sm" onclick="btpChangeToken()"><i class="ti ti-key"></i> تغییر توکن</button>
+      </div>
+      <div class="cm-section">
+        <div class="cm-section-label"><i class="ti ti-route"></i> تنظیمات ساخت</div>
+        <div class="cm-row2">
+          <div class="cm-field">
+            <label>پورت داخلی MTProto</label>
+            <input class="cm-input" id="btp-port" type="number" min="1" max="65535" placeholder="خالی = خودکار/پیش‌فرض">
+          </div>
+          <div class="cm-field">
+            <label>حالت جستجو</label>
+            <div class="cm-note" style="margin-top:0"><i class="ti ti-route"></i> حالت پیش‌فرض اسکن خودکار است. در صورت نیاز یکی از دامنه‌های پیشنهادی را انتخاب کن.</div>
+          </div>
+        </div>
+        <div class="cm-pills" style="margin-top:10px">
+          <span class="cm-pill active" id="btp-isp-auto" onclick="btpSelectIsp(null,'btp-isp-auto')">اسکن خودکار</span>
+          <span class="cm-pill" id="btp-isp-cloudflare" onclick="btpSelectIsp('cloudflare.com','btp-isp-cloudflare')">Cloudflare</span>
+          <span class="cm-pill" id="btp-isp-google" onclick="btpSelectIsp('google.com','btp-isp-google')">Google</span>
+          <span class="cm-pill" id="btp-isp-microsoft" onclick="btpSelectIsp('microsoft.com','btp-isp-microsoft')">Microsoft</span>
+        </div>
+      </div>
+      <div class="cm-section">
+        <div class="cm-section-label"><i class="ti ti-activity"></i> وضعیت</div>
+        <div class="cl" style="margin-top:0">
+          <i class="ti ti-player-play" id="btp-status-icon"></i>
+          <span id="btp-status-text">آماده شروع</span>
+        </div>
+        <div id="btp-log-box" style="display:none;background:rgba(0,0,0,.12);border:1px solid var(--card-b);border-radius:12px;padding:12px;max-height:220px;overflow:auto;font-family:ui-monospace,monospace;font-size:11px;line-height:1.8;margin-top:12px"></div>
+      </div>
+    </div>
+    <div class="cm-footer">
+      <button class="cm-btn-cancel" onclick="closeModal('modal-bot-tcp-proxy')">بستن</button>
+      <button class="btn btn-d" id="btp-stop-btn" onclick="stopBotTcpProxy()" style="display:none"><i class="ti ti-player-stop"></i> توقف</button>
+      <button class="cm-btn-submit" id="btp-start-btn" onclick="startBotTcpProxy()"><i class="ti ti-player-play"></i> شروع ساخت TCP Proxy</button>
+    </div>
+  </div>
+</div>
+
 <!-- مودال بروزرسانی -->
 <div class="modal-bg" id="modal-update" style="z-index:9999">
   <div class="modal-v2" style="max-width:460px">
@@ -1260,7 +1325,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small">OX</div>
-    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v1.2.0</div></div>
+    <div><div class="logo-name">oxnet</div><div class="logo-sub">OXNET · v1.2.1</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1341,7 +1406,7 @@ a{color:inherit;text-decoration:none}
         <i class="ti ti-square-rounded-plus"></i> ساخت کانفیگ جدید
       </button>
       <button class="btn btn-g" style="margin-right:14px" onclick="openModal('modal-bot-tcp-proxy');btpCheckTokenState()">
-        <i class="ti ti-server-2"></i> Bot tcp proxy
+        <i class="ti ti-server-2"></i> ساخت TCP Proxy
       </button>
     </div>
     <div class="tb-right">
@@ -1657,7 +1722,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v1.2.0</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v1.2.1</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
@@ -1859,13 +1924,15 @@ async function loadLinks(){
     const {links:rawLinks=[]}=await lr.json();
     const {subs=[]}=await sr.json();
     const multiSubs=subs.filter(s=>String(s.desc||'').includes('Multi Protocol'));
-    const childIds=new Set(rawLinks.filter(l=>l.is_multi_child || multiSubs.some(s=>(s.link_ids||[]).includes(l.uuid))).map(l=>l.uuid));
+    // فقط بچه‌های واقعی مولتی را داخل کارت گروهی مخفی/گروه‌بندی کن؛
+    // کانفیگ یا پروکسی معمولی که بعداً داخل همان گروه اضافه شده باید جدا نمایش داده شود.
+    const childIds=new Set(rawLinks.filter(l=>l.is_multi_child || l.multi_group_id).map(l=>l.uuid));
     const groupCards=multiSubs.map(s=>{
-      const kids=rawLinks.filter(l=>l.multi_group_id===s.sub_id || (s.link_ids||[]).includes(l.uuid));
+      const kids=rawLinks.filter(l=>l.is_multi_child && (l.multi_group_id===s.sub_id || (s.link_ids||[]).includes(l.uuid)));
       return {uuid:s.sub_id,label:s.name,protocol:'multi',is_multi_group:true,child_count:kids.length,children:kids,active:kids.some(k=>k.active&&!k.expired),expired:false,used_bytes:kids.reduce((a,k)=>a+(k.used_bytes||0),0),limit_bytes:kids.reduce((a,k)=>a+(k.limit_bytes||0),0),created_at:s.created_at,sub_url:s.sub_url,vless_link:s.sub_url,sub_id:s.sub_id};
     });
     const links=[...groupCards,...rawLinks.filter(l=>!childIds.has(l.uuid))];
-    allSubsList=subs;allLinksList=links;
+    allSubsList=subs;allLinksList=links;window.__rawLinksList=rawLinks;
     document.getElementById('info-inbounds').textContent = toFa(links.length);
     document.getElementById('info-clients').textContent = toFa(links.filter(l=>l.active).length);
     document.getElementById('info-alltime').textContent = fmtB(links.reduce((s,l)=>s+l.used_bytes,0));
@@ -2116,7 +2183,7 @@ async function createLink(){
 
 
 function openEditLink(uuid){
-  const l=allLinksList.find(x=>x.uuid===uuid);
+  const l=(window.__rawLinksList||allLinksList).find(x=>x.uuid===uuid);
   if(!l)return;
   document.getElementById('el-uuid').value=uuid;
   document.getElementById('el-label').value=l.label;
@@ -2864,7 +2931,8 @@ async function btpCheckTokenState(){
 
 async function startBotTcpProxy(){
   const tokenField = document.getElementById('btp-token');
-  const token = tokenField.style.display !== 'none' ? tokenField.value.trim() : '';
+  const tokenSection=document.getElementById('btp-token-section');
+  const token = tokenSection && tokenSection.style.display !== 'none' ? tokenField.value.trim() : '';
   const portVal = document.getElementById('btp-port').value.trim();
   const btn = document.getElementById('btp-start-btn');
   btn.disabled = true;
@@ -3139,7 +3207,8 @@ function dsRenderChips(){
 async function startDomainScan(){
   if(!dsDomains.length){ toast('حداقل یک دامنه اضافه کن','err'); return; }
   const tokenField = document.getElementById('ds-token');
-  const token = tokenField.style.display !== 'none' ? tokenField.value.trim() : '';
+  const tokenSection=document.getElementById('ds-token-section');
+  const token = tokenSection && tokenSection.style.display !== 'none' ? tokenField.value.trim() : '';
   const btn = document.getElementById('ds-start-btn');
   btn.disabled = true; btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال اجرا...';
   document.getElementById('ds-log-box').style.display = 'block';
@@ -3187,8 +3256,8 @@ let btpForcedDomain = null;
 
 function btpSelectIsp(domain, optId){
   btpForcedDomain = domain; // null یعنی حالت اسکن خودکار قبلی
-  document.querySelectorAll('#modal-bot-tcp-proxy .cm-opt').forEach(o=>o.classList.remove('sel'));
-  document.getElementById(optId).classList.add('sel');
+  document.querySelectorAll('#modal-bot-tcp-proxy .cm-pill,#modal-bot-tcp-proxy .cm-opt').forEach(o=>o.classList.remove('active','sel'));
+  const opt=document.getElementById(optId); if(opt) opt.classList.add('active','sel');
 }
 </script>
 </body></html>"""
@@ -3394,7 +3463,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark">OX</div>
-      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.2.0</div></div>
+      <div><div class="brand-name">oxnet</div><div class="brand-sub">OXNET · v1.2.1</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3404,7 +3473,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v1.2.0</div>
+  <div class="footer">OXNET v1.2.1</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';

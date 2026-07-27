@@ -1,3 +1,3 @@
-version=1.2.0
-description=OXNET dashboard, PostgreSQL, XHTTP and Shadowsocks fixes
-updated_at=1785148380
+version=1.2.1
+description=Fix config list visibility and TCP Proxy button
+updated_at=1785149441
