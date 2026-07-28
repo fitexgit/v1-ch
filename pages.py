@@ -181,7 +181,31 @@ body > .wrap .footer{display:none!important}
 [data-theme="dark"] .theme-swatch.on{border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(96,165,250,.18)!important}
 .dash-protocols{grid-template-columns:repeat(4,1fr)!important}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}@media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
-.fallback-bars{height:260px;display:flex;align-items:end;gap:8px;padding:12px}.fb-bar{flex:1;min-width:10px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:6px}.fb-bar span{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,var(--accent),rgba(59,130,246,.18));box-shadow:0 10px 24px rgba(59,130,246,.18)}.fb-bar b{font-size:9px;color:var(--t3);font-weight:800;writing-mode:vertical-rl;max-height:46px;overflow:hidden}.fallback-protos{height:260px;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:14px}.fb-proto{display:grid;grid-template-columns:74px 1fr 34px;gap:10px;align-items:center;font-size:11px;color:var(--t2);font-weight:800}.fb-proto div{height:11px;border-radius:999px;background:rgba(100,116,139,.16);overflow:hidden}.fb-proto i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#8b5cf6)}.fb-proto b{color:var(--t1);text-align:left}</style>
+.fallback-bars{height:260px;display:flex;align-items:end;gap:8px;padding:12px}.fb-bar{flex:1;min-width:10px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:6px}.fb-bar span{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,var(--accent),rgba(59,130,246,.18));box-shadow:0 10px 24px rgba(59,130,246,.18)}.fb-bar b{font-size:9px;color:var(--t3);font-weight:800;writing-mode:vertical-rl;max-height:46px;overflow:hidden}.fallback-protos{height:260px;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:14px}.fb-proto{display:grid;grid-template-columns:74px 1fr 34px;gap:10px;align-items:center;font-size:11px;color:var(--t2);font-weight:800}.fb-proto div{height:11px;border-radius:999px;background:rgba(100,116,139,.16);overflow:hidden}.fb-proto i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#8b5cf6)}.fb-proto b{color:var(--t1);text-align:left}
+
+/* OXNET user-request fixes: charts, backup, Cloudflare modal, dark buttons */
+.ch,.ch-sm,.traf-chart-body{min-height:220px;position:relative}
+.ch canvas,.ch-sm canvas,.traf-chart-body canvas{display:block!important;width:100%!important;height:100%!important;min-height:180px!important}
+.traf-chart-body canvas{min-height:300px!important}
+.dash-chart-card .pro-muted,.traf-chart-card .pro-muted{text-align:center;padding:34px 12px;color:var(--t3);font-size:12px}
+.cf-save-zone{margin-top:18px;padding-top:16px;border-top:1px solid var(--card-b);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cf-save-hint{font-size:10.5px;color:var(--t3);line-height:1.8;display:flex;align-items:center;gap:7px}
+.cf-save-main{min-width:190px;justify-content:center;font-weight:900!important;padding:11px 18px!important;border-radius:12px!important}
+.backup-panel{grid-column:1/-1;background:linear-gradient(155deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:var(--shadow)}
+.backup-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.backup-title{font-size:15px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.backup-title i{color:var(--accent)}
+.backup-sub{font-size:11px;color:var(--t3);margin-top:5px;line-height:1.8}
+.backup-actions{display:flex;gap:8px;flex-wrap:wrap}.backup-actions .btn{justify-content:center}
+.backup-import-box{margin-top:0}.backup-import-box textarea{width:100%;min-height:135px;resize:vertical;direction:ltr;font-family:ui-monospace,monospace;font-size:11px;line-height:1.7}
+#restore-points{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+#modal-cf-domain .modal-v2{max-width:620px!important}
+#modal-cf-domain textarea{min-height:190px;resize:vertical}
+[data-theme="dark"] .btn-p,[data-theme="dark"] .cm-btn-submit,[data-theme="dark"] .modal-v2-btn-submit,[data-theme="dark"] .pw-submit,[data-theme="dark"] .traf-range-tab.on,[data-theme="dark"] .cf-save-main{background:linear-gradient(135deg,#2563eb,#1d4ed8)!important;color:#fff!important;border:1px solid rgba(147,197,253,.35)!important;box-shadow:0 10px 26px rgba(37,99,235,.28)!important;text-shadow:none!important}
+[data-theme="dark"] .btn-p:hover,[data-theme="dark"] .cm-btn-submit:hover,[data-theme="dark"] .modal-v2-btn-submit:hover,[data-theme="dark"] .pw-submit:hover,[data-theme="dark"] .cf-save-main:hover{background:linear-gradient(135deg,#3b82f6,#2563eb)!important;color:#fff!important;filter:none!important;transform:translateY(-1px)}
+[data-theme="dark"] .btn-g,[data-theme="dark"] .btn-o,[data-theme="dark"] .btn-pur,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .cm-btn-cancel,[data-theme="dark"] .modal-v2-btn-cancel{background:#111827!important;color:#f8fafc!important;border-color:rgba(255,255,255,.16)!important}
+[data-theme="dark"] .btn-g:hover,[data-theme="dark"] .btn-o:hover,[data-theme="dark"] .btn-pur:hover,[data-theme="dark"] .theme-btn:hover,[data-theme="dark"] .menu-btn:hover,[data-theme="dark"] .theme-mob:hover,[data-theme="dark"] .cm-btn-cancel:hover,[data-theme="dark"] .modal-v2-btn-cancel:hover{background:#1f2937!important;color:#fff!important;border-color:rgba(147,197,253,.32)!important}
+[data-theme="light"] .btn-p:hover,[data-theme="light"] .cf-save-main:hover{color:#fff!important}
+</style>
 </head>
 <body>
 <div class="bg"></div><div class="grid"></div>
@@ -1109,6 +1133,30 @@ a{color:inherit;text-decoration:none}
 }
 @keyframes cmSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 
+
+
+/* OXNET dashboard final fixes: charts, backup, Cloudflare modal, dark buttons */
+.ch,.ch-sm,.traf-chart-body{min-height:220px;position:relative}
+.ch canvas,.ch-sm canvas,.traf-chart-body canvas{display:block!important;width:100%!important;height:100%!important;min-height:180px!important}
+.traf-chart-body canvas{min-height:300px!important}
+.dash-chart-card .pro-muted,.traf-chart-card .pro-muted{text-align:center;padding:34px 12px;color:var(--t3);font-size:12px}
+.cf-save-zone{margin-top:18px;padding-top:16px;border-top:1px solid var(--card-b);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cf-save-hint{font-size:10.5px;color:var(--t3);line-height:1.8;display:flex;align-items:center;gap:7px}
+.cf-save-main{min-width:190px;justify-content:center;font-weight:900!important;padding:11px 18px!important;border-radius:12px!important}
+.backup-panel{grid-column:1/-1;background:linear-gradient(155deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:var(--shadow)}
+.backup-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.backup-title{font-size:15px;font-weight:900;color:var(--t1);display:flex;align-items:center;gap:8px}.backup-title i{color:var(--accent)}
+.backup-sub{font-size:11px;color:var(--t3);margin-top:5px;line-height:1.8}
+.backup-actions{display:flex;gap:8px;flex-wrap:wrap}.backup-actions .btn{justify-content:center}
+.backup-import-box{margin-top:0}.backup-import-box textarea{width:100%;min-height:135px;resize:vertical;direction:ltr;font-family:ui-monospace,monospace;font-size:11px;line-height:1.7}
+#restore-points{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+#modal-cf-domain .modal-v2{max-width:620px!important}
+#modal-cf-domain textarea{min-height:190px;resize:vertical}
+[data-theme="dark"] .btn-p,[data-theme="dark"] .cm-btn-submit,[data-theme="dark"] .modal-v2-btn-submit,[data-theme="dark"] .pw-submit,[data-theme="dark"] .traf-range-tab.on,[data-theme="dark"] .cf-save-main{background:linear-gradient(135deg,#2563eb,#1d4ed8)!important;color:#fff!important;border:1px solid rgba(147,197,253,.35)!important;box-shadow:0 10px 26px rgba(37,99,235,.28)!important;text-shadow:none!important}
+[data-theme="dark"] .btn-p:hover,[data-theme="dark"] .cm-btn-submit:hover,[data-theme="dark"] .modal-v2-btn-submit:hover,[data-theme="dark"] .pw-submit:hover,[data-theme="dark"] .cf-save-main:hover{background:linear-gradient(135deg,#3b82f6,#2563eb)!important;color:#fff!important;filter:none!important;transform:translateY(-1px)}
+[data-theme="dark"] .btn-g,[data-theme="dark"] .btn-o,[data-theme="dark"] .btn-pur,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .cm-btn-cancel,[data-theme="dark"] .modal-v2-btn-cancel{background:#111827!important;color:#f8fafc!important;border-color:rgba(255,255,255,.16)!important}
+[data-theme="dark"] .btn-g:hover,[data-theme="dark"] .btn-o:hover,[data-theme="dark"] .btn-pur:hover,[data-theme="dark"] .theme-btn:hover,[data-theme="dark"] .menu-btn:hover,[data-theme="dark"] .theme-mob:hover,[data-theme="dark"] .cm-btn-cancel:hover,[data-theme="dark"] .modal-v2-btn-cancel:hover{background:#1f2937!important;color:#fff!important;border-color:rgba(147,197,253,.32)!important}
+[data-theme="light"] .btn-p:hover,[data-theme="light"] .cf-save-main:hover{color:#fff!important}
 </style>
 
 <style id="oxnet-dashboard-redesign">
@@ -1309,6 +1357,25 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+
+
+<div class="modal-bg" id="modal-cf-domain">
+  <div class="modal-v2">
+    <button class="modal-v2-close" onclick="closeModal('modal-cf-domain')"><i class="ti ti-x"></i></button>
+    <div class="modal-v2-head">
+      <div class="modal-v2-icon"><i class="ti ti-brand-cloudflare"></i></div>
+      <div class="modal-v2-title">ویرایش دامنه Cloudflare</div>
+      <div class="modal-v2-sub">ویرایش در پنجره جدا انجام می‌شود تا فرم ثبت دامنه دست‌نخورده بماند.</div>
+    </div>
+    <div class="modal-v2-body">
+      <input type="hidden" id="cf-m-edit-key" value="">
+      <div class="modal-v2-field"><label><i class="ti ti-world-www"></i> دامنه Cloudflare</label><input class="modal-v2-input" id="cf-m-domain" dir="ltr" placeholder="sub.example.com"></div>
+      <div class="modal-v2-field"><label><i class="ti ti-tag"></i> نام نمایشی</label><input class="modal-v2-input" id="cf-m-name" placeholder="Cloudflare Main"></div>
+      <div class="modal-v2-field"><label><i class="ti ti-route"></i> IP تمیز</label><textarea class="modal-v2-input" id="cf-m-ips" dir="ltr" placeholder="هر خط یک IP، IPv6 یا دامنه تمیز"></textarea></div>
+      <div class="modal-v2-footer"><button class="modal-v2-btn-cancel" onclick="closeModal('modal-cf-domain')">انصراف</button><button class="modal-v2-btn-submit" onclick="saveCloudflareDomain(true)"><i class="ti ti-device-floppy"></i> ذخیره تغییرات</button></div>
+    </div>
+  </div>
+</div>
 
 <!-- OXNET v2.0.10 repaired action modals -->
 <div class="modal-bg" id="modal-edit-link">
@@ -1626,7 +1693,7 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <section class="pg" id="pg-cloudflare">
-  <div class="topbar"><div><div class="tb-title"><i class="ti ti-cloud"></i> کلادفلیر</div><div class="tb-sub">دامنه Cloudflare جدا از دامنه اصلی پنل؛ ساخت ساب با Host/SNI دامنه و Clean IPهای دلخواه</div></div><div class="tb-right"><button class="btn btn-p btn-sm" onclick="saveCloudflareDomain()"><i class="ti ti-device-floppy"></i> ذخیره دامنه</button></div></div>
+  <div class="topbar"><div><div class="tb-title"><i class="ti ti-cloud"></i> کلادفلیر</div><div class="tb-sub">دامنه Cloudflare جدا از دامنه اصلی پنل؛ ساخت ساب با Host/SNI دامنه و Clean IPهای دلخواه</div></div></div>
   <div class="g2">
     <div class="card">
       <div class="card-title"><i class="ti ti-world-www"></i> ثبت دامنه Cloudflare</div>
@@ -1636,6 +1703,10 @@ a{color:inherit;text-decoration:none}
       <input type="hidden" id="cf-edit-key" value="">
       <div class="fg" style="margin-top:12px"><label>IP تمیز</label><textarea class="fi" id="cf-ips" dir="ltr" placeholder="هر خط یک IP، IPv6 یا دامنه تمیز&#10;104.16.1.1&#10;2606:4700:9c67:fc3d:7eb9:81b1:9156:fc79" style="width:100%;min-height:170px"></textarea></div>
       <div class="cl" style="margin-top:12px"><i class="ti ti-route"></i><span>IPv4، IPv6 و دامنه پشتیبانی می‌شود. اگر ۵۰ IP تمیز وارد کنی، در Sub کلادفلیر برای هر کانفیگ ۵۰ لینک ساخته می‌شود؛ آدرس کانفیگ IP تمیز است اما Host و SNI همان دامنه Cloudflare می‌ماند.</span></div>
+      <div class="cf-save-zone">
+        <div class="cf-save-hint"><i class="ti ti-arrow-down-circle"></i> بعد از وارد کردن دامنه، از همین دکمه ذخیره کن.</div>
+        <button class="btn btn-p cf-save-main" onclick="saveCloudflareDomain(false)"><i class="ti ti-device-floppy"></i> ذخیره دامنه</button>
+      </div>
     </div>
     <div class="card"><div class="card-title"><i class="ti ti-list-details"></i> دامنه‌های ثبت‌شده <span class="ml-auto badge bg-blue" id="cf-count">۰</span></div><div id="cf-list">در حال بارگذاری...</div></div>
   </div>
@@ -1817,6 +1888,30 @@ a{color:inherit;text-decoration:none}
         <button class="pw-submit" onclick="changePw()"><i class="ti ti-shield-check"></i> ذخیره رمز جدید</button>
       </div>
     </div>
+    <div class="backup-panel">
+      <div class="backup-head">
+        <div>
+          <div class="backup-title"><i class="ti ti-database-export"></i> بکاپ و ریستور</div>
+          <div class="backup-sub">از کل وضعیت پنل خروجی JSON بگیر، Restore Point بساز یا بکاپ قبلی را ایمپورت کن.</div>
+        </div>
+        <div class="backup-actions">
+          <button class="btn btn-g" onclick="exportBackup()"><i class="ti ti-download"></i> خروجی بکاپ</button>
+          <button class="btn btn-p" onclick="saveRestorePoint()"><i class="ti ti-device-floppy"></i> ساخت Restore Point</button>
+          <button class="btn btn-o" onclick="loadRestorePoints()"><i class="ti ti-refresh"></i> بروزرسانی لیست</button>
+        </div>
+      </div>
+      <div class="g2" style="margin-bottom:0">
+        <div class="card" style="margin:0">
+          <div class="card-title"><i class="ti ti-history-toggle"></i> Restore Pointها</div>
+          <div id="restore-points"><div class="pro-muted">در حال بارگذاری...</div></div>
+        </div>
+        <div class="card backup-import-box" style="margin:0">
+          <div class="card-title"><i class="ti ti-upload"></i> ایمپورت بکاپ JSON</div>
+          <textarea class="fi" id="backup-import" placeholder='محتوای فایل oxnet-backup.json را اینجا Paste کن'></textarea>
+          <div class="vl-actions"><button class="btn btn-amber" onclick="importBackup()"><i class="ti ti-database-import"></i> ریستور از JSON</button></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 </main>
@@ -1920,7 +2015,8 @@ overlay.addEventListener('click',closeSb);
 function navTo(name){
   document.querySelectorAll('.nav-it').forEach(n=>n.classList.toggle('on',n.dataset.pg===name));
   document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id==='pg-'+name));
-  const loaders={links:loadLinks,connections:loadConns,errors:loadErrs,subscriptions:loadSubsPage,subgroups:loadSubs,logs:loadActivity,settings:loadDbStatus,customers:loadCustomers,cloudflare:loadCloudflareDomains,security:loadSecuritySettings};  if(loaders[name])loaders[name]();
+  const loaders={links:loadLinks,connections:loadConns,errors:loadErrs,subscriptions:loadSubsPage,subgroups:loadSubs,logs:loadActivity,settings:()=>{loadDbStatus();loadRestorePoints();},customers:loadCustomers,cloudflare:loadCloudflareDomains,security:loadSecuritySettings};  if(loaders[name])loaders[name]();
+  setTimeout(()=>{try{[ch1,ch2,ch3].forEach(c=>{if(c){c.resize();c.update();}});fetchStats();}catch(e){}},120);
   closeSb();window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.nav-it').forEach(el=>el.addEventListener('click',()=>navTo(el.dataset.pg)));
@@ -1951,14 +2047,15 @@ async function fetchStats(){
     document.getElementById('bw-pct').textContent=pct+'%';
     document.getElementById('bw-bar').style.width=pct+'%';
     prevTraf=d.total_traffic_mb;
-    if(d.hourly){
-      const labels=Object.keys(d.hourly).sort(),vals=labels.map(k=>+(d.hourly[k]/1024**2).toFixed(2));
-      [ch1,ch3].forEach(c=>{if(!c)return;c.data.labels=labels;c.data.datasets[0].data=vals;c.update()});
-      const pc=d.protocol_counts||{};
-      if(ch2){ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
-      renderFallbackCharts(labels, vals, pc);
-      if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);const tAvg=document.getElementById('t-avg'),tPeak=document.getElementById('t-peak');if(tAvg)tAvg.innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';if(tPeak)tPeak.innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
-    }
+    const hourly=d.hourly||{};
+    let labels=Object.keys(hourly).sort(), vals=labels.map(k=>+(Number(hourly[k]||0)/1024**2).toFixed(2));
+    if(!labels.length && Number(d.total_traffic_mb||0)>0){labels=[new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})];vals=[Number(d.total_traffic_mb||0)];}
+    if(ch1){ch1.data.labels=labels;ch1.data.datasets[0].data=vals;ch1.update();}
+    if(ch3){const avgVal=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:0;ch3.data.labels=labels;ch3.data.datasets[0].data=vals;ch3.data.datasets[1].data=labels.map(()=>+avgVal.toFixed(2));ch3.update();}
+    const pc=d.protocol_counts||{};
+    if(ch2){ch2.data.labels=['VLESS WS','Trojan WS','XHTTP','Shadowsocks TLS','MTProto'];ch2.data.datasets[0].data=[pc.vless_ws||0,pc.trojan_ws||0,pc.xhttp||0,pc.shadowsocks_tls||0,pc.mtproto||0];ch2.update();}
+    renderFallbackCharts(labels, vals, pc);
+    if(vals.length){const avg=vals.reduce((a,b)=>a+b,0)/vals.length,peak=Math.max(...vals);const tAvg=document.getElementById('t-avg'),tPeak=document.getElementById('t-peak');if(tAvg)tAvg.innerHTML=avg.toFixed(2)+'<span class="m-unit">MB</span>';if(tPeak)tPeak.innerHTML=peak.toFixed(2)+'<span class="m-unit">MB</span>';}
     renderErrs(d.recent_errors||[]);
   }catch(e){console.error(e)}
 }
@@ -2635,15 +2732,27 @@ async function loadCloudflareDomains(){
 }
 function editCloudflareDomain(key){
   const x=(window.__cfDomains||[]).find(d=>d.id===key||d.slug===key||d.domain===key); if(!x)return;
-  cfEditingKey=x.id||x.slug||x.domain; const ek=document.getElementById('cf-edit-key'); if(ek)ek.value=cfEditingKey;
-  document.getElementById('cf-domain').value=x.domain||''; document.getElementById('cf-name').value=x.name||''; document.getElementById('cf-ips').value=(x.clean_ips||[]).join('\n');
-  toast('دامنه برای ویرایش آماده شد','ok'); window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('cf-m-edit-key').value=x.id||x.slug||x.domain;
+  document.getElementById('cf-m-domain').value=x.domain||'';
+  document.getElementById('cf-m-name').value=x.name||'';
+  document.getElementById('cf-m-ips').value=(x.clean_ips||[]).join('\n');
+  openModal('modal-cf-domain');
 }
-async function saveCloudflareDomain(){
-  const domain=document.getElementById('cf-domain').value.trim(); const name=document.getElementById('cf-name').value.trim(); const clean_ips=document.getElementById('cf-ips').value.trim(); const key=(document.getElementById('cf-edit-key')?.value||cfEditingKey||'').trim();
+async function saveCloudflareDomain(fromModal=false){
+  const prefix=fromModal?'cf-m':'cf';
+  const domain=document.getElementById(prefix+'-domain').value.trim();
+  const name=document.getElementById(prefix+'-name').value.trim();
+  const clean_ips=document.getElementById(prefix+'-ips').value.trim();
+  const key=fromModal?(document.getElementById('cf-m-edit-key')?.value||'').trim():(document.getElementById('cf-edit-key')?.value||cfEditingKey||'').trim();
   if(!domain){toast('دامنه را وارد کن','err');return}
-  try{const r=await authF('/api/cloudflare/domains',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key,domain,name,clean_ips})}); const d=await r.json().catch(()=>({})); if(!r.ok)throw new Error(d.detail||'خطا'); navigator.clipboard?.writeText(d.sub_url||''); toast(key?'دامنه کلادفلیر ویرایش شد':'دامنه کلادفلیر ذخیره شد و ساب کپی شد','ok'); cfEditingKey=''; const ek=document.getElementById('cf-edit-key'); if(ek)ek.value=''; loadCloudflareDomains();}
-  catch(e){toast(' '+e.message,'err')}
+  try{
+    const r=await authF('/api/cloudflare/domains',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key,domain,name,clean_ips})});
+    const d=await r.json().catch(()=>({})); if(!r.ok)throw new Error(d.detail||'خطا');
+    navigator.clipboard?.writeText(d.sub_url||'');
+    toast(key?'دامنه کلادفلیر ویرایش شد':'دامنه کلادفلیر ذخیره شد و ساب کپی شد','ok');
+    if(fromModal){closeModal('modal-cf-domain');}else{cfEditingKey=''; const ek=document.getElementById('cf-edit-key'); if(ek)ek.value=''; ['cf-domain','cf-name','cf-ips'].forEach(id=>{const el=document.getElementById(id); if(el)el.value='';});}
+    loadCloudflareDomains();
+  }catch(e){toast(' '+e.message,'err')}
 }
 async function deleteCloudflareDomain(key){if(!confirm('دامنه کلادفلیر حذف شود؟'))return; try{await authF('/api/cloudflare/domains/'+encodeURIComponent(key),{method:'DELETE'});toast('حذف شد','ok');loadCloudflareDomains()}catch(e){toast('خطا','err')}}
 
@@ -2701,11 +2810,12 @@ function checkPwStrength(val){
 }
 
 function renderFallbackCharts(labels=[], vals=[], pc={}){
-  const ch1Box=document.getElementById('ox-fallback-ch1');
-  if(ch1Box){
+  const ch1Box=document.getElementById('ox-fallback-ch1'), ch3Box=document.getElementById('ox-fallback-ch3');
+  [ch1Box,ch3Box].forEach(box=>{
+    if(!box)return;
     const max=Math.max(...vals,1);
-    ch1Box.innerHTML = labels.map((l,i)=>`<div class="fb-bar" title="${esc(l)} · ${(vals[i]||0).toFixed(2)} MB"><span style="height:${Math.max(4,((vals[i]||0)/max)*100)}%"></span><b>${esc(String(l).slice(-5))}</b></div>`).join('') || '<div class="pro-muted">هنوز مصرفی ثبت نشده</div>';
-  }
+    box.innerHTML = labels.map((l,i)=>`<div class="fb-bar" title="${esc(l)} · ${(vals[i]||0).toFixed(2)} MB"><span style="height:${Math.max(4,((vals[i]||0)/max)*100)}%"></span><b>${esc(String(l).slice(-5))}</b></div>`).join('') || '<div class="pro-muted">هنوز مصرفی ثبت نشده</div>';
+  });
   const ch2Box=document.getElementById('ox-fallback-ch2');
   if(ch2Box){
     const items=[['VLESS',pc.vless_ws||0],['Trojan',pc.trojan_ws||0],['XHTTP',pc.xhttp||0],['SS',pc.shadowsocks_tls||0],['MTProto',pc.mtproto||0]];
@@ -2714,9 +2824,10 @@ function renderFallbackCharts(labels=[], vals=[], pc={}){
   }
 }
 function setupFallbackCharts(){
-  const c1=document.getElementById('ch1'), c2=document.getElementById('ch2');
+  const c1=document.getElementById('ch1'), c2=document.getElementById('ch2'), c3=document.getElementById('ch3');
   if(c1) c1.parentElement.innerHTML='<div id="ox-fallback-ch1" class="fallback-bars"></div>';
   if(c2) c2.parentElement.innerHTML='<div id="ox-fallback-ch2" class="fallback-protos"></div>';
+  if(c3) c3.parentElement.innerHTML='<div id="ox-fallback-ch3" class="fallback-bars"></div>';
   renderFallbackCharts([],[],{});
 }
 
@@ -2727,6 +2838,7 @@ function makeGradient(ctx,color1,color2){
 }
 function initCharts(){
   if(typeof Chart==='undefined'){setupFallbackCharts();return;}
+  if(!document.getElementById('ch1')||!document.getElementById('ch2')||!document.getElementById('ch3')){setupFallbackCharts();return;}
   const c1=document.getElementById('ch1').getContext('2d');
   const grad1=makeGradient(c1,'rgba(59,130,246,.38)','rgba(59,130,246,0)');
   const opts={
