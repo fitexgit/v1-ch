@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.7
+# pages.py  -  OXNET v2.0.8
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -91,7 +91,7 @@ input:focus+.ic{color:var(--accent)}
 
 .pro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr}}
 
-/* OXNET v2.0.7 dark-mode contrast hardening */
+/* OXNET v2.0.8 dark-mode contrast hardening */
 [data-theme="dark"] .btn-o,[data-theme="dark"] .btn-g,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .icon-btn{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-bh)!important}
 [data-theme="dark"] .btn-p{background:linear-gradient(135deg,#f8fafc,#cbd5e1)!important;color:#020617!important;box-shadow:none!important}
 [data-theme="dark"] .btn-d{background:rgba(239,68,68,.18)!important;color:#fecaca!important}
@@ -100,7 +100,7 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .fs option{background:#0b1220!important;color:#f8fafc!important}
 [data-theme="dark"] .proto-card,[data-theme="dark"] .proto-base-card,[data-theme="dark"] .proto-t-card,[data-theme="dark"] .cm-dd,[data-theme="dark"] .cm-input{background:var(--card)!important;color:var(--t1)!important}
 
-/* OXNET v2.0.7 dark-mode final contrast fix */
+/* OXNET v2.0.8 dark-mode final contrast fix */
 [data-theme="dark"]{--bg:#05070b!important;--bg2:#0b1018!important;--bg3:#111827!important;--card:#0f172a!important;--card-b:rgba(255,255,255,.10)!important;--card-bh:rgba(255,255,255,.22)!important;--t1:#f8fafc!important;--t2:#cbd5e1!important;--t3:#94a3b8!important;--accent:#e5e7eb!important;--accent2:#ffffff!important;--accent-d:rgba(255,255,255,.08)!important}
 [data-theme="dark"] .card,[data-theme="dark"] .modal,[data-theme="dark"] .modal-v2,[data-theme="dark"] .cm-modal,[data-theme="dark"] .dash-main-card,[data-theme="dark"] .dash-kpi,[data-theme="dark"] .dash-chart-card,[data-theme="dark"] .dash-protocol,[data-theme="dark"] .cfg-card,[data-theme="dark"] .multi-group-card,[data-theme="dark"] .sub-card,[data-theme="dark"] .pro-card,[data-theme="dark"] .db-card,[data-theme="dark"] .srv-panel,[data-theme="dark"] .pw-panel,[data-theme="dark"] .conn-card-v2,[data-theme="dark"] .health-row,[data-theme="dark"] .cust-row{background:#0f172a!important;color:#f8fafc!important;border-color:rgba(255,255,255,.12)!important}
 [data-theme="dark"] .fi,[data-theme="dark"] .fs,[data-theme="dark"] .cm-input,[data-theme="dark"] .modal-v2-input,[data-theme="dark"] .pw-input,[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#0b1018!important;color:#f8fafc!important;border-color:rgba(255,255,255,.14)!important}
@@ -111,14 +111,14 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .cm-opt:hover,[data-theme="dark"] .cm-opt.sel{background:rgba(255,255,255,.10)!important}
 
 
-/* OXNET v2.0.7 extra dark contrast */
+/* OXNET v2.0.8 extra dark contrast */
 [data-theme="dark"] *{scrollbar-color:#334155 #0b1018}
 [data-theme="dark"] .upd-install-btn,[data-theme="dark"] .copy-all-btn{background:#0b1018!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.16)!important}
 [data-theme="dark"] .bg-blue,[data-theme="dark"] .badge{background:rgba(255,255,255,.08)!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.12)!important}
 [data-theme="dark"] .cfg-uuid-mini,[data-theme="dark"] .cfg-sub-tag,[data-theme="dark"] .exp-chip,[data-theme="dark"] .proto-chip{border-color:rgba(255,255,255,.12)!important}
 
 
-/* OXNET v2.0.7 stable polish */
+/* OXNET v2.0.8 stable polish */
 #modal-create-link .cm-modal{max-height:94vh!important;display:flex!important;flex-direction:column!important}
 #modal-create-link .cm-body{max-height:min(68vh,720px)!important;overflow-y:auto!important;padding-left:18px!important}
 #modal-create-link .cm-body::-webkit-scrollbar{width:8px}
@@ -136,7 +136,7 @@ body > .wrap .footer{display:none!important}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}
 @media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 
-/* OXNET v2.0.7 stable polish */
+/* OXNET v2.0.8 stable polish */
 #modal-create-link .cm-modal{max-height:94vh!important;display:flex!important;flex-direction:column!important}
 #modal-create-link .cm-body{max-height:min(68vh,720px)!important;overflow-y:auto!important;padding-left:18px!important}
 #modal-create-link .cm-body::-webkit-scrollbar{width:8px}
@@ -154,7 +154,7 @@ body > .wrap .footer{display:none!important}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}
 @media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 
-/* OXNET v2.0.7 final stable visual polish */
+/* OXNET v2.0.8 final stable visual polish */
 .brand-name,.logo-name{font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important}
 .brand-sub,.logo-sub{font-weight:700!important;letter-spacing:.02em!important}
 .brand-mark{background:linear-gradient(135deg,#0f172a,#334155)!important;color:#fff!important;font-weight:900!important}
@@ -168,7 +168,7 @@ body > .wrap .footer{display:none!important}
 .dash-protocols{grid-template-columns:repeat(4,1fr)!important}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}@media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 
-/* OXNET v2.0.7 final stable visual polish */
+/* OXNET v2.0.8 final stable visual polish */
 .brand-name,.logo-name{font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important}
 .brand-sub,.logo-sub{font-weight:700!important;letter-spacing:.02em!important}
 .brand-mark{background:linear-gradient(135deg,#0f172a,#334155)!important;color:#fff!important;font-weight:900!important}
@@ -190,7 +190,7 @@ body > .wrap .footer{display:none!important}
   <div class="card">
     <div class="brand">
       <div class="brand-mark"><i class="ti ti-network"></i></div>
-      <div><div class="brand-name">OXNET</div><div class="brand-sub login-version-pill">Stable Control · v2.0.7</div></div>
+      <div><div class="brand-name">OXNET</div><div class="brand-sub login-version-pill">OXNET Stable · v2.0.8</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -205,7 +205,7 @@ body > .wrap .footer{display:none!important}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.7</div>
+    <div class="footer">OXNET · 2.0.8</div>
   </div>
 </div>
 <script>
@@ -1196,7 +1196,7 @@ a{color:inherit;text-decoration:none}
             <div class="cm-opt" data-base="telproxy" onclick="cmSelectBase('telproxy',this)">
               <div class="cm-opt-radio"></div>
               <div class="cm-opt-icon"><i class="ti ti-brand-telegram"></i></div>
-              <div class="cm-opt-text"><div class="cm-opt-title">Telegram Proxy</div><div class="cm-opt-desc">ساخت MTProto با TCP Proxy عمومی</div></div>
+              <div class="cm-opt-text"><div class="cm-opt-title">Telegram Proxy</div><div class="cm-opt-desc">ساخت MTProto روی پورت داخلی</div></div>
               <span class="cm-opt-tag">MTProto</span>
             </div></div></div>
           </div>
@@ -1221,21 +1221,9 @@ a{color:inherit;text-decoration:none}
         <input type="hidden" id="nl-proto" value="vless-ws">
 
         <div class="cm-note" style="margin-top:12px" id="transport-note"><i class="ti ti-info-circle"></i> پروتکل و ترابرد پس از ساخت کانفیگ قابل تغییر نیستند.</div>
-        <div class="cm-note" style="margin-top:12px;display:none" id="mtproto-note"><i class="ti ti-brand-telegram"></i> Telegram Proxy ابتدا روی پورت داخلی ساخته می‌شود؛ اگر توکن Railway ذخیره باشد، دامنه و پورت عمومی TCP Proxy خودکار به همان لینک وصل می‌شود.</div>
+        <div class="cm-note" style="margin-top:12px;display:none" id="mtproto-note"><i class="ti ti-brand-telegram"></i> Telegram Proxy روی پورت داخلی پنل ساخته می‌شود. ابزار پروکسی Railway از این نسخه حذف شده است.</div>
 
         <div class="cm-section" id="mtproto-port-field" style="display:none;margin-bottom:0">
-        <div id="auto-domain-box" style="margin-top:10px;display:none">
-          <div class="cm-note" style="display:flex;justify-content:space-between;align-items:center;gap:10px" id="auto-domain-note">
-            <span id="auto-domain-status"><i class="ti ti-route"></i> برای دریافت خودکار دامنه‌ی TCP Proxy از دکمه‌ی کنار استفاده کن.</span>
-            <button type="button" class="btn btn-g btn-sm" id="auto-domain-btn" onclick="autoGetMtprotoDomain()"><i class="ti ti-bolt"></i> دریافت دامنه</button>
-          </div>
-          <div id="auto-domain-token-wrap" style="display:none;margin-top:9px">
-            <div class="cm-row2">
-              <input class="cm-input" id="auto-domain-token" type="password" placeholder="Railway API Token">
-              <button type="button" class="btn btn-p btn-sm" onclick="submitAutoDomainToken()"><i class="ti ti-check"></i> تایید و دریافت</button>
-            </div>
-          </div>
-        </div>
           <div class="cm-row2">
             <div class="cm-field">
               <label><i class="ti ti-route" style="color:var(--accent);margin-left:4px"></i>پورت TCP</label>
@@ -1299,71 +1287,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 
-<div class="modal-bg" id="modal-bot-tcp-proxy">
-  <div class="modal-v2 cm-modal" style="max-width:760px">
-    <button class="cm-close" onclick="closeModal('modal-bot-tcp-proxy')"><i class="ti ti-x"></i></button>
-    <div class="cm-head">
-      <div class="cm-head-row">
-        <div class="cm-head-icon"><i class="ti ti-server-2"></i></div>
-        <div>
-          <div class="cm-head-title">ساخت TCP Proxy عمومی</div>
-          <div class="cm-head-sub">برای پروکسی تلگرام/MTProto یک دامنه و پورت عمومی از Railway دریافت می‌کند</div>
-        </div>
-      </div>
-    </div>
-    <div class="cm-body">
-      <div class="cl" style="margin-top:0;margin-bottom:14px">
-        <i class="ti ti-info-circle"></i>
-        <span>اگر قبلاً توکن Railway ذخیره شده باشد، نیازی به وارد کردن دوباره نیست. در غیر این صورت توکن را وارد کن و فرآیند را شروع کن.</span>
-      </div>
-      <div class="cm-section" id="btp-token-section">
-        <div class="cm-section-label"><i class="ti ti-key"></i> توکن Railway</div>
-        <input class="cm-input" id="btp-token" type="password" placeholder="Railway API Token" dir="ltr">
-      </div>
-      <div class="cm-section" id="btp-token-saved-section" style="display:none">
-        <div class="cl" style="margin-top:0;background:var(--green-bg);color:var(--green-t)">
-          <i class="ti ti-circle-check"></i>
-          <span>توکن Railway قبلاً ذخیره شده است. برای تغییر توکن روی دکمه زیر بزن.</span>
-        </div>
-        <button type="button" class="btn btn-o btn-sm" onclick="btpChangeToken()"><i class="ti ti-key"></i> تغییر توکن</button>
-      </div>
-      <div class="cm-section">
-        <div class="cm-section-label"><i class="ti ti-route"></i> تنظیمات ساخت</div>
-        <div class="cm-row2">
-          <div class="cm-field">
-            <label>پورت داخلی MTProto</label>
-            <input class="cm-input" id="btp-port" type="number" min="1" max="65535" placeholder="خالی = خودکار/پیش‌فرض">
-          </div>
-          <div class="cm-field">
-            <label>حالت جستجو</label>
-            <div class="cm-note" style="margin-top:0"><i class="ti ti-route"></i> حالت پیش‌فرض اسکن خودکار است. در صورت نیاز یکی از دامنه‌های پیشنهادی را انتخاب کن.</div>
-          </div>
-        </div>
-        <div class="cm-pills" style="margin-top:10px">
-          <span class="cm-pill active" id="btp-isp-auto" onclick="btpSelectIsp(null,'btp-isp-auto')">اسکن خودکار</span>
-          <span class="cm-pill" id="btp-isp-cloudflare" onclick="btpSelectIsp('cloudflare.com','btp-isp-cloudflare')">Cloudflare</span>
-          <span class="cm-pill" id="btp-isp-google" onclick="btpSelectIsp('google.com','btp-isp-google')">Google</span>
-          <span class="cm-pill" id="btp-isp-microsoft" onclick="btpSelectIsp('microsoft.com','btp-isp-microsoft')">Microsoft</span>
-        </div>
-      </div>
-      <div class="cm-section">
-        <div class="cm-section-label"><i class="ti ti-activity"></i> وضعیت</div>
-        <div class="cl" style="margin-top:0">
-          <i class="ti ti-player-play" id="btp-status-icon"></i>
-          <span id="btp-status-text">آماده شروع</span>
-        </div>
-        <div id="btp-log-box" style="display:none;background:rgba(0,0,0,.12);border:1px solid var(--card-b);border-radius:12px;padding:12px;max-height:220px;overflow:auto;font-family:ui-monospace,monospace;font-size:11px;line-height:1.8;margin-top:12px"></div>
-      </div>
-    </div>
-    <div class="cm-footer">
-      <button class="cm-btn-cancel" onclick="closeModal('modal-bot-tcp-proxy')">بستن</button>
-      <button class="btn btn-d" id="btp-stop-btn" onclick="stopBotTcpProxy()" style="display:none"><i class="ti ti-ban"></i> توقف</button>
-      <button class="cm-btn-submit" id="btp-start-btn" onclick="startBotTcpProxy()"><i class="ti ti-player-play"></i> شروع ساخت TCP Proxy</button>
-    </div>
-  </div>
-</div>
 
-<!-- مودال بروزرسانی -->
 <div class="modal-bg" id="modal-update" style="z-index:9999">
   <div class="modal-v2" style="max-width:460px">
     <div class="modal-v2-head" style="background:linear-gradient(155deg,rgba(59,130,246,.16) 0%,transparent 65%)">
@@ -1386,7 +1310,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 
-<!-- OXNET v2.0.7 repaired action modals -->
+<!-- OXNET v2.0.8 repaired action modals -->
 <div class="modal-bg" id="modal-edit-link">
   <div class="modal-v2" style="max-width:520px">
     <button class="modal-v2-close" onclick="closeModal('modal-edit-link')"><i class="ti ti-x"></i></button>
@@ -1448,40 +1372,6 @@ a{color:inherit;text-decoration:none}
 </div>
 
 
-<div class="modal-bg" id="modal-domain-scan">
-  <div class="modal-v2 cm-modal" style="max-width:720px">
-    <button class="modal-v2-close" onclick="closeModal('modal-domain-scan')"><i class="ti ti-x"></i></button>
-    <div class="modal-v2-head">
-      <div class="modal-v2-icon"><i class="ti ti-radar"></i></div>
-      <div class="modal-v2-title">اسکن دامنه TCP Proxy</div>
-      <div class="modal-v2-sub">دامنه‌های دلخواه Railway را وارد کن تا فقط همان‌ها جستجو شوند.</div>
-    </div>
-    <div class="modal-v2-body">
-      <div class="cm-section" id="ds-token-section">
-        <div class="cm-section-label"><i class="ti ti-key"></i> توکن Railway</div>
-        <input class="cm-input" id="ds-token" type="password" dir="ltr" placeholder="Railway API Token">
-      </div>
-      <div class="cm-section">
-        <div class="cm-section-label"><i class="ti ti-world-search"></i> دامنه‌های هدف</div>
-        <div class="cm-row2">
-          <input class="cm-input" id="ds-domain-inp" dir="ltr" placeholder="example.proxy.rlwy.net" onkeydown="if(event.key==='Enter'){event.preventDefault();dsAddDomain()}">
-          <button class="btn btn-g" type="button" onclick="dsAddDomain()"><i class="ti ti-plus"></i> افزودن دامنه</button>
-        </div>
-        <div class="cm-pills" id="ds-domain-chips" style="margin-top:10px"></div>
-      </div>
-      <div class="cm-section">
-        <div class="cm-section-label"><i class="ti ti-activity"></i> وضعیت</div>
-        <div class="cl" style="margin-top:0"><i class="ti ti-radar"></i><span id="ds-status-text">آماده اسکن</span></div>
-        <div id="ds-log-box" style="display:none;background:rgba(0,0,0,.12);border:1px solid var(--card-b);border-radius:12px;padding:12px;max-height:220px;overflow:auto;font-family:ui-monospace,monospace;font-size:11px;line-height:1.8;margin-top:12px"></div>
-      </div>
-      <div class="modal-v2-footer">
-        <button class="modal-v2-btn-cancel" onclick="closeModal('modal-domain-scan')">بستن</button>
-        <button class="btn btn-d" id="ds-stop-btn" onclick="stopDomainScan()" style="display:none"><i class="ti ti-ban"></i> توقف</button>
-        <button class="modal-v2-btn-submit" id="ds-start-btn" onclick="startDomainScan()"><i class="ti ti-player-play"></i> شروع اسکن</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="mob-top">
   <div class="ml">
@@ -1498,7 +1388,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small"><i class="ti ti-network"></i></div>
-    <div><div class="logo-name">OXNET</div><div class="logo-sub">Stable Control · v2.0.7</div></div>
+    <div><div class="logo-name">OXNET</div><div class="logo-sub">OXNET Stable · v2.0.8</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1509,7 +1399,7 @@ a{color:inherit;text-decoration:none}
     <div class="nav-it" data-pg="traffic"><i class="ti ti-chart-area"></i> ترافیک</div>
     <div class="nav-it" data-pg="connections"><i class="ti ti-plug-connected"></i> اتصالات <span class="nav-badge" id="conns-nb">0</span></div>
     <div class="nav-it" data-pg="customers"><i class="ti ti-users"></i> کاربران</div>
-    <div class="nav-it" data-pg="pro"><i class="ti ti-sparkles"></i> ابزار v2 Pro</div>
+    <div class="nav-it" data-pg="cloudflare"><i class="ti ti-cloud"></i> کلادفلیر</div>
     <div class="nav-sec">سیستم</div>
     <div class="nav-it" data-pg="security"><i class="ti ti-shield-lock"></i> امنیت</div>
     <div class="nav-it" data-pg="logs"><i class="ti ti-history"></i> لاگ فعالیت‌ها</div>
@@ -1578,9 +1468,6 @@ a{color:inherit;text-decoration:none}
     <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:16px">
       <button class="btn btn-p" onclick="resetCreateModal();openModal('modal-create-link')">
         <i class="ti ti-plus"></i> ساخت کانفیگ جدید
-      </button>
-      <button class="btn btn-g" style="margin-right:14px" onclick="openModal('modal-bot-tcp-proxy');btpCheckTokenState()">
-        <i class="ti ti-server-2"></i> ساخت TCP Proxy
       </button>
     </div>
     <div class="tb-right">
@@ -1737,15 +1624,19 @@ a{color:inherit;text-decoration:none}
   <div class="topbar"><div><div class="tb-title"><i class="ti ti-users"></i> کاربران و مشتری‌ها</div><div class="tb-sub">مدیریت کاربر، یادداشت، وضعیت و اتصال به کانفیگ‌ها</div></div><div class="tb-right"><button class="btn btn-p btn-sm" onclick="createCustomer()"><i class="ti ti-user-plus"></i> کاربر جدید</button></div></div>
   <div class="card"><div class="form-row" style="margin-bottom:12px"><input class="fi" id="cust-name" placeholder="نام کاربر" style="flex:1"><input class="fi" id="cust-phone" placeholder="موبایل/شناسه" style="flex:1"><input class="fi" id="cust-note" placeholder="یادداشت" style="flex:1"></div><div id="customers-list">—</div></div>
 </section>
-<section class="pg" id="pg-pro">
-  <div class="topbar"><div><div class="tb-title"><i class="ti ti-sparkles"></i> ابزار v2 Pro</div><div class="tb-sub">Theme Studio، Smart Subscription، Health Check، Backup، Monitoring و پاک‌سازی خودکار</div></div><div class="tb-right"><button class="btn btn-p btn-sm" onclick="loadProTools()"><i class="ti ti-refresh"></i> رفرش</button></div></div>
-  <div class="pro-grid">
-    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-palette"></i> Theme Studio</div><div class="pro-muted">رنگ اصلی و حالت قالب پنل را تنظیم کن.</div><div class="theme-swatches" id="theme-swatches"></div><div class="pro-actions"><button class="btn btn-p btn-sm" onclick="saveThemeStudio()"><i class="ti ti-device-floppy"></i> ذخیره قالب</button></div></div>
-    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-route-alt-left"></i> Smart Subscription ایران</div><div class="pro-muted">ساب هوشمند با ترتیب پیشنهادی برای شبکه‌های ایران.</div><div class="form-row"><input class="fi" id="smart-label" placeholder="نام ساب" style="flex:1"><select class="fs" id="smart-profile"><option value="general">عمومی</option><option value="mobile">موبایل</option><option value="mci">همراه اول</option><option value="irancell">ایرانسل</option><option value="wifi">وای‌فای/ثابت</option></select></div><div class="pro-actions"><button class="btn btn-p btn-sm" onclick="createSmartSub()"><i class="ti ti-wand"></i> ساخت ساب هوشمند</button></div></div>
-    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-heart-rate-monitor"></i> سلامت کانفیگ‌ها</div><div class="pro-muted">تشخیص سالم، نیازمند بررسی یا خراب بر اساس فعال بودن، انقضا، سهمیه و اتصال زنده.</div><div class="pro-actions"><button class="btn btn-g btn-sm" onclick="loadHealth()"><i class="ti ti-stethoscope"></i> بررسی سلامت</button></div><div id="health-list" style="margin-top:12px">—</div></div>
-    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-chart-bar"></i> مانیتورینگ پیشرفته</div><div class="pro-muted">Top مصرف، پروتکل‌ها، IPهای آنلاین و وضعیت دیتابیس.</div><div class="pro-actions"><button class="btn btn-g btn-sm" onclick="loadMonitoring()"><i class="ti ti-chart-donut"></i> نمایش مانیتورینگ</button></div><div id="monitoring-box" style="margin-top:12px">—</div></div>
-    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-database-export"></i> Backup / Import / Export</div><div class="pro-muted">خروجی کامل از لینک‌ها، گروه‌ها، کاربران، تنظیمات و رمز هش‌شده.</div><textarea class="fi" id="backup-import" placeholder="برای ایمپورت، JSON بکاپ را اینجا paste کن" style="width:100%;min-height:80px;margin-top:10px"></textarea><div class="pro-actions"><button class="btn btn-p btn-sm" onclick="exportBackup()"><i class="ti ti-download"></i> خروجی بکاپ</button><button class="btn btn-g btn-sm" onclick="importBackup()"><i class="ti ti-upload"></i> ایمپورت</button></div></div>
-    <div class="pro-card"><div class="pro-card-title"><i class="ti ti-trash-x"></i> پاک‌سازی خودکار</div><div class="pro-muted">حذف کانفیگ‌های منقضی‌شده، آرشیو غیرفعال‌ها و پاک‌سازی لاگ‌ها.</div><div class="form-row"><input class="fi" id="clean-expired" type="number" placeholder="حذف منقضی بعد از X روز"><input class="fi" id="clean-inactive" type="number" placeholder="آرشیو غیرفعال بعد از X روز"></div><div class="pro-actions"><button class="btn btn-d btn-sm" onclick="runCleanup()"><i class="ti ti-broom"></i> اجرای پاک‌سازی</button></div></div>
+
+<section class="pg" id="pg-cloudflare">
+  <div class="topbar"><div><div class="tb-title"><i class="ti ti-cloud"></i> کلادفلیر</div><div class="tb-sub">دامنه Cloudflare جدا از دامنه اصلی پنل؛ ساخت ساب با Host/SNI دامنه و Clean IPهای دلخواه</div></div><div class="tb-right"><button class="btn btn-p btn-sm" onclick="saveCloudflareDomain()"><i class="ti ti-device-floppy"></i> ذخیره دامنه</button></div></div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title"><i class="ti ti-world-www"></i> ثبت دامنه Cloudflare</div>
+      <div class="cl" style="margin-top:0;margin-bottom:12px"><i class="ti ti-info-circle"></i><span>دامنه‌ای که روی Cloudflare به همین پنل وصل کرده‌ای را وارد کن. این بخش یک Sub جدا می‌سازد و لینک‌های کانفیگ‌ها را با Host/SNI همان دامنه تولید می‌کند.</span></div>
+      <div class="fg"><label>دامنه Cloudflare</label><input class="fi" id="cf-domain" dir="ltr" placeholder="sub.example.com" style="width:100%"></div>
+      <div class="fg" style="margin-top:12px"><label>نام نمایشی</label><input class="fi" id="cf-name" placeholder="Cloudflare Main" style="width:100%"></div>
+      <div class="fg" style="margin-top:12px"><label>IP تمیز</label><textarea class="fi" id="cf-ips" dir="ltr" placeholder="هر خط یک IP یا دامنه تمیز&#10;104.16.1.1&#10;104.17.2.2" style="width:100%;min-height:170px"></textarea></div>
+      <div class="cl" style="margin-top:12px"><i class="ti ti-route"></i><span>اگر ۵۰ IP تمیز وارد کنی، در Sub کلادفلیر برای هر کانفیگ ۵۰ لینک ساخته می‌شود؛ آدرس کانفیگ IP تمیز است اما Host و SNI همان دامنه Cloudflare می‌ماند.</span></div>
+    </div>
+    <div class="card"><div class="card-title"><i class="ti ti-list-details"></i> دامنه‌های ثبت‌شده <span class="ml-auto badge bg-blue" id="cf-count">۰</span></div><div id="cf-list">در حال بارگذاری...</div></div>
   </div>
 </section>
 
@@ -1872,20 +1763,6 @@ a{color:inherit;text-decoration:none}
 </section>
 <section class="pg" id="pg-settings">
   <div class="topbar"><div><div class="tb-title"><i class="ti ti-settings"></i> تنظیمات</div></div></div>
-  <div class="db-card">
-    <div class="card-title"><i class="ti ti-database"></i> دیتابیس خارجی PostgreSQL <span class="ml-auto badge bg-blue" id="db-status-badge">در حال بررسی</span></div>
-    <div class="cl" style="margin-top:0;margin-bottom:12px"><i class="ti ti-info-circle"></i><span>Internal URL را وقتی اپ و دیتابیس داخل یک شبکه هستند وارد کن. اگر از بیرون وصل می‌شی External URL را بزن. بعد از اتصال، OXNET جدول خودش را می‌سازد و اطلاعات پنل را در PostgreSQL ذخیره می‌کند.</span></div>
-    <div class="db-grid">
-      <div class="fg"><label>Internal URL</label><input class="fi" id="db-internal-url" dir="ltr" placeholder="postgresql://user:pass@host:5432/db" style="width:100%"></div>
-      <div class="fg"><label>External URL</label><input class="fi" id="db-external-url" dir="ltr" placeholder="postgresql://user:pass@host/db" style="width:100%"></div>
-      <div class="fg" style="grid-column:1/-1"><label>URL فعال / وضعیت</label><input class="fi" id="db-current-url" dir="ltr" readonly placeholder="هنوز متصل نیست" style="width:100%"></div>
-    </div>
-    <div class="vl-actions" style="margin-top:14px">
-      <button class="btn btn-p" onclick="connectDatabase('internal')"><i class="ti ti-plug-connected"></i> اتصال با Internal</button>
-      <button class="btn btn-g" onclick="connectDatabase('external')"><i class="ti ti-world"></i> اتصال با External</button>
-      <button class="btn btn-d" onclick="disconnectDatabase()"><i class="ti ti-plug-x"></i> قطع اتصال</button>
-    </div>
-  </div>
   <div class="g2">
     <div class="srv-panel">
       <div class="srv-hero">
@@ -1897,10 +1774,10 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.7</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.8</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
-        <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File / PostgreSQL</span></div></div></div>
+        <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File</span></div></div></div>
       </div>
     </div>
     <div class="pw-panel">
@@ -1984,19 +1861,22 @@ function expChip(exp,expired){
   if(d<=3)return `<span class="exp-chip ec-warn"><i class="ti ti-alert-triangle"></i> ${toFa(d)} روز مانده</span>`;
   return `<span class="exp-chip ec-ok"><i class="ti ti-calendar-check"></i> ${toFa(d)} روز مانده</span>`;
 }
+
+const PROTO_MAP={
+  'vless-ws':['VLESS · WS','pc-ws'],
+  'xhttp-packet-up':['VLESS · XHTTP packet-up','pc-xhttp'],
+  'xhttp-stream-up':['VLESS · XHTTP stream-up','pc-xhttp'],
+  'xhttp-stream-one':['XHTTP Stream','pc-xh'],
+  'trojan-ws':['Trojan · WS','pc-trojan'],
+  'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
+  'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
+  'shadowsocks-tls':['Shadowsocks · TLS','pc-ss'],
+  'mtproto':['Telegram Proxy · MTProto','pc-trojan'],
+  'multi':['Multi Protocol','pc-xhttp']
+};
+
 function protoBadge(p){
-  const m={
-    'vless-ws':['VLESS · WS','pc-ws'],
-    'xhttp-packet-up':['VLESS · XHTTP packet-up','pc-xhttp'],
-    'xhttp-stream-up':['VLESS · XHTTP stream-up','pc-xhttp'],
-    'xhttp-stream-one':['XHTTP Stream','pc-xh'],
-    'trojan-ws':['Trojan · WS','pc-trojan'],
-    'trojan-xhttp-packet-up':['Trojan · XHTTP packet-up','pc-trojan'],
-    'trojan-xhttp-stream-up':['Trojan · XHTTP stream-up','pc-trojan'],
-    'shadowsocks-tls':['Shadowsocks · TLS','pc-ss'],
-    'mtproto':['Telegram Proxy · MTProto','pc-trojan'],
-  };
-  const v=m[p]||['ناشناخته','pc-ws'];
+  const v=PROTO_MAP[p]||['ناشناخته','pc-ws'];
   return `<span class="proto-chip ${v[1]}">${v[0]}</span>`;
 }
 async function checkAuth(){try{const r=await fetch('/api/me');const d=await r.json();if(!d.authenticated)location.href='/login';}catch(e){location.href='/login'}}
@@ -2039,7 +1919,7 @@ overlay.addEventListener('click',closeSb);
 function navTo(name){
   document.querySelectorAll('.nav-it').forEach(n=>n.classList.toggle('on',n.dataset.pg===name));
   document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id==='pg-'+name));
-  const loaders={links:loadLinks,connections:loadConns,errors:loadErrs,subscriptions:loadSubsPage,subgroups:loadSubs,logs:loadActivity,settings:loadDbStatus,customers:loadCustomers,pro:loadProTools,security:loadSecuritySettings};  if(loaders[name])loaders[name]();
+  const loaders={links:loadLinks,connections:loadConns,errors:loadErrs,subscriptions:loadSubsPage,subgroups:loadSubs,logs:loadActivity,settings:loadDbStatus,customers:loadCustomers,cloudflare:loadCloudflareDomains,security:loadSecuritySettings};  if(loaders[name])loaders[name]();
   closeSb();window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.nav-it').forEach(el=>el.addEventListener('click',()=>navTo(el.dataset.pg)));
@@ -2171,9 +2051,6 @@ async function loadLinks(){
       <div class="cfg-divider-v"></div>
       <div class="cfg-badges-col">
         ${protoBadge(l.protocol)}
-        ${isMt && l.mtproto_public_host ? `<span class="cfg-sub-tag"><i class="ti ti-route"></i> ${esc(l.mtproto_public_host)}:${l.mtproto_public_port}</span>` : ''}
-        ${isMt && !l.mtproto_public_host && l.mtproto_public_pending ? `<span class="cfg-sub-tag" style="color:var(--amber-t)"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال ساخت TCP Proxy عمومی...</span>` : ''}
-        ${isMt && !l.mtproto_public_host && !l.mtproto_public_pending ? `<span class="cfg-sub-tag" style="color:var(--amber-t)"><i class="ti ti-alert-triangle"></i> دامنه عمومی وصل نیست</span><button class="btn btn-sm btn-p btn-icon" onclick="openTcpProxyFor('${l.uuid}',${Number(l.mtproto_port||0)})" title="ساخت TCP Proxy عمومی"><i class="ti ti-route"></i></button>` : ''}
         ${l.sub_id&&allSubsList.find(s=>s.sub_id===l.sub_id)?`<span class="cfg-sub-tag"><i class="ti ti-folder"></i> ${esc(allSubsList.find(s=>s.sub_id===l.sub_id).name)}</span>`:''}
       </div>
       <div class="cfg-divider-v"></div>
@@ -2194,7 +2071,7 @@ async function loadLinks(){
   </div>`;
 }).join('');
     document.getElementById('lsummary').innerHTML=links.slice(0,6).map(l=>`<div class="sr"><span class="sr-k" style="gap:5px"><i class="ti ${l.expired?'ti-calendar-x':l.active?'ti-circle-check':'ti-circle-x'}" style="color:${l.expired?'var(--amber)':l.active?'var(--green)':'var(--red)'}"></i>${esc(l.label)}</span><span class="sr-v" style="font-size:10px">${fmtB(l.used_bytes)} / ${l.limit_bytes===0?'∞':fmtB(l.limit_bytes)}</span></div>`).join('');
-  }catch(e){console.error(e);const grid=document.getElementById('links-grid');if(grid&&!grid.innerHTML){grid.innerHTML='<div class="empty"><i class="ti ti-alert-circle"></i><p>اتصال لحظه‌ای برقرار نشد؛ چند ثانیه دیگر رفرش کن</p></div>'}}
+  }catch(e){console.error(e);const grid=document.getElementById('links-grid');if(grid&&!grid.innerHTML){grid.innerHTML='<div class="empty"><i class="ti ti-alert-circle"></i><p>خطا در نمایش کانفیگ‌ها برطرف شد؛ اگر هنوز می‌بینی صفحه را کامل Reload کن</p></div>'}}
 }
 
 let protoBase = 'vless', protoTransport = 'ws';
@@ -2717,38 +2594,24 @@ function cpText(id){navigator.clipboard.writeText(document.getElementById(id).te
 function qrFor(id){showQR(document.getElementById(id).textContent)}
 function refreshAll(){fetchStats();fetchDefaultVless();loadLinks();if(document.getElementById('pg-subgroups').classList.contains('on'))loadSubs();if(document.getElementById('pg-subscriptions').classList.contains('on'))loadSubsPage();if(document.getElementById('pg-connections').classList.contains('on'))loadConns();if(document.getElementById('pg-logs').classList.contains('on'))loadActivity();toast('رفرش شد','ok')}
 
-async function loadDbStatus(){
-  try{
-    const r=await authF('/api/database/status'),d=await r.json();
-    const badge=document.getElementById('db-status-badge'),cur=document.getElementById('db-current-url'),storage=document.getElementById('storage-mode-label');
-    if(badge){badge.className='ml-auto badge '+(d.connected?'bg-green':'bg-amber');badge.textContent=d.connected?'PostgreSQL متصل':(d.configured?'تنظیم شده، قطع':'JSON محلی');}
-    if(cur)cur.value=d.url||'';
-    if(storage)storage.textContent=d.mode||'JSON File';
-  }catch(e){}
-}
-async function connectDatabase(kind){
-  const id=kind==='internal'?'db-internal-url':'db-external-url';
-  const url=(document.getElementById(id)?.value||'').trim();
-  if(!url){toast('لینک دیتابیس را وارد کنید','err');return}
-  try{
-    const r=await authF('/api/database/connect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
-    const d=await r.json().catch(()=>({}));
-    if(!r.ok)throw new Error(d.detail||'اتصال ناموفق بود');
-    toast('دیتابیس متصل شد و اطلاعات ذخیره شد','ok');
-    loadDbStatus();
-  renderThemeSwatches();
-  }catch(e){toast(' '+e.message,'err')}
-}
-async function disconnectDatabase(){
-  try{await authF('/api/database/disconnect',{method:'POST'});toast('اتصال دیتابیس قطع شد','ok');loadDbStatus();
-  renderThemeSwatches();}catch(e){toast('خطا در قطع اتصال','err')}
-}
 
+async function loadCloudflareDomains(){
+  try{
+    const r=await authF('/api/cloudflare/domains'),d=await r.json();
+    const list=d.domains||[]; const cnt=document.getElementById('cf-count'); if(cnt)cnt.textContent=toFa(list.length);
+    const el=document.getElementById('cf-list'); if(!el)return;
+    el.innerHTML=list.map(x=>`<div class="health-row"><div><b>${esc(x.name||x.domain)}</b><div class="pro-muted" dir="ltr">${esc(x.domain)} · ${toFa((x.clean_ips||[]).length)} IP</div><div class="vl-code" style="margin-top:8px" dir="ltr">${esc(x.sub_url)}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-p btn-sm" onclick="navigator.clipboard.writeText('${esc(x.sub_url)}').then(()=>toast('ساب کلادفلیر کپی شد','ok'))"><i class="ti ti-copy"></i></button><button class="btn btn-d btn-sm" onclick="deleteCloudflareDomain('${esc(x.slug||x.domain)}')"><i class="ti ti-trash"></i></button></div></div>`).join('')||'<div class="empty"><i class="ti ti-cloud-off"></i><p>دامنه‌ای ثبت نشده</p></div>';
+  }catch(e){console.error(e);toast('خطا در بارگذاری کلادفلیر','err')}
+}
+async function saveCloudflareDomain(){
+  const domain=document.getElementById('cf-domain').value.trim(); const name=document.getElementById('cf-name').value.trim(); const clean_ips=document.getElementById('cf-ips').value.trim();
+  if(!domain){toast('دامنه را وارد کن','err');return}
+  try{const r=await authF('/api/cloudflare/domains',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({domain,name,clean_ips})}); const d=await r.json().catch(()=>({})); if(!r.ok)throw new Error(d.detail||'خطا'); navigator.clipboard?.writeText(d.sub_url||''); toast('دامنه کلادفلیر ذخیره شد و ساب کپی شد','ok'); loadCloudflareDomains();}
+  catch(e){toast(' '+e.message,'err')}
+}
+async function deleteCloudflareDomain(key){if(!confirm('دامنه کلادفلیر حذف شود؟'))return; try{await authF('/api/cloudflare/domains/'+encodeURIComponent(key),{method:'DELETE'});toast('حذف شد','ok');loadCloudflareDomains()}catch(e){toast('خطا','err')}}
 
-const THEME_COLORS=['#2563EB','#111827','#7C3AED','#059669','#DC2626','#D97706'];let selectedThemeColor=localStorage.getItem('oxnet-accent')||'#2563EB';
-function applyAccent(c){selectedThemeColor=c;localStorage.setItem('oxnet-accent',c);document.documentElement.style.setProperty('--accent2',c);document.documentElement.style.setProperty('--accent-d',c+'18');}
-function renderThemeSwatches(){const el=document.getElementById('theme-swatches');if(!el)return;el.innerHTML=THEME_COLORS.map(c=>`<span class="theme-swatch ${c===selectedThemeColor?'on':''}" style="background:${c}" onclick="applyAccent('${c}');renderThemeSwatches()"></span>`).join('')}
-async function loadProTools(){renderThemeSwatches();loadHealth();loadMonitoring();loadRestorePoints();}
+async function loadDbStatus(){try{const el=document.getElementById('storage-mode-label');if(el)el.textContent='JSON File';}catch(e){}}
 async function saveThemeStudio(){try{await authF('/api/settings',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:{accent:selectedThemeColor}})});toast('قالب ذخیره شد','ok')}catch(e){toast('خطا','err')}}
 async function createSmartSub(){const label=document.getElementById('smart-label').value||'Smart Iran';const profile=document.getElementById('smart-profile').value;try{const r=await authF('/api/smart-subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({label,profile})});const d=await r.json();if(!r.ok)throw new Error(d.detail||'خطا');navigator.clipboard?.writeText(d.sub_url);toast('ساب هوشمند ساخته و کپی شد','ok');loadLinks();loadSubs();}catch(e){toast(' '+e.message,'err')}}
 async function loadHealth(){try{const r=await authF('/api/config-health'),d=await r.json();const el=document.getElementById('health-list');if(!el)return;el.innerHTML=(d.items||[]).slice(0,8).map(x=>`<div class="health-row"><div><b>${esc(x.label)}</b><div class="pro-muted">${esc(x.protocol)} · ${esc(x.status)} · ${(x.reasons||[]).join('، ')||'بدون مشکل'}</div></div><span class="score-pill">${toFa(x.score)}</span></div>`).join('')||'<div class="pro-muted">کانفیگی نیست</div>'}catch(e){}}
@@ -3107,397 +2970,6 @@ async function startUpdate(){
     btn.disabled=false;btn.innerHTML='<i class="ti ti-download"></i> نصب بروزرسانی';
   }
 }
-let btpPolling = null;
-let btpTargetUuid = null;
-
-function btpSetStatus(icon, color, text, spin){
-  const ic = document.getElementById('btp-status-icon');
-  ic.className = 'ti ' + icon;
-  ic.style.color = color;
-  ic.style.animation = spin ? 'spin 1s linear infinite' : '';
-  document.getElementById('btp-status-text').textContent = text;
-}
-
-function btpToggleButtons(running){
-  document.getElementById('btp-start-btn').style.display = running ? 'none' : 'flex';
-  document.getElementById('btp-stop-btn').style.display = running ? 'flex' : 'none';
-}
-
-function btpChangeToken(){
-  document.getElementById('btp-token-section').style.display = '';
-  document.getElementById('btp-token-saved-section').style.display = 'none';
-}
-
-async function btpCheckTokenState(){
-  try{
-    const r = await authF('/api/bot-tcp-proxy/status'), d = await r.json();
-    if(d.has_token){
-      document.getElementById('btp-token-section').style.display = 'none';
-      document.getElementById('btp-token-saved-section').style.display = '';
-    }else{
-      document.getElementById('btp-token-section').style.display = '';
-      document.getElementById('btp-token-saved-section').style.display = 'none';
-    }
-    btpToggleButtons(d.running);
-    if(d.running){
-      btpPolling = setInterval(pollBotTcpProxy, 1500);
-      btpSetStatus('ti-loader-2','var(--accent)', `در حال تلاش... (${d.attempts} تلاش انجام‌شده)`, true);
-    }
-  }catch(e){}
-}
-
-async function startBotTcpProxy(){
-  const tokenField = document.getElementById('btp-token');
-  const tokenSection=document.getElementById('btp-token-section');
-  const token = tokenSection && tokenSection.style.display !== 'none' ? tokenField.value.trim() : '';
-  const portVal = document.getElementById('btp-port').value.trim();
-  let pendingPublic = null;
-  if (btpTargetUuid) pendingPublic = (window.__rawLinksList||[]).find(l=>l.uuid===btpTargetUuid) || null;
-  if (!pendingPublic) pendingPublic = (window.__rawLinksList||[])
-    .filter(l => (l.protocol==='mtproto' && l.mtproto_port))
-    .sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||'')))[0];
-  btpTargetUuid = pendingPublic?.uuid || btpTargetUuid || null;
-  const autoPort = pendingPublic ? (pendingPublic.mtproto_port || pendingPublic.ss_tcp_port) : '';
-  const btn = document.getElementById('btp-start-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال اجرا...';
-  btpSetStatus('ti-loader-2','var(--accent)','در حال اتصال به Railway...', true);
-  document.getElementById('btp-log-box').style.display = 'block';
-
-  const body = { token, port: portVal || autoPort || undefined, target_uuid: btpTargetUuid || undefined };
-  if (btpForcedDomain) {
-    body.mode = 'whitelist';
-    body.target_domains = [btpForcedDomain];
-  } else {
-    body.mode = 'blacklist';
-  }
-
-  try{
-    const r = await authF('/api/bot-tcp-proxy/start', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(body)
-    });
-    if(!r.ok){ const d = await r.json().catch(()=>({})); throw new Error(d.detail || 'خطا'); }
-    document.getElementById('btp-token-section').style.display = 'none';
-    document.getElementById('btp-token-saved-section').style.display = '';
-    btpToggleButtons(true);
-    btpPolling = setInterval(pollBotTcpProxy, 1500);
-  }catch(e){
-    toast(' '+e.message,'err');
-    btpSetStatus('ti-alert-circle','var(--amber-t)', e.message, false);
-    setTimeout(()=>pollBotTcpProxy().catch(()=>{}), 900);
-    btn.disabled = false; btn.innerHTML = '<i class="ti ti-player-play"></i> شروع ساخت TCP Proxy';
-  }
-}
-async function stopBotTcpProxy(){
-  const btn = document.getElementById('btp-stop-btn');
-  btn.disabled = true;
-  try{
-    await authF('/api/bot-tcp-proxy/stop', {method:'POST'});
-    toast('درخواست توقف ارسال شد','ok');
-  }catch(e){
-    toast('خطا در توقف','err');
-  }
-  btn.disabled = false;
-}
-
-async function pollBotTcpProxy(){
-  try{
-    const r = await authF('/api/bot-tcp-proxy/status'), d = await r.json();
-    const box = document.getElementById('btp-log-box');
-    box.innerHTML = (d.logs||[]).map(l=>`<p class="upd-log-line">[${new Date(l.time*1000).toLocaleTimeString('fa-IR')}] ${esc(l.msg)}</p>`).join('') || '<p class="upd-log-empty">لاگی موجود نیست</p>';
-    box.scrollTop = box.scrollHeight;
-
-    if(d.running){
-      btpToggleButtons(true);
-      btpSetStatus('ti-loader-2','var(--accent)', `در حال تلاش... (${d.attempts} تلاش انجام‌شده)`, true);
-    }else{
-      clearInterval(btpPolling);
-      btpToggleButtons(false);
-      const btn = document.getElementById('btp-start-btn');
-      btn.disabled = false; btn.innerHTML = '<i class="ti ti-player-play"></i> شروع فرآیند';
-      if(d.result){
-        btpSetStatus('ti-circle-check','var(--green-t)', `موفق — ${d.result.domain}:${d.result.port}`, false);
-        toast('پروکسی ساخته شد: '+d.result.domain+':'+d.result.port,'ok');
-        try{
-          const ar=await authF('/api/bot-tcp-proxy/attach-result',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({result:d.result, uuid: btpTargetUuid || undefined})});
-          const ad=await ar.json().catch(()=>({}));
-          if(ar.ok){toast('دامنه و پورت روی لینک نشست: '+(ad.label||''),'ok'); btpTargetUuid=null; loadLinks();}
-        }catch(e){console.warn(e)}
-      } else if(d.stopped_by_user){
-        btpSetStatus('ti-ban','var(--amber-t)', 'فرآیند متوقف شد', false);
-      } else if(d.error){
-        btpSetStatus('ti-alert-circle','var(--red-t)', d.error, false);
-        toast(' '+d.error,'err');
-      }
-    }
-  }catch(e){}
-}
-async function pollUpdate(){
-  pollTicks++;
-  try{
-    const r=await fetch('/api/update-log',{credentials:'include'});
-    if(r.status===401){clearInterval(updatePolling);location.reload();return}
-    const d=await r.json();
-    document.getElementById('update-progress-bar').style.width=d.progress+'%';
-    document.getElementById('update-progress-pct').textContent=d.progress+'%';
-    renderUpdateLog(d.logs);
-    if(d.logs && d.logs.length) document.getElementById('update-progress-txt').textContent=d.logs[d.logs.length-1].msg;
-
-    if(!d.running && d.progress>=100){
-      document.getElementById('update-progress-txt').textContent='بروزرسانی کامل شد؛ در حال اتصال مجدد...';
-      clearInterval(updatePolling);
-      let tries=0;
-      const reconnect=setInterval(async()=>{
-        tries++;
-        try{const rr=await fetch('/api/me',{credentials:'include'});if(rr.ok){clearInterval(reconnect);location.reload();}}catch(e){}
-        if(tries>40)clearInterval(reconnect);
-      },2000);
-    }else if(!d.running && pollTicks>3){
-      document.getElementById('update-progress-txt').textContent='بروزرسانی متوقف شد (خطا) — لاگ را ببینید';
-      document.getElementById('update-btn').disabled=false;
-      document.getElementById('update-btn').innerHTML='<i class="ti ti-download"></i> نصب بروزرسانی';
-      clearInterval(updatePolling);
-    }
-  }catch(e){}
-}
-async function loadUpdateLog(){
-  try{const r=await authF('/api/update-log'),d=await r.json();renderUpdateLog(d.logs);}catch(e){}
-}
-function renderUpdateLog(logs){
-  const box=document.getElementById('update-log-box');
-  if(!logs||!logs.length){box.innerHTML='<p class="upd-log-empty">لاگی موجود نیست</p>';return}
-  box.innerHTML=logs.map(l=>{
-    const cls = l.msg.includes('') ? 'err' : (l.msg.includes('') ? 'ok' : '');
-    return `<p class="upd-log-line ${cls}">[${new Date(l.time*1000).toLocaleTimeString('fa-IR')}] ${esc(l.msg)}</p>`;
-  }).join('');
-  box.scrollTop=box.scrollHeight;
-}
-async function loadUpdateHistory(){
-  try{
-    const r=await authF('/api/update-history'),d=await r.json();
-    const hist=d.history||[];
-    document.getElementById('upd-history-count').textContent=toFa(hist.length)+' مورد';
-    const el=document.getElementById('upd-history-list');
-    if(!hist.length){
-      el.innerHTML='<div class="upd-history-empty"><i class="ti ti-history-toggle"></i><p>هنوز هیچ بروزرسانی‌ای ثبت نشده</p></div>';
-      return;
-    }
-    el.innerHTML=hist.map(h=>{
-      const isErr = h.status==='err';
-      return `
-      <div class="upd-item ${isErr?'err':''}">
-        <div class="upd-item-dot-wrap"><div class="upd-item-dot"><i class="ti ${isErr?'ti-x':'ti-check'}"></i></div></div>
-        <div class="upd-item-card">
-          <div class="upd-item-head">
-            <div class="upd-item-versions">
-              <span>${esc(h.from_version||'—')}</span>
-              <i class="ti ti-arrow-left arrow"></i>
-              <span class="to">${esc(h.to_version||'—')}</span>
-            </div>
-            <span class="upd-item-badge ${isErr?'err':'ok'}">${isErr?'ناموفق':'موفق'}</span>
-          </div>
-          <div class="upd-item-time"><i class="ti ti-clock"></i> ${new Date(h.time*1000).toLocaleString('fa-IR')} · ${timeAgoFa(h.time)}</div>
-          ${h.description?`<div class="upd-item-desc">${esc(h.description)}</div>`:''}
-          ${isErr && h.error?`<div class="upd-item-err-box"><i class="ti ti-alert-circle"></i> ${esc(h.error)}</div>`:''}
-        </div>
-      </div>`;
-    }).join('');
-  }catch(e){console.error(e)}
-}
-let autoDomainPolling = null;
-
-async function autoGetMtprotoDomain(){
-  // اول چک کن توکن ذخیره شده یا نه
-  try{
-    const r = await authF('/api/bot-tcp-proxy/status'), d = await r.json();
-    if(!d.has_token){
-      document.getElementById('auto-domain-token-wrap').style.display = 'block';
-      document.getElementById('auto-domain-status').innerHTML = '<i class="ti ti-key"></i> برای دریافت خودکار دامنه، ابتدا توکن Railway را وارد کن.';
-      return;
-    }
-    startAutoDomainFetch();
-  }catch(e){
-    toast('خطا در بررسی وضعیت توکن','err');
-  }
-}
-
-async function submitAutoDomainToken(){
-  const token = document.getElementById('auto-domain-token').value.trim();
-  if(!token){ toast('توکن را وارد کن','err'); return; }
-  document.getElementById('auto-domain-token-wrap').style.display = 'none';
-  startAutoDomainFetch(token);
-}
-
-async function startAutoDomainFetch(token){
-  const btn = document.getElementById('auto-domain-btn');
-  const statusEl = document.getElementById('auto-domain-status');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال دریافت...';
-  statusEl.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال دریافت دامنه از Railway...';
-
-  try{
-    const body = { mode: 'blacklist' };
-    if(token) body.token = token;
-    const r = await authF('/api/bot-tcp-proxy/start', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(body)
-    });
-    if(!r.ok){
-      const d = await r.json().catch(()=>({}));
-      throw new Error(d.detail || 'خطا در شروع فرآیند');
-    }
-    autoDomainPolling = setInterval(pollAutoDomain, 1000);
-  }catch(e){
-    statusEl.innerHTML = '<i class="ti ti-alert-circle" style="color:var(--red-t)"></i>  '+esc(e.message);
-    btn.disabled = false;
-    btn.innerHTML = '<i class="ti ti-bolt"></i> دریافت دامنه';
-  }
-}
-
-async function pollAutoDomain(){
-  try{
-    const r = await authF('/api/bot-tcp-proxy/status'), d = await r.json();
-    const btn = document.getElementById('auto-domain-btn');
-    const statusEl = document.getElementById('auto-domain-status');
-
-    if(d.running){
-      statusEl.innerHTML = `<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال جستجوی دامنه... (${d.attempts} تلاش)`;
-      return;
-    }
-
-    clearInterval(autoDomainPolling);
-    btn.disabled = false;
-    btn.innerHTML = '<i class="ti ti-bolt"></i> دریافت خودکار دامنه';
-
-    if(d.result){
-      // پر کردن خودکار فیلدها بدون دخالت کاربر
-      document.getElementById('nl-mtproto-domain').value = d.result.domain;
-      document.getElementById('nl-mtproto-port').value = ''; // پورت داخلی همان پیش‌فرض می‌ماند؛ این پورت، پورت عمومی TCP است
-      statusEl.innerHTML = `<i class="ti ti-circle-check" style="color:var(--green-t)"></i> دامنه دریافت شد: <b>${esc(d.result.domain)}:${d.result.port}</b>`;
-      toast('دامنه و پورت خودکار دریافت شد ','ok');
-    } else if(d.error){
-      statusEl.innerHTML = '<i class="ti ti-alert-circle" style="color:var(--red-t)"></i>  '+esc(d.error);
-      toast(' '+d.error,'err');
-    }
-  }catch(e){}
-}
-
-function openDomainScanModal(){
-  dsDomains = [];
-  dsRenderChips();
-  document.getElementById('ds-token-section').style.display = '';
-  openModal('modal-domain-scan');
-  authF('/api/bot-tcp-proxy/status').then(r=>r.json()).then(d=>{
-    if(d.has_token) document.getElementById('ds-token-section').style.display = 'none';
-  }).catch(()=>{});
-}
-async function autoAssignMtprotoDomain(){
-  const btn = document.getElementById('auto-domain-btn');
-  const statusEl = document.getElementById('auto-domain-status');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال دریافت...';
-  statusEl.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال اتصال به Railway و دریافت دامنه...';
-
-  try{
-    const r = await authF('/api/bot-tcp-proxy/start', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ mode:'blacklist' }) // توکن ذخیره‌شده خودکار استفاده می‌شود
-    });
-    if(!r.ok){
-      const d = await r.json().catch(()=>({}));
-      throw new Error(d.detail || 'خطا در شروع فرآیند');
-    }
-    autoDomainPolling = setInterval(pollAutoDomain, 1200);
-  }catch(e){
-    statusEl.innerHTML = '<i class="ti ti-alert-circle" style="color:var(--red-t)"></i>  '+e.message;
-    btn.disabled = false;
-    btn.innerHTML = '<i class="ti ti-bolt"></i> دریافت خودکار دامنه';
-  }
-}
-
-
-function dsAddDomain(){
-  const inp = document.getElementById('ds-domain-inp');
-  const v = inp.value.trim().toLowerCase().replace(/\.$/, '');
-  if(v && !dsDomains.includes(v)) dsDomains.push(v);
-  inp.value = '';
-  document.querySelectorAll('#modal-domain-scan .cm-opt').forEach(o=>o.classList.remove('sel')); // جدید
-  dsRenderChips();
-}
-function dsRemoveDomain(d){
-  dsDomains = dsDomains.filter(x=>x!==d);
-  dsRenderChips();
-}
-function dsRenderChips(){
-  document.getElementById('ds-domain-chips').innerHTML = dsDomains.map(d=>
-    `<span class="cm-pill active" style="cursor:pointer" onclick="dsRemoveDomain('${d}')">${d} <i class="ti ti-x" style="font-size:10px"></i></span>`
-  ).join('') || '<span style="font-size:10.5px;color:var(--t3)">هنوز دامنه‌ای اضافه نشده</span>';
-}
-async function startDomainScan(){
-  if(!dsDomains.length){ toast('حداقل یک دامنه اضافه کن','err'); return; }
-  const tokenField = document.getElementById('ds-token');
-  const tokenSection=document.getElementById('ds-token-section');
-  const token = tokenSection && tokenSection.style.display !== 'none' ? tokenField.value.trim() : '';
-  const btn = document.getElementById('ds-start-btn');
-  btn.disabled = true; btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> در حال اجرا...';
-  document.getElementById('ds-log-box').style.display = 'block';
-  try{
-    const r = await authF('/api/bot-tcp-proxy/start', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ token, mode:'whitelist', target_domains: dsDomains })
-    });
-    if(!r.ok){ const d = await r.json().catch(()=>({})); throw new Error(d.detail || 'خطا'); }
-    document.getElementById('ds-stop-btn').style.display = 'flex';
-    dsPolling = setInterval(pollDomainScan, 1500);
-  }catch(e){
-    toast(' '+e.message,'err');
-    btn.disabled = false; btn.innerHTML = '<i class="ti ti-player-play"></i> شروع اسکن';
-  }
-}
-async function stopDomainScan(){
-  await authF('/api/bot-tcp-proxy/stop', {method:'POST'});
-  toast('درخواست توقف ارسال شد','ok');
-}
-async function pollDomainScan(){
-  try{
-    const r = await authF('/api/bot-tcp-proxy/status'), d = await r.json();
-    const box = document.getElementById('ds-log-box');
-    box.innerHTML = (d.logs||[]).map(l=>`<p class="upd-log-line">[${new Date(l.time*1000).toLocaleTimeString('fa-IR')}] ${esc(l.msg)}</p>`).join('') || '<p class="upd-log-empty">لاگی موجود نیست</p>';
-    box.scrollTop = box.scrollHeight;
-    const txt = document.getElementById('ds-status-text');
-    if(d.running){
-      txt.textContent = `در حال جستجو... (${d.attempts} تلاش)`;
-    } else {
-      clearInterval(dsPolling);
-      document.getElementById('ds-stop-btn').style.display = 'none';
-      const btn = document.getElementById('ds-start-btn');
-      btn.disabled = false; btn.innerHTML = '<i class="ti ti-player-play"></i> شروع اسکن';
-      if(d.result){
-        txt.textContent = `پیدا شد: ${d.result.domain}:${d.result.port}`;
-        toast('دامنه پیدا شد: '+d.result.domain+':'+d.result.port,'ok');
-      } else if(d.error){
-        txt.textContent = d.error;
-      }
-    }
-  }catch(e){}
-}
-let btpForcedDomain = null;
-
-function openTcpProxyFor(uuid, port){
-  btpTargetUuid = uuid || null;
-  const inp=document.getElementById('btp-port');
-  if(inp && port) inp.value = port;
-  openModal('modal-bot-tcp-proxy');
-  btpCheckTokenState();
-  btpSetStatus('ti-route','var(--accent)', port ? ('آماده ساخت TCP Proxy عمومی برای پورت داخلی '+port) : 'آماده ساخت TCP Proxy عمومی', false);
-}
-
-function btpSelectIsp(domain, optId){
-  btpForcedDomain = domain; // null یعنی حالت اسکن خودکار قبلی
-  document.querySelectorAll('#modal-bot-tcp-proxy .cm-pill,#modal-bot-tcp-proxy .cm-opt').forEach(o=>o.classList.remove('active','sel'));
-  const opt=document.getElementById(optId); if(opt) opt.classList.add('active','sel');
-}
 </script>
 </body></html>"""
 
@@ -3685,7 +3157,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 }}
 @keyframes spin{{to{{transform:rotate(360deg)}}}}
 
-/* OXNET v2.0.7 public subscription theme polish */
+/* OXNET v2.0.8 public subscription theme polish */
 .copy-all-bar{{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;box-shadow:var(--shadow)!important}}
 .copy-all-btn{{background:var(--card)!important;color:var(--t1)!important;border:1px solid var(--card-bh)!important}}
 .btn-p{{background:var(--accent)!important;color:var(--bg)!important}}
@@ -3710,7 +3182,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark"><i class="ti ti-network"></i></div>
-      <div><div class="brand-name">OXNET</div><div class="brand-sub">Stable Control · v2.0.7</div></div>
+      <div><div class="brand-name">OXNET</div><div class="brand-sub">OXNET Stable · v2.0.8</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3720,7 +3192,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.7</div>
+  <div class="footer">OXNET v2.0.8</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';
