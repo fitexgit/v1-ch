@@ -1,3 +1,3 @@
-version=2.0.9
-description=Stable build: IPv6 clean IP support, editable Cloudflare domains, per-group Cloudflare subscriptions, multi card edit, chart fallback fixes
-updated_at=1785226900
+version=2.0.10
+description=Stable build: fixed Cloudflare URLs, multi quota edit, Cloudflare subs in subscriptions, dashboard live fallback
+updated_at=1785227759

@@ -1,5 +1,5 @@
 
-# pages.py  -  OXNET v2.0.9
+# pages.py  -  OXNET v2.0.10
 # شامل: LOGIN_HTML, DASHBOARD_HTML, get_public_page_html()
 
 LOGIN_HTML = r"""<!DOCTYPE html>
@@ -91,7 +91,7 @@ input:focus+.ic{color:var(--accent)}
 
 .pro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.pro-card{background:linear-gradient(145deg,var(--card),var(--bg3));border:1px solid var(--card-b);border-radius:22px;padding:20px;box-shadow:0 12px 34px rgba(15,23,42,.06)}.pro-card-title{font-weight:900;color:var(--t1);display:flex;gap:8px;align-items:center;margin-bottom:8px}.pro-muted{font-size:11px;color:var(--t3);line-height:1.8}.pro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.health-row,.cust-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--card-b);background:var(--bg2);border-radius:14px;padding:10px 12px;margin-bottom:8px}.score-pill{font-weight:900;border-radius:999px;padding:5px 9px;background:var(--accent-d);color:var(--accent2);font-size:11px}.theme-swatches{display:flex;gap:8px;flex-wrap:wrap}.theme-swatch{width:30px;height:30px;border-radius:10px;border:2px solid var(--card-b);cursor:pointer}.theme-swatch.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}@media(max-width:900px){.pro-grid{grid-template-columns:1fr}}
 
-/* OXNET v2.0.9 dark-mode contrast hardening */
+/* OXNET v2.0.10 dark-mode contrast hardening */
 [data-theme="dark"] .btn-o,[data-theme="dark"] .btn-g,[data-theme="dark"] .theme-btn,[data-theme="dark"] .menu-btn,[data-theme="dark"] .theme-mob,[data-theme="dark"] .icon-btn{background:var(--bg2)!important;color:var(--t1)!important;border-color:var(--card-bh)!important}
 [data-theme="dark"] .btn-p{background:linear-gradient(135deg,#f8fafc,#cbd5e1)!important;color:#020617!important;box-shadow:none!important}
 [data-theme="dark"] .btn-d{background:rgba(239,68,68,.18)!important;color:#fecaca!important}
@@ -100,7 +100,7 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .fs option{background:#0b1220!important;color:#f8fafc!important}
 [data-theme="dark"] .proto-card,[data-theme="dark"] .proto-base-card,[data-theme="dark"] .proto-t-card,[data-theme="dark"] .cm-dd,[data-theme="dark"] .cm-input{background:var(--card)!important;color:var(--t1)!important}
 
-/* OXNET v2.0.9 dark-mode final contrast fix */
+/* OXNET v2.0.10 dark-mode final contrast fix */
 [data-theme="dark"]{--bg:#05070b!important;--bg2:#0b1018!important;--bg3:#111827!important;--card:#0f172a!important;--card-b:rgba(255,255,255,.10)!important;--card-bh:rgba(255,255,255,.22)!important;--t1:#f8fafc!important;--t2:#cbd5e1!important;--t3:#94a3b8!important;--accent:#e5e7eb!important;--accent2:#ffffff!important;--accent-d:rgba(255,255,255,.08)!important}
 [data-theme="dark"] .card,[data-theme="dark"] .modal,[data-theme="dark"] .modal-v2,[data-theme="dark"] .cm-modal,[data-theme="dark"] .dash-main-card,[data-theme="dark"] .dash-kpi,[data-theme="dark"] .dash-chart-card,[data-theme="dark"] .dash-protocol,[data-theme="dark"] .cfg-card,[data-theme="dark"] .multi-group-card,[data-theme="dark"] .sub-card,[data-theme="dark"] .pro-card,[data-theme="dark"] .db-card,[data-theme="dark"] .srv-panel,[data-theme="dark"] .pw-panel,[data-theme="dark"] .conn-card-v2,[data-theme="dark"] .health-row,[data-theme="dark"] .cust-row{background:#0f172a!important;color:#f8fafc!important;border-color:rgba(255,255,255,.12)!important}
 [data-theme="dark"] .fi,[data-theme="dark"] .fs,[data-theme="dark"] .cm-input,[data-theme="dark"] .modal-v2-input,[data-theme="dark"] .pw-input,[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#0b1018!important;color:#f8fafc!important;border-color:rgba(255,255,255,.14)!important}
@@ -111,14 +111,14 @@ input:focus+.ic{color:var(--accent)}
 [data-theme="dark"] .cm-opt:hover,[data-theme="dark"] .cm-opt.sel{background:rgba(255,255,255,.10)!important}
 
 
-/* OXNET v2.0.9 extra dark contrast */
+/* OXNET v2.0.10 extra dark contrast */
 [data-theme="dark"] *{scrollbar-color:#334155 #0b1018}
 [data-theme="dark"] .upd-install-btn,[data-theme="dark"] .copy-all-btn{background:#0b1018!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.16)!important}
 [data-theme="dark"] .bg-blue,[data-theme="dark"] .badge{background:rgba(255,255,255,.08)!important;color:#f8fafc!important;border:1px solid rgba(255,255,255,.12)!important}
 [data-theme="dark"] .cfg-uuid-mini,[data-theme="dark"] .cfg-sub-tag,[data-theme="dark"] .exp-chip,[data-theme="dark"] .proto-chip{border-color:rgba(255,255,255,.12)!important}
 
 
-/* OXNET v2.0.9 stable polish */
+/* OXNET v2.0.10 stable polish */
 #modal-create-link .cm-modal{max-height:94vh!important;display:flex!important;flex-direction:column!important}
 #modal-create-link .cm-body{max-height:min(68vh,720px)!important;overflow-y:auto!important;padding-left:18px!important}
 #modal-create-link .cm-body::-webkit-scrollbar{width:8px}
@@ -136,7 +136,7 @@ body > .wrap .footer{display:none!important}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}
 @media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 
-/* OXNET v2.0.9 stable polish */
+/* OXNET v2.0.10 stable polish */
 #modal-create-link .cm-modal{max-height:94vh!important;display:flex!important;flex-direction:column!important}
 #modal-create-link .cm-body{max-height:min(68vh,720px)!important;overflow-y:auto!important;padding-left:18px!important}
 #modal-create-link .cm-body::-webkit-scrollbar{width:8px}
@@ -154,7 +154,7 @@ body > .wrap .footer{display:none!important}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}
 @media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 
-/* OXNET v2.0.9 final stable visual polish */
+/* OXNET v2.0.10 final stable visual polish */
 .brand-name,.logo-name{font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important}
 .brand-sub,.logo-sub{font-weight:700!important;letter-spacing:.02em!important}
 .brand-mark{background:linear-gradient(135deg,#0f172a,#334155)!important;color:#fff!important;font-weight:900!important}
@@ -168,7 +168,7 @@ body > .wrap .footer{display:none!important}
 .dash-protocols{grid-template-columns:repeat(4,1fr)!important}
 @media(max-width:1000px){.dash-protocols{grid-template-columns:1fr 1fr!important}}@media(max-width:560px){.dash-protocols{grid-template-columns:1fr!important}}
 
-/* OXNET v2.0.9 final stable visual polish */
+/* OXNET v2.0.10 final stable visual polish */
 .brand-name,.logo-name{font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important}
 .brand-sub,.logo-sub{font-weight:700!important;letter-spacing:.02em!important}
 .brand-mark{background:linear-gradient(135deg,#0f172a,#334155)!important;color:#fff!important;font-weight:900!important}
@@ -190,7 +190,7 @@ body > .wrap .footer{display:none!important}
   <div class="card">
     <div class="brand">
       <div class="brand-mark"><i class="ti ti-network"></i></div>
-      <div><div class="brand-name">OXNET</div><div class="brand-sub login-version-pill">OXNET Stable · v2.0.9</div></div>
+      <div><div class="brand-name">OXNET</div><div class="brand-sub login-version-pill">OXNET Stable · v2.0.10</div></div>
     </div>
     <h1>ورود به پنل</h1>
     <p class="sub">رمز عبور را برای دسترسی به داشبورد وارد کنید</p>
@@ -205,7 +205,7 @@ body > .wrap .footer{display:none!important}
       </div>
       <button class="btn" type="submit" id="btn"><i class="ti ti-login-2"></i> ورود به داشبورد</button>
     </form>
-    <div class="footer">OXNET · 2.0.9</div>
+    <div class="footer">OXNET · 2.0.10</div>
   </div>
 </div>
 <script>
@@ -1310,7 +1310,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 
-<!-- OXNET v2.0.9 repaired action modals -->
+<!-- OXNET v2.0.10 repaired action modals -->
 <div class="modal-bg" id="modal-edit-link">
   <div class="modal-v2" style="max-width:520px">
     <button class="modal-v2-close" onclick="closeModal('modal-edit-link')"><i class="ti ti-x"></i></button>
@@ -1388,7 +1388,7 @@ a{color:inherit;text-decoration:none}
   <button class="sb-close" id="close-sb"><i class="ti ti-x"></i></button>
   <div class="logo">
     <div class="brand-mark small"><i class="ti ti-network"></i></div>
-    <div><div class="logo-name">OXNET</div><div class="logo-sub">OXNET Stable · v2.0.9</div></div>
+    <div><div class="logo-name">OXNET</div><div class="logo-sub">OXNET Stable · v2.0.10</div></div>
   </div>
   <div class="nav-wrap">
     <div class="nav-sec">پنل</div>
@@ -1775,7 +1775,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="srv-tiles">
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-route"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پورت</div><div class="srv-tile-val">443 (TLS)</div></div></div>
-        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.9</div></div></div>
+        <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-versions"></i></div><div class="srv-tile-text"><div class="srv-tile-label">نسخه</div><div class="srv-tile-val">v2.0.10</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-brand-fastapi"></i></div><div class="srv-tile-text"><div class="srv-tile-label">فریم‌ورک</div><div class="srv-tile-val">FastAPI + Uvicorn</div></div></div>
         <div class="srv-tile"><div class="srv-tile-icon"><i class="ti ti-cloud"></i></div><div class="srv-tile-text"><div class="srv-tile-label">پلتفرم</div><div class="srv-tile-val">Railway</div></div></div>
         <div class="srv-tile" style="grid-column:1/-1"><div class="srv-tile-icon"><i class="ti ti-device-floppy"></i></div><div class="srv-tile-text"><div class="srv-tile-label">ذخیره‌سازی</div><div class="srv-tile-val"><span id="storage-mode-label">JSON File</span></div></div></div>
@@ -2021,7 +2021,7 @@ async function loadLinks(){
     empty.style.display='none';
     const subMap=Object.fromEntries(subs.map(s=>[s.sub_id,s.name]));
     grid.innerHTML=links.map(l=>{
-  if(l.is_multi_group){return `<div class="multi-group-card"><div class="multi-group-head"><div><div class="multi-group-title"><i class="ti ti-layers-intersect"></i>${esc(l.label)}</div><div class="multi-protos">${(l.children||[]).map(k=>`<span>${esc((PROTO_MAP[k.protocol]||[k.protocol])[0])}</span>`).join('')||'<span>Multi</span>'}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><span class="badge bg-blue">${toFa(l.child_count||0)} پروتکل</span><button class="btn btn-sm btn-p" onclick="navigator.clipboard.writeText('${esc(l.sub_url)}').then(()=>toast('ساب مولتی کپی شد','ok'))"><i class="ti ti-copy"></i> ساب</button><button class="btn btn-sm btn-g" onclick="openSubLinks('${esc(l.sub_id)}','${esc(l.label)}')"><i class="ti ti-link-plus"></i> کانفیگ‌ها</button><button class="btn btn-sm btn-amber btn-icon" onclick="editSubQuick('${esc(l.sub_id)}','${esc(l.label)}')" title="ویرایش"><i class="ti ti-edit"></i></button><button class="btn btn-sm btn-g btn-icon" onclick="showQR('${esc(l.sub_url)}')"><i class="ti ti-qrcode"></i></button></div></div><div class="utxt"><span>مصرف کل: ${fmtB(l.used_bytes||0)}</span><span>${esc(l.sub_url||'')}</span></div></div>`}
+  if(l.is_multi_group){return `<div class="multi-group-card"><div class="multi-group-head"><div><div class="multi-group-title"><i class="ti ti-layers-intersect"></i>${esc(l.label)}</div><div class="multi-protos">${(l.children||[]).map(k=>`<span>${esc((PROTO_MAP[k.protocol]||[k.protocol])[0])}</span>`).join('')||'<span>Multi</span>'}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><span class="badge bg-blue">${toFa(l.child_count||0)} پروتکل</span><button class="btn btn-sm btn-p" onclick="navigator.clipboard.writeText('${esc(l.sub_url)}').then(()=>toast('ساب مولتی کپی شد','ok'))"><i class="ti ti-copy"></i> ساب</button><button class="btn btn-sm btn-g" onclick="openSubLinks('${esc(l.sub_id)}','${esc(l.label)}')"><i class="ti ti-link-plus"></i> کانفیگ‌ها</button><button class="btn btn-sm btn-amber btn-icon" onclick="editMultiQuick('${esc(l.sub_id)}','${esc(l.label)}',${Number(l.limit_bytes||0)})" title="ویرایش کامل"><i class="ti ti-edit"></i></button><button class="btn btn-sm btn-g btn-icon" onclick="showQR('${esc(l.sub_url)}')"><i class="ti ti-qrcode"></i></button></div></div><div class="utxt"><span>مصرف کل: ${fmtB(l.used_bytes||0)}</span><span>${esc(l.sub_url||'')}</span></div></div>`}
   const lim=l.limit_bytes===0?'∞':fmtB(l.limit_bytes);
   const pct=l.limit_bytes===0?0:Math.min(100,l.used_bytes/l.limit_bytes*100);
   const bc=pct>90?'var(--red)':pct>70?'var(--amber)':'var(--accent)';
@@ -2396,7 +2396,8 @@ function renderSubsGrid(subs){
       </div>
       <div class="sub-card-bottom">
         <button class="btn btn-sm btn-g" onclick="openSubLinks('${esc(s.sub_id)}','${esc(s.name)}')"><i class="ti ti-link-plus"></i> کانفیگ‌ها</button>
-        <button class="btn btn-sm btn-o" onclick="navigator.clipboard.writeText('${esc(s.sub_url)}').then(()=>toast('لینک ساب کپی شد','ok'))"><i class="ti ti-rss"></i> ساب</button>
+        <button class="btn btn-sm btn-o" onclick="navigator.clipboard.writeText('${esc(s.sub_url)}').then(()=>toast('لینک ساب کپی شد','ok'))"><i class="ti ti-rss"></i> ساب اصلی</button>
+        ${(s.cloudflare_subs||[]).map(c=>`<button class="btn btn-sm btn-amber" onclick="navigator.clipboard.writeText('${esc(c.sub_url)}').then(()=>toast('ساب کلادفلیر کپی شد','ok'))"><i class="ti ti-brand-cloudflare"></i> CF</button>`).join('')}
         <button class="btn btn-sm btn-g btn-icon" onclick="showQR('${esc(s.sub_url)}')" title="QR"><i class="ti ti-qrcode"></i></button>
         <button class="btn btn-sm btn-d btn-icon" onclick="deleteSub('${esc(s.sub_id)}')" title="حذف"><i class="ti ti-trash"></i></button>
       </div>
@@ -2421,9 +2422,26 @@ async function createSub(){
   }catch(e){toast('خطا در ساخت گروه: '+(e.message||''),'err')}
 }
 async function editSubQuick(sub_id, oldName){
-  const name=prompt('نام جدید گروه/مولتی:', oldName||'');
+  const name=prompt('نام جدید گروه:', oldName||'');
   if(!name)return;
-  try{const r=await authF('/api/subs/'+sub_id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});if(!r.ok)throw new Error();toast('ویرایش شد','ok');loadSubs();loadLinks();}catch(e){toast('خطا در ویرایش','err')}
+  try{const r=await authF('/api/subs/'+sub_id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({name})});if(!r.ok)throw new Error();toast('ویرایش شد','ok');loadSubs();loadLinks();loadSubsPage();}catch(e){toast('خطا در ویرایش','err')}
+}
+async function editMultiQuick(sub_id, oldName, oldLimitBytes=0){
+  const name=prompt('نام جدید مولتی:', oldName||'');
+  if(name===null)return;
+  const currentGb = oldLimitBytes>0 ? (oldLimitBytes/1024/1024/1024).toFixed(2) : '';
+  const val=prompt('حجم جدید برای همه کانفیگ‌های مولتی (GB، خالی یا 0 یعنی نامحدود):', currentGb);
+  if(val===null)return;
+  const days=prompt('انقضا چند روز دیگر؟ خالی یعنی بدون تغییر، 0 یعنی بدون انقضا:', '');
+  if(days===null)return;
+  const active=confirm('مولتی و همه کانفیگ‌های داخلش فعال باشند؟\nOK = فعال، Cancel = بدون تغییر');
+  const reset=confirm('مصرف همه کانفیگ‌های داخل مولتی ریست شود؟');
+  const body={name:name||oldName||'Multi'};
+  body.limit_value = Number(val||0); body.limit_unit='GB';
+  if(days!=='') body.expires_days=Number(days||0);
+  if(active) body.active=true;
+  if(reset) body.reset_usage=true;
+  try{const r=await authF('/api/subs/'+sub_id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error();toast('مولتی کامل ویرایش شد','ok');loadSubs();loadLinks();loadSubsPage();}catch(e){toast('خطا در ویرایش مولتی','err')}
 }
 async function deleteSub(sub_id){
   if(!confirm('حذف این گروه؟ کانفیگ‌ها حذف نمی‌شوند.'))return;
@@ -2512,7 +2530,8 @@ async function loadSubsPage(){
           <div style="font-size:10px;color:var(--t3);margin-top:3px">${toFa(s.links_count)} کانفیگ · ${esc(s.total_used_fmt)} مصرف ${s.has_password?'·  رمزدار':''}</div>
         </div>
         <div style="display:flex;gap:5px;flex-wrap:wrap">
-          <button class="btn btn-sm btn-pur" onclick="navigator.clipboard.writeText('${esc(s.sub_url)}').then(()=>toast('کپی شد','ok'))"><i class="ti ti-copy"></i> ساب</button>
+          <button class="btn btn-sm btn-pur" onclick="navigator.clipboard.writeText('${esc(s.sub_url)}').then(()=>toast('کپی شد','ok'))"><i class="ti ti-copy"></i> ساب اصلی</button>
+          ${(s.cloudflare_subs||[]).map(c=>`<button class="btn btn-sm btn-amber" onclick="navigator.clipboard.writeText('${esc(c.sub_url)}').then(()=>toast('ساب کلادفلیر کپی شد','ok'))"><i class="ti ti-brand-cloudflare"></i> Cloudflare</button>`).join('')}
           <button class="btn btn-sm btn-pur" onclick="navigator.clipboard.writeText('${esc(s.public_url)}').then(()=>toast('کپی شد','ok'))"><i class="ti ti-globe"></i> پابلیک</button>
           <button class="btn btn-sm btn-g" onclick="showQR('${esc(s.sub_url)}')"><i class="ti ti-qrcode"></i></button>
         </div>
@@ -2596,7 +2615,9 @@ async function loadConns(){
 }
 async function loadErrs(){try{const r=await authF('/stats'),d=await r.json();renderErrs(d.recent_errors||[]);}catch(e){}}
 async function fetchDefaultVless(){
-  try{const r=await authF('/api/links'),d=await r.json();const links=d.links||[];const def=links.find(l=>l.limit_bytes===0&&l.active&&!l.expired)||links.find(l=>l.active&&!l.expired)||links[0];document.getElementById('vless-main').textContent=def?def.vless_link:'هنوز کانفیگی وجود ندارد';}catch(e){}
+  const el=document.getElementById('vless-main');
+  try{const r=await authF('/api/links'); if(!r.ok)throw new Error('links'); const d=await r.json();const links=d.links||[];const def=links.find(l=>l.limit_bytes===0&&l.active&&!l.expired)||links.find(l=>l.active&&!l.expired)||links[0]; if(el)el.textContent=def?(def.vless_link||def.sub_url||'لینک آماده نیست'):'هنوز کانفیگی وجود ندارد';}
+  catch(e){console.error(e); if(el)el.textContent='خطا در دریافت لینک؛ رفرش کن';}
 }
 function cpText(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>toast('کپی شد ','ok'))}
 function qrFor(id){showQR(document.getElementById(id).textContent)}
@@ -2777,6 +2798,7 @@ function initCharts(){
       }
     }
   });
+  setTimeout(()=>{try{renderFallbackCharts([],[],{})}catch(e){}},0);
 }
 const ICON_MAP={ad:'ti-speakerphone',news:'ti-news',warning:'ti-alert-triangle',urgent:'ti-alert-octagon'};
 const LABEL_MAP={ad:'تبلیغ',news:'خبر',warning:'هشدار',urgent:'فوری'};
@@ -2909,8 +2931,8 @@ async function sendSupportMsg(){
   inp.focus();
 }
 document.addEventListener('DOMContentLoaded', async () => {
-  await checkAuth();
-  initCharts();
+  try{await checkAuth();}catch(e){console.error('auth init',e)}
+  try{initCharts();}catch(e){console.error('chart init',e);setupFallbackCharts();}
   document.getElementById('set-host').textContent = location.host;
   document.getElementById('sub-all-url') && (document.getElementById('sub-all-url').textContent = location.protocol + '//' + location.host + '/sub-all');
   
@@ -2918,13 +2940,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   // بروزرسانی خودکار در نسخه مستقل حذف شده است
 
   // بقیه‌ی کدهای اولیه
-  fetchStats();
-  fetchDefaultVless();
-  loadLinks();
-  loadSubs();
-  loadAnnouncements();
-  loadDbStatus();
-  renderThemeSwatches();
+  fetchStats().catch?.(()=>{});
+  fetchDefaultVless().catch?.(()=>{});
+  loadLinks().catch?.(()=>{});
+  loadSubs().catch?.(()=>{});
+  loadSubsPage().catch?.(()=>{});
+  loadAnnouncements().catch?.(()=>{});
+  loadDbStatus().catch?.(()=>{});
+  try{renderThemeSwatches();}catch(e){}
   // بخش مرکزی حذف شده است
 
   setInterval(fetchStats, 2000);
@@ -2934,7 +2957,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (document.getElementById('pg-subscriptions').classList.contains('on')) loadSubsPage();
     if (document.getElementById('pg-connections').classList.contains('on')) loadConns();
     if (document.getElementById('pg-logs').classList.contains('on')) loadActivity();
-    if (document.getElementById('pg-support').classList.contains('on')) loadSupportMsgs();
+    if (document.getElementById('pg-support')?.classList.contains('on')) loadSupportMsgs();
     // بروزرسانی خودکار حذف شده است
   }, 5000);
   setInterval(loadAnnouncements, 3000);
@@ -3194,7 +3217,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
 }}
 @keyframes spin{{to{{transform:rotate(360deg)}}}}
 
-/* OXNET v2.0.9 public subscription theme polish */
+/* OXNET v2.0.10 public subscription theme polish */
 .copy-all-bar{{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;box-shadow:var(--shadow)!important}}
 .copy-all-btn{{background:var(--card)!important;color:var(--t1)!important;border:1px solid var(--card-bh)!important}}
 .btn-p{{background:var(--accent)!important;color:var(--bg)!important}}
@@ -3219,7 +3242,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div class="top">
     <div class="brand">
       <div class="brand-mark"><i class="ti ti-network"></i></div>
-      <div><div class="brand-name">OXNET</div><div class="brand-sub">OXNET Stable · v2.0.9</div></div>
+      <div><div class="brand-name">OXNET</div><div class="brand-sub">OXNET Stable · v2.0.10</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="تغییر تم"><i class="ti ti-sun" id="theme-icon"></i></button>
@@ -3229,7 +3252,7 @@ html,body{{min-height:100%;background:var(--bg);font-family:var(--serif);color:v
   <div id="root">
     <div class="empty-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>در حال بارگذاری...</div>
   </div>
-  <div class="footer">OXNET v2.0.9</div>
+  <div class="footer">OXNET v2.0.10</div>
 </div>
 <script>
 const UUID_KEY='{uuid_key}';

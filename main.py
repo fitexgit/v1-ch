@@ -654,19 +654,46 @@ async def list_subs(_=Depends(require_auth)):
 @app.patch("/api/subs/{sub_id}")
 async def update_sub(sub_id: str, request: Request, _=Depends(require_auth)):
     body = await request.json()
+    link_ids_snapshot = []
+    apply_to_children = any(k in body for k in ("limit_value", "limit_unit", "expires_days", "active", "reset_usage"))
     async with SUBS_LOCK:
         if sub_id not in SUBS:
             raise HTTPException(status_code=404, detail="sub not found")
         s = SUBS[sub_id]
         if "name" in body:
-            s["name"] = str(body["name"])[:60]
+            s["name"] = str(body["name"] or s.get("name") or "Multi")[:60]
         if "desc" in body:
-            s["desc"] = str(body["desc"])[:200]
+            s["desc"] = str(body["desc"] or "")[:200]
         if "password" in body:
-            pw = str(body["password"]).strip()
+            pw = str(body["password"] or "").strip()
             s["password_hash"] = hash_password(pw) if pw else None
         if "link_ids" in body:
-            s["link_ids"] = list(body["link_ids"])
+            s["link_ids"] = list(body["link_ids"] or [])
+        link_ids_snapshot = list(s.get("link_ids") or [])
+    if apply_to_children and link_ids_snapshot:
+        limit_bytes = None
+        if "limit_value" in body:
+            lv = float(body.get("limit_value") or 0)
+            lu = body.get("limit_unit") or "GB"
+            limit_bytes = 0 if lv <= 0 else parse_size_to_bytes(lv, lu)
+        expires_at = "UNCHANGED"
+        if "expires_days" in body:
+            ed = int(body.get("expires_days") or 0)
+            expires_at = (datetime.now() + timedelta(days=ed)).isoformat() if ed > 0 else None
+        async with LINKS_LOCK:
+            for lid in link_ids_snapshot:
+                link = LINKS.get(lid)
+                if not link:
+                    continue
+                if limit_bytes is not None:
+                    link["limit_bytes"] = limit_bytes
+                if expires_at != "UNCHANGED":
+                    link["expires_at"] = expires_at
+                if "active" in body:
+                    link["active"] = bool(body.get("active"))
+                if body.get("reset_usage"):
+                    link["used_bytes"] = 0
+        log_activity("sub", f"گروه/مولتی «{sub_id}» ویرایش شد", "info")
     await save_state()
     return {"ok": True}
 
@@ -934,7 +961,7 @@ def cloudflare_sub_urls_for_key(host: str, uuid_key: str) -> list[dict]:
             "domain": cf.get("domain"),
             "slug": cf.get("slug") or _cf_slug(cf.get("domain", "")),
             "clean_ip_count": len(cf.get("clean_ips") or []),
-            "sub_url": f"{{https://{host}}}/cf-sub/{cf.get('slug') or _cf_slug(cf.get('domain',''))}/{uuid_key}",
+            "sub_url": f"https://{host}/cf-sub/{cf.get('slug') or _cf_slug(cf.get('domain',''))}/{uuid_key}",
         }
         for cf in _cf_domains()
     ]
@@ -945,7 +972,7 @@ async def api_cloudflare_domains(_=Depends(require_auth)):
     items=[]
     for d in _cf_domains():
         slug=d.get('slug') or _cf_slug(d.get('domain',''))
-        items.append({**d, "slug": slug, "sub_url": f"{{https://{host}}}/cf-sub/{slug}", "group_sub_template": f"{{https://{host}}}/cf-sub/{slug}/{{uuid_key}}"})
+        items.append({**d, "slug": slug, "sub_url": f"https://{host}/cf-sub/{slug}", "group_sub_template": f"https://{host}/cf-sub/{slug}/{{uuid_key}}"})
     return {"domains": items}
 
 @app.post("/api/cloudflare/domains")
@@ -970,7 +997,7 @@ async def api_cloudflare_save_domain(request: Request, _=Depends(require_auth)):
         item["previous_slug"] = old_slug
     await save_state()
     host=get_host()
-    return {"ok": True, "domain": item, "sub_url": f"{{https://{host}}}/cf-sub/{item['slug']}"}
+    return {"ok": True, "domain": item, "sub_url": f"https://{host}/cf-sub/{item['slug']}"}
 
 @app.delete("/api/cloudflare/domains/{key}")
 async def api_cloudflare_delete_domain(key: str, _=Depends(require_auth)):
@@ -1649,7 +1676,7 @@ from pages import LOGIN_HTML, DASHBOARD_HTML
 
 def render_html(html: str) -> str:
     v = get_current_panel_version()
-    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("v2.0.3", f"v{v}").replace("v2.0.4", f"v{v}").replace("v2.0.5", f"v{v}").replace("v2.0.6", f"v{v}").replace("v2.0.7", f"v{v}").replace("v2.0.8", f"v{v}").replace("v2.0.9", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}").replace("· 2.0.3", f"· {v}").replace("· 2.0.4", f"· {v}").replace("· 2.0.5", f"· {v}").replace("· 2.0.6", f"· {v}").replace("· 2.0.7", f"· {v}").replace("· 2.0.8", f"· {v}").replace("· 2.0.9", f"· {v}")
+    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("v2.0.3", f"v{v}").replace("v2.0.4", f"v{v}").replace("v2.0.5", f"v{v}").replace("v2.0.6", f"v{v}").replace("v2.0.7", f"v{v}").replace("v2.0.8", f"v{v}").replace("v2.0.9", f"v{v}").replace("v2.0.10", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}").replace("· 2.0.3", f"· {v}").replace("· 2.0.4", f"· {v}").replace("· 2.0.5", f"· {v}").replace("· 2.0.6", f"· {v}").replace("· 2.0.7", f"· {v}").replace("· 2.0.8", f"· {v}").replace("· 2.0.9", f"· {v}").replace("· 2.0.10", f"· {v}")
 
 
 # ── Central: Announcements & Support ─────────────────────────────────────────
