@@ -1,6 +1,7 @@
-OXNET Stable v2.0.8
+OXNET Stable v2.0.9
 
-- Railway proxy tools removed
-- Pro tools page removed from UI
-- External database removed; JSON storage only
-- Cloudflare domains and clean IP subscription support added
+- Cloudflare clean IP supports IPv4, IPv6 and domains
+- Registered Cloudflare domains can be edited
+- Public subscription pages include separate Cloudflare subscriptions
+- Multi Protocol cards show in Configs with edit controls
+- Dashboard charts have offline fallback rendering

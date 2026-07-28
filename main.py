@@ -394,17 +394,28 @@ def generate_uuid() -> str:
 def now_ir() -> datetime:
     return datetime.now(IRAN_TZ)
 
+
+def _uri_authority_host(host: str) -> str:
+    host = str(host or "").strip()
+    if host.startswith("[") and host.endswith("]"):
+        return host
+    # IPv6 literals must be bracketed in URI authority: vless://uuid@[IPv6]:443
+    if ":" in host and not re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", host):
+        return f"[{host}]"
+    return host
+
 def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: str = DEFAULT_PROTOCOL, sni_host: str | None = None) -> str:
     link_obj = LINKS.get(uuid, {})
     public_path = link_obj.get("path") or uuid
     tls_host = (sni_host or host).strip()
+    authority_host = _uri_authority_host(host)
     if protocol == "shadowsocks-tls":
         import base64
         # SIP002 plugin form with explicit websocket mode and always a fragment/name.
         # This fixes links that previously ended as "...?" without plugin/name.
         user = base64.urlsafe_b64encode(f"chacha20-ietf-poly1305:{uuid}".encode()).decode().rstrip("=")
         plugin = quote(f"v2ray-plugin;tls;mode=websocket;host={tls_host};path=/ss/{public_path}", safe="")
-        return f"ss://{user}@{host}:443?plugin={plugin}#{quote(remark or 'OXNET-Shadowsocks')}"
+        return f"ss://{user}@{authority_host}:443?plugin={plugin}#{quote(remark or 'OXNET-Shadowsocks')}"
     if protocol == "mtproto":
         link = LINKS.get(uuid)
         port = link.get("mtproto_port") if link else None
@@ -422,7 +433,7 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
             "path": "/trojan-ws", "sni": tls_host, "fp": "chrome", "alpn": "http/1.1",
         }
         query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
-        return f"trojan://{uuid}@{host}:443?{query}#{quote(remark)}"
+        return f"trojan://{uuid}@{authority_host}:443?{query}#{quote(remark)}"
     if protocol.startswith("trojan-xhttp-"):
         mode = protocol.replace("trojan-xhttp-", "")
         if mode == "stream-one":
@@ -433,7 +444,7 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
             "path": path, "sni": tls_host, "fp": "chrome", "alpn": "h2,http/1.1",
         }
         query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
-        return f"trojan://{uuid}@{host}:443?{query}#{quote(remark)}"
+        return f"trojan://{uuid}@{authority_host}:443?{query}#{quote(remark)}"
     if protocol == "vless-ws":
         path = f"/ws/{public_path}"
         params = {
@@ -463,7 +474,7 @@ def generate_share_link(uuid: str, host: str, remark: str = "OXNET", protocol: s
             "alpn": "h2,http/1.1",
         }
     query = "&".join(f"{k}={quote(str(v))}" for k, v in params.items())
-    return f"vless://{uuid}@{host}:443?{query}#{quote(remark)}"
+    return f"vless://{uuid}@{authority_host}:443?{query}#{quote(remark)}"
 
 def uptime() -> str:
     secs = int(time.time() - stats["start_time"])
@@ -635,6 +646,7 @@ async def list_subs(_=Depends(require_auth)):
             "total_used_fmt": fmt_bytes(total_used),
             "public_url": f"https://{host}/p/{s['uuid_key']}",
             "sub_url": f"https://{host}/sub-group/{s['uuid_key']}",
+            "cloudflare_subs": cloudflare_sub_urls_for_key(host, s["uuid_key"]),
         })
     result.sort(key=lambda x: x["created_at"], reverse=True)
     return {"subs": result}
@@ -894,10 +906,13 @@ def _norm_domain(value: str) -> str:
     return value
 
 def _norm_clean_ips(raw) -> list[str]:
+    # Supports IPv4, domains, and IPv6 literals. Backslash-escaped colons from chat copy are normalized.
     parts = re.split(r"[\n,\s]+", raw) if isinstance(raw, str) else list(raw or [])
     out=[]
     for x in parts:
-        x=str(x).strip()
+        x=str(x).strip().replace("\\:", ":")
+        if x.startswith("[") and x.endswith("]"):
+            x=x[1:-1].strip()
         if x and x not in out:
             out.append(x)
     return out[:300]
@@ -912,13 +927,25 @@ def _find_cf_domain(key: str) -> dict | None:
             return d
     return None
 
+def cloudflare_sub_urls_for_key(host: str, uuid_key: str) -> list[dict]:
+    return [
+        {
+            "name": cf.get("name") or cf.get("domain"),
+            "domain": cf.get("domain"),
+            "slug": cf.get("slug") or _cf_slug(cf.get("domain", "")),
+            "clean_ip_count": len(cf.get("clean_ips") or []),
+            "sub_url": f"{{https://{host}}}/cf-sub/{cf.get('slug') or _cf_slug(cf.get('domain',''))}/{uuid_key}",
+        }
+        for cf in _cf_domains()
+    ]
+
 @app.get("/api/cloudflare/domains")
 async def api_cloudflare_domains(_=Depends(require_auth)):
     host=get_host()
     items=[]
     for d in _cf_domains():
         slug=d.get('slug') or _cf_slug(d.get('domain',''))
-        items.append({**d, "slug": slug, "sub_url": f"{{https://{host}}}/cf-sub/{slug}"})
+        items.append({**d, "slug": slug, "sub_url": f"{{https://{host}}}/cf-sub/{slug}", "group_sub_template": f"{{https://{host}}}/cf-sub/{slug}/{{uuid_key}}"})
     return {"domains": items}
 
 @app.post("/api/cloudflare/domains")
@@ -929,12 +956,18 @@ async def api_cloudflare_save_domain(request: Request, _=Depends(require_auth)):
         raise HTTPException(status_code=400, detail="دامنه کلادفلیر معتبر نیست")
     clean_ips = _norm_clean_ips(body.get("clean_ips") or body.get("ips") or "")
     name = (body.get("name") or domain).strip()[:80]
+    key = str(body.get("key") or body.get("id") or body.get("slug") or "").strip()
     domains = _cf_domains()
-    item = next((x for x in domains if x.get("domain") == domain), None)
+    item = next((x for x in domains if key and (x.get("id") == key or x.get("slug") == key or x.get("domain") == _norm_domain(key))), None)
+    if not item:
+        item = next((x for x in domains if x.get("domain") == domain), None)
     if not item:
         item = {"id": generate_uuid(), "slug": _cf_slug(domain), "domain": domain, "created_at": datetime.now().isoformat()}
         domains.append(item)
-    item.update({"name": name, "domain": domain, "clean_ips": clean_ips, "updated_at": datetime.now().isoformat()})
+    old_slug = item.get("slug")
+    item.update({"name": name, "domain": domain, "slug": _cf_slug(domain), "clean_ips": clean_ips, "updated_at": datetime.now().isoformat()})
+    if old_slug and old_slug != item["slug"]:
+        item["previous_slug"] = old_slug
     await save_state()
     host=get_host()
     return {"ok": True, "domain": item, "sub_url": f"{{https://{host}}}/cf-sub/{item['slug']}"}
@@ -971,6 +1004,40 @@ async def cloudflare_subscription(key: str):
             lines.append(generate_share_link(uid, target, remark=remark, protocol=proto, sni_host=domain))
     content=base64.b64encode("\n".join(lines).encode()).decode()
     return Response(content=content, media_type="text/plain", headers={"profile-title": quote(f"OXNET Cloudflare {domain}")})
+
+
+@app.get("/cf-sub/{key}/{uuid_key}")
+async def cloudflare_group_subscription(key: str, uuid_key: str, request: Request):
+    import base64
+    item=_find_cf_domain(key)
+    if not item:
+        raise HTTPException(status_code=404, detail="cloudflare domain not found")
+    async with SUBS_LOCK:
+        sub = next((s for s in SUBS.values() if s.get("uuid_key") == uuid_key), None)
+    if not sub:
+        raise HTTPException(status_code=404, detail="sub not found")
+    if sub.get("password_hash"):
+        pw = request.query_params.get("pw", "")
+        if hash_password(pw) != sub["password_hash"]:
+            raise HTTPException(status_code=403, detail="wrong password")
+    domain=item.get("domain")
+    clean_ips=item.get("clean_ips") or []
+    targets=clean_ips if clean_ips else [domain]
+    link_ids=sub.get("link_ids", [])
+    async with LINKS_LOCK:
+        lines=[]
+        for lid in link_ids:
+            link=LINKS.get(lid)
+            if not link or not is_link_allowed(link):
+                continue
+            proto=link.get("protocol", DEFAULT_PROTOCOL)
+            if proto == "mtproto":
+                continue
+            for target in targets:
+                remark=f"OXNET-CF-{domain}-{link.get('label','')}" + (f"-{target}" if clean_ips else "")
+                lines.append(generate_share_link(lid, target, remark=remark, protocol=proto, sni_host=domain))
+    content=base64.b64encode("\n".join(lines).encode()).decode()
+    return Response(content=content, media_type="text/plain", headers={"profile-title": quote(f"{sub.get('name','OXNET')} Cloudflare {domain}")})
 
 # ── Link Management ───────────────────────────────────────────────────────────
 @app.post("/api/links")
@@ -1105,7 +1172,7 @@ async def create_link(request: Request, _=Depends(require_auth)):
         **LINKS[uid],
         "expired": False,
         "vless_link": generate_share_link(uid, host, remark=f"OXNET-{label}", protocol=protocol),
-        "sub_url": f"https://{host}/sub/{d.get('path') or uid}",
+        "sub_url": f"https://{host}/sub/{LINKS[uid].get('path') or uid}",
     }
 
 @app.get("/api/links")
@@ -1377,6 +1444,7 @@ async def public_sub_data(uuid_key: str, request: Request):
         "name": sub["name"],
         "desc": sub.get("desc", ""),
         "sub_url": f"https://{host}/sub-group/{uuid_key}",
+        "cloudflare_subs": cloudflare_sub_urls_for_key(host, uuid_key),
         "active_connections": active_conns,
         "total_used_fmt": fmt_bytes(total_used),
         "links": links_out,
@@ -1581,7 +1649,7 @@ from pages import LOGIN_HTML, DASHBOARD_HTML
 
 def render_html(html: str) -> str:
     v = get_current_panel_version()
-    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("v2.0.3", f"v{v}").replace("v2.0.4", f"v{v}").replace("v2.0.5", f"v{v}").replace("v2.0.6", f"v{v}").replace("v2.0.7", f"v{v}").replace("v2.0.8", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}").replace("· 2.0.3", f"· {v}").replace("· 2.0.4", f"· {v}").replace("· 2.0.5", f"· {v}").replace("· 2.0.6", f"· {v}").replace("· 2.0.7", f"· {v}").replace("· 2.0.8", f"· {v}")
+    return html.replace("v1.0.0", f"v{v}").replace("v1.1.0", f"v{v}").replace("v1.2.0", f"v{v}").replace("v1.2.1", f"v{v}").replace("v2.0.0", f"v{v}").replace("v2.0.1", f"v{v}").replace("v2.0.2", f"v{v}").replace("v2.0.3", f"v{v}").replace("v2.0.4", f"v{v}").replace("v2.0.5", f"v{v}").replace("v2.0.6", f"v{v}").replace("v2.0.7", f"v{v}").replace("v2.0.8", f"v{v}").replace("v2.0.9", f"v{v}").replace("· 1.0.0", f"· {v}").replace("· 1.1.0", f"· {v}").replace("· 1.2.0", f"· {v}").replace("· 1.2.1", f"· {v}").replace("· 2.0.0", f"· {v}").replace("· 2.0.1", f"· {v}").replace("· 2.0.2", f"· {v}").replace("· 2.0.3", f"· {v}").replace("· 2.0.4", f"· {v}").replace("· 2.0.5", f"· {v}").replace("· 2.0.6", f"· {v}").replace("· 2.0.7", f"· {v}").replace("· 2.0.8", f"· {v}").replace("· 2.0.9", f"· {v}")
 
 
 # ── Central: Announcements & Support ─────────────────────────────────────────
