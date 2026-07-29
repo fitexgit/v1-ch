@@ -1,3 +1,3 @@
-version=2.0.11
-description=Stable build: fixed Cloudflare URLs, multi quota edit, Cloudflare subs in subscriptions, dashboard live fallback
-updated_at=1785227759
+version=2.0.7
+description=Final stable: remove HTTPUpgrade, fix protocol selector, improve MTProto TCP Proxy UX, polish dark buttons and branding
+updated_at=1785159155
